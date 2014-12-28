@@ -9,9 +9,7 @@
 #import "User.h"
 #import "Parse.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
-
-NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
-NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
+#import "SharedConstants.h"
 
 @interface User ()
 
@@ -26,11 +24,9 @@ NSString * const kCurrentUserKey = @"kCurrentUserKey";
 
 + (User *)currentUser {
     if (_currentUser == nil) {
-        NSLog(@"fetching currentUser from nil");
         NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentUserKey];
         if (data != nil) {
             NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-            NSLog(@"currentUser cached dictionary: %@", dictionary);
             _currentUser = [[User alloc] initWithDictionary:dictionary];
         }
         
@@ -44,10 +40,8 @@ NSString * const kCurrentUserKey = @"kCurrentUserKey";
 
 + (void)setCurrentUser:(User *)currentUser {
     _currentUser = currentUser;
-    NSLog(@"setCurrentUser");
     
     if (_currentUser != nil) {
-        NSLog(@"Current User dictionary: %@", currentUser.dictionary);
         NSData *data = nil;
         if (currentUser.dictionary != nil) {
             data = [NSJSONSerialization dataWithJSONObject:currentUser.dictionary options:0 error:NULL];
@@ -56,7 +50,6 @@ NSString * const kCurrentUserKey = @"kCurrentUserKey";
     } else {
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kCurrentUserKey];
     }
-    NSLog(@"synchronized userDefaults");
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -86,9 +79,6 @@ NSString * const kCurrentUserKey = @"kCurrentUserKey";
             
             [User setCurrentUser:[[User alloc] initWithPFUser:pfuser]];
             [User loadFacebookDataForCurrentUser];
-            
-            NSLog(@"sending notification: %@", UserDidLoginNotification);
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLoginNotification object:nil];
         }
         if (!pfuser && !error) {
@@ -106,7 +96,6 @@ NSString * const kCurrentUserKey = @"kCurrentUserKey";
 }
 
 + (void)loadFacebookDataForCurrentUser {
-    NSLog(@"loadFacebookDataForCurrentUser");
     FBRequest *request = [FBRequest requestForMe];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (error) {

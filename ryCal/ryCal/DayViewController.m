@@ -8,21 +8,17 @@
 
 #import "DayViewController.h"
 #import "User.h"
-#import "SelectableRecordTypeCell.h"
+#import "EditableRecordTypeCell.h"
 #import "RecordType.h"
 #import "Record.h"
 
 @interface DayViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) SelectableRecordTypeCell *prototypeCell;
+@property (nonatomic, strong) EditableRecordTypeCell *prototypeCell;
 @property (nonatomic, strong) NSArray *recordTypes;
-@property (nonatomic, strong) NSArray *records;
-
 @property (nonatomic, strong) NSMutableDictionary *recordDictionary;
 
 @property (weak, nonatomic) IBOutlet UITableView *typeTableView;
-
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end
 
@@ -31,23 +27,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupTypeTable];
-    self.dateLabel.text = [self.dayData getFullDateString];
     self.recordDictionary = [[NSMutableDictionary alloc] init];
-    
-//    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)]];
+
+    self.title = [self.dayData getTitleString];
 
 //    [Record createTestRecordsForDate:[self.dayData getStartDate]];
     
-    [RecordType loadAllTypes:^(NSArray *types, NSError *error) {
-        NSLog(@"Record types: %@", types);
+    [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
         self.recordTypes = types;
         [Record loadAllRecordsForDay:self.dayData completion:^(NSArray *records, NSError *error) {
-            self.records = records;
-            NSLog(@"Records for day: %@", self.records);
-            for (Record *record in self.records) {
-                // NSLog(@"Setting obj for key: %@, %@", record[@"typeID"], record);
-                [self.recordDictionary setObject:record forKey:record[@"typeID"]];
-                NSLog(@"Record dictionary for day: %@", self.recordDictionary);
+            // NSLog(@"Records for day: %@", records);
+            for (Record *record in records) {
+                // TODO: figure out why this doesn't work...
+                // NSString *recordTypeID = [record getTypeIDField];
+                NSString *recordTypeID = record[@"typeID"];
+                [self.recordDictionary setObject:record forKey:recordTypeID];
             }
             [self.typeTableView reloadData];
         }];
@@ -55,19 +49,19 @@
 }
 
 - (void)setupTypeTable {
+    UINib *cellNib = [UINib nibWithNibName:@"EditableRecordTypeCell" bundle:nil];
+    [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"EditableRecordTypeCell"];
+
     self.typeTableView.delegate = self;
     self.typeTableView.dataSource = self;
     self.typeTableView.rowHeight = UITableViewAutomaticDimension;
-    
-    UINib *cellNib = [UINib nibWithNibName:@"SelectableRecordTypeCell" bundle:nil];
-    [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"SelectableRecordTypeCell"];
 }
 
 #pragma mark - Custom setters
 
-- (SelectableRecordTypeCell *)prototypeCell {
+- (EditableRecordTypeCell *)prototypeCell {
     if (_prototypeCell == nil) {
-        _prototypeCell = [self.typeTableView dequeueReusableCellWithIdentifier:@"SelectableRecordTypeCell"];
+        _prototypeCell = [self.typeTableView dequeueReusableCellWithIdentifier:@"EditableRecordTypeCell"];
     }
     return _prototypeCell;
 }
@@ -76,16 +70,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 100;
-    
 //    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 //    return size.height + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SelectableRecordTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SelectableRecordTypeCell" forIndexPath:indexPath];
+    EditableRecordTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EditableRecordTypeCell" forIndexPath:indexPath];
     cell.typeData = self.recordTypes[indexPath.row];
     cell.date = [self.dayData getStartDate];
-    NSLog(@"attempting to set record data... %@, %@", cell.typeData, [self.recordDictionary objectForKey:cell.typeData.objectId]);
     cell.recordData = self.recordDictionary[cell.typeData.objectId];
     return cell;
 }

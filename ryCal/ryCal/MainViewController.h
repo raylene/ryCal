@@ -10,4 +10,8 @@
 
 @interface MainViewController : UIViewController
 
+@property (nonatomic, strong) NSDate *referenceDate;
+
+- (id)initWithDate:(NSDate *)date;
+
 @end

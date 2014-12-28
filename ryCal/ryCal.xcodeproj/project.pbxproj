@@ -31,9 +31,13 @@
 		6FBE73FA1A47E4650045810A /* RecordTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBE73F81A47E4650045810A /* RecordTypeViewController.xib */; };
 		6FBE73FE1A47F5910045810A /* RecordTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE73FC1A47F5910045810A /* RecordTypeCell.m */; };
 		6FBE73FF1A47F5910045810A /* RecordTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBE73FD1A47F5910045810A /* RecordTypeCell.xib */; };
-		6FBE74031A4950B00045810A /* SelectableRecordTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE74011A4950B00045810A /* SelectableRecordTypeCell.m */; };
-		6FBE74041A4950B00045810A /* SelectableRecordTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBE74021A4950B00045810A /* SelectableRecordTypeCell.xib */; };
+		6FBE74031A4950B00045810A /* EditableRecordTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE74011A4950B00045810A /* EditableRecordTypeCell.m */; };
+		6FBE74041A4950B00045810A /* EditableRecordTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBE74021A4950B00045810A /* EditableRecordTypeCell.xib */; };
 		6FBE740B1A4A5C570045810A /* SharedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE740A1A4A5C570045810A /* SharedConstants.m */; };
+		6FF442C81A4FB56700B3DD45 /* RecordTypeComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF442C61A4FB56700B3DD45 /* RecordTypeComposerViewController.m */; };
+		6FF442C91A4FB56700B3DD45 /* RecordTypeComposerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF442C71A4FB56700B3DD45 /* RecordTypeComposerViewController.xib */; };
+		6FF442D71A4FBCC100B3DD45 /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF442D51A4FBCC100B3DD45 /* ColorCell.m */; };
+		6FF442D81A4FBCC100B3DD45 /* ColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF442D61A4FBCC100B3DD45 /* ColorCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,11 +92,17 @@
 		6FBE73FB1A47F5910045810A /* RecordTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTypeCell.h; sourceTree = "<group>"; };
 		6FBE73FC1A47F5910045810A /* RecordTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTypeCell.m; sourceTree = "<group>"; };
 		6FBE73FD1A47F5910045810A /* RecordTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordTypeCell.xib; sourceTree = "<group>"; };
-		6FBE74001A4950B00045810A /* SelectableRecordTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectableRecordTypeCell.h; sourceTree = "<group>"; };
-		6FBE74011A4950B00045810A /* SelectableRecordTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectableRecordTypeCell.m; sourceTree = "<group>"; };
-		6FBE74021A4950B00045810A /* SelectableRecordTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectableRecordTypeCell.xib; sourceTree = "<group>"; };
+		6FBE74001A4950B00045810A /* EditableRecordTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableRecordTypeCell.h; sourceTree = "<group>"; };
+		6FBE74011A4950B00045810A /* EditableRecordTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableRecordTypeCell.m; sourceTree = "<group>"; };
+		6FBE74021A4950B00045810A /* EditableRecordTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditableRecordTypeCell.xib; sourceTree = "<group>"; };
 		6FBE74091A4A5C570045810A /* SharedConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedConstants.h; sourceTree = "<group>"; };
 		6FBE740A1A4A5C570045810A /* SharedConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedConstants.m; sourceTree = "<group>"; };
+		6FF442C51A4FB56700B3DD45 /* RecordTypeComposerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTypeComposerViewController.h; sourceTree = "<group>"; };
+		6FF442C61A4FB56700B3DD45 /* RecordTypeComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTypeComposerViewController.m; sourceTree = "<group>"; };
+		6FF442C71A4FB56700B3DD45 /* RecordTypeComposerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordTypeComposerViewController.xib; sourceTree = "<group>"; };
+		6FF442D41A4FBCC100B3DD45 /* ColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
+		6FF442D51A4FBCC100B3DD45 /* ColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCell.m; sourceTree = "<group>"; };
+		6FF442D61A4FBCC100B3DD45 /* ColorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColorCell.xib; sourceTree = "<group>"; };
 		8493B72B85792CDDCD9C5C78 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A8BCD7F6B25917ADCD0112DC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -131,6 +141,9 @@
 				6FBE73F61A47E4650045810A /* RecordTypeViewController.h */,
 				6FBE73F71A47E4650045810A /* RecordTypeViewController.m */,
 				6FBE73F81A47E4650045810A /* RecordTypeViewController.xib */,
+				6FF442C51A4FB56700B3DD45 /* RecordTypeComposerViewController.h */,
+				6FF442C61A4FB56700B3DD45 /* RecordTypeComposerViewController.m */,
+				6FF442C71A4FB56700B3DD45 /* RecordTypeComposerViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -163,9 +176,12 @@
 				6FBE73FB1A47F5910045810A /* RecordTypeCell.h */,
 				6FBE73FC1A47F5910045810A /* RecordTypeCell.m */,
 				6FBE73FD1A47F5910045810A /* RecordTypeCell.xib */,
-				6FBE74001A4950B00045810A /* SelectableRecordTypeCell.h */,
-				6FBE74011A4950B00045810A /* SelectableRecordTypeCell.m */,
-				6FBE74021A4950B00045810A /* SelectableRecordTypeCell.xib */,
+				6FBE74001A4950B00045810A /* EditableRecordTypeCell.h */,
+				6FBE74011A4950B00045810A /* EditableRecordTypeCell.m */,
+				6FBE74021A4950B00045810A /* EditableRecordTypeCell.xib */,
+				6FF442D41A4FBCC100B3DD45 /* ColorCell.h */,
+				6FF442D51A4FBCC100B3DD45 /* ColorCell.m */,
+				6FF442D61A4FBCC100B3DD45 /* ColorCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -341,13 +357,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F6B9A941A22BCDD005B7722 /* LoginViewController.xib in Resources */,
-				6FBE74041A4950B00045810A /* SelectableRecordTypeCell.xib in Resources */,
+				6FBE74041A4950B00045810A /* EditableRecordTypeCell.xib in Resources */,
 				6F6B9A991A22BCED005B7722 /* MainViewController.xib in Resources */,
 				6F926BE51A22BA5F00473EA2 /* LaunchScreen.xib in Resources */,
+				6FF442C91A4FB56700B3DD45 /* RecordTypeComposerViewController.xib in Resources */,
 				6FBE73EC1A4673380045810A /* DayViewController.xib in Resources */,
 				6FBE73FF1A47F5910045810A /* RecordTypeCell.xib in Resources */,
 				6FBE73E71A45193E0045810A /* DayCell.xib in Resources */,
 				6FBE73FA1A47E4650045810A /* RecordTypeViewController.xib in Resources */,
+				6FF442D81A4FBCC100B3DD45 /* ColorCell.xib in Resources */,
 				6F926BE21A22BA5F00473EA2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,12 +422,14 @@
 				6FBE73F91A47E4650045810A /* RecordTypeViewController.m in Sources */,
 				6F6B9A9E1A22F585005B7722 /* User.m in Sources */,
 				6FBE73DC1A4125320045810A /* MonthCollectionView.m in Sources */,
+				6FF442D71A4FBCC100B3DD45 /* ColorCell.m in Sources */,
 				6FBE73FE1A47F5910045810A /* RecordTypeCell.m in Sources */,
+				6FF442C81A4FB56700B3DD45 /* RecordTypeComposerViewController.m in Sources */,
 				6FBE73E21A4512FF0045810A /* Day.m in Sources */,
 				6F6B9A931A22BCDD005B7722 /* LoginViewController.m in Sources */,
 				6FBE73E61A45193E0045810A /* DayCell.m in Sources */,
 				6FBE73F51A47DC8D0045810A /* RecordType.m in Sources */,
-				6FBE74031A4950B00045810A /* SelectableRecordTypeCell.m in Sources */,
+				6FBE74031A4950B00045810A /* EditableRecordTypeCell.m in Sources */,
 				6F926BDA1A22BA5F00473EA2 /* AppDelegate.m in Sources */,
 				6F6B9A981A22BCED005B7722 /* MainViewController.m in Sources */,
 				6F926BD71A22BA5F00473EA2 /* main.m in Sources */,

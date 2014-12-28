@@ -10,6 +10,7 @@
 #import "User.h"
 #import "SVProgressHUD.h"
 #import "MainViewController.h"
+#import "SharedConstants.h"
 
 @interface LoginViewController ()
 

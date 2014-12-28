@@ -37,9 +37,10 @@
     return [NSString stringWithFormat:@"%d", self.dayInt];
 }
 
-- (NSString *)getFullDateString {
+// http://unicode.org/reports/tr35/tr35-6.html#Date_Format_Patterns
+- (NSString *)getTitleString {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:@"EEEE, MMM. d"];
     return [dateFormatter stringFromDate:[self getStartDate]];
 }
 
@@ -50,6 +51,5 @@
 - (NSDate *)getEndDate {
     return [self.monthData getEndDateForDay:self.dayInt];
 }
-
 
 @end

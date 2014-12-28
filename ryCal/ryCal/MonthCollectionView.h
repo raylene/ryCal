@@ -14,6 +14,7 @@
 @property (nonatomic, strong) Month *monthData;
 @property (nonatomic, strong) UIViewController *viewController;
 
+- (void)setDate:(NSDate *)date;
 - (int)getNumDays;
 
 @end

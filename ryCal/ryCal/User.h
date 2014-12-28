@@ -9,10 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 
-// extern -- allocated elsewhere
-extern NSString * const UserDidLogoutNotification;
-extern NSString * const UserDidLoginNotification;
-
 @interface User : NSObject
 
 @property (nonatomic, strong) PFUser *pfUser;
@@ -23,7 +19,6 @@ extern NSString * const UserDidLoginNotification;
 + (void)login;
 
 - (NSString *)getUsername;
-//- (PFUser *)getPFUser;
 - (NSString *)getUserID;
 
 @end

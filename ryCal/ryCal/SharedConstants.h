@@ -11,21 +11,45 @@
 
 @interface SharedConstants : NSObject
 
-// From: http://www.appcoda.com/customize-navigation-status-bar-ios-7/
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+// Notifications
+extern NSString * const UserDidLogoutNotification;
+extern NSString * const UserDidLoginNotification;
+extern NSString * const ColorSelectedNotification;
+
+extern NSString * const COLOR_NOTIF_PARAM;
+
+extern NSString * const kNoteFieldKey;
+extern NSString * const kTypeIDFieldKey;
+extern NSString * const kUserIDFieldKey;
+extern NSString * const kDateFieldKey;
+extern NSString * const kArchivedFieldKey;
+extern NSString * const kColorFieldKey;
+extern NSString * const kNameFieldKey;
 
 extern NSString * const RECORD_COLOR_EMPTY_ENTRY;
 extern NSString * const RECORD_COLOR_LIGHT_BLUE;
+
 extern NSString * const RECORD_COLOR_BLUE;
+extern NSString * const RECORD_COLOR_DEEP_BLUE;
 extern NSString * const RECORD_COLOR_GREEN;
+extern NSString * const RECORD_COLOR_TEAL;
 extern NSString * const RECORD_COLOR_PURPLE;
 extern NSString * const RECORD_COLOR_PINK;
+extern NSString * const RECORD_COLOR_RED;
+extern NSString * const RECORD_COLOR_ORANGE;
 extern NSString * const RECORD_COLOR_YELLOW;
+extern NSString * const RECORD_COLOR_BROWN;
 
 extern NSString * const TEST_TYPE_RUNNING;
 extern NSString * const TEST_TYPE_DANCING;
 extern NSString * const TEST_TYPE_CLIMBING;
 
+extern int const NUM_COLORS;
+
++ (NSArray *)getColorArray;
++ (NSString *)getDefaultColorName;
 + (UIColor *)getColor:(NSString *)name;
+
++ (NSInteger)getCurrentYear;
 
 @end

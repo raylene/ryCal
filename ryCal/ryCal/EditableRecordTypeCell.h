@@ -1,5 +1,5 @@
 //
-//  SelectableRecordTypeCell.h
+//  EditableRecordTypeCell.h
 //  ryCal
 //
 //  Created by Raylene Yung on 12/22/14.
@@ -10,7 +10,7 @@
 #import "RecordType.h"
 #import "Record.h"
 
-@interface SelectableRecordTypeCell : UITableViewCell
+@interface EditableRecordTypeCell : UITableViewCell
 
 @property (nonatomic, strong) RecordType *typeData;
 @property (nonatomic, strong) Record *recordData;

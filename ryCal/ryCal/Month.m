@@ -7,12 +7,12 @@
 //
 
 #import "Month.h"
+#import "SharedConstants.h"
 
 @interface Month ()
 
 @property (nonatomic, strong) NSArray *dates;
 @property (nonatomic, assign) NSRange dayRange;
-//@property (nonatomic, strong) NSDateComponents *components;
 
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSCalendar *calendar;
@@ -45,6 +45,12 @@
     return self.startDate;
 }
 
+- (NSDate *)getEndDate {
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    [offsetComponents setMonth:1];
+    return [self.calendar dateByAddingComponents:offsetComponents toDate:[self getStartDate] options:0];
+}
+
 - (NSDate *)getStartDateForDay:(int)day {
     NSDateComponents *components = [self.components copy];
     [components setDay:day];
@@ -54,13 +60,24 @@
 - (NSDate *)getEndDateForDay:(int)day {
     NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
     [offsetComponents setDay:1];
-    return [self.calendar dateByAddingComponents:offsetComponents toDate: [self getStartDateForDay:day] options:0];
+    return [self.calendar dateByAddingComponents:offsetComponents toDate:[self getStartDateForDay:day] options:0];
 }
 
 #pragma mark Day manipulation
 
 - (int)numDays {
     return (int)self.dayRange.length;
+}
+
+// http://unicode.org/reports/tr35/tr35-6.html#Date_Format_Patterns
+- (NSString *)getTitleString {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMMM"];
+    if (self.components.year != [SharedConstants getCurrentYear]) {
+        [dateFormatter setDateFormat:@"MMM yyyy"];
+    }
+    // Add the yyyy if it's not this year
+    return [dateFormatter stringFromDate:[self getStartDate]];
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "Month.h"
 #import "Day.h"
 #import <Parse/Parse.h>
+#import <Parse/PFObject+Subclass.h>
 #import "SharedConstants.h"
 
 @implementation Record
@@ -28,14 +29,14 @@
           [NSDateFormatter localizedStringFromDate:date
                                          dateStyle:NSDateFormatterShortStyle
                                          timeStyle:NSDateFormatterFullStyle]);
-    PFObject *newRecord = [PFObject objectWithClassName:@"Record"];
-    newRecord[@"typeID"] = typeID;
+    Record *newRecord = [Record object];
+    newRecord[kTypeIDFieldKey] = typeID;
     if (text != nil) {
-        newRecord[@"note"] = text;
+        newRecord[kNoteFieldKey] = text;
     }
-    newRecord[@"userID"] = [[User currentUser] getUserID];
-    newRecord[@"date"] = date;
-    return (Record *)newRecord;
+    newRecord[kUserIDFieldKey] = [[User currentUser] getUserID];
+    newRecord[kDateFieldKey] = date;
+    return newRecord;
 }
 
 + (void)createRecord:(NSString *)typeID withText:(NSString *)text completion:(void (^)(BOOL succeeded, NSError *error)) completion {
@@ -51,15 +52,14 @@
 }
 
 + (void)saveRecord:(NSString *)typeID withText:(NSString *)text onDate:(NSDate *)date completion:(void (^)(BOOL succeeded, NSError *error)) completion {
-    PFObject *newRecord = [PFObject objectWithClassName:@"Record"];
-    newRecord[@"typeID"] = typeID;
+    Record *newRecord = [Record object];
+    [newRecord setTypeIDField:typeID];
     if (text != nil) {
-        newRecord[@"note"] = text;
+        [newRecord setNoteField:text];
     }
-    newRecord[@"userID"] = [[User currentUser] getUserID];
-    newRecord[@"date"] = date;
+    [newRecord setUserIDField:[[User currentUser] getUserID]];
+    [newRecord setDateField:date];
     [newRecord saveInBackgroundWithBlock:completion];
-//    return (Record *)newRecord;
 }
 
 + (void)loadAllRecords:(void (^)(NSArray *records, NSError *error))completion {
@@ -70,24 +70,23 @@
 
 // Date comparison: https://www.parse.com/questions/cloud-code-querying-objects-by-creation-date
 + (void)loadAllRecordsForMonth:(Month *)month completion:(void (^)(NSArray *records, NSError *error))completion {
-    NSLog(@"Loading all records for month: ");
     PFQuery *query = [self createBasicRecordQuery];
-    [query whereKey:@"date" greaterThanOrEqualTo:[month getStartDate]];
+    [query whereKey:kDateFieldKey greaterThanOrEqualTo:[month getStartDate]];
+    [query whereKey:kDateFieldKey lessThan:[month getEndDate]];
     [query findObjectsInBackgroundWithBlock:completion];
 }
 
-// Date comparison: https://www.parse.com/questions/cloud-code-querying-objects-by-creation-date
 + (void)loadAllRecordsForDay:(Day *)day completion:(void (^)(NSArray *records, NSError *error))completion {
     NSLog(@"Loading all records for day: ");
     PFQuery *query = [self createBasicRecordQuery];
-    [query whereKey:@"date" greaterThanOrEqualTo:[day getStartDate]];
-    [query whereKey:@"date" lessThan:[day getEndDate]];
+    [query whereKey:kDateFieldKey greaterThanOrEqualTo:[day getStartDate]];
+    [query whereKey:kDateFieldKey lessThan:[day getEndDate]];
     [query findObjectsInBackgroundWithBlock:completion];
 }
 
 + (PFQuery *)createBasicRecordQuery {
     PFQuery *query = [PFQuery queryWithClassName:@"Record"];
-    [query whereKey:@"userID" equalTo:[[User currentUser] getUserID]];
+    [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
     [query orderByDescending:@"createdAt"];
     return query;
 }
@@ -99,13 +98,38 @@
     [self createRecord:TEST_TYPE_CLIMBING withText:@"climbed my first v2!" onDate:date completion:nil];
 }
 
-- (void)updateText:(NSString *)text completion:(void (^)(BOOL succeeded, NSError *error)) completion {
-    NSLog(@"updateText: %@", text);
-    if (text == nil) {
-        return;
-    }
-    [self setObject:text forKey:@"note"];
-    [self saveInBackgroundWithBlock:completion];
+#pragma mark Field accessors
+
+- (void)setNoteField:(NSString *)noteField {
+    self[kNoteFieldKey] = noteField;
+}
+
+- (NSString *)getNoteField {
+    return self[kNoteFieldKey];
+}
+
+- (void)setTypeIDField:(NSString *)typeIDField {
+    self[kTypeIDFieldKey] = typeIDField;
+}
+
+- (NSString *)getTypeIDField {
+    return self[kTypeIDFieldKey];
+}
+
+- (void)setUserIDField:(NSString *)userIDField {
+    self[kUserIDFieldKey] = userIDField;
+}
+
+- (NSString *)getUserIDField {
+    return self[kUserIDFieldKey];
+}
+
+- (void)setDateField:(NSDate *)dateField {
+    self[kDateFieldKey] = dateField;
+}
+
+- (NSDate *)getDateField {
+    return self[kDateFieldKey];
 }
 
 @end

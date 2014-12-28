@@ -11,6 +11,7 @@
 
 @interface RecordTypeCell : UITableViewCell
 
-@property (nonatomic, strong) RecordType *data;
+@property (nonatomic, strong) UIViewController *viewController;
+@property (nonatomic, strong) RecordType *typeData;
 
 @end

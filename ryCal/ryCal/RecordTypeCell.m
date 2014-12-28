@@ -8,18 +8,22 @@
 
 #import "RecordTypeCell.h"
 #import "RecordType.h"
+#import "SharedConstants.h"
+#import "RecordTypeComposerViewController.h"
 
 @interface RecordTypeCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *recordColorImage;
 @property (weak, nonatomic) IBOutlet UILabel *recordTypeName;
 
+- (IBAction)onEdit:(id)sender;
+
 @end
 
 @implementation RecordTypeCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -28,18 +32,20 @@
     // Configure the view for the selected state
 }
 
-@synthesize data = _data;
-- (void) setData:(RecordType *)data {
-    _data = data;
-//    self.recordColorImage.text = [self.data getMonthString];
-    self.recordTypeName.text = [data objectForKey:@"name"];
-//    
-//    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGesture:)];
-//    [self addGestureRecognizer:tgr];
+@synthesize typeData = _typeData;
+- (void) setTypeData:(RecordType *)typeData {
+    _typeData = typeData;
+    self.recordTypeName.text = typeData[kNameFieldKey];
+    self.recordColorImage.backgroundColor = [SharedConstants getColor:typeData[kColorFieldKey]];
+    
+    if ([typeData[kArchivedFieldKey] boolValue]) {
+        self.recordTypeName.textColor = [UIColor grayColor];
+    }
 }
 
-//- (RecordType *)data {
-//    return _data;
-//}
+- (IBAction)onEdit:(id)sender {
+    RecordTypeComposerViewController *vc = [[RecordTypeComposerViewController alloc] initWithRecordType:self.typeData];
+    [self.viewController.navigationController pushViewController:vc animated:YES];
+}
 
 @end

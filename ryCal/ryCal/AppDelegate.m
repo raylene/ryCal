@@ -12,6 +12,7 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "LoginViewController.h"
 #import "MainViewController.h"
+#import "SharedConstants.h"
 
 static const NSString *kParseAppID = @"MXbaau75VqOWXVcGqw5WM3KOsY12MPkRlLj5J7th";
 static const NSString *kParseClientKey = @"2vJqfG8gMODsZWgSGosJSsabTmhVJmTNdLLNFZFr";

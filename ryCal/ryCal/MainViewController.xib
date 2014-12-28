@@ -15,10 +15,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Psp-Vw-6Xi">
+                    <rect key="frame" x="140" y="607" width="94" height="30"/>
+                    <state key="normal" title="Record Types">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onRecordTypeClick:" destination="-1" eventType="touchUpInside" id="HQk-hX-7mA"/>
+                    </connections>
+                </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="RmB-M1-FJZ" customClass="MonthCollectionView">
-                    <rect key="frame" x="6" y="161" width="363" height="500"/>
+                    <rect key="frame" x="6" y="180" width="363" height="400"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="400" id="2hs-NL-gy6"/>
                         <constraint firstAttribute="height" constant="500" id="ydQ-Xj-ltz"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Sfe-Hy-GZn">
@@ -27,25 +37,31 @@
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="ydQ-Xj-ltz"/>
+                        </mask>
+                    </variation>
                 </collectionView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Psp-Vw-6Xi">
-                    <rect key="frame" x="140" y="94" width="94" height="30"/>
-                    <state key="normal" title="Record Types">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onRecordTypeClick:" destination="-1" eventType="touchUpInside" id="HQk-hX-7mA"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="RmB-M1-FJZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="6" id="0nw-Ja-3If"/>
                 <constraint firstAttribute="bottom" secondItem="RmB-M1-FJZ" secondAttribute="bottom" constant="6" id="JRQ-pr-Y2u"/>
                 <constraint firstAttribute="trailing" secondItem="RmB-M1-FJZ" secondAttribute="trailing" constant="6" id="OOT-1m-oHE"/>
+                <constraint firstItem="RmB-M1-FJZ" firstAttribute="top" secondItem="Psp-Vw-6Xi" secondAttribute="bottom" constant="140" id="UWe-MN-lWH"/>
+                <constraint firstAttribute="centerX" secondItem="Psp-Vw-6Xi" secondAttribute="centerX" id="Y7H-Mf-6qx"/>
+                <constraint firstAttribute="bottom" secondItem="Psp-Vw-6Xi" secondAttribute="bottom" constant="30" id="hp6-6z-dac"/>
+                <constraint firstItem="RmB-M1-FJZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="180" id="iyH-wg-aXp"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="115.5" y="59.5"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="JRQ-pr-Y2u"/>
+                    <exclude reference="UWe-MN-lWH"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="115.5" y="95.5"/>
         </view>
     </objects>
 </document>

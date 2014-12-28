@@ -12,26 +12,35 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="50" height="55"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="M" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="792-oj-3PG">
-                        <rect key="frame" x="8" y="4" width="26" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="D" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YcG-i8-EQY">
-                        <rect key="frame" x="8" y="17" width="34" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YcG-i8-EQY">
+                        <rect key="frame" x="19" y="17" width="13" height="22"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="YcG-i8-EQY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="Ck2-MI-bOv"/>
+                <constraint firstAttribute="centerY" secondItem="YcG-i8-EQY" secondAttribute="centerY" id="IhE-p2-elT"/>
+                <constraint firstAttribute="centerX" secondItem="YcG-i8-EQY" secondAttribute="centerX" id="VsA-GC-dyz"/>
+                <constraint firstItem="YcG-i8-EQY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="a3Y-8G-Aux"/>
+                <constraint firstAttribute="centerY" secondItem="YcG-i8-EQY" secondAttribute="centerY" id="i6v-1A-z7o"/>
+                <constraint firstAttribute="centerX" secondItem="YcG-i8-EQY" secondAttribute="centerX" id="rRF-Ry-TvD"/>
+            </constraints>
             <size key="customSize" width="50" height="55"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Ck2-MI-bOv"/>
+                    <exclude reference="IhE-p2-elT"/>
+                    <exclude reference="VsA-GC-dyz"/>
+                    <exclude reference="a3Y-8G-Aux"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="dayLabel" destination="YcG-i8-EQY" id="FbA-Ac-w12"/>
-                <outlet property="monthLabel" destination="792-oj-3PG" id="Pwx-6c-So1"/>
             </connections>
             <point key="canvasLocation" x="-250" y="74.5"/>
         </collectionViewCell>

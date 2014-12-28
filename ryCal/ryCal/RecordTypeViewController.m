@@ -9,6 +9,7 @@
 #import "RecordTypeViewController.h"
 #import "RecordType.h"
 #import "RecordTypeCell.h"
+#import "RecordTypeComposerViewController.h"
 
 @interface RecordTypeViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -23,9 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupTypeTable];
+    [self setupNavigationBar];
+    
     [RecordType loadAllTypes:^(NSArray *types, NSError *error) {
-        NSLog(@"Record types: %@", types);
         if (types.count == 0) {
+            // NOTE: only for testing
             [RecordType createTestRecordTypes];
         }
         self.recordTypes = types;
@@ -34,24 +37,24 @@
 }
 
 - (void)setupTypeTable {
+    UINib *cellNib = [UINib nibWithNibName:@"RecordTypeCell" bundle:nil];
+    [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"RecordTypeCell"];
+    
     self.typeTableView.delegate = self;
     self.typeTableView.dataSource = self;
     self.typeTableView.rowHeight = UITableViewAutomaticDimension;
     // No footer
     self.typeTableView.tableFooterView = [[UIView alloc] init];
-    
-    UINib *cellNib = [UINib nibWithNibName:@"RecordTypeCell" bundle:nil];
-    [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"RecordTypeCell"];
-    
-    // Init menu item option configurations
-//    self.menuItemConfig =
-//    @[
-//      @{@"name" : @"Profile", @"img":@"home"},
-//      @{@"name" : @"Calendar", @"img": @"home"},
-//      @{@"name" : @"Compose", @"img": @"home"},
-//      ];
 }
 
+- (void)setupNavigationBar {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Add New Type" style:UIBarButtonItemStylePlain target:self action:@selector(onCreateNewType)];
+}
+
+- (void)onCreateNewType {
+    RecordTypeComposerViewController *vc = [[RecordTypeComposerViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 #pragma mark - Custom setters
 
@@ -66,42 +69,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;
-    //self.prototypeCell.config = self.menuItemConfig[indexPath.row];
-//    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-//    return size.height + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     RecordTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecordTypeCell" forIndexPath:indexPath];
-    cell.data = self.recordTypes[indexPath.row];
-    //cell.config = self.menuItemConfig[indexPath.row];
+    cell.viewController = self;
+    cell.typeData = self.recordTypes[indexPath.row];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 10;
     return self.recordTypes.count;
 }
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//}
-
-//    UIViewController *vc;
-//    // TODO: add the rest of these
-//    if (indexPath.row == kProfileItemIndex) {
-//        NSLog(@"***creating profile view***");
-//        vc = [[UserProfileViewController alloc] init];
-//        //return;
-//    } else if (indexPath.row == kCalendarItemIndex) {
-//        return;
-//    } else if (indexPath.row == kComposeItemIndex) {
-//        vc = [[ComposeViewController alloc] init];
-//    }
-//    
-//    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:vc] animated:YES completion:^{
-//        NSLog(@"Menu presentVC completed");
-//    }];
-
 
 @end

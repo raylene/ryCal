@@ -1,15 +1,15 @@
 //
-//  SelectableRecordTypeCell.m
+//  EditableRecordTypeCell.m
 //  ryCal
 //
 //  Created by Raylene Yung on 12/22/14.
 //  Copyright (c) 2014 rayleney. All rights reserved.
 //
 
-#import "SelectableRecordTypeCell.h"
+#import "EditableRecordTypeCell.h"
 #import "SharedConstants.h"
 
-@interface SelectableRecordTypeCell ()
+@interface EditableRecordTypeCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *recordColorImage;
 @property (weak, nonatomic) IBOutlet UILabel *recordTypeName;
@@ -17,14 +17,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *noteTextField;
 
 - (IBAction)switchValueChanged:(id)sender;
-- (IBAction)noteEditingDidEnd:(id)sender;
-- (IBAction)noteEditingDidBegin:(id)sender;
-- (IBAction)noteEditingChanged:(id)sender;
 - (IBAction)noteDidEndOnExit:(id)sender;
 
 @end
 
-@implementation SelectableRecordTypeCell
+@implementation EditableRecordTypeCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -34,47 +31,32 @@
 @synthesize typeData = _typeData;
 - (void) setTypeData:(RecordType *)typeData {
     _typeData = typeData;
-    //    self.recordColorImage.text = [self.data getMonthString];
-    self.recordTypeName.text = typeData[@"name"];//[typeData objectForKey:@"name"];
-    self.recordColorImage.backgroundColor = [SharedConstants getColor:typeData[@"color"]];
+    self.recordTypeName.text = typeData[kNameFieldKey];
+    self.recordColorImage.backgroundColor = [SharedConstants getColor:typeData[kColorFieldKey]];
 }
 
 @synthesize recordData = _recordData;
 - (void) setRecordData:(Record *)recordData {
-    NSLog(@"setRecordData: %@", recordData);
     _recordData = recordData;
     BOOL hasData = (recordData != nil);
     [self.toggleSwitch setOn:hasData];
     [self.noteTextField setHidden:!hasData];
     
-    if (hasData && recordData[@"note"]) {
-        [self.noteTextField setText:recordData[@"note"]];
+    if (hasData && recordData[kNoteFieldKey]) {
+        [self.noteTextField setText:recordData[kNoteFieldKey]];
     }
 }
 
 - (IBAction)switchValueChanged:(id)sender {
-//    NSLog(@"switchValueChanged: %d", self.toggleSwitch.on);
-    [self.noteTextField setHidden:!self.toggleSwitch.on];
-    if (!self.toggleSwitch.on) {
+    BOOL isDisabled = !self.toggleSwitch.on;
+    [self.noteTextField setHidden:isDisabled];
+    if (isDisabled) {
         self.noteTextField.text = nil;
     }
     [self saveChanges];
 }
 
-- (IBAction)noteEditingDidEnd:(id)sender {
-//    NSLog(@"noteEditingDidEnd: %@", self.noteTextField.text);
-}
-
-- (IBAction)noteEditingDidBegin:(id)sender {
-//    NSLog(@"noteEditingDidBegin: %@", self.noteTextField.text);
-}
-
-- (IBAction)noteEditingChanged:(id)sender {
-//    NSLog(@"noteEditingChanged: %@", self.noteTextField.text);
-}
-
 - (IBAction)noteDidEndOnExit:(id)sender {
-    NSLog(@"noteDidEndOnExit: %@", self.noteTextField.text);
     [self resignFirstResponder];
     [self saveChanges];
 }
@@ -86,22 +68,27 @@
         NSString *trimmedString = [self.noteTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         
         if (self.recordData) {
-            self.recordData[@"note"] = trimmedString;
-            NSLog(@"attempting to updateText: %@, %@", self.recordData, trimmedString);
-//            [self.recordData updateText:trimmedString completion:nil];
+            self.recordData[kNoteFieldKey] = trimmedString;
         } else {
             self.recordData = [Record createNewRecord:self.typeData.objectId withText:trimmedString onDate:self.date];
         }
         [self.recordData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"Successfully saved/updated record");
+            } else {
+                NSLog(@"Failed to save record");
             }
         }];
     } else {
         // Delete the record if it already exists
         if (self.recordData != nil) {
             [self.recordData deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                self.recordData = nil;
+                if (succeeded) {
+                    NSLog(@"Succeeded in deleting the record");
+                    self.recordData = nil;
+                } else {
+                    NSLog(@"Failed to delete");
+                }
             }];
         }
     }

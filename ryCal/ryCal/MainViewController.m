@@ -11,6 +11,7 @@
 #import "DayCell.h"
 #import "User.h"
 #import "RecordTypeViewController.h"
+#import "RecordTypeComposerViewController.h"
 
 @interface MainViewController ()
 
@@ -22,12 +23,30 @@
 
 - (id)init {
     self = [super init];
+    if (self) {
+        [self setReferenceDate:[NSDate date]];
+    }
+    return self;
+}
+
+- (id)initWithDate:(NSDate *)date {
+    self = [super init];
+    if (self) {
+        [self setReferenceDate:date];
+    }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavigationBar];
+    [self setupCollectionView];
+    
+    self.title = [self.monthCollectionView.monthData getTitleString];
+}
+
+- (void)setupCollectionView {
+    [self.monthCollectionView setDate:self.referenceDate];
     [self.monthCollectionView setViewController:self];
 }
 
@@ -35,19 +54,13 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(onLogout)];
 }
 
-- (IBAction)onRecordTypeClick:(id)sender {
-    NSLog(@"Clicked Record Types");
- 
-    RecordTypeViewController *vc = [[RecordTypeViewController alloc] init];
-    //    vc.backgroundColor = self.color;
-    //    vc.textColor = self.bestieTextLabel.textColor;
-    //    vc.modalPresentationStyle = UIModalPresentationCustom;
-    //    vc.transitioningDelegate = self.parentVC;
-    
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 - (void)onLogout {
     [User logout];
 }
+
+- (IBAction)onRecordTypeClick:(id)sender {
+    RecordTypeViewController *vc = [[RecordTypeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 @end

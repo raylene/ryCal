@@ -15,7 +15,8 @@
 
 - (NSString *)getMonthString;
 - (NSString *)getDayString;
-- (NSString *)getFullDateString;
+
+- (NSString *)getTitleString;
 
 - (NSDate *)getStartDate;
 - (NSDate *)getEndDate;

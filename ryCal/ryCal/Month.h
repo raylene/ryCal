@@ -15,8 +15,11 @@
 - (id)initWithNSDate:(NSDate *)date;
 - (int)numDays;
 - (NSDate *)getStartDate;
+- (NSDate *)getEndDate;
 
 - (NSDate *)getStartDateForDay:(int)day;
 - (NSDate *)getEndDateForDay:(int)day;
+
+- (NSString *)getTitleString;
 
 @end
