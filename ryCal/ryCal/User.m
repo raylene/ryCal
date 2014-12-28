@@ -1,0 +1,160 @@
+//
+//  User.m
+//  ryCal
+//
+//  Created by Raylene Yung on 11/23/14.
+//  Copyright (c) 2014 rayleney. All rights reserved.
+//
+
+#import "User.h"
+#import "Parse.h"
+#import <ParseFacebookUtils/PFFacebookUtils.h>
+
+NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
+NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
+
+@interface User ()
+
+@property (nonatomic, strong) NSDictionary *dictionary;
+
+@end
+
+@implementation User
+
+static User *_currentUser;
+NSString * const kCurrentUserKey = @"kCurrentUserKey";
+
++ (User *)currentUser {
+    if (_currentUser == nil) {
+        NSLog(@"fetching currentUser from nil");
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentUserKey];
+        if (data != nil) {
+            NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+            NSLog(@"currentUser cached dictionary: %@", dictionary);
+            _currentUser = [[User alloc] initWithDictionary:dictionary];
+        }
+        
+        PFUser *curUser = [PFUser currentUser];
+        if (curUser != nil) {
+            _currentUser.pfUser = curUser;
+        }
+    }
+    return _currentUser;
+}
+
++ (void)setCurrentUser:(User *)currentUser {
+    _currentUser = currentUser;
+    NSLog(@"setCurrentUser");
+    
+    if (_currentUser != nil) {
+        NSLog(@"Current User dictionary: %@", currentUser.dictionary);
+        NSData *data = nil;
+        if (currentUser.dictionary != nil) {
+            data = [NSJSONSerialization dataWithJSONObject:currentUser.dictionary options:0 error:NULL];
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:kCurrentUserKey];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kCurrentUserKey];
+    }
+    NSLog(@"synchronized userDefaults");
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void)logout {
+    [User setCurrentUser:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogoutNotification object:nil];
+}
+
++ (void)login {
+    NSLog(@"User - Login");
+
+    // Facebook user permissions
+    NSArray *fbPermissions = @[@"user_about_me"];
+
+    // Login PFUser using Facebook
+    [PFFacebookUtils logInWithPermissions:fbPermissions block:^(PFUser *pfuser, NSError *error) {
+        NSString *errorMessage = nil;
+        if (error != nil) {
+            errorMessage = [error localizedDescription];
+        } else if (pfuser) {
+            NSLog(@"Loaded user: %@", pfuser);
+
+            if (pfuser.isNew) {
+                NSLog(@"Created new user!");
+                [pfuser saveInBackground];
+            }
+            
+            [User setCurrentUser:[[User alloc] initWithPFUser:pfuser]];
+            [User loadFacebookDataForCurrentUser];
+            
+            NSLog(@"sending notification: %@", UserDidLoginNotification);
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLoginNotification object:nil];
+        }
+        if (!pfuser && !error) {
+            errorMessage = @"The user cancelled their Facebook login";
+        }
+        if (errorMessage) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Error"
+                                                            message:errorMessage
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"Dismiss", nil];
+            [alert show];
+        }
+    }];
+}
+
++ (void)loadFacebookDataForCurrentUser {
+    NSLog(@"loadFacebookDataForCurrentUser");
+    FBRequest *request = [FBRequest requestForMe];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+            NSLog(@"FBRequest error: %@", [error localizedDescription]);
+        } else {
+            NSLog(@"Loaded fb user data: %@", result);
+            // result is a dictionary with the user's Facebook data
+            NSDictionary *userData = (NSDictionary *)result;
+            User *user = [User currentUser];
+            [user setDictionary:userData];
+            [User setCurrentUser:user];
+        }
+    }];
+}
+
+#pragma mark Custom Init methods
+
+- (id)initWithPFUser:(PFUser *)pfUser {
+    self = [super init];
+    if (self) {
+        [self setPfUser:pfUser];
+    }
+    return self;
+}
+
+- (id)initWithDictionary:(NSDictionary *)dictionary {
+    self = [super init];
+    if (self) {
+        [self setDictionary:dictionary];
+//        user.username = userData[@"name"];
+//        NSString *facebookID = userData[@"id"];
+//        NSString *profileImageUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
+//        user[@"profileImageUrl"] = profileImageUrl;
+
+    }
+    return self;
+}
+
+- (NSString *)getUsername {
+    return self.pfUser.username;
+}
+
+- (PFUser *)getPFUser {
+    return self.pfUser;
+}
+
+- (NSString *)getUserID {
+    return self.pfUser.objectId;
+}
+
+@end
