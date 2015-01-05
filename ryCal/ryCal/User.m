@@ -19,19 +19,16 @@
 
 @implementation User
 
-static User *_currentUser;
 NSString * const kCurrentUserKey = @"kCurrentUserKey";
 
+static User *_currentUser;
 + (User *)currentUser {
     if (_currentUser == nil) {
         NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:kCurrentUserKey];
-        if (data != nil) {
+        PFUser *curUser = [PFUser currentUser];
+        if (data != nil && curUser != nil) {
             NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
             _currentUser = [[User alloc] initWithDictionary:dictionary];
-        }
-        
-        PFUser *curUser = [PFUser currentUser];
-        if (curUser != nil) {
             _currentUser.pfUser = curUser;
         }
     }
@@ -144,6 +141,10 @@ NSString * const kCurrentUserKey = @"kCurrentUserKey";
 
 - (NSString *)getUserID {
     return self.pfUser.objectId;
+}
+
+- (NSString *)getProfileImageURL {
+    return self.pfUser[@"profileImageUrl"];
 }
 
 @end

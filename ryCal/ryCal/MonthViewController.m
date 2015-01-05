@@ -1,25 +1,24 @@
 //
-//  MainViewController.m
+//  MonthViewController.h
 //  ryCal
 //
 //  Created by Raylene Yung on 11/23/14.
 //  Copyright (c) 2014 rayleney. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "MonthViewController.h"
 #import "MonthCollectionView.h"
 #import "DayCell.h"
 #import "User.h"
 #import "RecordTypeViewController.h"
 #import "RecordTypeComposerViewController.h"
 
-@interface MainViewController ()
+@interface MonthViewController ()
 
 @property (weak, nonatomic) IBOutlet MonthCollectionView *monthCollectionView;
-
 @end
 
-@implementation MainViewController
+@implementation MonthViewController
 
 - (id)init {
     self = [super init];
@@ -39,6 +38,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"MonthViewC viewDidLoad: (%f, %f), (%f, %f)", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
+
     [self setupNavigationBar];
     [self setupCollectionView];
     

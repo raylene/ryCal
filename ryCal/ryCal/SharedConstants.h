@@ -15,10 +15,14 @@
 extern NSString * const UserDidLogoutNotification;
 extern NSString * const UserDidLoginNotification;
 extern NSString * const ColorSelectedNotification;
+extern NSString * const MonthDataChangedNotification;
+extern NSString * const RecordTypeDataChangedNotification;
 
-extern NSString * const COLOR_NOTIF_PARAM;
+// Notif params
+extern NSString * const kColorSelectedNotifParam;
 
 extern NSString * const kNoteFieldKey;
+extern NSString * const kTypeFieldKey;
 extern NSString * const kTypeIDFieldKey;
 extern NSString * const kUserIDFieldKey;
 extern NSString * const kDateFieldKey;
@@ -48,6 +52,7 @@ extern int const NUM_COLORS;
 
 + (NSArray *)getColorArray;
 + (NSString *)getDefaultColorName;
++ (UIColor *)getPlaceholderRecordTypeColor;
 + (UIColor *)getColor:(NSString *)name;
 
 + (NSInteger)getCurrentYear;

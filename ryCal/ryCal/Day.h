@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "Month.h"
+#import "Record.h"
 
 @interface Day : NSObject
 
-- (id)initWithMonthAndDay:(Month *)month day:(int)dayIndex;
+- (id)initWithMonthAndDay:(Month *)month dayIndex:(int)dayIndex;
 
 - (NSString *)getMonthString;
 - (NSString *)getDayString;
@@ -20,5 +21,7 @@
 
 - (NSDate *)getStartDate;
 - (NSDate *)getEndDate;
+
+- (Record *)getPrimaryRecord;
 
 @end

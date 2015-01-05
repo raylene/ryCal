@@ -8,20 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
-#import "Month.h"
-#import "Day.h"
+#import "RecordType.h"
 
 @interface Record : PFObject<PFSubclassing>
 
 // Creation methods
-+ (Record *)createNewRecord:(NSString *)typeID withText:(NSString *)text;
-+ (Record *)createNewRecord:(NSString *)typeID withText:(NSString *)text onDate:(NSDate *)date;
++ (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text;
++ (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text onDate:(NSDate *)date;
 
 + (void)createTestRecordsForDate:(NSDate *)date;
 
 + (void)loadAllRecords:(void (^)(NSArray *records, NSError *error))completion;
-+ (void)loadAllRecordsForMonth:(Month *)month completion:(void (^)(NSArray *records, NSError *error))completion;
-+ (void)loadAllRecordsForDay:(Day *)day completion:(void (^)(NSArray *records, NSError *error))completion;
++ (void)loadAllRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion;
 
 // Fields
 - (void)setNoteField:(NSString *)noteField;
@@ -30,10 +28,15 @@
 - (void)setTypeIDField:(NSString *)typeIDField;
 - (NSString *)getTypeIDField;
 
+- (void)setTypeField:(RecordType *)typeField;
+- (RecordType *)getTypeField;
+
 - (void)setUserIDField:(NSString *)userIDField;
 - (NSString *)getUserIDField;
 
 - (void)setDateField:(NSDate *)dateField;
 - (NSDate *)getDateField;
+
+- (UIColor *)getColor;
 
 @end

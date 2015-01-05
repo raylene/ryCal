@@ -8,6 +8,7 @@
 
 #import "Day.h"
 #import "Month.h"
+#import "Record.h"
 
 @interface Day ()
 
@@ -20,7 +21,7 @@
 
 #pragma mark Custom Init methods
 
-- (id)initWithMonthAndDay:(Month *)month day:(int)dayIndex {
+- (id)initWithMonthAndDay:(Month *)month dayIndex:(int)dayIndex {
     self = [super init];
     if (self) {
         self.monthData = month;
@@ -50,6 +51,10 @@
 
 - (NSDate *)getEndDate {
     return [self.monthData getEndDateForDay:self.dayInt];
+}
+
+- (Record *)getPrimaryRecord {
+    return [self.monthData getPrimaryRecordForDay:self.dayInt];
 }
 
 @end

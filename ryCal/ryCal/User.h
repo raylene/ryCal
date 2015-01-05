@@ -20,5 +20,6 @@
 
 - (NSString *)getUsername;
 - (NSString *)getUserID;
+- (NSString *)getProfileImageURL;
 
 @end

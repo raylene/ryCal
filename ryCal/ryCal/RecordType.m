@@ -7,6 +7,7 @@
 //
 
 #import "RecordType.h"
+#import <Parse/PFObject+Subclass.h>
 #import "User.h"
 #import "SharedConstants.h"
 
@@ -20,7 +21,7 @@
     RecordType *newRecordType = [RecordType object];
     newRecordType[kColorFieldKey] = [SharedConstants getDefaultColorName];
     newRecordType[kUserIDFieldKey] = [[User currentUser] getUserID];
-    newRecordType[kArchivedFieldKey] = @YES;
+    newRecordType[kArchivedFieldKey] = @NO;
     return newRecordType;
 }
 
@@ -34,24 +35,57 @@
     newRecordType[kColorFieldKey] = typeColor;
     newRecordType[kUserIDFieldKey] = [[User currentUser] getUserID];
     newRecordType[kArchivedFieldKey] = [[NSNumber alloc] initWithBool:archived];
-    [newRecordType saveInBackgroundWithBlock:completion];
+    
+    [newRecordType saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
+        }
+        completion(succeeded, error);
+    }];
 }
 
++ (PFQuery *)createBasicRecordTypeQuery {
+    PFQuery *query = [PFQuery queryWithClassName:@"RecordType"];
+    [query setCachePolicy:kPFCachePolicyNetworkElseCache];
+    [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
+    [query orderByDescending:@"createdAt"];
+    return query;
+}
+
+// TODO: see if this singleton pattern is really the right thing to do...
+static NSArray *_enabledRecordTypes;
 + (void)loadEnabledTypes:(void (^)(NSArray *types, NSError *error))completion {
     NSLog(@"Loading only enabled record types for user: %@", [[User currentUser] getUserID]);
-    PFQuery *query = [PFQuery queryWithClassName:@"RecordType"];
-    [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
-    [query whereKey:kArchivedFieldKey notEqualTo:@YES];
-    [query orderByDescending:@"createdAt"];
-    [query findObjectsInBackgroundWithBlock:completion];
+    if (_enabledRecordTypes == nil) {
+        PFQuery *query = [self createBasicRecordTypeQuery];
+        [query whereKey:kArchivedFieldKey notEqualTo:@YES];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (error != nil) {
+                _enabledRecordTypes = objects;
+            }
+            completion(objects, error);
+        }];
+    } else {
+        completion(_enabledRecordTypes, nil);
+    }
 }
 
 + (void)loadAllTypes:(void (^)(NSArray *types, NSError *error))completion {
     NSLog(@"Loading all record types for user: %@", [[User currentUser] getUserID]);
-    PFQuery *query = [PFQuery queryWithClassName:@"RecordType"];
-    [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
-    [query orderByDescending:@"createdAt"];
+    PFQuery *query = [self createBasicRecordTypeQuery];
     [query findObjectsInBackgroundWithBlock:completion];
+}
+
+// TODO: fill this out?
++ (void)loadFromID:(NSString *)objectID completion:(void (^)(RecordType *type, NSError *error))completion {
+    [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
+        for (RecordType *recordType in types) {
+            if ([objectID isEqualToString:recordType.objectId]) {
+                completion(recordType, error);
+            }
+        }
+    }];
 }
 
 + (void)createTestRecordTypes {

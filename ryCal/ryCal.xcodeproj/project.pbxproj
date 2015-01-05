@@ -8,10 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		09F697F05BDA49F09297C8FE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8BCD7F6B25917ADCD0112DC /* libPods.a */; };
+		6F1650941A5396F1006336EF /* SlidingMenuMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1650921A5396F1006336EF /* SlidingMenuMainViewController.m */; };
+		6F1650951A5396F1006336EF /* SlidingMenuMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1650931A5396F1006336EF /* SlidingMenuMainViewController.xib */; };
+		6F1650991A53994A006336EF /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1650971A53994A006336EF /* MenuViewController.m */; };
+		6F16509A1A53994A006336EF /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1650981A53994A006336EF /* MenuViewController.xib */; };
+		6F16509E1A53A549006336EF /* MenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F16509C1A53A549006336EF /* MenuItemCell.m */; };
+		6F16509F1A53A549006336EF /* MenuItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F16509D1A53A549006336EF /* MenuItemCell.xib */; };
 		6F6B9A931A22BCDD005B7722 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B9A911A22BCDD005B7722 /* LoginViewController.m */; };
 		6F6B9A941A22BCDD005B7722 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B9A921A22BCDD005B7722 /* LoginViewController.xib */; };
-		6F6B9A981A22BCED005B7722 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B9A961A22BCED005B7722 /* MainViewController.m */; };
-		6F6B9A991A22BCED005B7722 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B9A971A22BCED005B7722 /* MainViewController.xib */; };
+		6F6B9A981A22BCED005B7722 /* MonthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B9A961A22BCED005B7722 /* MonthViewController.m */; };
+		6F6B9A991A22BCED005B7722 /* MonthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B9A971A22BCED005B7722 /* MonthViewController.xib */; };
 		6F6B9A9E1A22F585005B7722 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B9A9D1A22F585005B7722 /* User.m */; };
 		6F926BD71A22BA5F00473EA2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F926BD61A22BA5F00473EA2 /* main.m */; };
 		6F926BDA1A22BA5F00473EA2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F926BD91A22BA5F00473EA2 /* AppDelegate.m */; };
@@ -52,12 +58,21 @@
 
 /* Begin PBXFileReference section */
 		6480DA282E4D17BB337F70D4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6F1650911A5396F1006336EF /* SlidingMenuMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingMenuMainViewController.h; sourceTree = "<group>"; };
+		6F1650921A5396F1006336EF /* SlidingMenuMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingMenuMainViewController.m; sourceTree = "<group>"; };
+		6F1650931A5396F1006336EF /* SlidingMenuMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlidingMenuMainViewController.xib; sourceTree = "<group>"; };
+		6F1650961A53994A006336EF /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		6F1650971A53994A006336EF /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		6F1650981A53994A006336EF /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		6F16509B1A53A549006336EF /* MenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemCell.h; sourceTree = "<group>"; };
+		6F16509C1A53A549006336EF /* MenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemCell.m; sourceTree = "<group>"; };
+		6F16509D1A53A549006336EF /* MenuItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuItemCell.xib; sourceTree = "<group>"; };
 		6F6B9A901A22BCDD005B7722 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6F6B9A911A22BCDD005B7722 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6F6B9A921A22BCDD005B7722 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		6F6B9A951A22BCED005B7722 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		6F6B9A961A22BCED005B7722 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		6F6B9A971A22BCED005B7722 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		6F6B9A951A22BCED005B7722 /* MonthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthViewController.h; sourceTree = "<group>"; };
+		6F6B9A961A22BCED005B7722 /* MonthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthViewController.m; sourceTree = "<group>"; };
+		6F6B9A971A22BCED005B7722 /* MonthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthViewController.xib; sourceTree = "<group>"; };
 		6F6B9A9C1A22F585005B7722 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		6F6B9A9D1A22F585005B7722 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		6F926BD11A22BA5F00473EA2 /* ryCal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ryCal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,9 +147,9 @@
 				6F6B9A901A22BCDD005B7722 /* LoginViewController.h */,
 				6F6B9A911A22BCDD005B7722 /* LoginViewController.m */,
 				6F6B9A921A22BCDD005B7722 /* LoginViewController.xib */,
-				6F6B9A951A22BCED005B7722 /* MainViewController.h */,
-				6F6B9A961A22BCED005B7722 /* MainViewController.m */,
-				6F6B9A971A22BCED005B7722 /* MainViewController.xib */,
+				6F6B9A951A22BCED005B7722 /* MonthViewController.h */,
+				6F6B9A961A22BCED005B7722 /* MonthViewController.m */,
+				6F6B9A971A22BCED005B7722 /* MonthViewController.xib */,
 				6FBE73E81A4673380045810A /* DayViewController.h */,
 				6FBE73E91A4673380045810A /* DayViewController.m */,
 				6FBE73EA1A4673380045810A /* DayViewController.xib */,
@@ -144,6 +159,12 @@
 				6FF442C51A4FB56700B3DD45 /* RecordTypeComposerViewController.h */,
 				6FF442C61A4FB56700B3DD45 /* RecordTypeComposerViewController.m */,
 				6FF442C71A4FB56700B3DD45 /* RecordTypeComposerViewController.xib */,
+				6F1650911A5396F1006336EF /* SlidingMenuMainViewController.h */,
+				6F1650921A5396F1006336EF /* SlidingMenuMainViewController.m */,
+				6F1650931A5396F1006336EF /* SlidingMenuMainViewController.xib */,
+				6F1650961A53994A006336EF /* MenuViewController.h */,
+				6F1650971A53994A006336EF /* MenuViewController.m */,
+				6F1650981A53994A006336EF /* MenuViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -182,6 +203,9 @@
 				6FF442D41A4FBCC100B3DD45 /* ColorCell.h */,
 				6FF442D51A4FBCC100B3DD45 /* ColorCell.m */,
 				6FF442D61A4FBCC100B3DD45 /* ColorCell.xib */,
+				6F16509B1A53A549006336EF /* MenuItemCell.h */,
+				6F16509C1A53A549006336EF /* MenuItemCell.m */,
+				6F16509D1A53A549006336EF /* MenuItemCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -358,11 +382,14 @@
 			files = (
 				6F6B9A941A22BCDD005B7722 /* LoginViewController.xib in Resources */,
 				6FBE74041A4950B00045810A /* EditableRecordTypeCell.xib in Resources */,
-				6F6B9A991A22BCED005B7722 /* MainViewController.xib in Resources */,
+				6F16509A1A53994A006336EF /* MenuViewController.xib in Resources */,
+				6F6B9A991A22BCED005B7722 /* MonthViewController.xib in Resources */,
 				6F926BE51A22BA5F00473EA2 /* LaunchScreen.xib in Resources */,
+				6F16509F1A53A549006336EF /* MenuItemCell.xib in Resources */,
 				6FF442C91A4FB56700B3DD45 /* RecordTypeComposerViewController.xib in Resources */,
 				6FBE73EC1A4673380045810A /* DayViewController.xib in Resources */,
 				6FBE73FF1A47F5910045810A /* RecordTypeCell.xib in Resources */,
+				6F1650951A5396F1006336EF /* SlidingMenuMainViewController.xib in Resources */,
 				6FBE73E71A45193E0045810A /* DayCell.xib in Resources */,
 				6FBE73FA1A47E4650045810A /* RecordTypeViewController.xib in Resources */,
 				6FF442D81A4FBCC100B3DD45 /* ColorCell.xib in Resources */,
@@ -422,6 +449,7 @@
 				6FBE73F91A47E4650045810A /* RecordTypeViewController.m in Sources */,
 				6F6B9A9E1A22F585005B7722 /* User.m in Sources */,
 				6FBE73DC1A4125320045810A /* MonthCollectionView.m in Sources */,
+				6F1650941A5396F1006336EF /* SlidingMenuMainViewController.m in Sources */,
 				6FF442D71A4FBCC100B3DD45 /* ColorCell.m in Sources */,
 				6FBE73FE1A47F5910045810A /* RecordTypeCell.m in Sources */,
 				6FF442C81A4FB56700B3DD45 /* RecordTypeComposerViewController.m in Sources */,
@@ -431,10 +459,12 @@
 				6FBE73F51A47DC8D0045810A /* RecordType.m in Sources */,
 				6FBE74031A4950B00045810A /* EditableRecordTypeCell.m in Sources */,
 				6F926BDA1A22BA5F00473EA2 /* AppDelegate.m in Sources */,
-				6F6B9A981A22BCED005B7722 /* MainViewController.m in Sources */,
+				6F6B9A981A22BCED005B7722 /* MonthViewController.m in Sources */,
 				6F926BD71A22BA5F00473EA2 /* main.m in Sources */,
+				6F16509E1A53A549006336EF /* MenuItemCell.m in Sources */,
 				6FBE73F21A476BFC0045810A /* Record.m in Sources */,
 				6FBE73EB1A4673380045810A /* DayViewController.m in Sources */,
+				6F1650991A53994A006336EF /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

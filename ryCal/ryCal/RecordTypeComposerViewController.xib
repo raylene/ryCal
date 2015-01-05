@@ -18,28 +18,34 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name your record type..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bdn-i2-23i">
-                    <rect key="frame" x="29" y="104" width="316" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name your record type..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bdn-i2-23i">
+                    <rect key="frame" x="20" y="100" width="335" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nsM-8y-hQ9">
-                    <rect key="frame" x="98" y="320" width="178" height="29"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nsM-8y-hQ9">
+                    <rect key="frame" x="120" y="320" width="135" height="29"/>
                     <segments>
                         <segment title="Enabled"/>
                         <segment title="Archived"/>
                     </segments>
                     <color key="tintColor" red="0.51092991450000003" green="0.67026581299999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </segmentedControl>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="I'll add a description later..." translatesAutoresizingMaskIntoConstraints="NO" id="eFP-3L-9j7">
-                    <rect key="frame" x="29" y="368" width="316" height="149"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="I'll add a description later..." translatesAutoresizingMaskIntoConstraints="NO" id="eFP-3L-9j7">
+                    <rect key="frame" x="30" y="368" width="315" height="140"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="140" id="bHp-3K-qXM"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="RxC-fE-xrp">
-                    <rect key="frame" x="41" y="153" width="284" height="149"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="RxC-fE-xrp">
+                    <rect key="frame" x="40" y="150" width="295" height="150"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="Lo8-nL-VrX"/>
+                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m1H-ha-x2t">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -59,8 +65,23 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="nsM-8y-hQ9" firstAttribute="top" secondItem="RxC-fE-xrp" secondAttribute="bottom" constant="20" id="38E-uK-jm2"/>
+                <constraint firstAttribute="trailing" secondItem="eFP-3L-9j7" secondAttribute="trailing" constant="30" id="B3Z-LI-mCE"/>
+                <constraint firstAttribute="centerX" secondItem="eFP-3L-9j7" secondAttribute="centerX" id="KIw-2B-Nkq"/>
+                <constraint firstItem="RxC-fE-xrp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="MBc-4j-q17"/>
+                <constraint firstItem="eFP-3L-9j7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="Pfr-ke-7V8"/>
+                <constraint firstAttribute="trailing" secondItem="RxC-fE-xrp" secondAttribute="trailing" constant="40" id="agC-jX-hVN"/>
+                <constraint firstItem="RxC-fE-xrp" firstAttribute="top" secondItem="Bdn-i2-23i" secondAttribute="bottom" constant="20" id="di4-Zj-lwR"/>
+                <constraint firstAttribute="trailing" secondItem="Bdn-i2-23i" secondAttribute="trailing" constant="20" id="gVh-re-gSW"/>
+                <constraint firstAttribute="centerX" secondItem="RxC-fE-xrp" secondAttribute="centerX" id="hsp-8z-g6Q"/>
+                <constraint firstItem="Bdn-i2-23i" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="qJF-4Q-suV"/>
+                <constraint firstAttribute="centerX" secondItem="yPK-wz-7Bh" secondAttribute="centerX" id="qNd-nI-og1"/>
                 <constraint firstAttribute="centerX" secondItem="yPK-wz-7Bh" secondAttribute="centerX" id="rMb-Gi-a3S"/>
                 <constraint firstAttribute="bottom" secondItem="yPK-wz-7Bh" secondAttribute="bottom" constant="30" id="rbT-wK-aND"/>
+                <constraint firstAttribute="centerX" secondItem="Bdn-i2-23i" secondAttribute="centerX" id="swx-YP-YIQ"/>
+                <constraint firstAttribute="centerX" secondItem="nsM-8y-hQ9" secondAttribute="centerX" id="vFn-Fx-que"/>
+                <constraint firstItem="Bdn-i2-23i" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="vyk-9j-HZp"/>
+                <constraint firstItem="eFP-3L-9j7" firstAttribute="top" secondItem="nsM-8y-hQ9" secondAttribute="bottom" constant="20" id="wXe-Cn-xUi"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="54.5" y="241.5"/>

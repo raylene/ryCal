@@ -10,6 +10,7 @@
 #import "RecordType.h"
 #import "RecordTypeCell.h"
 #import "RecordTypeComposerViewController.h"
+#import "SharedConstants.h"
 
 @interface RecordTypeViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -26,11 +27,17 @@
     [self setupTypeTable];
     [self setupNavigationBar];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTypeData) name:RecordTypeDataChangedNotification object:nil];
+    
+    [self refreshTypeData];
+}
+
+- (void)refreshTypeData {
     [RecordType loadAllTypes:^(NSArray *types, NSError *error) {
-        if (types.count == 0) {
-            // NOTE: only for testing
-            [RecordType createTestRecordTypes];
-        }
+//        if (types.count == 0) {
+//            // NOTE: only for testing
+//            [RecordType createTestRecordTypes];
+//        }
         self.recordTypes = types;
         [self.typeTableView reloadData];
     }];

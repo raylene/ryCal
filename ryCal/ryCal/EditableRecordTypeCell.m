@@ -70,7 +70,7 @@
         if (self.recordData) {
             self.recordData[kNoteFieldKey] = trimmedString;
         } else {
-            self.recordData = [Record createNewRecord:self.typeData.objectId withText:trimmedString onDate:self.date];
+            self.recordData = [Record createNewRecord:self.typeData withText:trimmedString onDate:self.date];
         }
         [self.recordData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {

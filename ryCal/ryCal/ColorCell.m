@@ -38,14 +38,14 @@
 
 - (void)colorSwitched:(NSNotification *)notification {
     NSDictionary *dict = [notification userInfo];
-    self.selectedStateView.hidden = ![self.colorName isEqualToString:dict[COLOR_NOTIF_PARAM]];
+    self.selectedStateView.hidden = ![self.colorName isEqualToString:dict[kColorSelectedNotifParam]];
 }
 
 #pragma mark UIGestureRecognizers
 
 - (IBAction)onTapGesture:(id)sender {
     self.selectedStateView.hidden = !(self.selectedStateView.hidden);
-    [[NSNotificationCenter defaultCenter] postNotificationName:ColorSelectedNotification object:nil userInfo:@{COLOR_NOTIF_PARAM: self.colorName}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ColorSelectedNotification object:nil userInfo:@{kColorSelectedNotifParam: self.colorName}];
 }
 
 @end

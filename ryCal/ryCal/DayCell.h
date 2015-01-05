@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "Day.h"
+#import "Record.h"
 
 @interface DayCell : UICollectionViewCell
 
 @property (nonatomic, strong) Day *data;
 @property (nonatomic, strong) UIViewController *viewController;
+
+@property (nonatomic, strong) Record *primaryRecord;
 
 @end

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
-#import <Parse/PFObject+Subclass.h>
 
 @interface RecordType : PFObject<PFSubclassing>
 
@@ -18,8 +17,10 @@
 + (void)createRecordType:(NSString *)typeName typeColor:(NSString *)typeColor completion:(void (^)(BOOL succeeded, NSError *error)) completion;
 + (void)createRecordType:(NSString *)typeName typeColor:(NSString *)typeColor archived:(BOOL)archived completion:(void (^)(BOOL succeeded, NSError *error)) completion;
 
+//+ (void)loadEnabledTypes;
 + (void)loadEnabledTypes:(void (^)(NSArray *types, NSError *error))completion;
 + (void)loadAllTypes:(void (^)(NSArray *types, NSError *error))completion;
++ (void)loadFromID:(NSString *)objectID completion:(void (^)(RecordType *type, NSError *error))completion;
 
 + (void)createTestRecordTypes;
 

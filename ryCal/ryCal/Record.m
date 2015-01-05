@@ -7,12 +7,15 @@
 //
 
 #import "Record.h"
+#import "RecordType.h"
 #import "User.h"
-#import "Month.h"
-#import "Day.h"
 #import <Parse/Parse.h>
 #import <Parse/PFObject+Subclass.h>
 #import "SharedConstants.h"
+
+@interface Record ()
+
+@end
 
 @implementation Record
 
@@ -20,17 +23,18 @@
     return @"Record";
 }
 
-+ (Record *)createNewRecord:(NSString *)typeID withText:(NSString *)text {
-    return [Record createNewRecord:typeID withText:text onDate:[NSDate date]];
++ (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text {
+    return [Record createNewRecord:type withText:text onDate:[NSDate date]];
 }
 
-+ (Record *)createNewRecord:(NSString *)typeID withText:(NSString *)text onDate:(NSDate *)date {
++ (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text onDate:(NSDate *)date {
     NSLog(@"Creating record: %@, %@", text,
           [NSDateFormatter localizedStringFromDate:date
                                          dateStyle:NSDateFormatterShortStyle
                                          timeStyle:NSDateFormatterFullStyle]);
     Record *newRecord = [Record object];
-    newRecord[kTypeIDFieldKey] = typeID;
+    newRecord[kTypeFieldKey] = type;
+    newRecord[kTypeIDFieldKey] = type.objectId;
     if (text != nil) {
         newRecord[kNoteFieldKey] = text;
     }
@@ -39,21 +43,22 @@
     return newRecord;
 }
 
-+ (void)createRecord:(NSString *)typeID withText:(NSString *)text completion:(void (^)(BOOL succeeded, NSError *error)) completion {
-    [self createRecord:typeID withText:text onDate:[NSDate date] completion:completion];
++ (void)createRecord:(RecordType *)type withText:(NSString *)text completion:(void (^)(BOOL succeeded, NSError *error)) completion {
+    [self createRecord:type withText:text onDate:[NSDate date] completion:completion];
 }
 
-+ (void)createRecord:(NSString *)typeID withText:(NSString *)text onDate:(NSDate *)date completion:(void (^)(BOOL succeeded, NSError *error)) completion {
++ (void)createRecord:(RecordType *)type withText:(NSString *)text onDate:(NSDate *)date completion:(void (^)(BOOL succeeded, NSError *error)) completion {
     NSLog(@"Creating record: %@, %@", text,
         [NSDateFormatter localizedStringFromDate:date
                                         dateStyle:NSDateFormatterShortStyle
                                         timeStyle:NSDateFormatterFullStyle]);
-    [self saveRecord:typeID withText:text onDate:date completion:completion];
+    [self saveRecord:type withText:text onDate:date completion:completion];
 }
 
-+ (void)saveRecord:(NSString *)typeID withText:(NSString *)text onDate:(NSDate *)date completion:(void (^)(BOOL succeeded, NSError *error)) completion {
++ (void)saveRecord:(RecordType *)type withText:(NSString *)text onDate:(NSDate *)date completion:(void (^)(BOOL succeeded, NSError *error)) completion {
     Record *newRecord = [Record object];
-    [newRecord setTypeIDField:typeID];
+    [newRecord setTypeField:type];
+    [newRecord setTypeIDField:type.objectId];
     if (text != nil) {
         [newRecord setNoteField:text];
     }
@@ -69,33 +74,29 @@
 }
 
 // Date comparison: https://www.parse.com/questions/cloud-code-querying-objects-by-creation-date
-+ (void)loadAllRecordsForMonth:(Month *)month completion:(void (^)(NSArray *records, NSError *error))completion {
++ (void)loadAllRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion {
+    NSLog(@"Loading all records");
     PFQuery *query = [self createBasicRecordQuery];
-    [query whereKey:kDateFieldKey greaterThanOrEqualTo:[month getStartDate]];
-    [query whereKey:kDateFieldKey lessThan:[month getEndDate]];
+    [query whereKey:kDateFieldKey greaterThanOrEqualTo:startDate];
+    [query whereKey:kDateFieldKey lessThan:endDate];
+    [query includeKey:kTypeFieldKey];
     [query findObjectsInBackgroundWithBlock:completion];
 }
 
-+ (void)loadAllRecordsForDay:(Day *)day completion:(void (^)(NSArray *records, NSError *error))completion {
-    NSLog(@"Loading all records for day: ");
-    PFQuery *query = [self createBasicRecordQuery];
-    [query whereKey:kDateFieldKey greaterThanOrEqualTo:[day getStartDate]];
-    [query whereKey:kDateFieldKey lessThan:[day getEndDate]];
-    [query findObjectsInBackgroundWithBlock:completion];
-}
-
+//
 + (PFQuery *)createBasicRecordQuery {
     PFQuery *query = [PFQuery queryWithClassName:@"Record"];
+    [query setCachePolicy:kPFCachePolicyNetworkElseCache];
     [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
-    [query orderByDescending:@"createdAt"];
+    [query orderByDescending:@"date"];
     return query;
 }
 
 + (void)createTestRecordsForDate:(NSDate *)date {
-    [self createRecord:TEST_TYPE_RUNNING withText:@"bernal heights loop" onDate:date completion:nil];
-    [self createRecord:TEST_TYPE_RUNNING withText:nil onDate:date completion:nil];
-    [self createRecord:TEST_TYPE_DANCING withText:@"monday bhangra!" onDate:date completion:nil];
-    [self createRecord:TEST_TYPE_CLIMBING withText:@"climbed my first v2!" onDate:date completion:nil];
+//    [self createRecord:TEST_TYPE_RUNNING withText:@"bernal heights loop" onDate:date completion:nil];
+//    [self createRecord:TEST_TYPE_RUNNING withText:nil onDate:date completion:nil];
+//    [self createRecord:TEST_TYPE_DANCING withText:@"monday bhangra!" onDate:date completion:nil];
+//    [self createRecord:TEST_TYPE_CLIMBING withText:@"climbed my first v2!" onDate:date completion:nil];
 }
 
 #pragma mark Field accessors
@@ -116,6 +117,14 @@
     return self[kTypeIDFieldKey];
 }
 
+- (void)setTypeField:(RecordType *)typeField {
+    self[kTypeIDFieldKey] = typeField;
+}
+
+- (NSString *)getTypeField {
+    return self[kTypeFieldKey];
+}
+
 - (void)setUserIDField:(NSString *)userIDField {
     self[kUserIDFieldKey] = userIDField;
 }
@@ -130,6 +139,15 @@
 
 - (NSDate *)getDateField {
     return self[kDateFieldKey];
+}
+
+- (UIColor *)getColor {
+    if ([self getTypeField] == nil) {
+        // TODO: this should only be needed to deal with my old data created for december
+        return [SharedConstants getPlaceholderRecordTypeColor];
+    } else {
+        return [SharedConstants getColor:[self getTypeField][kColorFieldKey]];
+    }
 }
 
 @end

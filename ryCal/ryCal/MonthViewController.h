@@ -1,5 +1,5 @@
 //
-//  MainViewController.h
+//  MonthViewController.h
 //  ryCal
 //
 //  Created by Raylene Yung on 11/23/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController
+@interface MonthViewController : UIViewController
 
 @property (nonatomic, strong) NSDate *referenceDate;
 

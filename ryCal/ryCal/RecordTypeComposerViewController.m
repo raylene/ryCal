@@ -69,16 +69,18 @@
     self.recordType[kArchivedFieldKey] = [[NSNumber alloc] initWithBool:(BOOL)self.enabledControl.selectedSegmentIndex];
     
     NSLog(@"onSave: %@", self.recordType);
-    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
     [self.recordType saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Successfully saved record type changes");
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
         } else {
             NSLog(@"Error saving!");
             UIAlertView *alert = [[UIAlertView alloc] init];
             [alert show];
-            self.navigationItem.rightBarButtonItem.enabled = YES;
+//            self.navigationItem.rightBarButtonItem.enabled = YES;
         }
     }];
 }
@@ -94,7 +96,7 @@
 
 - (void)colorSwitched:(NSNotification *)notification {
     NSDictionary *dict = [notification userInfo];
-    self.recordType[kColorFieldKey] = dict[COLOR_NOTIF_PARAM];
+    self.recordType[kColorFieldKey] = dict[kColorSelectedNotifParam];
 }
 
 - (IBAction)onDelete:(id)sender {
@@ -103,6 +105,8 @@
     [self.recordType deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Successfully deleted record type");
+            [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
         } else {
             NSLog(@"Error deleting record type");
         }

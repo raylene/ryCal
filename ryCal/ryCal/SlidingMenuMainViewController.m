@@ -1,0 +1,156 @@
+//
+//  SlidingMenuMainViewController.m
+//  ryCal
+//
+//  Created by Raylene Yung on 12/30/14.
+//  Copyright (c) 2014 rayleney. All rights reserved.
+//
+
+#import "SlidingMenuMainViewController.h"
+
+int const kMenuPeekingAmount = 100;
+float const kMenuAnimationDuration = 0.3;
+float const kContentSwappingDuration = 0.2;
+
+@interface SlidingMenuMainViewController ()
+
+@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, strong) UIView *menuView;
+
+@property (nonatomic, assign) CGPoint initialOffset;
+
+@property (nonatomic, assign) BOOL menuIsOpen;
+
+@end
+
+@implementation SlidingMenuMainViewController
+
+- (id)initWithViewControllers:(UIViewController<SlidingMenuProtocol> *)menuVC contentVC:(UIViewController *)contentVC {
+    self = [super init];
+    if (self) {
+//        [self setMenuDelegate:menuDelegate];
+//        [self.menuDelegate setMainVC:self];
+        [self setMenuVC:menuVC];
+        [self setContentVC:contentVC];
+//        [self.view addSubview:self.menuView];
+//        [self.view addSubview:self.contentView];
+        self.menuIsOpen = NO;
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    NSLog(@"SlidingMenuVC viewDidLoad: (%f, %f), (%f, %f)", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
+
+//    [self setupNavigationBar];
+}
+
+# pragma mark - Private helper functions
+
+//- (void)setupNavigationBar {
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(onMenu:)];
+//}
+
+- (IBAction)onMenu:(id)sender {
+    // Only open the menu it if it's not yet visible
+    // TODO: check if there's a better way to check if a view is visible vs. manually tracking..
+    if (self.menuIsOpen) {
+        [self animateMenuClosed];
+    } else {
+        [self animateMenuOpen];
+    }
+}
+
+#pragma mark - Custom setters
+
+//@synthesize menuDelegate = _menuDelegate;
+//- (void)setMenuDelegate:(id<SlidingMenuMainViewControllerDelegate>)menuDelegate {
+//    _menuDelegate = menuDelegate;
+//    self.menuView = [menuDelegate getView];
+////    [menuVC setMainViewController: ];
+//}
+
+@synthesize menuVC = _menuVC;
+- (void)setMenuVC:(UIViewController<SlidingMenuProtocol> *)menuVC {
+    _menuVC = menuVC;
+    [_menuVC setMainVC:self];
+    self.menuView = menuVC.view;
+    [self.view addSubview:self.menuView];
+}
+
+@synthesize contentVC = _contentVC;
+- (void)setContentVC:(UIViewController *)contentVC {
+    UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanGesture:)];
+    if (self.contentView != nil) {
+        [self.contentView removeFromSuperview];
+    }
+    _contentVC = contentVC;
+    self.contentView = contentVC.view;
+    self.contentView.frame = self.view.frame;
+    [self.contentView addGestureRecognizer:pgr];
+    [self.view addSubview:self.contentView];
+}
+
+- (void)displayContentVC:(UIViewController *)contentVC {
+    CGRect frame = self.view.frame;
+    if (self.contentView != nil) {
+        frame = self.contentView.frame;
+    }
+    UIView *newContentView = contentVC.view;
+    [newContentView setFrame:frame];
+    [newContentView setAlpha:0];
+    [self.view addSubview:newContentView];
+    [UIView animateWithDuration:kContentSwappingDuration animations:^{
+        [newContentView setAlpha:1.0f];
+    } completion:^(BOOL finished) {
+        [newContentView removeFromSuperview];
+        [self setContentVC:contentVC];
+        [self animateMenuClosed];
+    }];
+}
+
+# pragma mark - Gesture recognizers
+- (IBAction)onPanGesture:(UIPanGestureRecognizer *)sender {
+    CGPoint location = [sender locationInView:self.view];
+    CGPoint velocity = [sender velocityInView:self.view];
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        self.initialOffset = [sender locationInView:sender.view];
+    } else if (sender.state == UIGestureRecognizerStateChanged) {
+        CGRect newFrame = self.view.frame;
+        float newX = location.x - self.initialOffset.x;
+        if (newX < 0) {
+            newX = 0;
+        }
+        newFrame.origin.x = newX;
+        sender.view.frame = newFrame;
+    } else if (sender.state == UIGestureRecognizerStateEnded) {
+        if (velocity.x > 0) {
+            [self animateMenuOpen];
+        } else {
+            [self animateMenuClosed];
+        }
+    }
+}
+
+- (void)animateMenuOpen {
+    [UIView animateWithDuration:kMenuAnimationDuration animations:^{
+        CGRect newFrame = self.view.frame;
+        float maxX = (newFrame.origin.x + newFrame.size.width) - kMenuPeekingAmount;
+        newFrame.origin.x = maxX;
+        self.contentView.frame = newFrame;
+    } completion:^(BOOL finished) {
+        self.menuIsOpen = YES;
+    }];
+}
+
+- (void)animateMenuClosed {
+    [UIView animateWithDuration:kMenuAnimationDuration animations:^{
+        self.contentView.frame = self.view.frame;
+    } completion:^(BOOL finished) {
+        self.menuIsOpen = NO;
+    }];
+}
+
+@end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Record.h"
 
 @interface Month : NSObject
 
@@ -21,5 +22,8 @@
 - (NSDate *)getEndDateForDay:(int)day;
 
 - (NSString *)getTitleString;
+
+- (void)loadAllRecords:(void (^)(NSError *error))monthCompletion;
+- (Record *)getPrimaryRecordForDay:(int)day;
 
 @end

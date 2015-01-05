@@ -9,12 +9,12 @@
 #import "MonthCollectionView.h"
 #import "DayCell.h"
 #import "Month.h"
-#import "Record.h"
+#import "SharedConstants.h"
 
 // TODO: look and see if it's weird for something to be its own delegate...
+// maybe create a wrapper class for this or merge back into the VC if I don't actually need
+// multiple MonthCollectionViews anywhere
 @interface MonthCollectionView () <UICollectionViewDataSource, UICollectionViewDelegate>
-
-@property (nonatomic, strong) NSArray *records;
 
 @end
 
@@ -43,15 +43,19 @@
     self.delegate = self;
     self.dataSource = self;
     
-//    [self setDate:date];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMonthData) name:MonthDataChangedNotification object:nil];
+}
+
+- (void)refreshMonthData {
+    [self reloadData];
 }
 
 - (void)setDate:(NSDate *)date {
     self.monthData = [[Month alloc] initWithNSDate:date];
-    
-    [Record loadAllRecordsForMonth:self.monthData completion:^(NSArray *records, NSError *error) {
-        self.records = records;
-        NSLog(@"Loaded %ld records for month.", self.records.count);
+    [self.monthData loadAllRecords:^(NSError *error) {
+        if (error == nil) {
+            [self refreshMonthData];
+        }
     }];
 }
 
@@ -76,7 +80,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     DayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DayCell" forIndexPath:indexPath];
-    [cell setData:[[Day alloc] initWithMonthAndDay:self.monthData day:(int)indexPath.row]];
+    int dayIdx = (int)indexPath.row;
+    [cell setData:[[Day alloc] initWithMonthAndDay:self.monthData dayIndex:dayIdx]];
     [cell setViewController:self.viewController];
     return cell;
 }

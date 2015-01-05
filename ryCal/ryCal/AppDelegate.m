@@ -8,11 +8,16 @@
 
 #import "AppDelegate.h"
 #import "User.h"
-#import "Parse.h"
+#import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "LoginViewController.h"
-#import "MainViewController.h"
+#import "MonthViewController.h"
+#import "MenuViewController.h"
+#import "SlidingMenuMainViewController.h"
 #import "SharedConstants.h"
+// PFObject subclasses
+#import "Record.h"
+#import "RecordType.h"
 
 static const NSString *kParseAppID = @"MXbaau75VqOWXVcGqw5WM3KOsY12MPkRlLj5J7th";
 static const NSString *kParseClientKey = @"2vJqfG8gMODsZWgSGosJSsabTmhVJmTNdLLNFZFr";
@@ -27,9 +32,18 @@ static const NSString *kFacebookAppID = @"745968008790705";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+
+    // PFObject subclasses...
+    // https://parse.com/docs/ios/api/Protocols/PFSubclassing.html#//api/name/registerSubclass
+    [Record registerSubclass];
+    [RecordType registerSubclass];
+
+    // https://www.parse.com/docs/ios_guide#objects-pinning/iOS
+    //[Parse enableLocalDatastore];
+
     [Parse setApplicationId:(NSString *)kParseAppID clientKey:(NSString *)kParseClientKey];
     [PFFacebookUtils initializeFacebook];
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:UserDidLogoutNotification object:nil];
     
@@ -40,9 +54,12 @@ static const NSString *kFacebookAppID = @"745968008790705";
         LoginViewController *lvc = [[LoginViewController alloc] init];
         vc = [[UINavigationController alloc] initWithRootViewController:lvc];
     } else {
-        MainViewController *mvc = [[MainViewController alloc] init];
-        vc = [[UINavigationController alloc] initWithRootViewController:mvc];
+        MonthViewController *mvc = [[MonthViewController alloc] init];
+        UINavigationController *contentVC = [[UINavigationController alloc] initWithRootViewController:mvc];
+        MenuViewController *menuVC = [[MenuViewController alloc] init];
+        vc = [[SlidingMenuMainViewController alloc] initWithViewControllers:menuVC contentVC:contentVC];
     }
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];

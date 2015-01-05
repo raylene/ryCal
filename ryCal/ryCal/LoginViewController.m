@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import "User.h"
 #import "SVProgressHUD.h"
-#import "MainViewController.h"
+#import "MonthViewController.h"
 #import "SharedConstants.h"
 
 @interface LoginViewController ()
@@ -43,7 +43,7 @@
     NSLog(@"loginSuccessful!");
     [SVProgressHUD dismiss];
     
-    MainViewController *mvc = [[MainViewController alloc] init];
+    MonthViewController *mvc = [[MonthViewController alloc] init];
     UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:mvc];
     [self presentViewController:vc animated:YES completion:nil];
 }

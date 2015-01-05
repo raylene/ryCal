@@ -18,10 +18,13 @@
 NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
 NSString * const ColorSelectedNotification = @"ColorSelectedNotification";
+NSString * const MonthDataChangedNotification = @"MonthDataChangedNotification";
+NSString * const RecordTypeDataChangedNotification = @"RecordTypeDataChangedNotification";
 
-NSString * const COLOR_NOTIF_PARAM = @"colorname";
+NSString * const kColorSelectedNotifParam = @"colorname";
 
 NSString * const kNoteFieldKey = @"note";
+NSString * const kTypeFieldKey = @"type";
 NSString * const kTypeIDFieldKey = @"typeID";
 NSString * const kUserIDFieldKey = @"userID";
 NSString * const kDateFieldKey = @"date";
@@ -69,6 +72,10 @@ int const NUM_COLORS = 10;
     return RECORD_COLOR_DEEP_BLUE;
 }
 
++ (UIColor *)getPlaceholderRecordTypeColor {
+    return [UIColor whiteColor];
+}
+
 // Hex colors from: http://www.w3schools.com/tags/ref_colorpicker.asp
 + (UIColor *)getColor:(NSString *)name {
     unsigned long int rgbValue = 0xBAE3FF;
@@ -89,9 +96,9 @@ int const NUM_COLORS = 10;
     } else if ([name isEqualToString:RECORD_COLOR_PINK]) {
         rgbValue = 0xFFA3D1;
     } else if ([name isEqualToString:RECORD_COLOR_RED]) {
-        rgbValue = 0xFF7171;
+        rgbValue = 0xFF6F6F;
     } else if ([name isEqualToString:RECORD_COLOR_ORANGE]) {
-        rgbValue = 0xFFAD5C;
+        rgbValue = 0xFFCC99;
     } else if ([name isEqualToString:RECORD_COLOR_YELLOW]) {
         rgbValue = 0xFFFF99;
     } else if ([name isEqualToString:RECORD_COLOR_BROWN]) {

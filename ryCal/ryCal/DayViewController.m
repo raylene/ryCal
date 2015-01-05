@@ -35,7 +35,7 @@
     
     [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
         self.recordTypes = types;
-        [Record loadAllRecordsForDay:self.dayData completion:^(NSArray *records, NSError *error) {
+        [Record loadAllRecordsForTimeRange:[self.dayData getStartDate] endDate:[self.dayData getEndDate] completion:^(NSArray *records, NSError *error) {
             // NSLog(@"Records for day: %@", records);
             for (Record *record in records) {
                 // TODO: figure out why this doesn't work...
@@ -69,7 +69,7 @@
 #pragma mark - UITableView methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 80;
 //    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 //    return size.height + 1;
 }

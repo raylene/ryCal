@@ -8,6 +8,7 @@
 
 #import "Month.h"
 #import "SharedConstants.h"
+#import "Record.h"
 
 @interface Month ()
 
@@ -16,6 +17,8 @@
 
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSCalendar *calendar;
+
+@property (nonatomic, strong) NSMutableDictionary *dailyRecordDictionary;
 
 @end
 
@@ -61,6 +64,39 @@
     NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
     [offsetComponents setDay:1];
     return [self.calendar dateByAddingComponents:offsetComponents toDate:[self getStartDateForDay:day] options:0];
+}
+
+// TODO: fix this primary record business to use the primary record type?
+- (Record *)getPrimaryRecordForDay:(int)day {
+    NSDate *dateKey = [self getStartDateForDay:day];
+    if (self.dailyRecordDictionary == nil ||
+        self.dailyRecordDictionary[dateKey] == nil) {
+        return nil;
+    }
+    NSArray *records = self.dailyRecordDictionary[dateKey];
+//    NSLog(@"Records for DAY: %d, %@", day, records);
+    return records[0];
+}
+
+- (void)loadAllRecords:(void (^)(NSError *error))monthCompletion {
+    [Record loadAllRecordsForTimeRange:[self getStartDate] endDate:[self getEndDate] completion:^(NSArray *records, NSError *error) {
+        if (error == nil) {
+            NSLog(@"Loaded all records for month: %lu", (unsigned long)records.count);
+            self.dailyRecordDictionary = [[NSMutableDictionary alloc] init];
+            for (Record *record in records) {
+                NSString *dateKey = record[kDateFieldKey];
+                if (self.dailyRecordDictionary[dateKey] == nil) {
+//                    self.dailyRecordDictionary[dateKey] = [[NSMutableDictionary alloc] init];
+                    self.dailyRecordDictionary[dateKey] = [[NSMutableArray alloc] init];
+                }
+                //                [self.dailyRecordDictionary[dateKey] addObject:record forKey:record[kTypeIDFieldKey]];
+                [self.dailyRecordDictionary[dateKey] addObject:record];
+            }
+        } else {
+            NSLog(@"Error loading records for month: %@", [self getTitleString]);
+        }
+        monthCompletion(error);
+    }];
 }
 
 #pragma mark Day manipulation
