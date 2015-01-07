@@ -38,6 +38,7 @@
     self.recordTypeName.text = typeData[kNameFieldKey];
     self.recordColorImage.backgroundColor = [SharedConstants getColor:typeData[kColorFieldKey]];
     
+    self.recordTypeName.textColor = [UIColor blackColor];
     if ([typeData[kArchivedFieldKey] boolValue]) {
         self.recordTypeName.textColor = [UIColor grayColor];
     }

@@ -86,6 +86,8 @@
 }
 
 // TODO: fix this primary record business to use the primary record type?
+// TODO: fix this to not return records that are of archived record types...
+// will need to also fix loadAllRecords probably
 - (Record *)getPrimaryRecordForDay:(int)day {
     NSDate *dateKey = [self getStartDateForDay:day];
     if (self.dailyRecordDictionary == nil ||
