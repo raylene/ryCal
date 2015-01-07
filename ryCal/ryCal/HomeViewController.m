@@ -17,8 +17,6 @@
 @property (nonatomic, strong) NSDate *referenceDate;
 @property (nonatomic, strong) Month *monthData;
 
-@property (nonatomic, assign) BOOL isCurrentMonth;
-
 @property (weak, nonatomic) IBOutlet UIView *monthView;
 @property (weak, nonatomic) IBOutlet UIView *dayEditView;
 
@@ -34,11 +32,8 @@
     if (self) {
         self.referenceDate = date;
         self.monthData = [[Month alloc] initWithNSDate:date];
-
-        self.isCurrentMonth = ([self.monthData.getStartDate compare:[NSDate date]] != NSOrderedDescending) &&
-            ([self.monthData.getEndDate compare:[NSDate date]] == NSOrderedDescending);
         // HACK: reset reference date to today to properly feature it if it's the current month
-        if (self.isCurrentMonth) {
+        if (self.monthData.isCurrentMonth) {
             self.referenceDate = [NSDate date];
         }
     }
@@ -58,11 +53,15 @@
 
     [self.monthView addSubview:self.monthVC.view];
 
-    self.dayEditVC = [[EditDailyRecordViewController alloc] initWithDate:self.referenceDate];
-    self.dayEditVC.presentingVC = self.navigationController;
+    self.dayEditView.backgroundColor = [SharedConstants getMonthBackgroundColor];
     
-    self.dayEditVC.view.frame = CGRectMake(0, 0, self.dayEditView.frame.size.width, self.dayEditView.frame.size.height);
-    [self.dayEditView addSubview:self.dayEditVC.view];
+    if (self.monthData.isCurrentMonth) {
+        self.dayEditVC = [[EditDailyRecordViewController alloc] initWithDate:self.referenceDate];
+        // TODO: delete the presentingVC var, no longer needed
+        self.dayEditVC.presentingVC = self.navigationController;
+        self.dayEditVC.view.frame = CGRectMake(0, 0, self.dayEditView.frame.size.width, self.dayEditView.frame.size.height);
+        [self.dayEditView addSubview:self.dayEditVC.view];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentDayView:) name:ViewDayNotification object:nil];
 }
@@ -77,7 +76,7 @@
     self.title = [self.monthData getTitleString];
     
     // If we're already looking at this month, don't let us go into the future
-    if (!self.isCurrentMonth) {
+    if (!self.monthData.isCurrentMonth) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@">>" style:UIBarButtonItemStylePlain target:self action:@selector(onGoForwardInTime)];
     }
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<<" style:UIBarButtonItemStylePlain target:self action:@selector(onGoBackInTime)];

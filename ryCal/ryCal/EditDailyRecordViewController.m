@@ -8,14 +8,15 @@
 
 #import "EditDailyRecordViewController.h"
 #import "User.h"
-#import "EditableRecordTypeCell.h"
+//#import "EditableRecordTypeCell.h"
+#import "CompressedDailyRecordCell.h"
 #import "RecordType.h"
 #import "Record.h"
 #import "SharedConstants.h"
 
 @interface EditDailyRecordViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) EditableRecordTypeCell *prototypeCell;
+@property (nonatomic, strong) CompressedDailyRecordCell *prototypeCell;
 @property (nonatomic, strong) NSArray *recordTypes;
 @property (nonatomic, strong) NSMutableDictionary *recordDictionary;
 - (IBAction)addMoreInfo:(id)sender;
@@ -30,6 +31,8 @@
     [super viewDidLoad];
     [self setupTypeTable];
     [self setupRecordData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupRecordData) name:MonthDataChangedNotification object:nil];
 }
 
 - (id)initWithDay:(Day *)dayData {
@@ -60,9 +63,10 @@
 }
 
 - (void)setupTypeTable {
-    UINib *cellNib = [UINib nibWithNibName:@"EditableRecordTypeCell" bundle:nil];
-    [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"EditableRecordTypeCell"];
+    UINib *cellNib = [UINib nibWithNibName:@"CompressedDailyRecordCell" bundle:nil];
+    [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"CompressedDailyRecordCell"];
     
+    self.typeTableView.backgroundColor = [SharedConstants getMonthBackgroundColor];
     self.typeTableView.delegate = self;
     self.typeTableView.dataSource = self;
     self.typeTableView.rowHeight = UITableViewAutomaticDimension;
@@ -84,9 +88,9 @@
 
 #pragma mark - Custom setters
 
-- (EditableRecordTypeCell *)prototypeCell {
+- (CompressedDailyRecordCell *)prototypeCell {
     if (_prototypeCell == nil) {
-        _prototypeCell = [self.typeTableView dequeueReusableCellWithIdentifier:@"EditableRecordTypeCell"];
+        _prototypeCell = [self.typeTableView dequeueReusableCellWithIdentifier:@"CompressedDailyRecordCell"];
     }
     return _prototypeCell;
 }
@@ -94,11 +98,12 @@
 #pragma mark - UITableView methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    EditableRecordTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EditableRecordTypeCell" forIndexPath:indexPath];
+    CompressedDailyRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CompressedDailyRecordCell" forIndexPath:indexPath];
     cell.typeData = self.recordTypes[indexPath.row];
     cell.date = [self.dayData getStartDate];
     cell.recordData = self.recordDictionary[cell.typeData.objectId];
@@ -106,8 +111,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
-//    return self.recordTypes.count;
+//    return MAX(self.recordTypes.count, 3);
+    return self.recordTypes.count;
 }
 
 - (IBAction)addMoreInfo:(id)sender {

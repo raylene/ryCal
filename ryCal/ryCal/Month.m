@@ -118,6 +118,12 @@
     }];
 }
 
+// TODO: save this as a local var or static to avoid recomputing it?
+- (BOOL)isCurrentMonth {
+    return ([self.getStartDate compare:[NSDate date]] != NSOrderedDescending) &&
+    ([self.getEndDate compare:[NSDate date]] == NSOrderedDescending);
+}
+
 #pragma mark Day manipulation
 
 - (int)numDays {

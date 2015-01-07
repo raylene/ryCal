@@ -90,7 +90,9 @@
     DayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DayCell" forIndexPath:indexPath];
 
     int dayIdx = (int)indexPath.row;
-    [cell setFeatured:(dayIdx == self.selectedDayIdx)];
+    if (self.monthData.isCurrentMonth) {
+        [cell setFeatured:(dayIdx == self.selectedDayIdx)];
+    }
     [cell setData:[[Day alloc] initWithMonthAndDay:self.monthData dayIndex:dayIdx]];
 
     [cell setViewController:self.presentingVC];

@@ -87,7 +87,7 @@ static int const kLogoutItemIndex = 3;
     self.menuItemConfig =
     @[
       @{@"name" : @"Home", @"img":@"home"},
-      @{@"name" : @"Edit Records", @"img": @"recordtypes"},
+      @{@"name" : @"Record Types", @"img": @"recordtypes"},
       @{@"name" : @"Settings", @"img": @"profile"},
       @{@"name" : @"Logout", @"img": @"logout"}
       ];

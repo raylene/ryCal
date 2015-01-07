@@ -29,6 +29,8 @@
 
 - (NSString *)getTitleString;
 
+- (BOOL)isCurrentMonth;
+
 - (void)loadAllRecords:(void (^)(NSError *error))monthCompletion;
 - (Record *)getPrimaryRecordForDay:(int)day;
 

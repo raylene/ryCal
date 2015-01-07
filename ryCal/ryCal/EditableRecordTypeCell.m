@@ -28,74 +28,44 @@
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
 
-@synthesize typeData = _typeData;
-- (void) setTypeData:(RecordType *)typeData {
-    _typeData = typeData;
-    self.recordTypeName.text = typeData[kNameFieldKey];
-    self.recordColorImage.backgroundColor = [SharedConstants getColor:typeData[kColorFieldKey]];
-}
-
-@synthesize recordData = _recordData;
-- (void) setRecordData:(Record *)recordData {
-    _recordData = recordData;
-    BOOL hasData = (recordData != nil);
-    [self.toggleSwitch setOn:hasData];
-    [self.noteTextField setHidden:!hasData];
-    
-    if (hasData && recordData[kNoteFieldKey]) {
-        [self.noteTextField setText:recordData[kNoteFieldKey]];
-    }
-}
-
 - (IBAction)switchValueChanged:(id)sender {
     BOOL isDisabled = !self.toggleSwitch.on;
     [self.noteTextField setHidden:isDisabled];
     if (isDisabled) {
         self.noteTextField.text = nil;
     }
-    [self saveChanges];
+    [super saveChanges:[self shouldDeleteRecord]];
 }
 
 - (IBAction)noteDidEndOnExit:(id)sender {
     [self resignFirstResponder];
-    [self saveChanges];
+    [self saveChanges:[self shouldDeleteRecord]];
 }
 
-- (void)saveChanges {
-    NSLog(@"Saving record changes: %@", self.recordData);
-    if (self.toggleSwitch.on) {
-        // Format text so it is saveable
-        NSString *trimmedString = [self.noteTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        
-        if (self.recordData) {
-            self.recordData[kNoteFieldKey] = trimmedString;
-        } else {
-            self.recordData = [Record createNewRecord:self.typeData withText:trimmedString onDate:self.date];
-        }
-        [self.recordData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                NSLog(@"Successfully saved/updated record");
-                // TODO: figure out if this is working properly...
-                [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
-            } else {
-                NSLog(@"Failed to save record");
-            }
-        }];
-    } else {
-        // Delete the record if it already exists
-        if (self.recordData != nil) {
-            [self.recordData deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    NSLog(@"Succeeded in deleting the record");
-                    self.recordData = nil;
-                    // TODO: figure out if this is working properly...
-                    [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
-                } else {
-                    NSLog(@"Failed to delete");
-                }
-            }];
-        }
+#pragma mark CompressedDailyRecordCell that should be overridden
+
+- (void)setupTypeRelatedFields {
+    self.recordTypeName.text = self.typeData[kNameFieldKey];
+    self.recordColorImage.backgroundColor = [SharedConstants getColor:self.typeData[kColorFieldKey]];
+}
+
+- (void)setupRecordDataRelatedFields {
+    BOOL hasData = (self.recordData != nil);
+    [self.toggleSwitch setOn:hasData];
+    [self.noteTextField setHidden:!hasData];
+    
+    if (hasData && self.recordData[kNoteFieldKey]) {
+        [self.noteTextField setText:self.recordData[kNoteFieldKey]];
     }
+}
+
+- (BOOL)shouldDeleteRecord {
+    return !self.toggleSwitch.on;
+}
+
+- (NSString *)getNewRecordNoteText {
+    // Format text so it is saveable
+    return [self.noteTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
 @end

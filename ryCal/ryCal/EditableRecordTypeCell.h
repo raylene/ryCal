@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RecordType.h"
-#import "Record.h"
+//#import "RecordType.h"
+//#import "Record.h"
+#import "CompressedDailyRecordCell.h"
 
-@interface EditableRecordTypeCell : UITableViewCell
+// TODO: make this extend CompressedDailyRecordCell?
+@interface EditableRecordTypeCell : CompressedDailyRecordCell
 
-@property (nonatomic, strong) RecordType *typeData;
-@property (nonatomic, strong) Record *recordData;
-
-@property (nonatomic, strong) NSDate *date;
+//@property (nonatomic, strong) RecordType *typeData;
+//@property (nonatomic, strong) Record *recordData;
+//
+//@property (nonatomic, strong) NSDate *date;
 
 @end

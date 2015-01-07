@@ -17,17 +17,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOE-Jm-bPY">
-                    <rect key="frame" x="0.0" y="340" width="375" height="327"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <rect key="frame" x="0.0" y="320" width="375" height="347"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="FPZ-j8-cpM"/>
                     </constraints>
                 </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDX-7i-VcP">
-                    <rect key="frame" x="0.0" y="20" width="375" height="300"/>
+                    <rect key="frame" x="0.0" y="10" width="375" height="310"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="300" id="lyp-hw-1P6"/>
+                        <constraint firstAttribute="height" constant="310" id="lyp-hw-1P6"/>
                     </constraints>
                 </view>
             </subviews>
@@ -36,10 +35,10 @@
                 <constraint firstItem="eDX-7i-VcP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AhF-ea-Rw0"/>
                 <constraint firstAttribute="trailing" secondItem="LOE-Jm-bPY" secondAttribute="trailing" id="FQ2-nq-SwD"/>
                 <constraint firstAttribute="trailing" secondItem="eDX-7i-VcP" secondAttribute="trailing" id="jEr-sy-zbn"/>
-                <constraint firstItem="eDX-7i-VcP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="nPa-wS-Tgw"/>
+                <constraint firstItem="eDX-7i-VcP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="nPa-wS-Tgw"/>
                 <constraint firstItem="LOE-Jm-bPY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qJQ-5N-kot"/>
                 <constraint firstAttribute="bottom" secondItem="LOE-Jm-bPY" secondAttribute="bottom" id="tJx-WK-nM9"/>
-                <constraint firstItem="LOE-Jm-bPY" firstAttribute="top" secondItem="eDX-7i-VcP" secondAttribute="bottom" constant="20" id="w8b-1F-Ai4"/>
+                <constraint firstItem="LOE-Jm-bPY" firstAttribute="top" secondItem="eDX-7i-VcP" secondAttribute="bottom" id="w8b-1F-Ai4"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="97.5" y="117.5"/>

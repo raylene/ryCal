@@ -42,6 +42,8 @@
 		6FE8A3471A5B75CD00754D34 /* EditDailyRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8A3451A5B75CD00754D34 /* EditDailyRecordViewController.m */; };
 		6FE8A3481A5B75CD00754D34 /* EditDailyRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FE8A3461A5B75CD00754D34 /* EditDailyRecordViewController.xib */; };
 		6FE8A3501A5B7A3A00754D34 /* RyCalMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8A34F1A5B7A3A00754D34 /* RyCalMainViewController.m */; };
+		6FF278441A5D27B10063323F /* CompressedDailyRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF278421A5D27B10063323F /* CompressedDailyRecordCell.m */; };
+		6FF278451A5D27B10063323F /* CompressedDailyRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF278431A5D27B10063323F /* CompressedDailyRecordCell.xib */; };
 		6FF334151A5BC56B00ADDBDB /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF334131A5BC56B00ADDBDB /* HomeViewController.m */; };
 		6FF334161A5BC56B00ADDBDB /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FF334141A5BC56B00ADDBDB /* HomeViewController.xib */; };
 		6FF442C81A4FB56700B3DD45 /* RecordTypeComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF442C61A4FB56700B3DD45 /* RecordTypeComposerViewController.m */; };
@@ -119,6 +121,9 @@
 		6FE8A3461A5B75CD00754D34 /* EditDailyRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditDailyRecordViewController.xib; sourceTree = "<group>"; };
 		6FE8A34E1A5B7A3A00754D34 /* RyCalMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RyCalMainViewController.h; sourceTree = "<group>"; };
 		6FE8A34F1A5B7A3A00754D34 /* RyCalMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RyCalMainViewController.m; sourceTree = "<group>"; };
+		6FF278411A5D27B10063323F /* CompressedDailyRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompressedDailyRecordCell.h; sourceTree = "<group>"; };
+		6FF278421A5D27B10063323F /* CompressedDailyRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompressedDailyRecordCell.m; sourceTree = "<group>"; };
+		6FF278431A5D27B10063323F /* CompressedDailyRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompressedDailyRecordCell.xib; sourceTree = "<group>"; };
 		6FF334121A5BC56B00ADDBDB /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6FF334131A5BC56B00ADDBDB /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		6FF334141A5BC56B00ADDBDB /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -222,6 +227,9 @@
 				6F16509B1A53A549006336EF /* MenuItemCell.h */,
 				6F16509C1A53A549006336EF /* MenuItemCell.m */,
 				6F16509D1A53A549006336EF /* MenuItemCell.xib */,
+				6FF278411A5D27B10063323F /* CompressedDailyRecordCell.h */,
+				6FF278421A5D27B10063323F /* CompressedDailyRecordCell.m */,
+				6FF278431A5D27B10063323F /* CompressedDailyRecordCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -406,6 +414,7 @@
 				6FBE73FF1A47F5910045810A /* RecordTypeCell.xib in Resources */,
 				6F1650951A5396F1006336EF /* SlidingMenuMainViewController.xib in Resources */,
 				6FF334161A5BC56B00ADDBDB /* HomeViewController.xib in Resources */,
+				6FF278451A5D27B10063323F /* CompressedDailyRecordCell.xib in Resources */,
 				6FE8A3481A5B75CD00754D34 /* EditDailyRecordViewController.xib in Resources */,
 				6FBE73E71A45193E0045810A /* DayCell.xib in Resources */,
 				6FBE73FA1A47E4650045810A /* RecordTypeViewController.xib in Resources */,
@@ -475,6 +484,7 @@
 				6FBE73E61A45193E0045810A /* DayCell.m in Sources */,
 				6FBE73F51A47DC8D0045810A /* RecordType.m in Sources */,
 				6FC6D8321A5CAC79007871C3 /* MonthViewController.m in Sources */,
+				6FF278441A5D27B10063323F /* CompressedDailyRecordCell.m in Sources */,
 				6FF334151A5BC56B00ADDBDB /* HomeViewController.m in Sources */,
 				6FE8A3471A5B75CD00754D34 /* EditDailyRecordViewController.m in Sources */,
 				6FBE74031A4950B00045810A /* EditableRecordTypeCell.m in Sources */,
