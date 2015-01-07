@@ -18,6 +18,12 @@
 - (NSDate *)getStartDate;
 - (NSDate *)getEndDate;
 
+- (NSDate *)getStartDateForPrevMonth;
+- (NSDate *)getStartDateForNextMonth;
+
+// TODO: fix this, weird pattern
+- (NSInteger)getReferenceDayIdx;
+
 - (NSDate *)getStartDateForDay:(int)day;
 - (NSDate *)getEndDateForDay:(int)day;
 

@@ -55,7 +55,13 @@
 }
 
 - (void)setupNavigationBar {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Add New Type" style:UIBarButtonItemStylePlain target:self action:@selector(onCreateNewType)];
+    self.title = @"Record Types";
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(onCreateNewType)];
+    // TODO: possibly customize add button style?
+    self.navigationItem.rightBarButtonItem = addButton;
+    
+    // Is there a better way to do this?
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]    initWithTitle:@"All Records" style:UIBarButtonItemStylePlain target:self action:nil];
 }
 
 - (void)onCreateNewType {

@@ -15,16 +15,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xs0-kQ-reR">
-                        <rect key="frame" x="63" y="28" width="38" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="48" y="27" width="41" height="20"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X6S-fD-iYA">
-                        <rect key="frame" x="13" y="22" width="30" height="30"/>
+                        <rect key="frame" x="23" y="32" width="10" height="10"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="hcx-0W-7Gz"/>
-                            <constraint firstAttribute="height" constant="30" id="xaf-Du-HPy"/>
+                            <constraint firstAttribute="width" constant="10" id="hcx-0W-7Gz"/>
+                            <constraint firstAttribute="height" constant="10" id="xaf-Du-HPy"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -32,9 +32,9 @@
                     <constraint firstItem="X6S-fD-iYA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="3DG-tp-GRg"/>
                     <constraint firstAttribute="centerY" secondItem="Xs0-kQ-reR" secondAttribute="centerY" id="IfU-If-gDW"/>
                     <constraint firstItem="X6S-fD-iYA" firstAttribute="centerY" secondItem="Xs0-kQ-reR" secondAttribute="centerY" id="Nrv-oF-LTU"/>
-                    <constraint firstItem="X6S-fD-iYA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="ROe-pj-FEI"/>
+                    <constraint firstItem="X6S-fD-iYA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="ROe-pj-FEI"/>
                     <constraint firstAttribute="centerY" secondItem="X6S-fD-iYA" secondAttribute="centerY" id="XLa-o9-icG"/>
-                    <constraint firstItem="Xs0-kQ-reR" firstAttribute="leading" secondItem="X6S-fD-iYA" secondAttribute="trailing" constant="20" id="zwR-tt-af2"/>
+                    <constraint firstItem="Xs0-kQ-reR" firstAttribute="leading" secondItem="X6S-fD-iYA" secondAttribute="trailing" constant="15" id="zwR-tt-af2"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -47,7 +47,7 @@
                 <outlet property="itemImage" destination="X6S-fD-iYA" id="sBM-NW-wLe"/>
                 <outlet property="itemName" destination="Xs0-kQ-reR" id="vt8-DK-sOO"/>
             </connections>
-            <point key="canvasLocation" x="308" y="138.5"/>
+            <point key="canvasLocation" x="308" y="136.5"/>
         </tableViewCell>
     </objects>
 </document>

@@ -10,13 +10,6 @@
 
 @class SlidingMenuMainViewController;
 
-//@protocol SlidingMenuMainViewControllerDelegate <NSObject>
-//
-//- (void)setMainVC:(SlidingMenuMainViewController *)vc;
-//- (UIView *)getView;
-//
-//@end
-
 @protocol SlidingMenuProtocol <NSObject>
 
 - (void)setMainVC:(SlidingMenuMainViewController *)mainVC;

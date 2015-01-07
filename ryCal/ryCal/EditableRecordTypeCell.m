@@ -75,6 +75,8 @@
         [self.recordData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"Successfully saved/updated record");
+                // TODO: figure out if this is working properly...
+                [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
             } else {
                 NSLog(@"Failed to save record");
             }
@@ -86,6 +88,8 @@
                 if (succeeded) {
                     NSLog(@"Succeeded in deleting the record");
                     self.recordData = nil;
+                    // TODO: figure out if this is working properly...
+                    [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
                 } else {
                     NSLog(@"Failed to delete");
                 }

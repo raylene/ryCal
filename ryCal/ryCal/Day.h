@@ -12,7 +12,9 @@
 
 @interface Day : NSObject
 
+// TODO: cleanup weird init / interdependencies between Month/Day
 - (id)initWithMonthAndDay:(Month *)month dayIndex:(int)dayIndex;
+- (id)initWithMonthAndDate:(Month *)month date:(NSDate *)date;
 
 - (NSString *)getMonthString;
 - (NSString *)getDayString;

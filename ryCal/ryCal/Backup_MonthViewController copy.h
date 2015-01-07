@@ -10,7 +10,7 @@
 
 @interface MonthViewController : UIViewController
 
-@property (nonatomic, strong) UIViewController *presentingVC;
+@property (nonatomic, strong) NSDate *referenceDate;
 
 - (id)initWithDate:(NSDate *)date;
 

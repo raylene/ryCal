@@ -10,12 +10,14 @@
 #import "MenuItemCell.h"
 #import "User.h"
 #import "MonthViewController.h"
+#import "HomeViewController.h"
 #import "RecordTypeViewController.h"
 #import "UIImageView+AfNetworking.h"
+#import "SharedConstants.h"
 
-static int const kProfileItemIndex = 0;
-static int const kHomeItemIndex = 1;
-static int const kRecordTypesItemIndex = 2;
+static int const kProfileItemIndex = 2;
+static int const kHomeItemIndex = 0;
+static int const kRecordTypesItemIndex = 1;
 static int const kLogoutItemIndex = 3;
 
 @interface MenuViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -36,8 +38,7 @@ static int const kLogoutItemIndex = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    NSLog(@"MenuViewC viewDidLoad: (%f, %f), (%f, %f)", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
+    self.view.backgroundColor = [SharedConstants getMenuBackgroundColor];
     [self setupMenuTable];
     [self displayUserInfo];
 }
@@ -62,7 +63,8 @@ static int const kLogoutItemIndex = 3;
 - (void)displayUserInfo {
     User *user = [User currentUser];
     self.nameLabel.text = [user getUsername];
-
+    self.nameLabel.textColor = [SharedConstants getMenuTextColor];
+    
     [self.profileImageView setImageWithURL:[NSURL URLWithString:[user getProfileImageURL]]];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.clipsToBounds = YES;
@@ -76,6 +78,7 @@ static int const kLogoutItemIndex = 3;
     self.menuTableView.rowHeight = UITableViewAutomaticDimension;
     // No footer
     self.menuTableView.tableFooterView = [[UIView alloc] init];
+    self.menuTableView.backgroundColor = [SharedConstants getMenuBackgroundColor];
     
     UINib *menuItemCellNib = [UINib nibWithNibName:@"MenuItemCell" bundle:nil];
     [self.menuTableView registerNib:menuItemCellNib forCellReuseIdentifier:@"MenuItemCell"];
@@ -83,9 +86,9 @@ static int const kLogoutItemIndex = 3;
     // Init menu item option configurations
     self.menuItemConfig =
     @[
-      @{@"name" : @"Profile", @"img":@"profile"},
-      @{@"name" : @"Home", @"img": @"home"},
-      @{@"name" : @"Record Types", @"img": @"recordtypes"},
+      @{@"name" : @"Home", @"img":@"home"},
+      @{@"name" : @"Edit Records", @"img": @"recordtypes"},
+      @{@"name" : @"Settings", @"img": @"profile"},
       @{@"name" : @"Logout", @"img": @"logout"}
       ];
 }
@@ -102,13 +105,15 @@ static int const kLogoutItemIndex = 3;
 //    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 //    NSLog(@"menu size: %ld, %f", indexPath.row, size.height + 1);
 
-    return 80;
+    return 60;
 //    return size.height + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuItemCell" forIndexPath:indexPath];
     cell.config = self.menuItemConfig[indexPath.row];
+    cell.backgroundColor = [SharedConstants getMenuBackgroundColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     return cell;
 }
 
@@ -124,7 +129,8 @@ static int const kLogoutItemIndex = 3;
 //        vc = [[ProfileViewController alloc] init];
 //        [(ProfileViewController *)vc setUser:[User currentUser]];
     } else if (indexPath.row == kHomeItemIndex) {
-        vc = [[MonthViewController alloc] init];
+//        vc = [[MonthViewController alloc] init];
+        vc = [[HomeViewController alloc] initWithDate:[NSDate date]];
     } else if (indexPath.row == kRecordTypesItemIndex) {
         vc = [[RecordTypeViewController alloc] init];
     } else if (indexPath.row == kLogoutItemIndex) {

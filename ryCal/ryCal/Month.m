@@ -12,6 +12,9 @@
 
 @interface Month ()
 
+@property (nonatomic, strong) NSDate *referenceDate;
+@property (nonatomic, assign) NSInteger referenceDayIdx;
+
 @property (nonatomic, strong) NSArray *dates;
 @property (nonatomic, assign) NSRange dayRange;
 
@@ -32,16 +35,22 @@
     if (self) {
         self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         [self parseDateComponents:date];
+        self.referenceDate = date;
     }
     return self;
 }
 
 - (void)parseDateComponents:(NSDate *)date {
     self.components = [self.calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate: date];
+    self.referenceDayIdx = self.components.day - 1;
     [self.components setDay:1];
     self.dayRange = [self.calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
     NSLog(@"Day range for month: %lu, %lu", (unsigned long)self.dayRange.location, (unsigned long)self.dayRange.length);
     self.startDate = [self.calendar dateFromComponents:self.components];
+}
+
+- (NSInteger)getReferenceDayIdx {
+    return self.referenceDayIdx;
 }
 
 - (NSDate *)getStartDate {
@@ -52,6 +61,16 @@
     NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
     [offsetComponents setMonth:1];
     return [self.calendar dateByAddingComponents:offsetComponents toDate:[self getStartDate] options:0];
+}
+
+- (NSDate *)getStartDateForPrevMonth {
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    [offsetComponents setMonth:-1];
+    return [self.calendar dateByAddingComponents:offsetComponents toDate:[self getStartDate] options:0];
+}
+
+- (NSDate *)getStartDateForNextMonth {
+    return [self getEndDate];
 }
 
 - (NSDate *)getStartDateForDay:(int)day {

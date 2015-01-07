@@ -30,6 +30,19 @@
     return self;
 }
 
+- (id)initWithMonthAndDate:(Month *)month date:(NSDate *)date {
+    self = [super init];
+    if (self) {
+        // TODO: fix up the Month vs. Day init mess :/
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSDateComponents *components = [calendar components:(NSCalendarUnitDay) fromDate:date];
+
+        self.monthData = month;
+        self.dayInt = (int)components.day;
+    }
+    return self;
+}
+
 - (NSString *)getMonthString {
     return [NSString stringWithFormat:@"%ld", self.monthData.components.month];
 }

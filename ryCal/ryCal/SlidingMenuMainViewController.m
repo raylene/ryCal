@@ -28,12 +28,8 @@ float const kContentSwappingDuration = 0.2;
 - (id)initWithViewControllers:(UIViewController<SlidingMenuProtocol> *)menuVC contentVC:(UIViewController *)contentVC {
     self = [super init];
     if (self) {
-//        [self setMenuDelegate:menuDelegate];
-//        [self.menuDelegate setMainVC:self];
         [self setMenuVC:menuVC];
         [self setContentVC:contentVC];
-//        [self.view addSubview:self.menuView];
-//        [self.view addSubview:self.contentView];
         self.menuIsOpen = NO;
     }
     return self;
@@ -42,15 +38,9 @@ float const kContentSwappingDuration = 0.2;
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"SlidingMenuVC viewDidLoad: (%f, %f), (%f, %f)", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
-
-//    [self setupNavigationBar];
 }
 
 # pragma mark - Private helper functions
-
-//- (void)setupNavigationBar {
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(onMenu:)];
-//}
 
 - (IBAction)onMenu:(id)sender {
     // Only open the menu it if it's not yet visible
@@ -63,13 +53,6 @@ float const kContentSwappingDuration = 0.2;
 }
 
 #pragma mark - Custom setters
-
-//@synthesize menuDelegate = _menuDelegate;
-//- (void)setMenuDelegate:(id<SlidingMenuMainViewControllerDelegate>)menuDelegate {
-//    _menuDelegate = menuDelegate;
-//    self.menuView = [menuDelegate getView];
-////    [menuVC setMainViewController: ];
-//}
 
 @synthesize menuVC = _menuVC;
 - (void)setMenuVC:(UIViewController<SlidingMenuProtocol> *)menuVC {

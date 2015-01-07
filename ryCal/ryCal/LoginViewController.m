@@ -9,8 +9,8 @@
 #import "LoginViewController.h"
 #import "User.h"
 #import "SVProgressHUD.h"
-#import "MonthViewController.h"
 #import "SharedConstants.h"
+#import "RyCalMainViewController.h"
 
 @interface LoginViewController ()
 
@@ -42,9 +42,7 @@
 - (void)loginSuccessful {
     NSLog(@"loginSuccessful!");
     [SVProgressHUD dismiss];
-    
-    MonthViewController *mvc = [[MonthViewController alloc] init];
-    UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:mvc];
+    RyCalMainViewController *vc = [[RyCalMainViewController alloc] init];
     [self presentViewController:vc animated:YES completion:nil];
 }
 

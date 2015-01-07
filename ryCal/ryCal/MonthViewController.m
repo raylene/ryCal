@@ -7,15 +7,18 @@
 //
 
 #import "MonthViewController.h"
-#import "MonthCollectionView.h"
 #import "DayCell.h"
 #import "User.h"
 #import "RecordTypeViewController.h"
 #import "RecordTypeComposerViewController.h"
+#import "SharedConstants.h"
 
-@interface MonthViewController ()
+@interface MonthViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (weak, nonatomic) IBOutlet MonthCollectionView *monthCollectionView;
+@property (nonatomic, strong) Month *monthData;
+@property (nonatomic, assign) NSInteger selectedDayIdx;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *monthCollectionView;
 @end
 
 @implementation MonthViewController
@@ -23,7 +26,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        [self setReferenceDate:[NSDate date]];
+        [self setupWithDate:[NSDate date]];
     }
     return self;
 }
@@ -31,37 +34,72 @@
 - (id)initWithDate:(NSDate *)date {
     self = [super init];
     if (self) {
-        [self setReferenceDate:date];
+        [self setupWithDate:date];
     }
     return self;
+}
+
+- (void)setupWithDate:(NSDate *)date {
+    self.monthData = [[Month alloc] initWithNSDate:date];
+    // TODO: fix weird month/day logic
+    self.selectedDayIdx = [self.monthData getReferenceDayIdx];
+    [self refreshMonthData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"MonthViewC viewDidLoad: (%f, %f), (%f, %f)", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
 
-    [self setupNavigationBar];
     [self setupCollectionView];
-    
-    self.title = [self.monthCollectionView.monthData getTitleString];
+    self.title = [self.monthData getTitleString];
 }
 
 - (void)setupCollectionView {
-    [self.monthCollectionView setDate:self.referenceDate];
-    [self.monthCollectionView setViewController:self];
+    UINib *cellNib = [UINib nibWithNibName:@"DayCell" bundle:nil];
+    [self.monthCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"DayCell"];
+    
+    self.monthCollectionView.delegate = self;
+    self.monthCollectionView.dataSource = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMonthData) name:MonthDataChangedNotification object:nil];
 }
 
-- (void)setupNavigationBar {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(onLogout)];
+- (void)refreshMonthData {
+    [self.monthData loadAllRecords:^(NSError *error) {
+        if (error == nil) {
+            [self.monthCollectionView reloadData];
+        }
+    }];
 }
 
-- (void)onLogout {
-    [User logout];
+#pragma mark UICollectionViewDataSource & UICollectionViewDataDelegate methods
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.monthData.numDays;
 }
 
-- (IBAction)onRecordTypeClick:(id)sender {
-    RecordTypeViewController *vc = [[RecordTypeViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 4;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    double width = collectionView.frame.size.width/8;
+    return CGSizeMake(width, width);
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    DayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DayCell" forIndexPath:indexPath];
+
+    int dayIdx = (int)indexPath.row;
+    [cell setFeatured:(dayIdx == self.selectedDayIdx)];
+    [cell setData:[[Day alloc] initWithMonthAndDay:self.monthData dayIndex:dayIdx]];
+
+    [cell setViewController:self.presentingVC];
+//    [cell setViewController:self.presentingViewController];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 }
 
 @end

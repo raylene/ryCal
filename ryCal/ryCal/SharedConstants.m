@@ -20,8 +20,10 @@ NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
 NSString * const ColorSelectedNotification = @"ColorSelectedNotification";
 NSString * const MonthDataChangedNotification = @"MonthDataChangedNotification";
 NSString * const RecordTypeDataChangedNotification = @"RecordTypeDataChangedNotification";
+NSString * const ViewDayNotification = @"ViewDayNotification";
 
 NSString * const kColorSelectedNotifParam = @"colorname";
+NSString * const kDayNotifParam = @"day";
 
 NSString * const kNoteFieldKey = @"note";
 NSString * const kTypeFieldKey = @"type";
@@ -32,7 +34,11 @@ NSString * const kArchivedFieldKey = @"archived";
 NSString * const kColorFieldKey = @"color";
 NSString * const kNameFieldKey = @"name";
 
+NSString * const NAV_BAR_COLOR = @"navbar";
+NSString * const MENU_BACKGROUND_COLOR = @"menubackground";
+
 NSString * const RECORD_COLOR_EMPTY_ENTRY = @"emptyentry";
+NSString * const RECORD_COLOR_FEATURED_ENTRY = @"featured";
 NSString * const RECORD_COLOR_LIGHT_BLUE = @"lightblue";
 
 NSString * const RECORD_COLOR_BLUE = @"blue";
@@ -76,11 +82,33 @@ int const NUM_COLORS = 10;
     return [UIColor whiteColor];
 }
 
++ (UIColor *)getNavigationBarColor {
+    return [self getColor:NAV_BAR_COLOR];
+}
+
++ (UIColor *)getMenuBackgroundColor {
+    return [self getColor:MENU_BACKGROUND_COLOR];
+}
+
++ (UIColor *)getMenuTextColor {
+//    return [UIColor darkGrayColor];
+    return [UIColor whiteColor];
+}
+
 // Hex colors from: http://www.w3schools.com/tags/ref_colorpicker.asp
 + (UIColor *)getColor:(NSString *)name {
     unsigned long int rgbValue = 0xBAE3FF;
     if ([name isEqualToString:RECORD_COLOR_EMPTY_ENTRY]) {
-        rgbValue = 0xE2E2FF;
+        // rgbValue = 0xE2E2FF;
+        // rgbValue = 0xE0EBEB;
+        // gbValue = 0xFFFFFF;
+        // light blue empty
+        rgbValue = 0xC2D1FF;
+        // light gray empty
+        rgbValue = 0xE8E8E8;
+    } else if ([name isEqualToString:RECORD_COLOR_FEATURED_ENTRY]) {
+        rgbValue = 0xFFFF00;
+        rgbValue = 0x474747;
     } else if ([name isEqualToString:RECORD_COLOR_LIGHT_BLUE]) {
         rgbValue = 0xE6F0FF;
     } else if ([name isEqualToString:RECORD_COLOR_BLUE]) {
@@ -103,6 +131,13 @@ int const NUM_COLORS = 10;
         rgbValue = 0xFFFF99;
     } else if ([name isEqualToString:RECORD_COLOR_BROWN]) {
         rgbValue = 0xB5916C;
+    } else if ([name isEqualToString:NAV_BAR_COLOR]) {
+        rgbValue = 0x4775FF;
+        rgbValue = 0x6C91FF;
+    } else if ([name isEqualToString:MENU_BACKGROUND_COLOR]) {
+        rgbValue = 0x99FFCC;
+        rgbValue = 0xADFFD6;
+        rgbValue = 0x4CB299;
     }
     // From: http://www.appcoda.com/customize-navigation-status-bar-ios-7/
     return [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0];

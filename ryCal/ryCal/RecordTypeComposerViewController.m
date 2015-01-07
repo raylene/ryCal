@@ -60,6 +60,7 @@
 }
 
 - (void)setupNavigationBar {
+    self.title = @"Edit";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(onSave)];
 }
 

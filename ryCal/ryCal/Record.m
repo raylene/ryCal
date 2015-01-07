@@ -64,7 +64,13 @@
     }
     [newRecord setUserIDField:[[User currentUser] getUserID]];
     [newRecord setDateField:date];
-    [newRecord saveInBackgroundWithBlock:completion];
+    [newRecord saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            // TODO: figure out why this isn't working?
+            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
+        }
+        completion(succeeded, error);
+    }];
 }
 
 + (void)loadAllRecords:(void (^)(NSArray *records, NSError *error))completion {

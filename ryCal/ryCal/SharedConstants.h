@@ -17,9 +17,11 @@ extern NSString * const UserDidLoginNotification;
 extern NSString * const ColorSelectedNotification;
 extern NSString * const MonthDataChangedNotification;
 extern NSString * const RecordTypeDataChangedNotification;
+extern NSString * const ViewDayNotification;
 
 // Notif params
 extern NSString * const kColorSelectedNotifParam;
+extern NSString * const kDayNotifParam;
 
 extern NSString * const kNoteFieldKey;
 extern NSString * const kTypeFieldKey;
@@ -30,7 +32,10 @@ extern NSString * const kArchivedFieldKey;
 extern NSString * const kColorFieldKey;
 extern NSString * const kNameFieldKey;
 
+// extern NSString * const NAV_BAR_COLOR;
+
 extern NSString * const RECORD_COLOR_EMPTY_ENTRY;
+extern NSString * const RECORD_COLOR_FEATURED_ENTRY;
 extern NSString * const RECORD_COLOR_LIGHT_BLUE;
 
 extern NSString * const RECORD_COLOR_BLUE;
@@ -54,6 +59,10 @@ extern int const NUM_COLORS;
 + (NSString *)getDefaultColorName;
 + (UIColor *)getPlaceholderRecordTypeColor;
 + (UIColor *)getColor:(NSString *)name;
+
++ (UIColor *)getNavigationBarColor;
++ (UIColor *)getMenuBackgroundColor;
++ (UIColor *)getMenuTextColor;
 
 + (NSInteger)getCurrentYear;
 

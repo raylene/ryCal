@@ -11,9 +11,7 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "LoginViewController.h"
-#import "MonthViewController.h"
-#import "MenuViewController.h"
-#import "SlidingMenuMainViewController.h"
+#import "RyCalMainViewController.h"
 #import "SharedConstants.h"
 // PFObject subclasses
 #import "Record.h"
@@ -54,10 +52,7 @@ static const NSString *kFacebookAppID = @"745968008790705";
         LoginViewController *lvc = [[LoginViewController alloc] init];
         vc = [[UINavigationController alloc] initWithRootViewController:lvc];
     } else {
-        MonthViewController *mvc = [[MonthViewController alloc] init];
-        UINavigationController *contentVC = [[UINavigationController alloc] initWithRootViewController:mvc];
-        MenuViewController *menuVC = [[MenuViewController alloc] init];
-        vc = [[SlidingMenuMainViewController alloc] initWithViewControllers:menuVC contentVC:contentVC];
+        vc = [[RyCalMainViewController alloc] init];
     }
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

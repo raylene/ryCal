@@ -7,6 +7,7 @@
 //
 
 #import "MenuItemCell.h"
+#import "SharedConstants.h"
 
 @interface MenuItemCell()
 
@@ -24,7 +25,11 @@
 - (void)setConfig:(NSDictionary *)config {
     _config = config;
     self.itemName.text = config[@"name"];
-    self.itemImage.image = [UIImage imageNamed:config[@"img"]];
+    self.itemName.textColor = [SharedConstants getMenuTextColor];
+    
+    // TODO: fix this when I have better icons..
+//    self.itemImage.image = [UIImage imageNamed:config[@"img"]];
+    self.itemImage.backgroundColor = [UIColor whiteColor];
 }
 
 @end

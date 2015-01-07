@@ -27,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupTypeTable];
+    [self setupNavigationBar];
     self.recordDictionary = [[NSMutableDictionary alloc] init];
 
     self.title = [self.dayData getTitleString];
@@ -46,6 +47,14 @@
             [self.typeTableView reloadData];
         }];
     }];
+}
+
+- (void)setupNavigationBar {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(onDismiss)];
+}
+
+- (void)onDismiss {
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)setupTypeTable {
@@ -84,10 +93,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.recordTypes.count;
-}
-
-- (void)onLogout {
-    [User logout];
 }
 
 @end

@@ -24,22 +24,35 @@
 @implementation DayCell
 
 - (void)awakeFromNib {
-    [self setBackgroundColor:[SharedConstants getColor:RECORD_COLOR_EMPTY_ENTRY]];
-    [self.recordIndicatorView setAlpha:0];
+    [self resetColors];
     
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGesture:)];
     [self addGestureRecognizer:tgr];
+}
+
+- (void)resetColors {
+    [self setBackgroundColor:[SharedConstants getColor:RECORD_COLOR_EMPTY_ENTRY]];
+    self.dayLabel.textColor = [UIColor darkGrayColor];
+    self.recordIndicatorView.alpha = 0;
 }
 
 @synthesize data = _data;
 
 - (void)setData:(Day *)data {
     _data = data;
+    [self resetColors];
+
+    if (self.featured) {
+        [self setBackgroundColor:[SharedConstants getColor:RECORD_COLOR_FEATURED_ENTRY]];
+        self.dayLabel.textColor = [UIColor whiteColor];
+    }    
+
     self.monthLabel.text = [self.data getMonthString];
     self.dayLabel.text = [self.data getDayString];
+    self.recordIndicatorView.alpha = 0;
     Record *record = [self.data getPrimaryRecord];
     if (record != nil) {
-        NSLog(@"day primary record? %@, %@", [self.data getTitleString], [self.data getPrimaryRecord]);
+        NSLog(@"day primary record? %@, %@, %@", [self.data getDayString], [self.data getTitleString], [self.data getPrimaryRecord]);
         self.recordIndicatorView.backgroundColor = [record getColor];
         self.recordIndicatorView.alpha = 1;
     }
@@ -52,9 +65,14 @@
 #pragma mark UIGestureRecognizers
 
 - (IBAction)onTapGesture:(id)sender {
-    DayViewController *vc = [[DayViewController alloc] init];
-    vc.dayData = self.data;
-    [self.viewController.navigationController pushViewController:vc animated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ViewDayNotification object:nil userInfo:@{kDayNotifParam: self.data}];
+    
+//    DayViewController *vc = [[DayViewController alloc] init];
+//    vc.dayData = self.data;
+//    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+//    [self.viewController presentViewController:nvc animated:YES completion:nil];
+//    // NOTE: I changed self.viewController to already be a nav controller...
+//    // [(UINavigationController *)self.viewController pushViewController:vc animated:YES];
 }
 
 @end

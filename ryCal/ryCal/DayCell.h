@@ -17,4 +17,6 @@
 
 @property (nonatomic, strong) Record *primaryRecord;
 
+@property (nonatomic, assign) BOOL featured;
+
 @end
