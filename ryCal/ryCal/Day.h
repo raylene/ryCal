@@ -26,4 +26,6 @@
 
 - (Record *)getPrimaryRecord;
 
+- (BOOL)isToday;
+
 @end

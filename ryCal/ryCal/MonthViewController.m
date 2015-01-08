@@ -90,9 +90,9 @@
     DayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DayCell" forIndexPath:indexPath];
 
     int dayIdx = (int)indexPath.row;
-    if (self.monthData.isCurrentMonth) {
+//    if (self.monthData.isCurrentMonth) {
         [cell setFeatured:(dayIdx == self.selectedDayIdx)];
-    }
+//    }
     [cell setData:[[Day alloc] initWithMonthAndDay:self.monthData dayIndex:dayIdx]];
 
     [cell setViewController:self.presentingVC];
@@ -102,6 +102,17 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+}
+
+// Temporary highlight?
+- (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+    cell.contentView.backgroundColor = [SharedConstants getDayHighlightColor];
+}
+
+- (void)collectionView:(UICollectionView *)colView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+    cell.contentView.backgroundColor = nil;
 }
 
 @end

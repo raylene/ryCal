@@ -37,7 +37,7 @@ NSString * const kNameFieldKey = @"name";
 NSString * const NAV_BAR_COLOR = @"navbar";
 NSString * const MENU_BACKGROUND_COLOR = @"menubackground";
 NSString * const MONTH_BACKGROUND_COLOR = @"monthbackground";
-
+NSString * const DAY_HIGHLIGHT_COLOR = @"dayhighlight";
 NSString * const RECORD_COLOR_EMPTY_ENTRY = @"emptyentry";
 NSString * const RECORD_COLOR_FEATURED_ENTRY = @"featured";
 NSString * const RECORD_COLOR_LIGHT_BLUE = @"lightblue";
@@ -100,6 +100,10 @@ int const NUM_COLORS = 10;
     return [self getColor:MONTH_BACKGROUND_COLOR];
 }
 
++ (UIColor *)getDayHighlightColor {
+    return [self getColor:DAY_HIGHLIGHT_COLOR];
+}
+
 // Hex colors from: http://www.w3schools.com/tags/ref_colorpicker.asp
 + (UIColor *)getColor:(NSString *)name {
     unsigned long int rgbValue = 0xBAE3FF;
@@ -145,6 +149,8 @@ int const NUM_COLORS = 10;
         rgbValue = 0x4CB299;
     } else if ([name isEqualToString:MONTH_BACKGROUND_COLOR]) {
         rgbValue = 0xABABAB;
+    }else if ([name isEqualToString:DAY_HIGHLIGHT_COLOR]) {
+        rgbValue = 0x6C6C6C;
     }
 
     // From: http://www.appcoda.com/customize-navigation-status-bar-ios-7/

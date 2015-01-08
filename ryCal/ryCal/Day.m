@@ -70,4 +70,10 @@
     return [self.monthData getPrimaryRecordForDay:self.dayInt];
 }
 
+// TODO: save this as a local var or static to avoid recomputing it?
+- (BOOL)isToday {
+    return ([self.getStartDate compare:[NSDate date]] != NSOrderedDescending) &&
+    ([self.getEndDate compare:[NSDate date]] == NSOrderedDescending);
+}
+
 @end

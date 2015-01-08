@@ -15,10 +15,10 @@
 #import "UIImageView+AfNetworking.h"
 #import "SharedConstants.h"
 
-static int const kProfileItemIndex = 2;
 static int const kHomeItemIndex = 0;
 static int const kRecordTypesItemIndex = 1;
-static int const kLogoutItemIndex = 3;
+static int const kProfileItemIndex = 3;//2;
+static int const kLogoutItemIndex = 2;//3;
 
 @interface MenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -66,10 +66,10 @@ static int const kLogoutItemIndex = 3;
     self.nameLabel.textColor = [SharedConstants getMenuTextColor];
     
     [self.profileImageView setImageWithURL:[NSURL URLWithString:[user getProfileImageURL]]];
-    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
+//    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.clipsToBounds = YES;
     [self.profileImageView.layer setBorderColor: [[UIColor whiteColor] CGColor]];
-    [self.profileImageView.layer setBorderWidth: 0.5];
+    [self.profileImageView.layer setBorderWidth: 3];
 }
 
 - (void)setupMenuTable {
@@ -88,7 +88,7 @@ static int const kLogoutItemIndex = 3;
     @[
       @{@"name" : @"Home", @"img":@"home"},
       @{@"name" : @"Record Types", @"img": @"recordtypes"},
-      @{@"name" : @"Settings", @"img": @"profile"},
+//      @{@"name" : @"Settings", @"img": @"profile"},
       @{@"name" : @"Logout", @"img": @"logout"}
       ];
 }

@@ -55,15 +55,19 @@
 
     self.dayEditView.backgroundColor = [SharedConstants getMonthBackgroundColor];
     
-    if (self.monthData.isCurrentMonth) {
+//    if (self.monthData.isCurrentMonth) {
         self.dayEditVC = [[EditDailyRecordViewController alloc] initWithDate:self.referenceDate];
         // TODO: delete the presentingVC var, no longer needed
         self.dayEditVC.presentingVC = self.navigationController;
         self.dayEditVC.view.frame = CGRectMake(0, 0, self.dayEditView.frame.size.width, self.dayEditView.frame.size.height);
         [self.dayEditView addSubview:self.dayEditVC.view];
-    }
+//    }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentDayView:) name:ViewDayNotification object:nil];
+    // TODO: put this back if the dynamic swapping of the bottom in EditDailyRecordVC doesn't work out...
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentDayView:) name:ViewDayNotification object:nil];
+    
+    // Not needed?
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUsingNewDay:) name:ViewDayNotification object:nil];
 }
 
 - (void)viewDidLoad {
@@ -104,5 +108,10 @@
     
 //    [self.navigationController pushViewController:vc animated:YES];
 }
+
+//- (void)updateUsingNewDay:(NSNotification *)notification {
+//    NSDictionary *dict = [notification userInfo];
+//    Day *data = dict[kDayNotifParam];
+//}
 
 @end

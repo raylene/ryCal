@@ -10,6 +10,7 @@
 #import "User.h"
 //#import "EditableRecordTypeCell.h"
 #import "CompressedDailyRecordCell.h"
+#import "DayViewController.h"
 #import "RecordType.h"
 #import "Record.h"
 #import "SharedConstants.h"
@@ -22,6 +23,7 @@
 - (IBAction)addMoreInfo:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITableView *typeTableView;
+@property (weak, nonatomic) IBOutlet UILabel *dateHeaderLabel;
 
 @end
 
@@ -29,10 +31,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setupDateHeader];
     [self setupTypeTable];
     [self setupRecordData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupRecordData) name:MonthDataChangedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUsingNewDay:) name:ViewDayNotification object:nil];
 }
 
 - (id)initWithDay:(Day *)dayData {
@@ -62,6 +68,23 @@
     return self;
 }
 
+@synthesize dayData = _dayData;
+- (void)setDayData:(Day *)dayData {
+    _dayData = dayData;
+    [self setupDateHeader];
+}
+
+// TODO: look into viewDidLoad in the lifecycle and see why I need to call this 2x
+// it needs to be in viewDidLoad for a new VC via alloc, and needs to be setDayData for
+// the same VC that's just having it's data be refreshed
+- (void)setupDateHeader {
+    NSString *header = @"TODAY";
+    if (!self.dayData.isToday) {
+        header = [self.dayData getTitleString];
+    }
+    self.dateHeaderLabel.text = header;
+}
+
 - (void)setupTypeTable {
     UINib *cellNib = [UINib nibWithNibName:@"CompressedDailyRecordCell" bundle:nil];
     [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"CompressedDailyRecordCell"];
@@ -84,6 +107,13 @@
             [self.typeTableView reloadData];
         }];
     }];
+}
+
+- (void)updateUsingNewDay:(NSNotification *)notification {
+    NSDictionary *dict = [notification userInfo];
+    Day *data = dict[kDayNotifParam];
+    [self setDayData:data];
+    [self setupRecordData];
 }
 
 #pragma mark - Custom setters
@@ -115,8 +145,17 @@
     return self.recordTypes.count;
 }
 
+// ---------------
+
 - (IBAction)addMoreInfo:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:ViewDayNotification object:nil userInfo:@{kDayNotifParam: self.dayData}];
+    // TODO: figure out another way to display the day permalink...?
+//    [[NSNotificationCenter defaultCenter] postNotificationName:ViewDayNotification object:nil userInfo:@{kDayNotifParam: self.dayData}];
+    
+    DayViewController *vc = [[DayViewController alloc] init];
+    vc.dayData = self.dayData;
+    
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.presentingVC presentViewController:nvc animated:YES completion:nil];
 }
 
 @end

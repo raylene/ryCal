@@ -34,18 +34,33 @@
     [self setBackgroundColor:[SharedConstants getColor:RECORD_COLOR_EMPTY_ENTRY]];
     self.dayLabel.textColor = [UIColor darkGrayColor];
     self.recordIndicatorView.alpha = 0;
+    
+    // Selected state color
+    UIView* selectedBGView = [[UIView alloc] initWithFrame:self.bounds];
+    selectedBGView.backgroundColor = [UIColor whiteColor];
+    self.selectedBackgroundView = selectedBGView;
+}
+
+- (void)setFeatured:(BOOL)featured {
+    if (featured) {
+        [self setBackgroundColor:[SharedConstants getColor:RECORD_COLOR_FEATURED_ENTRY]];
+        self.dayLabel.textColor = [UIColor whiteColor];
+    } else {
+        [self setBackgroundColor:[SharedConstants getColor:RECORD_COLOR_EMPTY_ENTRY]];
+        self.dayLabel.textColor = [UIColor darkGrayColor];
+    }
 }
 
 @synthesize data = _data;
 
 - (void)setData:(Day *)data {
     _data = data;
-    [self resetColors];
-
-    if (self.featured) {
-        [self setBackgroundColor:[SharedConstants getColor:RECORD_COLOR_FEATURED_ENTRY]];
-        self.dayLabel.textColor = [UIColor whiteColor];
-    }    
+//    [self resetColors];
+//
+//    if (self.featured) {
+//        [self setBackgroundColor:[SharedConstants getColor:RECORD_COLOR_FEATURED_ENTRY]];
+//        self.dayLabel.textColor = [UIColor whiteColor];
+//    }    
 
     self.monthLabel.text = [self.data getMonthString];
     self.dayLabel.text = [self.data getDayString];
@@ -66,6 +81,9 @@
 
 - (IBAction)onTapGesture:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:ViewDayNotification object:nil userInfo:@{kDayNotifParam: self.data}];
+    
+    // TODO: fix this so that you can show cells that have been tapped/featured
+    // self.featured = YES;
     
 //    DayViewController *vc = [[DayViewController alloc] init];
 //    vc.dayData = self.data;

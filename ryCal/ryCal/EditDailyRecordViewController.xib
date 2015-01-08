@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditDailyRecordViewController">
             <connections>
+                <outlet property="dateHeaderLabel" destination="Sos-yx-7M1" id="br5-hx-lct"/>
                 <outlet property="typeTableView" destination="nt3-TR-D9x" id="RUR-Dw-87Z"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,9 +23,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vi4-J3-Nt1">
-                    <rect key="frame" x="140" y="628" width="94" height="29"/>
+                    <rect key="frame" x="152" y="628" width="70" height="29"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                    <state key="normal" title="Add More Info">
+                    <state key="normal" title="Add Notes">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

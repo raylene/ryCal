@@ -64,6 +64,7 @@ extern int const NUM_COLORS;
 + (UIColor *)getMenuBackgroundColor;
 + (UIColor *)getMenuTextColor;
 + (UIColor *)getMonthBackgroundColor;
++ (UIColor *)getDayHighlightColor;
 
 + (NSInteger)getCurrentYear;
 

@@ -17,15 +17,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bcs-dq-pxq">
-                    <rect key="frame" x="60" y="80" width="80" height="80"/>
+                    <rect key="frame" x="60" y="80" width="100" height="100"/>
                     <color key="backgroundColor" red="0.5425709822" green="1" blue="0.59192542969999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="80" id="sCE-F1-6bE"/>
-                        <constraint firstAttribute="height" constant="80" id="tay-9g-WKD"/>
+                        <constraint firstAttribute="width" constant="100" id="sCE-F1-6bE"/>
+                        <constraint firstAttribute="height" constant="100" id="tay-9g-WKD"/>
                     </constraints>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="X4g-07-HfO">
-                    <rect key="frame" x="10" y="190" width="365" height="477"/>
+                    <rect key="frame" x="10" y="220" width="365" height="447"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
@@ -38,7 +38,7 @@
                 <constraint firstAttribute="trailing" secondItem="X4g-07-HfO" secondAttribute="trailing" id="GVP-fy-gHk"/>
                 <constraint firstItem="Bcs-dq-pxq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="Oiw-W7-QyA"/>
                 <constraint firstItem="X4g-07-HfO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="SLQ-ws-JpE"/>
-                <constraint firstItem="X4g-07-HfO" firstAttribute="top" secondItem="Bcs-dq-pxq" secondAttribute="bottom" constant="30" id="ZnS-jk-0x0"/>
+                <constraint firstItem="X4g-07-HfO" firstAttribute="top" secondItem="Bcs-dq-pxq" secondAttribute="bottom" constant="40" id="ZnS-jk-0x0"/>
                 <constraint firstItem="Bcs-dq-pxq" firstAttribute="leading" secondItem="X4g-07-HfO" secondAttribute="leading" id="eTW-K2-ELC"/>
                 <constraint firstItem="Bcs-dq-pxq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="knL-Xw-oZh"/>
             </constraints>

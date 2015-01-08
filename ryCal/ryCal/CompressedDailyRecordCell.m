@@ -15,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *recordNoteText;
 @property (weak, nonatomic) IBOutlet UIView *outerContentView;
 @property (weak, nonatomic) IBOutlet UIView *innerContentView;
+@property (weak, nonatomic) IBOutlet UIView *checkboxView;
+
+@property (nonatomic, strong) UIImageView *selectedCheckImageView;
 
 @end
 
@@ -25,6 +28,12 @@
     self.backgroundColor = [SharedConstants getMonthBackgroundColor];
     self.outerContentView.backgroundColor = [SharedConstants getMonthBackgroundColor];
     self.innerContentView.backgroundColor = [UIColor whiteColor];
+
+    // Reusable checked image view
+    self.selectedCheckImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"centercheck"]];
+    CGRect frame = self.checkboxView.frame;
+    frame.origin.x = frame.origin.y = 0;
+    self.selectedCheckImageView.frame = frame;
     
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGesture:)];
     [self addGestureRecognizer:tgr];
@@ -108,9 +117,15 @@
         }
         self.outerContentView.backgroundColor = typeColor;
         self.innerContentView.backgroundColor = typeColor;
+
+        [self.checkboxView addSubview:self.selectedCheckImageView];
     } else {
         self.outerContentView.backgroundColor = typeColor;
         self.innerContentView.backgroundColor = [UIColor whiteColor];
+        
+        [self.selectedCheckImageView removeFromSuperview];
+        self.checkboxView.layer.borderColor = [typeColor CGColor];
+        self.checkboxView.layer.borderWidth = 1;
     }
     self.recordNoteText.textColor = self.recordTypeName.textColor = textColor;
 }
@@ -124,9 +139,26 @@
 #pragma mark UIGestureRecognizers
 
 - (IBAction)onTapGesture:(id)sender {
-    // what happens when you tap? sigh
     // This is a binary toggle, so if the record already exists, consider this a delete
-    [self saveChanges:(self.recordData != nil)];
+    BOOL deleteRecord = self.recordData != nil;
+    if (deleteRecord && self.recordNoteText.text) {
+        // TODO: prevent people from deleting too quickly if there is a note
+//        [self presentDeleteWarningAlert];
+    }
+    [self saveChanges:deleteRecord];
+}
+
+// Prevent people from deleting too quickly if there is a note
+- (void)presentDeleteWarningAlert {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Are you sure?"
+                                                                   message:@"You've saved a special note for this record. "
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self saveChanges:YES];
+    }];
+    [alert addAction:defaultAction];
+//    [ presentViewController:alert animated:YES completion:nil];
 }
 
 @end
