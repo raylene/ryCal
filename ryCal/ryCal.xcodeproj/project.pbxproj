@@ -14,6 +14,10 @@
 		6F16509A1A53994A006336EF /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F1650981A53994A006336EF /* MenuViewController.xib */; };
 		6F16509E1A53A549006336EF /* MenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F16509C1A53A549006336EF /* MenuItemCell.m */; };
 		6F16509F1A53A549006336EF /* MenuItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F16509D1A53A549006336EF /* MenuItemCell.xib */; };
+		6F621D731A5F4D4A00F85A17 /* DummyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F621D711A5F4D4A00F85A17 /* DummyCell.m */; };
+		6F621D741A5F4D4A00F85A17 /* DummyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F621D721A5F4D4A00F85A17 /* DummyCell.xib */; };
+		6F621D781A5F539000F85A17 /* MonthHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F621D761A5F539000F85A17 /* MonthHomeViewController.m */; };
+		6F621D791A5F539000F85A17 /* MonthHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F621D771A5F539000F85A17 /* MonthHomeViewController.xib */; };
 		6F6B9A931A22BCDD005B7722 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B9A911A22BCDD005B7722 /* LoginViewController.m */; };
 		6F6B9A941A22BCDD005B7722 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B9A921A22BCDD005B7722 /* LoginViewController.xib */; };
 		6F6B9A9E1A22F585005B7722 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B9A9D1A22F585005B7722 /* User.m */; };
@@ -73,6 +77,12 @@
 		6F16509B1A53A549006336EF /* MenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemCell.h; sourceTree = "<group>"; };
 		6F16509C1A53A549006336EF /* MenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemCell.m; sourceTree = "<group>"; };
 		6F16509D1A53A549006336EF /* MenuItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuItemCell.xib; sourceTree = "<group>"; };
+		6F621D701A5F4D4A00F85A17 /* DummyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyCell.h; sourceTree = "<group>"; };
+		6F621D711A5F4D4A00F85A17 /* DummyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyCell.m; sourceTree = "<group>"; };
+		6F621D721A5F4D4A00F85A17 /* DummyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DummyCell.xib; sourceTree = "<group>"; };
+		6F621D751A5F539000F85A17 /* MonthHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthHomeViewController.h; sourceTree = "<group>"; };
+		6F621D761A5F539000F85A17 /* MonthHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthHomeViewController.m; sourceTree = "<group>"; };
+		6F621D771A5F539000F85A17 /* MonthHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthHomeViewController.xib; sourceTree = "<group>"; };
 		6F6B9A901A22BCDD005B7722 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6F6B9A911A22BCDD005B7722 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6F6B9A921A22BCDD005B7722 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -159,35 +169,38 @@
 		6F6B9A8D1A22BCB2005B7722 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6FC6D82E1A5CAC79007871C3 /* MonthViewController.xib */,
-				6FC6D82F1A5CAC79007871C3 /* MonthViewController.m */,
-				6FC6D8301A5CAC79007871C3 /* MonthViewController.h */,
-				6F6B9A901A22BCDD005B7722 /* LoginViewController.h */,
-				6F6B9A911A22BCDD005B7722 /* LoginViewController.m */,
-				6F6B9A921A22BCDD005B7722 /* LoginViewController.xib */,
 				6FBE73E81A4673380045810A /* DayViewController.h */,
 				6FBE73E91A4673380045810A /* DayViewController.m */,
 				6FBE73EA1A4673380045810A /* DayViewController.xib */,
-				6FBE73F61A47E4650045810A /* RecordTypeViewController.h */,
-				6FBE73F71A47E4650045810A /* RecordTypeViewController.m */,
-				6FBE73F81A47E4650045810A /* RecordTypeViewController.xib */,
-				6FF442C51A4FB56700B3DD45 /* RecordTypeComposerViewController.h */,
-				6FF442C61A4FB56700B3DD45 /* RecordTypeComposerViewController.m */,
-				6FF442C71A4FB56700B3DD45 /* RecordTypeComposerViewController.xib */,
-				6F1650911A5396F1006336EF /* SlidingMenuMainViewController.h */,
-				6F1650921A5396F1006336EF /* SlidingMenuMainViewController.m */,
-				6F1650931A5396F1006336EF /* SlidingMenuMainViewController.xib */,
-				6F1650961A53994A006336EF /* MenuViewController.h */,
-				6F1650971A53994A006336EF /* MenuViewController.m */,
-				6F1650981A53994A006336EF /* MenuViewController.xib */,
 				6FE8A3441A5B75CD00754D34 /* EditDailyRecordViewController.h */,
 				6FE8A3451A5B75CD00754D34 /* EditDailyRecordViewController.m */,
 				6FE8A3461A5B75CD00754D34 /* EditDailyRecordViewController.xib */,
 				6FF334121A5BC56B00ADDBDB /* HomeViewController.h */,
 				6FF334131A5BC56B00ADDBDB /* HomeViewController.m */,
 				6FF334141A5BC56B00ADDBDB /* HomeViewController.xib */,
+				6F6B9A901A22BCDD005B7722 /* LoginViewController.h */,
+				6F6B9A911A22BCDD005B7722 /* LoginViewController.m */,
+				6F6B9A921A22BCDD005B7722 /* LoginViewController.xib */,
+				6F1650961A53994A006336EF /* MenuViewController.h */,
+				6F1650971A53994A006336EF /* MenuViewController.m */,
+				6F1650981A53994A006336EF /* MenuViewController.xib */,
+				6F621D751A5F539000F85A17 /* MonthHomeViewController.h */,
+				6F621D761A5F539000F85A17 /* MonthHomeViewController.m */,
+				6F621D771A5F539000F85A17 /* MonthHomeViewController.xib */,
+				6FC6D8301A5CAC79007871C3 /* MonthViewController.h */,
+				6FC6D82F1A5CAC79007871C3 /* MonthViewController.m */,
+				6FC6D82E1A5CAC79007871C3 /* MonthViewController.xib */,
+				6FF442C51A4FB56700B3DD45 /* RecordTypeComposerViewController.h */,
+				6FF442C61A4FB56700B3DD45 /* RecordTypeComposerViewController.m */,
+				6FF442C71A4FB56700B3DD45 /* RecordTypeComposerViewController.xib */,
+				6FBE73F61A47E4650045810A /* RecordTypeViewController.h */,
+				6FBE73F71A47E4650045810A /* RecordTypeViewController.m */,
+				6FBE73F81A47E4650045810A /* RecordTypeViewController.xib */,
 				6FE8A34E1A5B7A3A00754D34 /* RyCalMainViewController.h */,
 				6FE8A34F1A5B7A3A00754D34 /* RyCalMainViewController.m */,
+				6F1650911A5396F1006336EF /* SlidingMenuMainViewController.h */,
+				6F1650921A5396F1006336EF /* SlidingMenuMainViewController.m */,
+				6F1650931A5396F1006336EF /* SlidingMenuMainViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -212,24 +225,27 @@
 		6F6B9A8F1A22BCC7005B7722 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6FBE73E31A45193E0045810A /* DayCell.h */,
-				6FBE73E41A45193E0045810A /* DayCell.m */,
-				6FBE73E51A45193E0045810A /* DayCell.xib */,
-				6FBE73FB1A47F5910045810A /* RecordTypeCell.h */,
-				6FBE73FC1A47F5910045810A /* RecordTypeCell.m */,
-				6FBE73FD1A47F5910045810A /* RecordTypeCell.xib */,
-				6FBE74001A4950B00045810A /* EditableRecordTypeCell.h */,
-				6FBE74011A4950B00045810A /* EditableRecordTypeCell.m */,
-				6FBE74021A4950B00045810A /* EditableRecordTypeCell.xib */,
 				6FF442D41A4FBCC100B3DD45 /* ColorCell.h */,
 				6FF442D51A4FBCC100B3DD45 /* ColorCell.m */,
 				6FF442D61A4FBCC100B3DD45 /* ColorCell.xib */,
-				6F16509B1A53A549006336EF /* MenuItemCell.h */,
-				6F16509C1A53A549006336EF /* MenuItemCell.m */,
-				6F16509D1A53A549006336EF /* MenuItemCell.xib */,
 				6FF278411A5D27B10063323F /* CompressedDailyRecordCell.h */,
 				6FF278421A5D27B10063323F /* CompressedDailyRecordCell.m */,
 				6FF278431A5D27B10063323F /* CompressedDailyRecordCell.xib */,
+				6FBE73E31A45193E0045810A /* DayCell.h */,
+				6FBE73E41A45193E0045810A /* DayCell.m */,
+				6FBE73E51A45193E0045810A /* DayCell.xib */,
+				6F621D701A5F4D4A00F85A17 /* DummyCell.h */,
+				6F621D711A5F4D4A00F85A17 /* DummyCell.m */,
+				6F621D721A5F4D4A00F85A17 /* DummyCell.xib */,
+				6FBE74001A4950B00045810A /* EditableRecordTypeCell.h */,
+				6FBE74011A4950B00045810A /* EditableRecordTypeCell.m */,
+				6FBE74021A4950B00045810A /* EditableRecordTypeCell.xib */,
+				6F16509B1A53A549006336EF /* MenuItemCell.h */,
+				6F16509C1A53A549006336EF /* MenuItemCell.m */,
+				6F16509D1A53A549006336EF /* MenuItemCell.xib */,
+				6FBE73FB1A47F5910045810A /* RecordTypeCell.h */,
+				6FBE73FC1A47F5910045810A /* RecordTypeCell.m */,
+				6FBE73FD1A47F5910045810A /* RecordTypeCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -406,6 +422,7 @@
 			files = (
 				6F6B9A941A22BCDD005B7722 /* LoginViewController.xib in Resources */,
 				6FBE74041A4950B00045810A /* EditableRecordTypeCell.xib in Resources */,
+				6F621D741A5F4D4A00F85A17 /* DummyCell.xib in Resources */,
 				6F16509A1A53994A006336EF /* MenuViewController.xib in Resources */,
 				6F926BE51A22BA5F00473EA2 /* LaunchScreen.xib in Resources */,
 				6F16509F1A53A549006336EF /* MenuItemCell.xib in Resources */,
@@ -420,6 +437,7 @@
 				6FBE73FA1A47E4650045810A /* RecordTypeViewController.xib in Resources */,
 				6FC6D8311A5CAC79007871C3 /* MonthViewController.xib in Resources */,
 				6FF442D81A4FBCC100B3DD45 /* ColorCell.xib in Resources */,
+				6F621D791A5F539000F85A17 /* MonthHomeViewController.xib in Resources */,
 				6F926BE21A22BA5F00473EA2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,7 +507,9 @@
 				6FE8A3471A5B75CD00754D34 /* EditDailyRecordViewController.m in Sources */,
 				6FBE74031A4950B00045810A /* EditableRecordTypeCell.m in Sources */,
 				6F926BDA1A22BA5F00473EA2 /* AppDelegate.m in Sources */,
+				6F621D781A5F539000F85A17 /* MonthHomeViewController.m in Sources */,
 				6F926BD71A22BA5F00473EA2 /* main.m in Sources */,
+				6F621D731A5F4D4A00F85A17 /* DummyCell.m in Sources */,
 				6FE8A3501A5B7A3A00754D34 /* RyCalMainViewController.m in Sources */,
 				6F16509E1A53A549006336EF /* MenuItemCell.m in Sources */,
 				6FBE73F21A476BFC0045810A /* Record.m in Sources */,

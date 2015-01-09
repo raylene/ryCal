@@ -14,24 +14,27 @@
 @property (nonatomic, strong) NSDateComponents *components;
 
 - (id)initWithNSDate:(NSDate *)date;
-- (int)numDays;
+
+- (NSInteger)numDays;
+// Number of days before this month until you hit a Sunday
+- (NSInteger)numBufferDays;
+
+- (BOOL)isCurrentMonth;
+// TODO: fix this, weird pattern
+- (NSInteger)getReferenceDayIdx;
+
+- (NSString *)getTitleString;
+
 - (NSDate *)getStartDate;
 - (NSDate *)getEndDate;
 
 - (NSDate *)getStartDateForPrevMonth;
 - (NSDate *)getStartDateForNextMonth;
 
-// TODO: fix this, weird pattern
-- (NSInteger)getReferenceDayIdx;
-
-- (NSDate *)getStartDateForDay:(int)day;
-- (NSDate *)getEndDateForDay:(int)day;
-
-- (NSString *)getTitleString;
-
-- (BOOL)isCurrentMonth;
+- (NSDate *)getStartDateForDay:(NSInteger)day;
+- (NSDate *)getEndDateForDay:(NSInteger)day;
 
 - (void)loadAllRecords:(void (^)(NSError *error))monthCompletion;
-- (Record *)getPrimaryRecordForDay:(int)day;
+- (Record *)getPrimaryRecordForDay:(NSInteger)day;
 
 @end

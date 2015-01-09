@@ -13,19 +13,19 @@
 @interface Day : NSObject
 
 // TODO: cleanup weird init / interdependencies between Month/Day
-- (id)initWithMonthAndDay:(Month *)month dayIndex:(int)dayIndex;
+- (id)initWithMonthAndDay:(Month *)month dayIndex:(NSInteger)dayIndex;
 - (id)initWithMonthAndDate:(Month *)month date:(NSDate *)date;
 
-- (NSString *)getMonthString;
-- (NSString *)getDayString;
+- (BOOL)isToday;
+- (NSInteger)getDayInt;
 
+- (NSString *)getDayString;
 - (NSString *)getTitleString;
+- (NSString *)getHeaderString;
 
 - (NSDate *)getStartDate;
 - (NSDate *)getEndDate;
 
 - (Record *)getPrimaryRecord;
-
-- (BOOL)isToday;
 
 @end

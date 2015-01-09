@@ -11,6 +11,7 @@
 #import "User.h"
 #import "MonthViewController.h"
 #import "HomeViewController.h"
+#import "MonthHomeViewController.h"
 #import "RecordTypeViewController.h"
 #import "UIImageView+AfNetworking.h"
 #import "SharedConstants.h"
@@ -129,8 +130,8 @@ static int const kLogoutItemIndex = 2;//3;
 //        vc = [[ProfileViewController alloc] init];
 //        [(ProfileViewController *)vc setUser:[User currentUser]];
     } else if (indexPath.row == kHomeItemIndex) {
-//        vc = [[MonthViewController alloc] init];
         vc = [[HomeViewController alloc] initWithDate:[NSDate date]];
+        //vc = [[MonthHomeViewController alloc] initWithDate:[NSDate date]];
     } else if (indexPath.row == kRecordTypesItemIndex) {
         vc = [[RecordTypeViewController alloc] init];
     } else if (indexPath.row == kLogoutItemIndex) {

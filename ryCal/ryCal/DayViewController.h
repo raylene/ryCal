@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) Day *dayData;
 
+- (id)initWithDay:(Day *)dayData;
+
 @end

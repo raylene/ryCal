@@ -14,8 +14,6 @@
 
 @interface DayCell ()
 
-// TODO -- delete
-@property (weak, nonatomic) IBOutlet UILabel *monthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 @property (weak, nonatomic) IBOutlet UIView *recordIndicatorView;
 
@@ -36,9 +34,9 @@
     self.recordIndicatorView.alpha = 0;
     
     // Selected state color
-    UIView* selectedBGView = [[UIView alloc] initWithFrame:self.bounds];
-    selectedBGView.backgroundColor = [UIColor whiteColor];
-    self.selectedBackgroundView = selectedBGView;
+//    UIView* selectedBGView = [[UIView alloc] initWithFrame:self.bounds];
+//    selectedBGView.backgroundColor = [UIColor whiteColor];
+//    self.selectedBackgroundView = selectedBGView;
 }
 
 - (void)setFeatured:(BOOL)featured {
@@ -62,12 +60,11 @@
 //        self.dayLabel.textColor = [UIColor whiteColor];
 //    }    
 
-    self.monthLabel.text = [self.data getMonthString];
     self.dayLabel.text = [self.data getDayString];
     self.recordIndicatorView.alpha = 0;
     Record *record = [self.data getPrimaryRecord];
     if (record != nil) {
-        NSLog(@"day primary record? %@, %@, %@", [self.data getDayString], [self.data getTitleString], [self.data getPrimaryRecord]);
+//        NSLog(@"day primary record? %@, %@, %@", [self.data getDayString], [self.data getTitleString], [self.data getPrimaryRecord]);
         self.recordIndicatorView.backgroundColor = [record getColor];
         self.recordIndicatorView.alpha = 1;
     }
@@ -80,7 +77,7 @@
 #pragma mark UIGestureRecognizers
 
 - (IBAction)onTapGesture:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:ViewDayNotification object:nil userInfo:@{kDayNotifParam: self.data}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SwitchDayNotification object:nil userInfo:@{kDayNotifParam: self.data}];
     
     // TODO: fix this so that you can show cells that have been tapped/featured
     // self.featured = YES;

@@ -32,6 +32,7 @@
     if (self) {
         self.referenceDate = date;
         self.monthData = [[Month alloc] initWithNSDate:date];
+        
         // HACK: reset reference date to today to properly feature it if it's the current month
         if (self.monthData.isCurrentMonth) {
             self.referenceDate = [NSDate date];
@@ -40,40 +41,79 @@
     return self;
 }
 
-- (void)setup {
-    self.monthVC = [[MonthViewController alloc] initWithDate:self.referenceDate];
-    self.monthVC.presentingVC = self.navigationController;
-
-//    // Option 1
-    CGRect newMonthFrame = self.monthView.frame;
-    newMonthFrame.origin.y += self.navigationController.navigationBar.frame.size.height;
-    self.monthVC.view.frame = newMonthFrame;
-//    // Option 2
-//    // self.monthVC.view.frame = self.monthView.frame;
-
-    [self.monthView addSubview:self.monthVC.view];
-
-    self.dayEditView.backgroundColor = [SharedConstants getMonthBackgroundColor];
-    
-//    if (self.monthData.isCurrentMonth) {
-        self.dayEditVC = [[EditDailyRecordViewController alloc] initWithDate:self.referenceDate];
-        // TODO: delete the presentingVC var, no longer needed
-        self.dayEditVC.presentingVC = self.navigationController;
-        self.dayEditVC.view.frame = CGRectMake(0, 0, self.dayEditView.frame.size.width, self.dayEditView.frame.size.height);
-        [self.dayEditView addSubview:self.dayEditVC.view];
-//    }
-    
-    // TODO: put this back if the dynamic swapping of the bottom in EditDailyRecordVC doesn't work out...
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentDayView:) name:ViewDayNotification object:nil];
-    
-    // Not needed?
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUsingNewDay:) name:ViewDayNotification object:nil];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setup];
     [self setupNavigationBar];
+}
+
+- (void)layoutFunTimes {
+    CGRect fullFrame = self.view.frame;
+    
+    CGRect calendarFrame = [self createNewFrameBasedOnView:self.monthVC.view];
+    CGRect dayFrame = [self createNewFrameBasedOnView:self.dayEditVC.view];
+    
+    
+    //    CGFloat fullHeight = self.monthView.frame.size.height + self.dayEditView.frame.size.height;
+    //
+    //    // Use this for calendar sizing
+    //    CGRect calendarFrame = [self createNewFrameBasedOnView:self.monthVC.view];
+    //    // Reposition the origin to account for the nav bar
+    //    calendarFrame.origin.y += self.navigationController.navigationBar.frame.size.height;
+    //    self.monthView.frame = calendarFrame;
+    //    [self.monthView addSubview:self.monthVC.view];
+    //
+    //    CGRect newDayFrame = self.dayEditView.frame;
+    //    newDayFrame.size.height = fullHeight - self.monthView.frame.size.height;
+    //    self.dayEditView.frame = newDayFrame;
+    //    self.dayEditVC.view.frame = [self createNewFrameBasedOnView:self.dayEditView];
+    //
+    //    [self.dayEditView addSubview:self.dayEditVC.view];
+    
+   
+}
+
+- (void)setup {
+    self.monthVC = [[MonthViewController alloc] initWithDate:self.referenceDate];
+    self.dayEditVC = [[EditDailyRecordViewController alloc] initWithDate:self.referenceDate];
+
+//    NSLog(@"Frame debugging... monthVC: %@, monthView: %@; dayVC: %@, dayView: %@",
+//          NSStringFromCGRect(self.monthVC.view.frame),
+//          NSStringFromCGRect(self.monthView.frame),
+//          NSStringFromCGRect(self.dayEditVC.view.frame),
+//          NSStringFromCGRect(self.dayEditView.frame)
+//          );
+    
+    // Frame fun!
+    // 1. Resize self.monthView so that it will fit the full calendar
+    // 2. Reposition the calendar view so that it fits within self.monthView
+    // 3. Resize self.dayEditView so that it fills the whole window, minus calendar
+    // 4. Reposition/resize the edit panel so that it fills self.dayEditView
+//    CGFloat fullHeight = self.monthView.frame.size.height + self.dayEditView.frame.size.height;
+//    
+//    // Use this for calendar sizing
+//    CGRect calendarFrame = [self createNewFrameBasedOnView:self.monthVC.view];
+//    // Reposition the origin to account for the nav bar
+//    calendarFrame.origin.y += self.navigationController.navigationBar.frame.size.height;
+//    self.monthView.frame = calendarFrame;
+//    [self.monthView addSubview:self.monthVC.view];
+//    
+//    CGRect newDayFrame = self.dayEditView.frame;
+//    newDayFrame.size.height = fullHeight - self.monthView.frame.size.height;
+//    self.dayEditView.frame = newDayFrame;
+//    self.dayEditVC.view.frame = [self createNewFrameBasedOnView:self.dayEditView];
+//    
+//    [self.dayEditView addSubview:self.dayEditVC.view];
+    
+    
+//    NSLog(@"Frame debugging AFTER: monthVC: %@, monthView: %@; dayVC: %@, dayView: %@",
+//          NSStringFromCGRect(self.monthVC.view.frame),
+//          NSStringFromCGRect(self.monthView.frame),
+//          NSStringFromCGRect(self.dayEditVC.view.frame),
+//          NSStringFromCGRect(self.dayEditView.frame)
+//          );
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentDayView:) name:ViewFullDayNotification object:nil];
 }
 
 - (void)setupNavigationBar {
@@ -84,6 +124,12 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@">>" style:UIBarButtonItemStylePlain target:self action:@selector(onGoForwardInTime)];
     }
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<<" style:UIBarButtonItemStylePlain target:self action:@selector(onGoBackInTime)];
+}
+
+#pragma mark Private helper methods
+
+- (CGRect)createNewFrameBasedOnView:(UIView *)view {
+    return CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
 }
 
 - (void)onGoBackInTime {
@@ -100,18 +146,9 @@
     NSDictionary *dict = [notification userInfo];
     Day *data = dict[kDayNotifParam];
     
-    DayViewController *vc = [[DayViewController alloc] init];
-    vc.dayData = data;
-    
+    DayViewController *vc = [[DayViewController alloc] initWithDay:data];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nvc animated:YES completion:nil];
-    
-//    [self.navigationController pushViewController:vc animated:YES];
 }
-
-//- (void)updateUsingNewDay:(NSNotification *)notification {
-//    NSDictionary *dict = [notification userInfo];
-//    Day *data = dict[kDayNotifParam];
-//}
 
 @end

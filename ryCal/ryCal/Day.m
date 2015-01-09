@@ -13,7 +13,7 @@
 @interface Day ()
 
 @property (nonatomic, strong) Month *monthData;
-@property (nonatomic, assign) int dayInt;
+@property (nonatomic, assign) NSInteger dayInt;
 
 @end
 
@@ -21,7 +21,7 @@
 
 #pragma mark Custom Init methods
 
-- (id)initWithMonthAndDay:(Month *)month dayIndex:(int)dayIndex {
+- (id)initWithMonthAndDay:(Month *)month dayIndex:(NSInteger)dayIndex {
     self = [super init];
     if (self) {
         self.monthData = month;
@@ -43,20 +43,41 @@
     return self;
 }
 
-- (NSString *)getMonthString {
-    return [NSString stringWithFormat:@"%ld", self.monthData.components.month];
+#pragma mark Basic accessors
+
+- (NSInteger) getDayInt {
+    return self.dayInt;
+}
+
+- (BOOL)isToday {
+    return ([self.getStartDate compare:[NSDate date]] != NSOrderedDescending) &&
+    ([self.getEndDate compare:[NSDate date]] == NSOrderedDescending);
 }
 
 - (NSString *)getDayString {
-    return [NSString stringWithFormat:@"%d", self.dayInt];
+    return [NSString stringWithFormat:@"%ld", (long)self.dayInt];
 }
 
 // http://unicode.org/reports/tr35/tr35-6.html#Date_Format_Patterns
 - (NSString *)getTitleString {
+    return [self getTitleString:NO];
+}
+
+- (NSString *)getHeaderString {
+    return [self getTitleString:YES];
+}
+
+- (NSString *)getTitleString:(BOOL)allCaps {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE, MMM. d"];
-    return [dateFormatter stringFromDate:[self getStartDate]];
+    NSString *result = [dateFormatter stringFromDate:[self getStartDate]];
+    if (allCaps) {
+        return [result uppercaseString];
+    }
+    return result;
 }
+
+#pragma mark Date manipulation
 
 - (NSDate *)getStartDate {
    return [self.monthData getStartDateForDay:self.dayInt];
@@ -68,12 +89,6 @@
 
 - (Record *)getPrimaryRecord {
     return [self.monthData getPrimaryRecordForDay:self.dayInt];
-}
-
-// TODO: save this as a local var or static to avoid recomputing it?
-- (BOOL)isToday {
-    return ([self.getStartDate compare:[NSDate date]] != NSOrderedDescending) &&
-    ([self.getEndDate compare:[NSDate date]] == NSOrderedDescending);
 }
 
 @end

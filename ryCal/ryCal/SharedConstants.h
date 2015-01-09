@@ -17,7 +17,8 @@ extern NSString * const UserDidLoginNotification;
 extern NSString * const ColorSelectedNotification;
 extern NSString * const MonthDataChangedNotification;
 extern NSString * const RecordTypeDataChangedNotification;
-extern NSString * const ViewDayNotification;
+extern NSString * const ViewFullDayNotification;
+extern NSString * const SwitchDayNotification;
 
 // Notif params
 extern NSString * const kColorSelectedNotifParam;
@@ -62,6 +63,7 @@ extern int const NUM_COLORS;
 
 + (UIColor *)getNavigationBarColor;
 + (UIColor *)getMenuBackgroundColor;
++ (UIColor *)getMenuSelectedBackgroundColor;
 + (UIColor *)getMenuTextColor;
 + (UIColor *)getMonthBackgroundColor;
 + (UIColor *)getDayHighlightColor;

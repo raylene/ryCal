@@ -15,12 +15,11 @@
 @property (nonatomic, strong) NSDate *referenceDate;
 @property (nonatomic, assign) NSInteger referenceDayIdx;
 
+@property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSArray *dates;
 @property (nonatomic, assign) NSRange dayRange;
 
-@property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSCalendar *calendar;
-
 @property (nonatomic, strong) NSMutableDictionary *dailyRecordDictionary;
 
 @end
@@ -29,7 +28,7 @@
 
 #pragma mark Custom Init methods
 
-// https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/DatesAndTimes/Articles/dtCalendricalCalculations.html
+// Reference: https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/DatesAndTimes/Articles/dtCalendricalCalculations.html
 - (id)initWithNSDate:(NSDate *)date {
     self = [super init];
     if (self) {
@@ -40,13 +39,48 @@
     return self;
 }
 
+#pragma mark Basic accessors
+
+- (NSInteger)numDays {
+    return self.dayRange.length;
+}
+
+// Number of days preceding this month until a sunday (NSCalendarUnitWeekday 1)
+- (NSInteger)numBufferDays {
+    // TEST TEST
+    return 6;
+    return (self.components.weekday - 1);
+}
+
+- (BOOL)isCurrentMonth {
+    return ([self.getStartDate compare:[NSDate date]] != NSOrderedDescending) &&
+    ([self.getEndDate compare:[NSDate date]] == NSOrderedDescending);
+}
+
+// http://unicode.org/reports/tr35/tr35-6.html#Date_Format_Patterns
+- (NSString *)getTitleString {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMMM"];
+    // Add the yyyy if it's not this year
+    if (self.components.year != [SharedConstants getCurrentYear]) {
+        [dateFormatter setDateFormat:@"MMM yyyy"];
+    }
+    return [dateFormatter stringFromDate:[self getStartDate]];
+}
+
+#pragma mark Date manipulation
+
 - (void)parseDateComponents:(NSDate *)date {
     self.components = [self.calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate: date];
     self.referenceDayIdx = self.components.day - 1;
+    
+    // Get start date from 1st of the month
     [self.components setDay:1];
     self.dayRange = [self.calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
-    NSLog(@"Day range for month: %lu, %lu", (unsigned long)self.dayRange.location, (unsigned long)self.dayRange.length);
     self.startDate = [self.calendar dateFromComponents:self.components];
+    
+    // Get all components for the first of the month
+    self.components = [self.calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate: date];
 }
 
 - (NSInteger)getReferenceDayIdx {
@@ -73,29 +107,30 @@
     return [self getEndDate];
 }
 
-- (NSDate *)getStartDateForDay:(int)day {
+- (NSDate *)getStartDateForDay:(NSInteger)day {
     NSDateComponents *components = [self.components copy];
     [components setDay:day];
     return [self.calendar dateFromComponents:components];
 }
 
-- (NSDate *)getEndDateForDay:(int)day {
+- (NSDate *)getEndDateForDay:(NSInteger)day {
     NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
     [offsetComponents setDay:1];
     return [self.calendar dateByAddingComponents:offsetComponents toDate:[self getStartDateForDay:day] options:0];
 }
 
+#pragma mark Data-fetching related methods
+
 // TODO: fix this primary record business to use the primary record type?
 // TODO: fix this to not return records that are of archived record types...
 // will need to also fix loadAllRecords probably
-- (Record *)getPrimaryRecordForDay:(int)day {
+- (Record *)getPrimaryRecordForDay:(NSInteger)day {
     NSDate *dateKey = [self getStartDateForDay:day];
     if (self.dailyRecordDictionary == nil ||
         self.dailyRecordDictionary[dateKey] == nil) {
         return nil;
     }
     NSArray *records = self.dailyRecordDictionary[dateKey];
-//    NSLog(@"Records for DAY: %d, %@", day, records);
     return records[0];
 }
 
@@ -107,10 +142,8 @@
             for (Record *record in records) {
                 NSString *dateKey = record[kDateFieldKey];
                 if (self.dailyRecordDictionary[dateKey] == nil) {
-//                    self.dailyRecordDictionary[dateKey] = [[NSMutableDictionary alloc] init];
                     self.dailyRecordDictionary[dateKey] = [[NSMutableArray alloc] init];
                 }
-                //                [self.dailyRecordDictionary[dateKey] addObject:record forKey:record[kTypeIDFieldKey]];
                 [self.dailyRecordDictionary[dateKey] addObject:record];
             }
         } else {
@@ -118,29 +151,6 @@
         }
         monthCompletion(error);
     }];
-}
-
-// TODO: save this as a local var or static to avoid recomputing it?
-- (BOOL)isCurrentMonth {
-    return ([self.getStartDate compare:[NSDate date]] != NSOrderedDescending) &&
-    ([self.getEndDate compare:[NSDate date]] == NSOrderedDescending);
-}
-
-#pragma mark Day manipulation
-
-- (int)numDays {
-    return (int)self.dayRange.length;
-}
-
-// http://unicode.org/reports/tr35/tr35-6.html#Date_Format_Patterns
-- (NSString *)getTitleString {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMMM"];
-    if (self.components.year != [SharedConstants getCurrentYear]) {
-        [dateFormatter setDateFormat:@"MMM yyyy"];
-    }
-    // Add the yyyy if it's not this year
-    return [dateFormatter stringFromDate:[self getStartDate]];
 }
 
 @end

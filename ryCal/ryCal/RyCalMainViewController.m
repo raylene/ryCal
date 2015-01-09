@@ -8,6 +8,7 @@
 
 #import "RyCalMainViewController.h"
 #import "HomeViewController.h"
+#import "MonthHomeViewController.h"
 #import "MenuViewController.h"
 #import "SharedConstants.h"
 
@@ -22,6 +23,9 @@
 
 - (id)init {
     self.contentVC = [[UINavigationController alloc] initWithRootViewController:[[HomeViewController alloc] initWithDate:[NSDate date]]];
+    
+//    self.contentVC = [[UINavigationController alloc] initWithRootViewController:[[MonthHomeViewController alloc] initWithDate:[NSDate date]]];
+    
     self.menuVC = [[MenuViewController alloc] init];
     self = [super initWithViewControllers:self.menuVC contentVC:self.contentVC];
     

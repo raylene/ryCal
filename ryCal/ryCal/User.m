@@ -52,6 +52,7 @@ static User *_currentUser;
 
 + (void)logout {
     [User setCurrentUser:nil];
+    [PFUser logOut];
     [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogoutNotification object:nil];
 }
 

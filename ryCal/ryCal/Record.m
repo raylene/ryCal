@@ -81,7 +81,7 @@
 
 // Date comparison: https://www.parse.com/questions/cloud-code-querying-objects-by-creation-date
 + (void)loadAllRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion {
-    NSLog(@"Loading all records");
+    NSLog(@"Loading all records for time range: %@, %@", startDate, endDate);
     PFQuery *query = [self createBasicRecordQuery];
     [query whereKey:kDateFieldKey greaterThanOrEqualTo:startDate];
     [query whereKey:kDateFieldKey lessThan:endDate];

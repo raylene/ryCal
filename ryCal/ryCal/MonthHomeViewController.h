@@ -1,5 +1,5 @@
 //
-//  EditDailyRecordViewController.h
+//  MonthHomeViewController.h
 //  ryCal
 //
 //  Created by Raylene Yung on 1/5/15.
@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Day.h"
 
-@interface EditDailyRecordViewController : UIViewController
-
-@property (nonatomic, strong) Day *dayData;
+@interface MonthHomeViewController : UIViewController
 
 - (id)initWithDate:(NSDate *)date;
 

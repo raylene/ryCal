@@ -30,6 +30,11 @@
     // TODO: fix this when I have better icons..
 //    self.itemImage.image = [UIImage imageNamed:config[@"img"]];
     self.itemImage.backgroundColor = [UIColor whiteColor];
+    
+    // Customized selection color
+    UIView *backgroundSelectionView = [[UIView alloc] init];
+    backgroundSelectionView.backgroundColor = [SharedConstants getMenuSelectedBackgroundColor];
+    self.selectedBackgroundView = backgroundSelectionView;
 }
 
 @end

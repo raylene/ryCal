@@ -16,32 +16,31 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOE-Jm-bPY">
-                    <rect key="frame" x="0.0" y="320" width="375" height="347"/>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="FPZ-j8-cpM"/>
-                    </constraints>
-                </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDX-7i-VcP">
-                    <rect key="frame" x="0.0" y="10" width="375" height="310"/>
+                    <rect key="frame" x="0.0" y="10" width="375" height="407"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOE-Jm-bPY">
+                    <rect key="frame" x="0.0" y="417" width="375" height="250"/>
+                    <color key="backgroundColor" red="0.9153251262626263" green="0.9153251262626263" blue="0.9153251262626263" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="310" id="lyp-hw-1P6"/>
+                        <constraint firstAttribute="height" constant="250" id="wYy-Zm-5Zl"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="eDX-7i-VcP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AhF-ea-Rw0"/>
-                <constraint firstAttribute="trailing" secondItem="LOE-Jm-bPY" secondAttribute="trailing" id="FQ2-nq-SwD"/>
-                <constraint firstAttribute="trailing" secondItem="eDX-7i-VcP" secondAttribute="trailing" id="jEr-sy-zbn"/>
-                <constraint firstItem="eDX-7i-VcP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="nPa-wS-Tgw"/>
-                <constraint firstItem="LOE-Jm-bPY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qJQ-5N-kot"/>
-                <constraint firstAttribute="bottom" secondItem="LOE-Jm-bPY" secondAttribute="bottom" id="tJx-WK-nM9"/>
-                <constraint firstItem="LOE-Jm-bPY" firstAttribute="top" secondItem="eDX-7i-VcP" secondAttribute="bottom" id="w8b-1F-Ai4"/>
+                <constraint firstAttribute="trailing" secondItem="LOE-Jm-bPY" secondAttribute="trailing" id="0gZ-SM-Pww"/>
+                <constraint firstItem="eDX-7i-VcP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="Dlc-hb-yep"/>
+                <constraint firstItem="eDX-7i-VcP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JdC-bB-JZp"/>
+                <constraint firstItem="LOE-Jm-bPY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Jx2-En-Kev"/>
+                <constraint firstItem="LOE-Jm-bPY" firstAttribute="top" secondItem="eDX-7i-VcP" secondAttribute="bottom" id="ZGN-OI-sI0"/>
+                <constraint firstItem="LOE-Jm-bPY" firstAttribute="top" secondItem="eDX-7i-VcP" secondAttribute="bottom" id="kV2-xO-Hcs"/>
+                <constraint firstAttribute="trailing" secondItem="eDX-7i-VcP" secondAttribute="trailing" id="mmX-gw-7wh"/>
+                <constraint firstAttribute="bottom" secondItem="LOE-Jm-bPY" secondAttribute="bottom" id="noy-0i-lqt"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="97.5" y="117.5"/>
+            <point key="canvasLocation" x="25.5" y="64.5"/>
         </view>
     </objects>
 </document>

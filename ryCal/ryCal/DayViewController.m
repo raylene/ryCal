@@ -24,6 +24,14 @@
 
 @implementation DayViewController
 
+- (id)initWithDay:(Day *)dayData {
+    self = [super init];
+    if (self) {
+        [self setDayData:dayData];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupTypeTable];

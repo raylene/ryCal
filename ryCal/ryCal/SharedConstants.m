@@ -20,7 +20,8 @@ NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
 NSString * const ColorSelectedNotification = @"ColorSelectedNotification";
 NSString * const MonthDataChangedNotification = @"MonthDataChangedNotification";
 NSString * const RecordTypeDataChangedNotification = @"RecordTypeDataChangedNotification";
-NSString * const ViewDayNotification = @"ViewDayNotification";
+NSString * const ViewFullDayNotification = @"ViewFullDayNotification";
+NSString * const SwitchDayNotification = @"SwitchDayNotification";
 
 NSString * const kColorSelectedNotifParam = @"colorname";
 NSString * const kDayNotifParam = @"day";
@@ -36,6 +37,7 @@ NSString * const kNameFieldKey = @"name";
 
 NSString * const NAV_BAR_COLOR = @"navbar";
 NSString * const MENU_BACKGROUND_COLOR = @"menubackground";
+NSString * const MENU_SELECTED_BACKGROUND_COLOR = @"menuselectedbackground";
 NSString * const MONTH_BACKGROUND_COLOR = @"monthbackground";
 NSString * const DAY_HIGHLIGHT_COLOR = @"dayhighlight";
 NSString * const RECORD_COLOR_EMPTY_ENTRY = @"emptyentry";
@@ -91,6 +93,10 @@ int const NUM_COLORS = 10;
     return [self getColor:MENU_BACKGROUND_COLOR];
 }
 
++ (UIColor *)getMenuSelectedBackgroundColor {
+    return [self getColor:MENU_SELECTED_BACKGROUND_COLOR];
+}
+
 + (UIColor *)getMenuTextColor {
 //    return [UIColor darkGrayColor];
     return [UIColor whiteColor];
@@ -144,9 +150,11 @@ int const NUM_COLORS = 10;
         rgbValue = 0x4775FF;
         rgbValue = 0x6C91FF;
     } else if ([name isEqualToString:MENU_BACKGROUND_COLOR]) {
-        rgbValue = 0x99FFCC;
-        rgbValue = 0xADFFD6;
+//        rgbValue = 0x99FFCC;
+//        rgbValue = 0xADFFD6;
         rgbValue = 0x4CB299;
+    } else if ([name isEqualToString:MENU_SELECTED_BACKGROUND_COLOR]) {
+        rgbValue = 0x7EC7B5;
     } else if ([name isEqualToString:MONTH_BACKGROUND_COLOR]) {
         rgbValue = 0xABABAB;
     }else if ([name isEqualToString:DAY_HIGHLIGHT_COLOR]) {

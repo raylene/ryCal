@@ -26,21 +26,15 @@
 }
 
 - (void)setupNavigationBar {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(onLogout)];
-}
-
-- (void)onLogout {
-    [User logout];
+    self.title = @"ryCal";
 }
 
 - (IBAction)onLogin:(id)sender {
-    NSLog(@"onLogin");
     [SVProgressHUD showWithStatus:@"Logging in..." maskType:SVProgressHUDMaskTypeGradient];
     [User login];
 }
 
 - (void)loginSuccessful {
-    NSLog(@"loginSuccessful!");
     [SVProgressHUD dismiss];
     RyCalMainViewController *vc = [[RyCalMainViewController alloc] init];
     [self presentViewController:vc animated:YES completion:nil];
