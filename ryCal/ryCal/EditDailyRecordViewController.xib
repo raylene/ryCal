@@ -13,17 +13,17 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TODAY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sos-yx-7M1">
-                    <rect key="frame" x="164" y="10" width="47" height="17"/>
+                    <rect key="frame" x="277" y="10" width="47" height="17"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vi4-J3-Nt1">
-                    <rect key="frame" x="152" y="628" width="70" height="29"/>
+                    <rect key="frame" x="265" y="561" width="70" height="29"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <state key="normal" title="Add Notes">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,10 +34,10 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="nt3-TR-D9x">
-                    <rect key="frame" x="0.0" y="37" width="375" height="581"/>
+                    <rect key="frame" x="0.0" y="37" width="600" height="514"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="KQ0-h0-UbI"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="80" id="KQ0-h0-UbI"/>
                     </constraints>
                 </tableView>
             </subviews>
@@ -51,7 +51,6 @@
                 <constraint firstItem="nt3-TR-D9x" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="v0w-0Z-3Fz"/>
                 <constraint firstAttribute="trailing" secondItem="nt3-TR-D9x" secondAttribute="trailing" id="ziB-fJ-dCm"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="-4.5" y="16.5"/>
         </view>
     </objects>

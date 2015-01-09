@@ -22,7 +22,8 @@
 @implementation RyCalMainViewController
 
 - (id)init {
-    self.contentVC = [[UINavigationController alloc] initWithRootViewController:[[HomeViewController alloc] initWithDate:[NSDate date]]];
+    HomeViewController *hvc = [[HomeViewController alloc] initWithDate:[NSDate date]];
+    self.contentVC = [[UINavigationController alloc] initWithRootViewController:hvc];
     
 //    self.contentVC = [[UINavigationController alloc] initWithRootViewController:[[MonthHomeViewController alloc] initWithDate:[NSDate date]]];
     
@@ -32,6 +33,12 @@
     [[UINavigationBar appearance] setBarTintColor:[SharedConstants getNavigationBarColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
+    
+//    CGRect hvcFrame = hvc.view.frame;
+//    CGRect viewFrame = self.view.frame;
+//    CGRect contentFrame = self.contentVC.view.frame;
+//    CGRect menuFrame = self.menuVC.view.frame;
+
     return self;
 }
 

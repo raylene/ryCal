@@ -74,6 +74,9 @@
     Day *dayData = dict[kDayNotifParam];
     self.selectedDayIdx = [dayData getDayInt] - 1;
     [self.monthCollectionView reloadData];
+    
+    // TEST TEST
+    NSLog(@"month intrinsic size: %@", NSStringFromCGSize([self.monthCollectionView intrinsicContentSize]));
 }
 
 // TODO: make static?
@@ -89,10 +92,23 @@
              ][idx];
 }
 
+- (CGFloat)getCellWidth {
+    return self.monthCollectionView.frame.size.width/8;
+}
+
+- (CGFloat)getEstimatedHeight {
+//    return ([self getCellWidth] * 8);
+    return ([self getCellWidth] * (1 + floor([self getNumCells] / 7)));
+}
+
+- (NSInteger)getNumCells {
+    return (7 + self.monthData.numDays + self.monthData.numBufferDays);
+}
+
 #pragma mark UICollectionViewDataSource & UICollectionViewDataDelegate methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return (7 + self.monthData.numDays + self.monthData.numBufferDays);
+    return [self getNumCells];
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -100,7 +116,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    double width = collectionView.frame.size.width/8;
+    CGFloat width = [self getCellWidth];
     if (indexPath.row < 7) {
         return CGSizeMake(width, width/4);
     }

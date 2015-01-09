@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="RmB-M1-FJZ">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="RmB-M1-FJZ">
                     <rect key="frame" x="10" y="10" width="355" height="647"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Sfe-Hy-GZn">
@@ -29,9 +29,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="RmB-M1-FJZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="1wn-m5-7q1"/>
-                <constraint firstAttribute="bottom" secondItem="RmB-M1-FJZ" secondAttribute="bottom" constant="10" id="Dtb-Ph-GT4"/>
                 <constraint firstAttribute="trailing" secondItem="RmB-M1-FJZ" secondAttribute="trailing" constant="10" id="Gbg-8l-hmp"/>
-                <constraint firstItem="RmB-M1-FJZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="lTQ-h1-sgx"/>
+                <constraint firstAttribute="bottom" secondItem="RmB-M1-FJZ" secondAttribute="bottom" constant="10" id="bgK-Hp-WMl"/>
+                <constraint firstItem="RmB-M1-FJZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="zRb-M8-BrB"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="115.5" y="95.5"/>

@@ -12,4 +12,7 @@
 
 - (id)initWithDate:(NSDate *)date;
 
+- (CGFloat)getCellWidth;
+- (CGFloat)getEstimatedHeight;
+
 @end

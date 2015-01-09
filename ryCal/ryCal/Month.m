@@ -47,8 +47,6 @@
 
 // Number of days preceding this month until a sunday (NSCalendarUnitWeekday 1)
 - (NSInteger)numBufferDays {
-    // TEST TEST
-    return 6;
     return (self.components.weekday - 1);
 }
 
@@ -80,7 +78,9 @@
     self.startDate = [self.calendar dateFromComponents:self.components];
     
     // Get all components for the first of the month
-    self.components = [self.calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate: date];
+    self.components = [self.calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate: self.startDate];
+    
+    NSLog(@"Month components: %@ -- %ld, %ld, %ld, %ld", self.getTitleString, self.components.year, self.components.month, self.components.day, self.components.weekday);
 }
 
 - (NSInteger)getReferenceDayIdx {

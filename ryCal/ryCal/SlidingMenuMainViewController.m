@@ -37,7 +37,6 @@ float const kContentSwappingDuration = 0.2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"SlidingMenuVC viewDidLoad: (%f, %f), (%f, %f)", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.height, self.view.frame.size.width);
 }
 
 # pragma mark - Private helper functions

@@ -62,7 +62,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/Month.m"
-            timestampString = "442454515.07536"
+            timestampString = "442539588.884264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "148"
@@ -108,7 +108,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/Month.m"
-            timestampString = "442454515.07536"
+            timestampString = "442539588.884264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "133"
@@ -124,7 +124,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/Month.m"
-            timestampString = "442454515.07536"
+            timestampString = "442539588.884264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "131"
@@ -171,7 +171,7 @@
                   symbolName = "+[RecordType loadFromID:completion:]"
                   moduleName = "ryCal"
                   urlString = "file:///Users/rayleney/ryCal/ryCal/ryCal/RecordType.m"
-                  timestampString = "442480619.648102"
+                  timestampString = "442538872.935465"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "82"
@@ -185,7 +185,7 @@
                   symbolName = "__36+[RecordType loadFromID:completion:]_block_invoke"
                   moduleName = "ryCal"
                   urlString = "file:///Users/rayleney/ryCal/ryCal/ryCal/RecordType.m"
-                  timestampString = "442480619.648371"
+                  timestampString = "442538872.935697"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "82"
@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/SlidingMenuMainViewController.m"
-            timestampString = "442227427.298436"
+            timestampString = "442486709.413559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "-displayContentVC:"
             landmarkType = "5">
          </BreakpointContent>
@@ -505,22 +505,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ryCal/ryCal/HomeViewController.m"
-            timestampString = "442481069.798481"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "-setupNavigationBar"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/CompressedDailyRecordCell.m"
             timestampString = "442397899.319441"
             startingColumnNumber = "9223372036854775807"
@@ -534,15 +518,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/Month.m"
-            timestampString = "442454515.07536"
+            timestampString = "442539588.884264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "-getTitleString"
             landmarkType = "5">
          </BreakpointContent>
@@ -554,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/Month.m"
-            timestampString = "442454515.07536"
+            timestampString = "442539588.884264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "-getTitleString"
             landmarkType = "5">
          </BreakpointContent>
@@ -566,15 +550,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/Month.m"
-            timestampString = "442454515.07536"
+            timestampString = "442539588.884264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "-getTitleString"
             landmarkType = "5">
          </BreakpointContent>
@@ -595,6 +579,38 @@
                   </ActionContent>
                </BreakpointActionProxy>
             </Actions>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ryCal/ryCal/RyCalMainViewController.m"
+            timestampString = "442537726.912016"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "-init"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ryCal/ryCal/RyCalMainViewController.m"
+            timestampString = "442537726.912016"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "-init"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
