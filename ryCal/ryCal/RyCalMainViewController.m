@@ -34,10 +34,12 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
     
-//    CGRect hvcFrame = hvc.view.frame;
-//    CGRect viewFrame = self.view.frame;
-//    CGRect contentFrame = self.contentVC.view.frame;
-//    CGRect menuFrame = self.menuVC.view.frame;
+    // TODO: look into this. hack hack
+    hvc.view.frame = self.contentVC.view.frame;
+    CGRect hvcFrame = hvc.view.frame;
+    CGRect viewFrame = self.view.frame;
+    CGRect contentFrame = self.contentVC.view.frame;
+    CGRect menuFrame = self.menuVC.view.frame;
 
     return self;
 }

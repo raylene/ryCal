@@ -30,10 +30,16 @@
             <constraints>
                 <constraint firstItem="RmB-M1-FJZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="1wn-m5-7q1"/>
                 <constraint firstAttribute="trailing" secondItem="RmB-M1-FJZ" secondAttribute="trailing" constant="10" id="Gbg-8l-hmp"/>
+                <constraint firstAttribute="centerY" secondItem="RmB-M1-FJZ" secondAttribute="centerY" id="awL-bh-Gtv"/>
                 <constraint firstAttribute="bottom" secondItem="RmB-M1-FJZ" secondAttribute="bottom" constant="10" id="bgK-Hp-WMl"/>
                 <constraint firstItem="RmB-M1-FJZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="zRb-M8-BrB"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="awL-bh-Gtv"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="115.5" y="95.5"/>
         </view>
     </objects>

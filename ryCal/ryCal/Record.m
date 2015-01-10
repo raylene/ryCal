@@ -89,13 +89,11 @@
     [query findObjectsInBackgroundWithBlock:completion];
 }
 
-//
 + (PFQuery *)createBasicRecordQuery {
     PFQuery *query = [PFQuery queryWithClassName:@"Record"];
     [query setCachePolicy:kPFCachePolicyNetworkElseCache];
     [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
-    [query orderByDescending:@"updatedAt"];
-    [query orderByDescending:@"date"];
+    [query orderByAscending:@"date,updatedAt"];
     return query;
 }
 

@@ -70,8 +70,7 @@
 //                                      fullWidth,
 //                                      calendarHeight);
     self.monthVC.view.frame = calendarFrame;
-//    self.monthVC.view.backgroundColor = [UIColor redColor];
-    [self.view addSubview:self.monthVC.view];
+//    [self.view addSubview:self.monthVC.view];
     
     CGFloat dayY = (calendarFrame.origin.y + CGRectGetHeight(calendarFrame));
     CGRect dayFrame = CGRectMake(0,
@@ -79,14 +78,15 @@
                                  fullWidth,
                                  fullHeight - dayY);
     self.dayEditVC.view.frame = dayFrame;
-//    self.dayEditVC.view.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:self.dayEditVC.view];
+//    [self.view addSubview:self.dayEditVC.view];
 }
 
 - (void)setup {
     self.monthVC = [[MonthViewController alloc] initWithDate:self.referenceDate];
-    self.dayEditVC = [[EditDailyRecordViewController alloc] initWithDate:self.referenceDate];
+    [self.view addSubview:self.monthVC.view];
 
+    self.dayEditVC = [[EditDailyRecordViewController alloc] initWithDate:self.referenceDate];
+    [self.view addSubview:self.dayEditVC.view];
 //    [self layoutFunTimes];
 //    NSLog(@"Frame debugging... monthVC: %@, monthView: %@; dayVC: %@, dayView: %@",
 //          NSStringFromCGRect(self.monthVC.view.frame),
@@ -133,6 +133,7 @@
     // If we're already looking at this month, don't let us go into the future
     if (!self.monthData.isCurrentMonth) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@">>" style:UIBarButtonItemStylePlain target:self action:@selector(onGoForwardInTime)];
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(onGoToToday)];
     }
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<<" style:UIBarButtonItemStylePlain target:self action:@selector(onGoBackInTime)];
 }
@@ -150,6 +151,12 @@
 
 - (void)onGoForwardInTime {
     HomeViewController *vc = [[HomeViewController alloc] initWithDate:[self.monthData getStartDateForNextMonth]];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (void)onGoToToday {
+    HomeViewController *vc = [[HomeViewController alloc] initWithDate:[NSDate date]];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

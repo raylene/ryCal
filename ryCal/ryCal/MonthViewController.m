@@ -93,12 +93,15 @@
 }
 
 - (CGFloat)getCellWidth {
+    CGFloat width = self.monthCollectionView.frame.size.width/8;
     return self.monthCollectionView.frame.size.width/8;
 }
 
 - (CGFloat)getEstimatedHeight {
-//    return ([self getCellWidth] * 8);
-    return ([self getCellWidth] * (1 + floor([self getNumCells] / 7)));
+    return ([self getCellWidth] * (1 + ceil([self getNumCells] / 7)));
+//    CGFloat rows = ceil([self getNumCells] / 7.0);
+//    CGFloat estimatedHeight = ([self getCellWidth] * (1 + ceil([self getNumCells] / 7.0)));
+//    return ([self getCellWidth] * (1 + ceil([self getNumCells] / 7.0)));
 }
 
 - (NSInteger)getNumCells {

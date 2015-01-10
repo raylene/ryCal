@@ -87,7 +87,7 @@ static int const kLogoutItemIndex = 2;//3;
     // Init menu item option configurations
     self.menuItemConfig =
     @[
-      @{@"name" : @"Home", @"img":@"home"},
+      @{@"name" : @"Today", @"img":@"home"},
       @{@"name" : @"Record Types", @"img": @"recordtypes"},
 //      @{@"name" : @"Settings", @"img": @"profile"},
       @{@"name" : @"Logout", @"img": @"logout"}

@@ -146,6 +146,7 @@
                 }
                 [self.dailyRecordDictionary[dateKey] addObject:record];
             }
+            NSLog(@"RECORDS: %@", self.dailyRecordDictionary);
         } else {
             NSLog(@"Error loading records for month: %@", [self getTitleString]);
         }
