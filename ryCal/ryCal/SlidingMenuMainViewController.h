@@ -16,7 +16,13 @@
 
 @end
 
+//@protocol SlidingContentProtocol <NSObject>
+//
+//@end
+
 @interface SlidingMenuMainViewController : UIViewController
+
+extern NSString * const SlidingMenuToggleStateNotification;
 
 @property (nonatomic, strong) UIViewController *contentVC;
 @property (nonatomic, strong) UIViewController<SlidingMenuProtocol> *menuVC;

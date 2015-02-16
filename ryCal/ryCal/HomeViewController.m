@@ -11,6 +11,7 @@
 #import "EditDailyRecordViewController.h"
 #import "SharedConstants.h"
 #import "DayViewController.h"
+#import "SlidingMenuMainViewController.h"
 
 @interface HomeViewController ()
 
@@ -131,17 +132,26 @@
     self.title = [self.monthData getTitleString];
     
     // If we're already looking at this month, don't let us go into the future
+    /*
     if (!self.monthData.isCurrentMonth) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@">>" style:UIBarButtonItemStylePlain target:self action:@selector(onGoForwardInTime)];
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(onGoToToday)];
     }
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<<" style:UIBarButtonItemStylePlain target:self action:@selector(onGoBackInTime)];
+    */
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(onGoToToday)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
 }
 
 #pragma mark Private helper methods
 
 - (CGRect)createNewFrameBasedOnView:(UIView *)view {
     return CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+}
+
+- (void)toggleMenu {
+    // TODO: see if it's weird to call this notif directly / import SlidingMenu
+    [[NSNotificationCenter defaultCenter] postNotificationName:SlidingMenuToggleStateNotification object:nil];
 }
 
 - (void)onGoBackInTime {
@@ -154,10 +164,10 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
 - (void)onGoToToday {
     HomeViewController *vc = [[HomeViewController alloc] initWithDate:[NSDate date]];
-    [self.navigationController pushViewController:vc animated:YES];
+    BOOL animated = !self.monthData.isCurrentMonth;
+    [self.navigationController pushViewController:vc animated:animated];
 }
 
 - (void)presentDayView:(NSNotification *)notification {

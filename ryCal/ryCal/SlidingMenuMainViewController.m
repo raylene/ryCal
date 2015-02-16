@@ -25,6 +25,8 @@ float const kContentSwappingDuration = 0.2;
 
 @implementation SlidingMenuMainViewController
 
+NSString * const SlidingMenuToggleStateNotification = @"SlidingMenuToggleStateNotification";
+
 - (id)initWithViewControllers:(UIViewController<SlidingMenuProtocol> *)menuVC contentVC:(UIViewController *)contentVC {
     self = [super init];
     if (self) {
@@ -32,6 +34,9 @@ float const kContentSwappingDuration = 0.2;
         [self setContentVC:contentVC];
         self.menuIsOpen = NO;
     }
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleMenuState) name:SlidingMenuToggleStateNotification object:nil];
     return self;
 }
 
@@ -113,6 +118,14 @@ float const kContentSwappingDuration = 0.2;
         } else {
             [self animateMenuClosed];
         }
+    }
+}
+
+- (void)toggleMenuState {
+    if (self.menuIsOpen) {
+        [self animateMenuClosed];
+    } else {
+        [self animateMenuOpen];
     }
 }
 
