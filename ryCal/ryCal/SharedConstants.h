@@ -32,6 +32,7 @@ extern NSString * const kDateFieldKey;
 extern NSString * const kArchivedFieldKey;
 extern NSString * const kColorFieldKey;
 extern NSString * const kNameFieldKey;
+extern NSString * const kDescriptionFieldKey;
 
 // extern NSString * const NAV_BAR_COLOR;
 

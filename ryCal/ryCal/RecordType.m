@@ -17,6 +17,9 @@
     return @"RecordType";
 }
 
+//+ (void)createRecordType:(NSString *)typeName typeColor:(NSString *)typeColor completion:(void (^)(BOOL succeeded, NSError *error)) completion;
+//+ (void)createRecordType:(NSString *)typeName typeColor:(NSString *)typeColor archived:(BOOL)archived completion:(void (^)(BOOL succeeded, NSError *error)) completion;
+
 + (RecordType *)createNewDefaultRecordType {
     RecordType *newRecordType = [RecordType object];
     newRecordType[kColorFieldKey] = [SharedConstants getDefaultColorName];
@@ -25,6 +28,7 @@
     return newRecordType;
 }
 
+// Private creation methods for testing
 + (void)createRecordType:(NSString *)typeName typeColor:(NSString *)typeColor completion:(void (^)(BOOL succeeded, NSError *error)) completion {
     [self createRecordType:typeName typeColor:typeColor archived:NO completion:completion];
 }

@@ -11,7 +11,7 @@
 #import "ColorCell.h"
 #import "RecordType.h"
 
-@interface RecordTypeComposerViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface RecordTypeComposerViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>//, UITextViewDelegate>
 
 @property (nonatomic, strong) RecordType *recordType;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 
 - (IBAction)onDelete:(id)sender;
+- (IBAction)nameTextEditingChanged:(id)sender;
 
 @end
 
@@ -49,14 +50,30 @@
     [self setRecordType:recordType];
 }
 
+// Customize description text view appearance
+- (void)setupTextView {
+    // Some tips from: http://stackoverflow.com/questions/1824463/how-to-style-uitextview-to-like-rounded-rect-text-field
+    [self.descriptionTextView.layer setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.2] CGColor]];
+    [self.descriptionTextView.layer setBorderWidth:1.0];
+    self.descriptionTextView.layer.cornerRadius = 5;
+    self.descriptionTextView.clipsToBounds = YES;
+//    self.descriptionTextView.delegate = self;
+    
+    [self.descriptionTextView setText:self.recordType[kDescriptionFieldKey]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupColorCollectionView];
     [self setupNavigationBar];
-
+    [self setupTextView];
+    
     // Initialize elements using current record type data
     [self.nameTextField setText:self.recordType[kNameFieldKey]];
     [self.enabledControl setSelectedSegmentIndex:(int)[self.recordType[kArchivedFieldKey] boolValue]];
+    
+    // Disable saving if there's no type name
+    self.navigationItem.rightBarButtonItem.enabled = self.nameTextField.text.length;
 }
 
 - (void)setupNavigationBar {
@@ -68,6 +85,7 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
     self.recordType[kNameFieldKey] = self.nameTextField.text;
     self.recordType[kArchivedFieldKey] = [[NSNumber alloc] initWithBool:(BOOL)self.enabledControl.selectedSegmentIndex];
+    self.recordType[kDescriptionFieldKey] = self.descriptionTextView.text;
     
     NSLog(@"onSave: %@", self.recordType);
     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -113,6 +131,25 @@
         }
     }];
 }
+
+
+#pragma mark UITextField event methods
+
+- (IBAction)nameTextEditingChanged:(id)sender {
+    // Disable saving if there's no type name
+    self.navigationItem.rightBarButtonItem.enabled = self.nameTextField.text.length;
+}
+
+#pragma mark UITextView methods
+
+// TODO: delete these if no further customization is needed
+//- (void)textViewDidBeginEditing:(UITextView *)textView {
+//    [textView becomeFirstResponder];
+//}
+//
+//- (void)textViewDidEndEditing:(UITextView *)textView {
+//    [textView resignFirstResponder];
+//}
 
 #pragma mark UICollectionViewDataSource & UICollectionViewDataDelegate methods
 

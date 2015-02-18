@@ -11,6 +11,7 @@
 #import "RecordTypeCell.h"
 #import "RecordTypeComposerViewController.h"
 #import "SharedConstants.h"
+#import "SlidingMenuMainViewController.h"
 
 @interface RecordTypeViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -59,14 +60,21 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(onCreateNewType)];
     // TODO: possibly customize add button style?
     self.navigationItem.rightBarButtonItem = addButton;
-    
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
+
     // Is there a better way to do this?
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]    initWithTitle:@"All Records" style:UIBarButtonItemStylePlain target:self action:nil];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"All Records" style:UIBarButtonItemStylePlain target:self action:nil];    
 }
 
 - (void)onCreateNewType {
     RecordTypeComposerViewController *vc = [[RecordTypeComposerViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)toggleMenu {
+    // TODO: see if it's weird to call this notif directly / import SlidingMenu
+    [[NSNotificationCenter defaultCenter] postNotificationName:SlidingMenuToggleStateNotification object:nil];
 }
 
 #pragma mark - Custom setters

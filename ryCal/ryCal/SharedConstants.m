@@ -34,6 +34,7 @@ NSString * const kDateFieldKey = @"date";
 NSString * const kArchivedFieldKey = @"archived";
 NSString * const kColorFieldKey = @"color";
 NSString * const kNameFieldKey = @"name";
+NSString * const kDescriptionFieldKey = @"description";
 
 NSString * const NAV_BAR_COLOR = @"navbar";
 NSString * const MENU_BACKGROUND_COLOR = @"menubackground";
@@ -141,9 +142,13 @@ int const NUM_COLORS = 10;
     } else if ([name isEqualToString:RECORD_COLOR_RED]) {
         rgbValue = 0xFF6F6F;
     } else if ([name isEqualToString:RECORD_COLOR_ORANGE]) {
-        rgbValue = 0xFFCC99;
+//        rgbValue = 0xFFCC99;
+        rgbValue = 0xFF8F45;
     } else if ([name isEqualToString:RECORD_COLOR_YELLOW]) {
-        rgbValue = 0xFFFF99;
+//        rgbValue = 0xFFFF99;
+//        rgbValue = 0xFFDA45;
+//        rgbValue = 0xFFDE58;
+        rgbValue = 0xFFE169;
     } else if ([name isEqualToString:RECORD_COLOR_BROWN]) {
         rgbValue = 0xB5916C;
     } else if ([name isEqualToString:NAV_BAR_COLOR]) {
