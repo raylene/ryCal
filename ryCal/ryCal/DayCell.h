@@ -2,6 +2,8 @@
 //  DayCell.h
 //  ryCal
 //
+//  Displays a single day's summary within the month calendar view
+//
 //  Created by Raylene Yung on 12/19/14.
 //  Copyright (c) 2014 rayleney. All rights reserved.
 //

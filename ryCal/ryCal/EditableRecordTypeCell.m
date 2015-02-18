@@ -24,7 +24,6 @@
 @implementation EditableRecordTypeCell
 
 - (void)awakeFromNib {
-    // Initialization code
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
 
@@ -64,8 +63,7 @@
 }
 
 - (NSString *)getNewRecordNoteText {
-    // Format text so it is saveable
-    return [self.noteTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    return [SharedConstants getSaveFormattedString:self.noteTextField.text];
 }
 
 @end

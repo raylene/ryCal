@@ -17,6 +17,7 @@
 // Notifications
 NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
+NSString * const UserFailedLoginNotification = @"UserFailedLoginNotification";
 NSString * const ColorSelectedNotification = @"ColorSelectedNotification";
 NSString * const MonthDataChangedNotification = @"MonthDataChangedNotification";
 NSString * const DayDataChangedNotification = @"DayDataChangedNotification";
@@ -63,7 +64,7 @@ NSString * const TEST_TYPE_CLIMBING = @"V6UNX3Rq3m";
 
 int const NUM_COLORS = 10;
 
-// Convert to singleton? http://www.galloway.me.uk/tutorials/singleton-classes/
+// TODO: convert to singleton? http://www.galloway.me.uk/tutorials/singleton-classes/
 + (NSArray *)getColorArray {
     return @[
              RECORD_COLOR_DEEP_BLUE,
@@ -100,7 +101,6 @@ int const NUM_COLORS = 10;
 }
 
 + (UIColor *)getMenuTextColor {
-//    return [UIColor darkGrayColor];
     return [UIColor whiteColor];
 }
 
@@ -116,15 +116,8 @@ int const NUM_COLORS = 10;
 + (UIColor *)getColor:(NSString *)name {
     unsigned long int rgbValue = 0xBAE3FF;
     if ([name isEqualToString:RECORD_COLOR_EMPTY_ENTRY]) {
-        // rgbValue = 0xE2E2FF;
-        // rgbValue = 0xE0EBEB;
-        // gbValue = 0xFFFFFF;
-        // light blue empty
-        rgbValue = 0xC2D1FF;
-        // light gray empty
         rgbValue = 0xE8E8E8;
     } else if ([name isEqualToString:RECORD_COLOR_FEATURED_ENTRY]) {
-        rgbValue = 0xFFFF00;
         rgbValue = 0x474747;
     } else if ([name isEqualToString:RECORD_COLOR_LIGHT_BLUE]) {
         rgbValue = 0xE6F0FF;
@@ -143,12 +136,8 @@ int const NUM_COLORS = 10;
     } else if ([name isEqualToString:RECORD_COLOR_RED]) {
         rgbValue = 0xFF6F6F;
     } else if ([name isEqualToString:RECORD_COLOR_ORANGE]) {
-//        rgbValue = 0xFFCC99;
         rgbValue = 0xFF8F45;
     } else if ([name isEqualToString:RECORD_COLOR_YELLOW]) {
-//        rgbValue = 0xFFFF99;
-//        rgbValue = 0xFFDA45;
-//        rgbValue = 0xFFDE58;
         rgbValue = 0xFFE169;
     } else if ([name isEqualToString:RECORD_COLOR_BROWN]) {
         rgbValue = 0xB5916C;
@@ -156,8 +145,6 @@ int const NUM_COLORS = 10;
         rgbValue = 0x4775FF;
         rgbValue = 0x6C91FF;
     } else if ([name isEqualToString:MENU_BACKGROUND_COLOR]) {
-//        rgbValue = 0x99FFCC;
-//        rgbValue = 0xADFFD6;
         rgbValue = 0x4CB299;
     } else if ([name isEqualToString:MENU_SELECTED_BACKGROUND_COLOR]) {
         rgbValue = 0x7EC7B5;
@@ -175,6 +162,10 @@ int const NUM_COLORS = 10;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy"];
     return [[formatter stringFromDate:[NSDate date]] integerValue];
+}
+
++ (NSString *)getSaveFormattedString:(NSString *)inputStr {
+    return [inputStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
 @end

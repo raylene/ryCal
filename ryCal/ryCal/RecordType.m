@@ -11,20 +11,31 @@
 #import "User.h"
 #import "SharedConstants.h"
 
+@interface RecordType ()
+
+@property BOOL archived;
+@property (nonatomic, strong) NSString *color;
+@property (nonatomic, strong) NSString *userID;
+@property (nonatomic, strong) NSString *name;
+
+@end
+
 @implementation RecordType
+
+@dynamic archived;
+@dynamic color;
+@dynamic userID;
+@dynamic name;
 
 + (NSString *)parseClassName {
     return @"RecordType";
 }
 
-//+ (void)createRecordType:(NSString *)typeName typeColor:(NSString *)typeColor completion:(void (^)(BOOL succeeded, NSError *error)) completion;
-//+ (void)createRecordType:(NSString *)typeName typeColor:(NSString *)typeColor archived:(BOOL)archived completion:(void (^)(BOOL succeeded, NSError *error)) completion;
-
 + (RecordType *)createNewDefaultRecordType {
     RecordType *newRecordType = [RecordType object];
-    newRecordType[kColorFieldKey] = [SharedConstants getDefaultColorName];
-    newRecordType[kUserIDFieldKey] = [[User currentUser] getUserID];
-    newRecordType[kArchivedFieldKey] = @NO;
+    newRecordType.color = [SharedConstants getDefaultColorName];
+    newRecordType.userID = [[User currentUser] getUserID];
+    newRecordType.archived = NO;
     return newRecordType;
 }
 
@@ -35,10 +46,10 @@
 
 + (void)createRecordType:(NSString *)typeName typeColor:(NSString *)typeColor archived:(BOOL)archived completion:(void (^)(BOOL succeeded, NSError *error)) completion {
     RecordType *newRecordType = [RecordType object];
-    newRecordType[kNameFieldKey] = typeName;
-    newRecordType[kColorFieldKey] = typeColor;
-    newRecordType[kUserIDFieldKey] = [[User currentUser] getUserID];
-    newRecordType[kArchivedFieldKey] = [[NSNumber alloc] initWithBool:archived];
+    newRecordType.name = typeName;
+    newRecordType.color = typeColor;
+    newRecordType.userID = [[User currentUser] getUserID];
+    newRecordType.archived = archived;
     
     [newRecordType saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -109,39 +120,5 @@ static NSArray *_enabledRecordTypes;
         }
     }];
 }
-
-//#pragma mark Field accessors
-//
-//- (void)setNameField:(NSString *)nameField {
-//    self[kNameFieldKey] = nameField;
-//}
-//
-//- (NSString *)getNameField {
-//    return self[kNameFieldKey];
-//}
-//
-//- (void)setColorField:(NSString *)colorField {
-//    self[kColorFieldKey] = colorField;
-//}
-//
-//- (NSString *)getColorField {
-//    return self[kColorFieldKey];
-//}
-//
-//- (void)setUserIDField:(NSString *)userIDField {
-//    self[kUserIDFieldKey] = userIDField;
-//}
-//
-//- (NSString *)getUserIDField {
-//    return self[kUserIDFieldKey];
-//}
-//
-//- (void)setArchivedField:(BOOL)archivedField {
-//    self[kArchivedFieldKey] = [[NSNumber alloc] initWithBool:archivedField];
-//}
-//
-//- (BOOL)getArchivedField {
-//    return self[kArchivedFieldKey];
-//}
 
 @end

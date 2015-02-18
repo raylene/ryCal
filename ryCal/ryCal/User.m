@@ -50,19 +50,22 @@ static User *_currentUser;
 }
 
 + (void)logout {
-    [User setCurrentUser:nil];
     [PFUser logOut];
+    [User setCurrentUser:nil];
+    // TODO: figure out why logging out does not seem to reset the fb session info
+    [FBSession.activeSession closeAndClearTokenInformation];
+    [FBSession.activeSession close];
+    [FBSession setActiveSession:nil];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogoutNotification object:nil];
 }
 
 + (void)login {
-    NSLog(@"User - Login");
-
     // Facebook user permissions
-    NSArray *fbPermissions = @[@"user_about_me"];
+    // https://www.parse.com/tutorials/integrating-facebook-in-ios
 
     // Login PFUser using Facebook
-    [PFFacebookUtils logInWithPermissions:fbPermissions block:^(PFUser *pfuser, NSError *error) {
+    [PFFacebookUtils logInWithPermissions:nil block:^(PFUser *pfuser, NSError *error) {
         NSString *errorMessage = nil;
         if (error != nil) {
             errorMessage = [error localizedDescription];
@@ -82,14 +85,24 @@ static User *_currentUser;
             errorMessage = @"The user cancelled their Facebook login";
         }
         if (errorMessage) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Error"
-                                                            message:errorMessage
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"Dismiss", nil];
-            [alert show];
+            [self showLoginErrorAlert:errorMessage];
         }
     }];
+}
+
++ (void)showLoginErrorAlert:(NSString *)errorMessage {
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserFailedLoginNotification object:nil];
+    NSString *displayedErrorMessage = [NSString stringWithFormat:@"There was an issue logging into your Facebook account. Error: %@", errorMessage];
+    UIAlertController* alert =
+    [UIAlertController alertControllerWithTitle:@"Login Error"
+                                        message:displayedErrorMessage
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Try Again" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:defaultAction];
+    
+    // NOTE: this seems like a huge hack. there must be a better way to present this
+    // from a view...
+    [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 + (void)loadFacebookDataForCurrentUser {
@@ -99,7 +112,6 @@ static User *_currentUser;
             NSLog(@"FBRequest error: %@", [error localizedDescription]);
         } else {
             NSLog(@"Loaded fb user data: %@", result);
-            // result is a dictionary with the user's Facebook data
             NSDictionary *userData = (NSDictionary *)result;
             User *user = [User currentUser];
             [user setDictionary:userData];
@@ -122,10 +134,6 @@ static User *_currentUser;
     self = [super init];
     if (self) {
         [self setDictionary:dictionary];
-//        user.username = userData[@"name"];
-//        NSString *facebookID = userData[@"id"];
-//        NSString *profileImageUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
-//        user[@"profileImageUrl"] = profileImageUrl;
         self.pfUser = pfUser;
     }
     return self;

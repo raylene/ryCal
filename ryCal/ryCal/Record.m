@@ -15,9 +15,21 @@
 
 @interface Record ()
 
+@property (nonatomic, strong) NSString *note;
+@property (nonatomic, strong) NSString *typeID;
+@property (nonatomic, strong) RecordType *type;
+@property (nonatomic, strong) NSString *userID;
+@property (nonatomic, strong) NSDate *date;
+
 @end
 
 @implementation Record
+
+@dynamic note;
+@dynamic typeID;
+@dynamic type;
+@dynamic userID;
+@dynamic date;
 
 + (NSString *)parseClassName {
     return @"Record";
@@ -33,13 +45,13 @@
                                          dateStyle:NSDateFormatterShortStyle
                                          timeStyle:NSDateFormatterFullStyle]);
     Record *newRecord = [Record object];
-    newRecord[kTypeFieldKey] = type;
-    newRecord[kTypeIDFieldKey] = type.objectId;
+    newRecord.type = type;
+    newRecord.typeID = type.objectId;
     if (text != nil) {
-        newRecord[kNoteFieldKey] = text;
+        newRecord.note = text;
     }
-    newRecord[kUserIDFieldKey] = [[User currentUser] getUserID];
-    newRecord[kDateFieldKey] = date;
+    newRecord.userID = [[User currentUser] getUserID];
+    newRecord.date = date;
     return newRecord;
 }
 
@@ -57,13 +69,13 @@
 
 + (void)saveRecord:(RecordType *)type withText:(NSString *)text onDate:(NSDate *)date completion:(void (^)(BOOL succeeded, NSError *error)) completion {
     Record *newRecord = [Record object];
-    [newRecord setTypeField:type];
-    [newRecord setTypeIDField:type.objectId];
+    newRecord.type = type;
+    newRecord.typeID = type.objectId;
     if (text != nil) {
-        [newRecord setNoteField:text];
+        newRecord.note = text;
     }
-    [newRecord setUserIDField:[[User currentUser] getUserID]];
-    [newRecord setDateField:date];
+    newRecord.userID = [[User currentUser] getUserID];
+    newRecord.date = date;
     [newRecord saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             // TODO: figure out why this isn't working?
@@ -100,60 +112,18 @@
 }
 
 + (void)createTestRecordsForDate:(NSDate *)date {
-//    [self createRecord:TEST_TYPE_RUNNING withText:@"bernal heights loop" onDate:date completion:nil];
-//    [self createRecord:TEST_TYPE_RUNNING withText:nil onDate:date completion:nil];
-//    [self createRecord:TEST_TYPE_DANCING withText:@"monday bhangra!" onDate:date completion:nil];
-//    [self createRecord:TEST_TYPE_CLIMBING withText:@"climbed my first v2!" onDate:date completion:nil];
-}
-
-#pragma mark Field accessors
-
-- (void)setNoteField:(NSString *)noteField {
-    self[kNoteFieldKey] = noteField;
-}
-
-- (NSString *)getNoteField {
-    return self[kNoteFieldKey];
-}
-
-- (void)setTypeIDField:(NSString *)typeIDField {
-    self[kTypeIDFieldKey] = typeIDField;
-}
-
-- (NSString *)getTypeIDField {
-    return self[kTypeIDFieldKey];
-}
-
-- (void)setTypeField:(RecordType *)typeField {
-    self[kTypeIDFieldKey] = typeField;
-}
-
-- (NSString *)getTypeField {
-    return self[kTypeFieldKey];
-}
-
-- (void)setUserIDField:(NSString *)userIDField {
-    self[kUserIDFieldKey] = userIDField;
-}
-
-- (NSString *)getUserIDField {
-    return self[kUserIDFieldKey];
-}
-
-- (void)setDateField:(NSDate *)dateField {
-    self[kDateFieldKey] = dateField;
-}
-
-- (NSDate *)getDateField {
-    return self[kDateFieldKey];
+    [self createRecord:TEST_TYPE_RUNNING withText:@"bernal heights loop" onDate:date completion:nil];
+    [self createRecord:TEST_TYPE_RUNNING withText:nil onDate:date completion:nil];
+    [self createRecord:TEST_TYPE_DANCING withText:@"monday bhangra!" onDate:date completion:nil];
+    [self createRecord:TEST_TYPE_CLIMBING withText:@"climbed my first v2!" onDate:date completion:nil];
 }
 
 - (UIColor *)getColor {
-    if ([self getTypeField] == nil) {
+    if (self.type == nil) {
         // TODO: this should only be needed to deal with my old data created for december
         return [SharedConstants getPlaceholderRecordTypeColor];
     } else {
-        return [SharedConstants getColor:[self getTypeField][kColorFieldKey]];
+        return [SharedConstants getColor:self.type[kColorFieldKey]];
     }
 }
 

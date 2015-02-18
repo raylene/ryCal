@@ -97,9 +97,6 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
         } else {
             NSLog(@"Error saving!");
-            UIAlertView *alert = [[UIAlertView alloc] init];
-            [alert show];
-//            self.navigationItem.rightBarButtonItem.enabled = YES;
         }
     }];
 }

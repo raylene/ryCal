@@ -2,6 +2,8 @@
 //  ColorCell.h
 //  ryCal
 //
+//  UICollectionViewCell used to select/display a record type's chosen color
+//
 //  Created by Raylene Yung on 12/27/14.
 //  Copyright (c) 2014 rayleney. All rights reserved.
 //

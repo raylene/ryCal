@@ -40,7 +40,7 @@
 
     self.title = [self.dayData getTitleString];
 
-//    [Record createTestRecordsForDate:[self.dayData getStartDate]];
+    // [Record createTestRecordsForDate:[self.dayData getStartDate]];
     
     [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
         self.recordTypes = types;

@@ -2,6 +2,8 @@
 //  RecordType.h
 //  ryCal
 //
+//  Represents a single PFObject record type for a given user. (E.g. "Running")
+//
 //  Created by Raylene Yung on 12/21/14.
 //  Copyright (c) 2014 rayleney. All rights reserved.
 //
@@ -20,18 +22,5 @@
 + (void)loadFromID:(NSString *)objectID completion:(void (^)(RecordType *type, NSError *error))completion;
 
 + (void)createTestRecordTypes;
-
-// Fields
-//- (void)setArchivedField:(BOOL)archivedField;
-//- (BOOL)getArchivedField;
-//
-//- (void)setColorField:(NSString *)colorField;
-//- (NSString *)getColorField;
-//
-//- (void)setUserIDField:(NSString *)userIDField;
-//- (NSString *)getUserIDField;
-//
-//- (void)setNameField:(NSString *)nameField;
-//- (NSString *)getNameField;
 
 @end

@@ -41,7 +41,6 @@ static const NSString *kFacebookAppID = @"745968008790705";
 
     [Parse setApplicationId:(NSString *)kParseAppID clientKey:(NSString *)kParseClientKey];
     [PFFacebookUtils initializeFacebook];
-
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:UserDidLogoutNotification object:nil];
     

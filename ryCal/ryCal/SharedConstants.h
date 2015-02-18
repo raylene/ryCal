@@ -14,6 +14,7 @@
 // Notifications
 extern NSString * const UserDidLogoutNotification;
 extern NSString * const UserDidLoginNotification;
+extern NSString * const UserFailedLoginNotification;
 extern NSString * const ColorSelectedNotification;
 extern NSString * const MonthDataChangedNotification;
 extern NSString * const DayDataChangedNotification;
@@ -25,6 +26,7 @@ extern NSString * const SwitchDayNotification;
 extern NSString * const kColorSelectedNotifParam;
 extern NSString * const kDayNotifParam;
 
+// Parse field keys
 extern NSString * const kNoteFieldKey;
 extern NSString * const kTypeFieldKey;
 extern NSString * const kTypeIDFieldKey;
@@ -71,5 +73,6 @@ extern int const NUM_COLORS;
 + (UIColor *)getDayHighlightColor;
 
 + (NSInteger)getCurrentYear;
++ (NSString *)getSaveFormattedString:(NSString *)inputStr;
 
 @end

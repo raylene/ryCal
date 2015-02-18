@@ -23,6 +23,7 @@
     [self setupNavigationBar];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessful) name:UserDidLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailed) name:UserFailedLoginNotification object:nil];
 }
 
 - (void)setupNavigationBar {
@@ -38,6 +39,10 @@
     [SVProgressHUD dismiss];
     RyCalMainViewController *vc = [[RyCalMainViewController alloc] init];
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)loginFailed {
+    [SVProgressHUD dismiss];
 }
 
 @end

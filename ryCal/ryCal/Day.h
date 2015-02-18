@@ -2,6 +2,8 @@
 //  Day.h
 //  ryCal
 //
+//  Encapsulates data and rendering convenience methods for a month
+//
 //  Created by Raylene Yung on 12/19/14.
 //  Copyright (c) 2014 rayleney. All rights reserved.
 //

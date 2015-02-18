@@ -2,6 +2,9 @@
 //  CompressedDailyRecordCell.h
 //  ryCal
 //
+//  Base class for UITableViewCells that are used to display / edit the state for
+//  a single day's record entry
+//
 //  Created by Raylene Yung on 1/7/15.
 //  Copyright (c) 2015 rayleney. All rights reserved.
 //

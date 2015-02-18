@@ -39,12 +39,6 @@
     [self addGestureRecognizer:tgr];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
-    //[self saveChanges:selected];
-}
-
 @synthesize typeData = _typeData;
 - (void)setTypeData:(RecordType *)typeData {
     _typeData = typeData;
@@ -97,7 +91,7 @@
 - (void)sendDataChangedNotifications {
     // TODO: figure out if this is working properly...
     [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
-    // TODO: clean up duplicate Month + Day notifs being sent out
+    // TODO: cleanup duplicate Month + Day notifs being sent out
     [[NSNotificationCenter defaultCenter] postNotificationName:DayDataChangedNotification object:nil];
 }
 
@@ -136,8 +130,6 @@
 
 - (NSString *)getNewRecordNoteText {
     return self.recordData[kNoteFieldKey];
-    // Format text so it is saveable
-//    NSString *trimmedString = [self.noteTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
 #pragma mark UIGestureRecognizers
