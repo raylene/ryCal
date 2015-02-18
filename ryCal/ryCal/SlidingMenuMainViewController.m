@@ -18,13 +18,13 @@ float const kContentSwappingDuration = 0.2;
 @property (nonatomic, strong) UIView *menuView;
 
 @property (nonatomic, assign) CGPoint initialOffset;
-
 @property (nonatomic, assign) BOOL menuIsOpen;
 
 @end
 
 @implementation SlidingMenuMainViewController
 
+// TODO: potentially fix this strange notification model to trigger the menu
 NSString * const SlidingMenuToggleStateNotification = @"SlidingMenuToggleStateNotification";
 
 - (id)initWithViewControllers:(UIViewController<SlidingMenuProtocol> *)menuVC contentVC:(UIViewController *)contentVC {
@@ -34,8 +34,6 @@ NSString * const SlidingMenuToggleStateNotification = @"SlidingMenuToggleStateNo
         [self setContentVC:contentVC];
         self.menuIsOpen = NO;
     }
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleMenuState) name:SlidingMenuToggleStateNotification object:nil];
     return self;
 }
@@ -48,7 +46,6 @@ NSString * const SlidingMenuToggleStateNotification = @"SlidingMenuToggleStateNo
 
 - (IBAction)onMenu:(id)sender {
     // Only open the menu it if it's not yet visible
-    // TODO: check if there's a better way to check if a view is visible vs. manually tracking..
     if (self.menuIsOpen) {
         [self animateMenuClosed];
     } else {

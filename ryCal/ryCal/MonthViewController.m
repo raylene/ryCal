@@ -10,7 +10,7 @@
 #import "DayCell.h"
 #import "DummyCell.h"
 #import "User.h"
-#import "RecordTypeViewController.h"
+#import "RecordTypeListViewController.h"
 #import "RecordTypeComposerViewController.h"
 #import "SharedConstants.h"
 
@@ -57,6 +57,7 @@
 
     self.monthCollectionView.delegate = self;
     self.monthCollectionView.dataSource = self;
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMonthData) name:MonthDataChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDayData) name:DayDataChangedNotification object:nil];
 }
@@ -79,34 +80,14 @@
     Day *dayData = dict[kDayNotifParam];
     self.selectedDayIdx = [dayData getDayInt] - 1;
     [self.monthCollectionView reloadData];
-    
-    // TEST TEST
-    NSLog(@"month intrinsic size: %@", NSStringFromCGSize([self.monthCollectionView intrinsicContentSize]));
-}
-
-// TODO: make static?
-- (NSString *)getDayHeaderForIdx:(NSInteger)idx {
-    return @[
-             @"SU",
-             @"M",
-             @"TU",
-             @"W",
-             @"TH",
-             @"F",
-             @"SA"
-             ][idx];
 }
 
 - (CGFloat)getCellWidth {
-//    CGFloat width = self.monthCollectionView.frame.size.width/8;
     return self.monthCollectionView.frame.size.width/8;
 }
 
 - (CGFloat)getEstimatedHeight {
     return ([self getCellWidth] * (1 + ceil([self getNumCells] / 7)));
-//    CGFloat rows = ceil([self getNumCells] / 7.0);
-//    CGFloat estimatedHeight = ([self getCellWidth] * (1 + ceil([self getNumCells] / 7.0)));
-//    return ([self getCellWidth] * (1 + ceil([self getNumCells] / 7.0)));
 }
 
 - (NSInteger)getNumCells {
@@ -131,13 +112,15 @@
     return CGSizeMake(width, width);
 }
 
+static NSString *daysOfWeek[] = { @"SU", @"M", @"TU", @"W", @"TH", @"F", @"SA" };
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell;
     NSInteger idx = indexPath.row;
     NSInteger totalBuffer = (self.monthData.numBufferDays + 7);
     if (idx < 7) {
         DummyCell *dummyCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DummyCell" forIndexPath:indexPath];
-        [dummyCell setText:[self getDayHeaderForIdx:idx]];
+        [dummyCell setText:daysOfWeek[idx]];
         cell = dummyCell;
     } else if (idx < totalBuffer) {
         DummyCell *dummyCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DummyCell" forIndexPath:indexPath];

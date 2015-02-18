@@ -14,6 +14,13 @@
 
 @interface Record : PFObject<PFSubclassing>
 
+// PFObject keys
+@property (nonatomic, strong) NSString *note;
+@property (nonatomic, strong) NSString *typeID;
+@property (nonatomic, strong) RecordType *type;
+@property (nonatomic, strong) NSString *userID;
+@property (nonatomic, strong) NSDate *date;
+
 // Creation methods
 + (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text;
 + (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text onDate:(NSDate *)date;
@@ -22,5 +29,6 @@
 + (void)loadAllRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion;
 
 - (UIColor *)getColor;
+- (NSString *)getDateStringKey;
 
 @end

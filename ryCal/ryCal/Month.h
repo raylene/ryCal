@@ -18,7 +18,7 @@
 - (id)initWithNSDate:(NSDate *)date;
 
 - (NSInteger)numDays;
-// Number of days before this month until you hit a Sunday
+// Number of days before the 1st of this month until you hit a Sunday
 - (NSInteger)numBufferDays;
 
 - (BOOL)isCurrentMonth;

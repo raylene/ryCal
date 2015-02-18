@@ -13,6 +13,13 @@
 
 @interface RecordType : PFObject<PFSubclassing>
 
+// PFObject keys
+@property BOOL archived;
+@property (nonatomic, strong) NSString *color;
+@property (nonatomic, strong) NSString *userID;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *description;
+
 // Creation methods
 + (RecordType *)createNewDefaultRecordType;
 
@@ -22,5 +29,6 @@
 + (void)loadFromID:(NSString *)objectID completion:(void (^)(RecordType *type, NSError *error))completion;
 
 + (void)createTestRecordTypes;
+
 
 @end

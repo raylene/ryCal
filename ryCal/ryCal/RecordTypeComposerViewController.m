@@ -11,7 +11,7 @@
 #import "ColorCell.h"
 #import "RecordType.h"
 
-@interface RecordTypeComposerViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>//, UITextViewDelegate>
+@interface RecordTypeComposerViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) RecordType *recordType;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
@@ -43,23 +43,10 @@
 }
 
 - (void)setupWithRecordType:(RecordType *)recordType {
-    NSLog(@"Setup with record type: %@", recordType);
     if (recordType == nil) {
         recordType = [RecordType createNewDefaultRecordType];
     }
     [self setRecordType:recordType];
-}
-
-// Customize description text view appearance
-- (void)setupTextView {
-    // Some tips from: http://stackoverflow.com/questions/1824463/how-to-style-uitextview-to-like-rounded-rect-text-field
-    [self.descriptionTextView.layer setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.2] CGColor]];
-    [self.descriptionTextView.layer setBorderWidth:1.0];
-    self.descriptionTextView.layer.cornerRadius = 5;
-    self.descriptionTextView.clipsToBounds = YES;
-//    self.descriptionTextView.delegate = self;
-    
-    [self.descriptionTextView setText:self.recordType[kDescriptionFieldKey]];
 }
 
 - (void)viewDidLoad {
@@ -67,6 +54,10 @@
     [self setupColorCollectionView];
     [self setupNavigationBar];
     [self setupTextView];
+    
+    // Setup tap gesture recognizer to help dismiss keyboard
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDismissKeyboard)];
+    [self.view addGestureRecognizer:tgr];
     
     // Initialize elements using current record type data
     [self.nameTextField setText:self.recordType[kNameFieldKey]];
@@ -81,24 +72,14 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(onSave)];
 }
 
-- (void)onSave {
-    self.navigationItem.rightBarButtonItem.enabled = NO;
-    self.recordType[kNameFieldKey] = self.nameTextField.text;
-    self.recordType[kArchivedFieldKey] = [[NSNumber alloc] initWithBool:(BOOL)self.enabledControl.selectedSegmentIndex];
-    self.recordType[kDescriptionFieldKey] = self.descriptionTextView.text;
+- (void)setupTextView {
+    // Some tips from: http://stackoverflow.com/questions/1824463/how-to-style-uitextview-to-like-rounded-rect-text-field
+    [self.descriptionTextView.layer setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.2] CGColor]];
+    [self.descriptionTextView.layer setBorderWidth:1.0];
+    [self.descriptionTextView.layer setCornerRadius:5.0];
+    self.descriptionTextView.clipsToBounds = YES;
     
-    NSLog(@"onSave: %@", self.recordType);
-    [self.navigationController popToRootViewControllerAnimated:YES];
-
-    [self.recordType saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Successfully saved record type changes");
-            [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
-        } else {
-            NSLog(@"Error saving!");
-        }
-    }];
+    [self.descriptionTextView setText:self.recordType[kDescriptionFieldKey]];
 }
 
 - (void)setupColorCollectionView {
@@ -115,9 +96,34 @@
     self.recordType[kColorFieldKey] = dict[kColorSelectedNotifParam];
 }
 
+#pragma mark Event handling helper methods
+
+- (void)tapDismissKeyboard {
+    [self.nameTextField resignFirstResponder];
+    [self.descriptionTextView resignFirstResponder];
+}
+
+- (void)onSave {
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.recordType.name = self.nameTextField.text;
+    self.recordType.archived = (BOOL)self.enabledControl.selectedSegmentIndex;
+    self.recordType.description = self.descriptionTextView.text;
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.recordType saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Successfully saved record type changes");
+            [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
+        } else {
+            NSLog(@"Error saving!");
+        }
+    }];
+}
+
 - (IBAction)onDelete:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
-    // TODO: also delete all records with that type?
+    // TODO: also delete all records with that type? Would need a confirmation before doing this...
     [self.recordType deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Successfully deleted record type");
@@ -136,17 +142,6 @@
     // Disable saving if there's no type name
     self.navigationItem.rightBarButtonItem.enabled = self.nameTextField.text.length;
 }
-
-#pragma mark UITextView methods
-
-// TODO: delete these if no further customization is needed
-//- (void)textViewDidBeginEditing:(UITextView *)textView {
-//    [textView becomeFirstResponder];
-//}
-//
-//- (void)textViewDidEndEditing:(UITextView *)textView {
-//    [textView resignFirstResponder];
-//}
 
 #pragma mark UICollectionViewDataSource & UICollectionViewDataDelegate methods
 

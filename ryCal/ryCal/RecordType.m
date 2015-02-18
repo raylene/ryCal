@@ -11,21 +11,13 @@
 #import "User.h"
 #import "SharedConstants.h"
 
-@interface RecordType ()
-
-@property BOOL archived;
-@property (nonatomic, strong) NSString *color;
-@property (nonatomic, strong) NSString *userID;
-@property (nonatomic, strong) NSString *name;
-
-@end
-
 @implementation RecordType
 
 @dynamic archived;
 @dynamic color;
 @dynamic userID;
 @dynamic name;
+@dynamic description;
 
 + (NSString *)parseClassName {
     return @"RecordType";

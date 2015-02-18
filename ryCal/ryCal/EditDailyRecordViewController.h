@@ -2,6 +2,8 @@
 //  EditDailyRecordViewController.h
 //  ryCal
 //
+//  Displays a compressed version of a current day's one-click editable record entries
+//
 //  Created by Raylene Yung on 1/5/15.
 //  Copyright (c) 2015 rayleney. All rights reserved.
 //

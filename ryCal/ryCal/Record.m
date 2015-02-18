@@ -13,16 +13,6 @@
 #import <Parse/PFObject+Subclass.h>
 #import "SharedConstants.h"
 
-@interface Record ()
-
-@property (nonatomic, strong) NSString *note;
-@property (nonatomic, strong) NSString *typeID;
-@property (nonatomic, strong) RecordType *type;
-@property (nonatomic, strong) NSString *userID;
-@property (nonatomic, strong) NSDate *date;
-
-@end
-
 @implementation Record
 
 @dynamic note;
@@ -118,6 +108,12 @@
     } else {
         return [SharedConstants getColor:self.type[kColorFieldKey]];
     }
+}
+
+- (NSString *)getDateStringKey {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-YYYY"];
+    return [dateFormatter stringFromDate:self.date];
 }
 
 @end

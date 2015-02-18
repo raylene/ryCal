@@ -8,7 +8,6 @@
 
 #import "EditDailyRecordViewController.h"
 #import "User.h"
-//#import "EditableRecordTypeCell.h"
 #import "CompressedDailyRecordCell.h"
 #import "DayViewController.h"
 #import "RecordType.h"
@@ -36,9 +35,6 @@
     [self setupTypeTable];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRecordData) name:MonthDataChangedNotification object:nil];
-    // TODO: clean up duplicate Month + Day notifs being sent out
-    [[NSNotificationCenter defaultCenter] postNotificationName:DayDataChangedNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUsingNewDay:) name:SwitchDayNotification object:nil];
 }
 
@@ -68,13 +64,13 @@
 }
 
 - (void)setupTypeTable {
-    UINib *cellNib = [UINib nibWithNibName:@"CompressedDailyRecordCell" bundle:nil];
-    [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"CompressedDailyRecordCell"];
-    
     self.typeTableView.delegate = self;
     self.typeTableView.dataSource = self;
     self.typeTableView.backgroundColor = [SharedConstants getMonthBackgroundColor];
     self.typeTableView.rowHeight = UITableViewAutomaticDimension;
+
+    UINib *cellNib = [UINib nibWithNibName:@"CompressedDailyRecordCell" bundle:nil];
+    [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"CompressedDailyRecordCell"];
 }
 
 - (void)loadRecordData {
@@ -126,15 +122,11 @@
     return self.recordTypes.count;
 }
 
-// ---------------
+#pragma mark Add More action
 
 - (IBAction)addMoreInfo:(id)sender {
-    // TODO: figure out another way to display the day permalink...?
+    // TODO: figure out if there's a better way to display the day permalink...
     [[NSNotificationCenter defaultCenter] postNotificationName:ViewFullDayNotification object:nil userInfo:@{kDayNotifParam: self.dayData}];
-    
-//    DayViewController *vc = [[DayViewController alloc] initWithDay:self.dayData];
-//    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
-//    [self.presentingVC presentViewController:nvc animated:YES completion:nil];
 }
 
 @end

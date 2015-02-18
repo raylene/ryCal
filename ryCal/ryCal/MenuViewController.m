@@ -9,17 +9,14 @@
 #import "MenuViewController.h"
 #import "MenuItemCell.h"
 #import "User.h"
-#import "MonthViewController.h"
 #import "HomeViewController.h"
-#import "MonthHomeViewController.h"
-#import "RecordTypeViewController.h"
+#import "RecordTypeListViewController.h"
 #import "UIImageView+AfNetworking.h"
 #import "SharedConstants.h"
 
 static int const kHomeItemIndex = 0;
 static int const kRecordTypesItemIndex = 1;
-static int const kProfileItemIndex = 3;//2;
-static int const kLogoutItemIndex = 2;//3;
+static int const kLogoutItemIndex = 2;
 
 @interface MenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -27,8 +24,6 @@ static int const kLogoutItemIndex = 2;//3;
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-
 @property (nonatomic, strong) NSArray *menuItemConfig;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 @property (nonatomic, strong) MenuItemCell *prototypeCell;
@@ -67,7 +62,6 @@ static int const kLogoutItemIndex = 2;//3;
     self.nameLabel.textColor = [SharedConstants getMenuTextColor];
     
     [self.profileImageView setImageWithURL:[NSURL URLWithString:[user getProfileImageURL]]];
-//    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.clipsToBounds = YES;
     [self.profileImageView.layer setBorderColor: [[UIColor whiteColor] CGColor]];
     [self.profileImageView.layer setBorderWidth: 3];
@@ -89,7 +83,6 @@ static int const kLogoutItemIndex = 2;//3;
     @[
       @{@"name" : @"Today", @"img":@"home"},
       @{@"name" : @"Record Types", @"img": @"recordtypes"},
-//      @{@"name" : @"Settings", @"img": @"profile"},
       @{@"name" : @"Logout", @"img": @"logout"}
       ];
 }
@@ -103,11 +96,7 @@ static int const kLogoutItemIndex = 2;//3;
 #pragma mark - UITableView methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-//    NSLog(@"menu size: %ld, %f", indexPath.row, size.height + 1);
-
     return 60;
-//    return size.height + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -126,14 +115,10 @@ static int const kLogoutItemIndex = 2;//3;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UIViewController *vc;
-    if (indexPath.row == kProfileItemIndex) {
-//        vc = [[ProfileViewController alloc] init];
-//        [(ProfileViewController *)vc setUser:[User currentUser]];
-    } else if (indexPath.row == kHomeItemIndex) {
+    if (indexPath.row == kHomeItemIndex) {
         vc = [[HomeViewController alloc] initWithDate:[NSDate date]];
-        //vc = [[MonthHomeViewController alloc] initWithDate:[NSDate date]];
     } else if (indexPath.row == kRecordTypesItemIndex) {
-        vc = [[RecordTypeViewController alloc] init];
+        vc = [[RecordTypeListViewController alloc] init];
     } else if (indexPath.row == kLogoutItemIndex) {
         [User logout];
     }

@@ -1,19 +1,19 @@
 //
-//  RecordTypeViewController.m
+//  RecordTypeListViewController.m
 //  ryCal
 //
 //  Created by Raylene Yung on 12/21/14.
 //  Copyright (c) 2014 rayleney. All rights reserved.
 //
 
-#import "RecordTypeViewController.h"
+#import "RecordTypeListViewController.h"
 #import "RecordType.h"
 #import "RecordTypeCell.h"
 #import "RecordTypeComposerViewController.h"
 #import "SharedConstants.h"
 #import "SlidingMenuMainViewController.h"
 
-@interface RecordTypeViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface RecordTypeListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *typeTableView;
 @property (nonatomic, strong) RecordTypeCell *prototypeCell;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation RecordTypeViewController
+@implementation RecordTypeListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,10 +35,6 @@
 
 - (void)refreshTypeData {
     [RecordType loadAllTypes:^(NSArray *types, NSError *error) {
-//        if (types.count == 0) {
-//            // NOTE: only for testing
-//            [RecordType createTestRecordTypes];
-//        }
         self.recordTypes = types;
         [self.typeTableView reloadData];
     }];
@@ -51,19 +47,18 @@
     self.typeTableView.delegate = self;
     self.typeTableView.dataSource = self;
     self.typeTableView.rowHeight = UITableViewAutomaticDimension;
-    // No footer
     self.typeTableView.tableFooterView = [[UIView alloc] init];
 }
 
 - (void)setupNavigationBar {
     self.title = @"Record Types";
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(onCreateNewType)];
     // TODO: possibly customize add button style?
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(onCreateNewType)];
     self.navigationItem.rightBarButtonItem = addButton;
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
 
-    // Is there a better way to do this?
+    // TODO: see if there is a better way to do this?
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"All Records" style:UIBarButtonItemStylePlain target:self action:nil];    
 }
 

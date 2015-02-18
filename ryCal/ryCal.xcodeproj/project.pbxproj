@@ -32,8 +32,8 @@
 		6FBE73EC1A4673380045810A /* DayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBE73EA1A4673380045810A /* DayViewController.xib */; };
 		6FBE73F21A476BFC0045810A /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE73F11A476BFC0045810A /* Record.m */; };
 		6FBE73F51A47DC8D0045810A /* RecordType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE73F41A47DC8D0045810A /* RecordType.m */; };
-		6FBE73F91A47E4650045810A /* RecordTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE73F71A47E4650045810A /* RecordTypeViewController.m */; };
-		6FBE73FA1A47E4650045810A /* RecordTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBE73F81A47E4650045810A /* RecordTypeViewController.xib */; };
+		6FBE73F91A47E4650045810A /* RecordTypeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE73F71A47E4650045810A /* RecordTypeListViewController.m */; };
+		6FBE73FA1A47E4650045810A /* RecordTypeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBE73F81A47E4650045810A /* RecordTypeListViewController.xib */; };
 		6FBE73FE1A47F5910045810A /* RecordTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE73FC1A47F5910045810A /* RecordTypeCell.m */; };
 		6FBE73FF1A47F5910045810A /* RecordTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FBE73FD1A47F5910045810A /* RecordTypeCell.xib */; };
 		6FBE74031A4950B00045810A /* EditableRecordTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE74011A4950B00045810A /* EditableRecordTypeCell.m */; };
@@ -107,9 +107,9 @@
 		6FBE73F11A476BFC0045810A /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
 		6FBE73F31A47DC8D0045810A /* RecordType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordType.h; sourceTree = "<group>"; };
 		6FBE73F41A47DC8D0045810A /* RecordType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordType.m; sourceTree = "<group>"; };
-		6FBE73F61A47E4650045810A /* RecordTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTypeViewController.h; sourceTree = "<group>"; };
-		6FBE73F71A47E4650045810A /* RecordTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTypeViewController.m; sourceTree = "<group>"; };
-		6FBE73F81A47E4650045810A /* RecordTypeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordTypeViewController.xib; sourceTree = "<group>"; };
+		6FBE73F61A47E4650045810A /* RecordTypeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTypeListViewController.h; sourceTree = "<group>"; };
+		6FBE73F71A47E4650045810A /* RecordTypeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTypeListViewController.m; sourceTree = "<group>"; };
+		6FBE73F81A47E4650045810A /* RecordTypeListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordTypeListViewController.xib; sourceTree = "<group>"; };
 		6FBE73FB1A47F5910045810A /* RecordTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTypeCell.h; sourceTree = "<group>"; };
 		6FBE73FC1A47F5910045810A /* RecordTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTypeCell.m; sourceTree = "<group>"; };
 		6FBE73FD1A47F5910045810A /* RecordTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordTypeCell.xib; sourceTree = "<group>"; };
@@ -185,9 +185,9 @@
 				6FF442C51A4FB56700B3DD45 /* RecordTypeComposerViewController.h */,
 				6FF442C61A4FB56700B3DD45 /* RecordTypeComposerViewController.m */,
 				6FF442C71A4FB56700B3DD45 /* RecordTypeComposerViewController.xib */,
-				6FBE73F61A47E4650045810A /* RecordTypeViewController.h */,
-				6FBE73F71A47E4650045810A /* RecordTypeViewController.m */,
-				6FBE73F81A47E4650045810A /* RecordTypeViewController.xib */,
+				6FBE73F61A47E4650045810A /* RecordTypeListViewController.h */,
+				6FBE73F71A47E4650045810A /* RecordTypeListViewController.m */,
+				6FBE73F81A47E4650045810A /* RecordTypeListViewController.xib */,
 				6FE8A34E1A5B7A3A00754D34 /* RyCalMainViewController.h */,
 				6FE8A34F1A5B7A3A00754D34 /* RyCalMainViewController.m */,
 				6F1650911A5396F1006336EF /* SlidingMenuMainViewController.h */,
@@ -426,7 +426,7 @@
 				6FF278451A5D27B10063323F /* CompressedDailyRecordCell.xib in Resources */,
 				6FE8A3481A5B75CD00754D34 /* EditDailyRecordViewController.xib in Resources */,
 				6FBE73E71A45193E0045810A /* DayCell.xib in Resources */,
-				6FBE73FA1A47E4650045810A /* RecordTypeViewController.xib in Resources */,
+				6FBE73FA1A47E4650045810A /* RecordTypeListViewController.xib in Resources */,
 				6FC6D8311A5CAC79007871C3 /* MonthViewController.xib in Resources */,
 				6FF442D81A4FBCC100B3DD45 /* ColorCell.xib in Resources */,
 				6F926BE21A22BA5F00473EA2 /* Images.xcassets in Resources */,
@@ -482,7 +482,7 @@
 			files = (
 				6FBE740B1A4A5C570045810A /* SharedConstants.m in Sources */,
 				6FBE73DF1A4508860045810A /* Month.m in Sources */,
-				6FBE73F91A47E4650045810A /* RecordTypeViewController.m in Sources */,
+				6FBE73F91A47E4650045810A /* RecordTypeListViewController.m in Sources */,
 				6F6B9A9E1A22F585005B7722 /* User.m in Sources */,
 				6F1650941A5396F1006336EF /* SlidingMenuMainViewController.m in Sources */,
 				6FF442D71A4FBCC100B3DD45 /* ColorCell.m in Sources */,

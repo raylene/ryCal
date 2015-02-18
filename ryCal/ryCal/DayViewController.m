@@ -43,11 +43,8 @@
     [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
         self.recordTypes = types;
         [Record loadAllRecordsForTimeRange:[self.dayData getStartDate] endDate:[self.dayData getEndDate] completion:^(NSArray *records, NSError *error) {
-            // NSLog(@"Records for day: %@", records);
             for (Record *record in records) {
-                // TODO: figure out why this doesn't work...
-                // NSString *recordTypeID = [record getTypeIDField];
-                NSString *recordTypeID = record[@"typeID"];
+                NSString *recordTypeID = record.typeID;
                 [self.recordDictionary setObject:record forKey:recordTypeID];
             }
             [self.typeTableView reloadData];
@@ -64,12 +61,12 @@
 }
 
 - (void)setupTypeTable {
-    UINib *cellNib = [UINib nibWithNibName:@"EditableRecordTypeCell" bundle:nil];
-    [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"EditableRecordTypeCell"];
-
     self.typeTableView.delegate = self;
     self.typeTableView.dataSource = self;
     self.typeTableView.rowHeight = UITableViewAutomaticDimension;
+
+    UINib *cellNib = [UINib nibWithNibName:@"EditableRecordTypeCell" bundle:nil];
+    [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"EditableRecordTypeCell"];
 }
 
 #pragma mark - Custom setters
@@ -85,8 +82,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 80;
-//    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-//    return size.height + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

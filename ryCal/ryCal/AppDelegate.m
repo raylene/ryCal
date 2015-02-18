@@ -29,9 +29,9 @@ static const NSString *kFacebookAppID = @"745968008790705";
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-
-    // PFObject subclasses...
+    // Parse setup
+    
+    // PFObject subclasses
     // https://parse.com/docs/ios/api/Protocols/PFSubclassing.html#//api/name/registerSubclass
     [Record registerSubclass];
     [RecordType registerSubclass];
@@ -42,10 +42,10 @@ static const NSString *kFacebookAppID = @"745968008790705";
     [Parse setApplicationId:(NSString *)kParseAppID clientKey:(NSString *)kParseClientKey];
     [PFFacebookUtils initializeFacebook];
     
+    // Notification subscriptions
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:UserDidLogoutNotification object:nil];
-    
+
     User *user = [User currentUser];
-    
     UIViewController *vc = nil;
     if (user == nil) {
         LoginViewController *lvc = [[LoginViewController alloc] init];

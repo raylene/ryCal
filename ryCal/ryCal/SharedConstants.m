@@ -142,7 +142,6 @@ int const NUM_COLORS = 10;
     } else if ([name isEqualToString:RECORD_COLOR_BROWN]) {
         rgbValue = 0xB5916C;
     } else if ([name isEqualToString:NAV_BAR_COLOR]) {
-        rgbValue = 0x4775FF;
         rgbValue = 0x6C91FF;
     } else if ([name isEqualToString:MENU_BACKGROUND_COLOR]) {
         rgbValue = 0x4CB299;
