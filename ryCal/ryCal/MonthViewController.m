@@ -98,7 +98,7 @@
 }
 
 - (CGFloat)getCellWidth {
-    CGFloat width = self.monthCollectionView.frame.size.width/8;
+//    CGFloat width = self.monthCollectionView.frame.size.width/8;
     return self.monthCollectionView.frame.size.width/8;
 }
 
