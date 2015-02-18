@@ -137,7 +137,7 @@
 - (IBAction)onTapGesture:(id)sender {
     // This is a binary toggle, so if the record already exists, consider this a delete
     BOOL deleteRecord = self.recordData != nil;
-    if (deleteRecord && self.recordNoteText.text) {
+    if (deleteRecord && self.recordNoteText.text.length) {
         [self presentDeleteWarningAlert];
     } else {
         [self saveChanges:deleteRecord];

@@ -164,7 +164,12 @@ int const NUM_COLORS = 10;
 }
 
 + (NSString *)getSaveFormattedString:(NSString *)inputStr {
-    return [inputStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *result = [inputStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if (!result.length) {
+        // Don't bother saving the empty string
+        return nil;
+    }
+    return result;
 }
 
 @end

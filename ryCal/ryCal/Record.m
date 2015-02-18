@@ -97,7 +97,8 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Record"];
     [query setCachePolicy:kPFCachePolicyNetworkElseCache];
     [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
-    [query orderByAscending:@"date,updatedAt"];
+    [query orderByAscending:@"date"];
+    [query addDescendingOrder:@"updatedAt"];
     return query;
 }
 
