@@ -111,13 +111,6 @@
     return query;
 }
 
-+ (void)createTestRecordsForDate:(NSDate *)date {
-    [self createRecord:TEST_TYPE_RUNNING withText:@"bernal heights loop" onDate:date completion:nil];
-    [self createRecord:TEST_TYPE_RUNNING withText:nil onDate:date completion:nil];
-    [self createRecord:TEST_TYPE_DANCING withText:@"monday bhangra!" onDate:date completion:nil];
-    [self createRecord:TEST_TYPE_CLIMBING withText:@"climbed my first v2!" onDate:date completion:nil];
-}
-
 - (UIColor *)getColor {
     if (self.type == nil) {
         // TODO: this should only be needed to deal with my old data created for december

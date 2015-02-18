@@ -39,8 +39,6 @@
     self.recordDictionary = [[NSMutableDictionary alloc] init];
 
     self.title = [self.dayData getTitleString];
-
-    // [Record createTestRecordsForDate:[self.dayData getStartDate]];
     
     [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
         self.recordTypes = types;
