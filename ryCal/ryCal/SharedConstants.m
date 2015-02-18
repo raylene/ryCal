@@ -19,6 +19,7 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
 NSString * const ColorSelectedNotification = @"ColorSelectedNotification";
 NSString * const MonthDataChangedNotification = @"MonthDataChangedNotification";
+NSString * const DayDataChangedNotification = @"DayDataChangedNotification";
 NSString * const RecordTypeDataChangedNotification = @"RecordTypeDataChangedNotification";
 NSString * const ViewFullDayNotification = @"ViewFullDayNotification";
 NSString * const SwitchDayNotification = @"SwitchDayNotification";

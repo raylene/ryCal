@@ -68,6 +68,8 @@
         if (succeeded) {
             // TODO: figure out why this isn't working?
             [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
+            // TODO: clean up duplicate Month + Day notifs being sent out
+            [[NSNotificationCenter defaultCenter] postNotificationName:DayDataChangedNotification object:nil];
         }
         completion(succeeded, error);
     }];

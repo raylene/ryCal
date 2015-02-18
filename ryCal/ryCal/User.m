@@ -28,8 +28,7 @@ static User *_currentUser;
         PFUser *curUser = [PFUser currentUser];
         if (data != nil && curUser != nil) {
             NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-            _currentUser = [[User alloc] initWithDictionary:dictionary];
-            _currentUser.pfUser = curUser;
+            _currentUser = [[User alloc] initWithDictionaryAndPFUser:dictionary pfUser:curUser];
         }
     }
     return _currentUser;
@@ -119,7 +118,7 @@ static User *_currentUser;
     return self;
 }
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
+- (id)initWithDictionaryAndPFUser:(NSDictionary *)dictionary pfUser:(PFUser *)pfUser {
     self = [super init];
     if (self) {
         [self setDictionary:dictionary];
@@ -127,7 +126,7 @@ static User *_currentUser;
 //        NSString *facebookID = userData[@"id"];
 //        NSString *profileImageUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
 //        user[@"profileImageUrl"] = profileImageUrl;
-
+        self.pfUser = pfUser;
     }
     return self;
 }

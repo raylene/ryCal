@@ -16,6 +16,7 @@ extern NSString * const UserDidLogoutNotification;
 extern NSString * const UserDidLoginNotification;
 extern NSString * const ColorSelectedNotification;
 extern NSString * const MonthDataChangedNotification;
+extern NSString * const DayDataChangedNotification;
 extern NSString * const RecordTypeDataChangedNotification;
 extern NSString * const ViewFullDayNotification;
 extern NSString * const SwitchDayNotification;

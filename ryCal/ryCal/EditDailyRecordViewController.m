@@ -36,6 +36,8 @@
     [self setupTypeTable];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRecordData) name:MonthDataChangedNotification object:nil];
+    // TODO: clean up duplicate Month + Day notifs being sent out
+    [[NSNotificationCenter defaultCenter] postNotificationName:DayDataChangedNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUsingNewDay:) name:SwitchDayNotification object:nil];
 }

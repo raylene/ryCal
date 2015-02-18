@@ -74,8 +74,7 @@
         [self.recordData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"Successfully saved/updated record");
-                // TODO: figure out if this is working properly...
-                [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
+                [self sendDataChangedNotifications];
             } else {
                 NSLog(@"Failed to save record");
             }
@@ -88,12 +87,18 @@
         if (succeeded) {
             NSLog(@"Succeeded in deleting the record");
             self.recordData = nil;
-            // TODO: figure out if this is working properly...
-            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
+            [self sendDataChangedNotifications];
         } else {
             NSLog(@"Failed to delete");
         }
     }];
+}
+
+- (void)sendDataChangedNotifications {
+    // TODO: figure out if this is working properly...
+    [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
+    // TODO: clean up duplicate Month + Day notifs being sent out
+    [[NSNotificationCenter defaultCenter] postNotificationName:DayDataChangedNotification object:nil];
 }
 
 #pragma mark Methods tied to visual elements that should be overriden
@@ -101,7 +106,6 @@
 - (void)setupTypeRelatedFields {
     self.recordTypeName.text = self.typeData[kNameFieldKey];
     self.backgroundColor = [SharedConstants getColor:self.typeData[kColorFieldKey]];
-    //    self.recordColorImage.backgroundColor = [SharedConstants getColor:typeData[kColorFieldKey]];
 }
 
 - (void)setupRecordDataRelatedFields {
@@ -142,23 +146,29 @@
     // This is a binary toggle, so if the record already exists, consider this a delete
     BOOL deleteRecord = self.recordData != nil;
     if (deleteRecord && self.recordNoteText.text) {
-        // TODO: prevent people from deleting too quickly if there is a note
-//        [self presentDeleteWarningAlert];
+        [self presentDeleteWarningAlert];
+    } else {
+        [self saveChanges:deleteRecord];
     }
-    [self saveChanges:deleteRecord];
 }
 
 // Prevent people from deleting too quickly if there is a note
 - (void)presentDeleteWarningAlert {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Are you sure?"
-                                                                   message:@"You've saved a special note for this record. "
-                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* alert =
+        [UIAlertController alertControllerWithTitle:@"Confirm Delete"
+                                            message:@"You've saved a special note for this record. Are you sure you want to delete this?"
+                                     preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"Yes, Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self saveChanges:YES];
     }];
-    [alert addAction:defaultAction];
-//    [ presentViewController:alert animated:YES completion:nil];
+    UIAlertAction* escapeAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:deleteAction];
+    [alert addAction:escapeAction];
+    
+    // NOTE: this seems like a huge hack. there must be a better way to present this
+    // from a view...
+    [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 @end
