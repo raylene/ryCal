@@ -80,7 +80,7 @@
     // Get all components for the first of the month
     self.components = [self.calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate: self.startDate];
     
-    NSLog(@"Month components: %@ -- %ld, %ld, %ld, %ld", self.getTitleString, self.components.year, self.components.month, self.components.day, self.components.weekday);
+    // NSLog(@"Month components: %@ -- %ld, %ld, %ld, %ld", self.getTitleString, self.components.year, self.components.month, self.components.day, self.components.weekday);
 }
 
 - (NSInteger)getReferenceDayIdx {
