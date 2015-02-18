@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SEH-pV-Hzi">
-                    <rect key="frame" x="10" y="40" width="355" height="587"/>
+                    <rect key="frame" x="12" y="40" width="353" height="587"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="nvS-Sr-tg5"/>
@@ -29,7 +29,7 @@
                 <constraint firstAttribute="trailing" secondItem="SEH-pV-Hzi" secondAttribute="trailing" constant="10" id="GKS-ny-OwQ"/>
                 <constraint firstItem="SEH-pV-Hzi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="Kbx-4n-oUn"/>
                 <constraint firstAttribute="bottom" secondItem="SEH-pV-Hzi" secondAttribute="bottom" constant="40" id="Mg3-we-XjG"/>
-                <constraint firstItem="SEH-pV-Hzi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Tnv-vc-9rT"/>
+                <constraint firstItem="SEH-pV-Hzi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="Tnv-vc-9rT"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">

@@ -45,6 +45,11 @@ static const NSString *kFacebookAppID = @"745968008790705";
     // Notification subscriptions
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLogout) name:UserDidLogoutNotification object:nil];
 
+    // Navigation appearance for the whole app
+    [[UINavigationBar appearance] setBarTintColor:[SharedConstants getNavigationBarColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
+
     User *user = [User currentUser];
     UIViewController *vc = nil;
     if (user == nil) {

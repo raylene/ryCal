@@ -140,13 +140,14 @@
             NSLog(@"Loaded all records for month: %lu", (unsigned long)records.count);
             self.dailyRecordDictionary = [[NSMutableDictionary alloc] init];
             for (Record *record in records) {
-                NSString *dateKey = [record getDateStringKey];
+                // TODO: see if this should be changed
+                NSString *dateKey = record[kDateFieldKey];
                 if (self.dailyRecordDictionary[dateKey] == nil) {
                     self.dailyRecordDictionary[dateKey] = [[NSMutableArray alloc] init];
                 }
                 [self.dailyRecordDictionary[dateKey] addObject:record];
             }
-            NSLog(@"RECORDS: %@", self.dailyRecordDictionary);
+            // NSLog(@"RECORDS: %@", self.dailyRecordDictionary);
         } else {
             NSLog(@"Error loading records for month: %@", [self getTitleString]);
         }

@@ -105,9 +105,9 @@
 
 - (void)onSave {
     self.navigationItem.rightBarButtonItem.enabled = NO;
-    self.recordType.name = self.nameTextField.text;
+    self.recordType.name = [SharedConstants getSaveFormattedString:self.nameTextField.text];
     self.recordType.archived = (BOOL)self.enabledControl.selectedSegmentIndex;
-    self.recordType.description = self.descriptionTextView.text;
+    self.recordType.description = [SharedConstants getSaveFormattedString:self.descriptionTextView.text];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
     [self.recordType saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

@@ -25,10 +25,10 @@
     
     self.menuVC = [[MenuViewController alloc] init];
     self = [super initWithViewControllers:self.menuVC contentVC:self.contentVC];
-    
-    [[UINavigationBar appearance] setBarTintColor:[SharedConstants getNavigationBarColor]];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
+//    
+//    [[UINavigationBar appearance] setBarTintColor:[SharedConstants getNavigationBarColor]];
+//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+//    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
     
     // TODO: look into this resizing hack
     hvc.view.frame = self.contentVC.view.frame;

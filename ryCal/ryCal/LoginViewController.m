@@ -27,7 +27,7 @@
 }
 
 - (void)setupNavigationBar {
-    self.title = @"ryCal";
+    self.title = @"(^_^)";
 }
 
 - (IBAction)onLogin:(id)sender {
