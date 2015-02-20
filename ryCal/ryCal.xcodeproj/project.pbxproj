@@ -16,6 +16,8 @@
 		6F16509F1A53A549006336EF /* MenuItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F16509D1A53A549006336EF /* MenuItemCell.xib */; };
 		6F621D731A5F4D4A00F85A17 /* DummyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F621D711A5F4D4A00F85A17 /* DummyCell.m */; };
 		6F621D741A5F4D4A00F85A17 /* DummyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F621D721A5F4D4A00F85A17 /* DummyCell.xib */; };
+		6F62F2D71A9565A30041D3B1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F62F2D61A9565A30041D3B1 /* libsqlite3.0.dylib */; };
+		6F62F2D91A9565C50041D3B1 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F62F2D81A9565C50041D3B1 /* libsqlite3.dylib */; };
 		6F6B9A931A22BCDD005B7722 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B9A911A22BCDD005B7722 /* LoginViewController.m */; };
 		6F6B9A941A22BCDD005B7722 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B9A921A22BCDD005B7722 /* LoginViewController.xib */; };
 		6F6B9A9E1A22F585005B7722 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B9A9D1A22F585005B7722 /* User.m */; };
@@ -78,6 +80,8 @@
 		6F621D701A5F4D4A00F85A17 /* DummyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyCell.h; sourceTree = "<group>"; };
 		6F621D711A5F4D4A00F85A17 /* DummyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyCell.m; sourceTree = "<group>"; };
 		6F621D721A5F4D4A00F85A17 /* DummyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DummyCell.xib; sourceTree = "<group>"; };
+		6F62F2D61A9565A30041D3B1 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		6F62F2D81A9565C50041D3B1 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		6F6B9A901A22BCDD005B7722 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6F6B9A911A22BCDD005B7722 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6F6B9A921A22BCDD005B7722 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F62F2D91A9565C50041D3B1 /* libsqlite3.dylib in Frameworks */,
+				6F62F2D71A9565A30041D3B1 /* libsqlite3.0.dylib in Frameworks */,
 				09F697F05BDA49F09297C8FE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,6 +322,8 @@
 		7B11BFFA42288D1AE09F3A35 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6F62F2D81A9565C50041D3B1 /* libsqlite3.dylib */,
+				6F62F2D61A9565A30041D3B1 /* libsqlite3.0.dylib */,
 				A8BCD7F6B25917ADCD0112DC /* libPods.a */,
 			);
 			name = Frameworks;

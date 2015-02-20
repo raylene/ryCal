@@ -52,6 +52,15 @@
     }];
 }
 
++ (void)saveType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion {
+    [type saveInBackgroundWithBlock:completion];
+}
+
++ (void)deleteType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion {
+    [type deleteInBackgroundWithBlock:completion];
+}
+
+// Parse: base query used for fetching any record types
 + (PFQuery *)createBasicRecordTypeQuery {
     PFQuery *query = [PFQuery queryWithClassName:@"RecordType"];
     [query setCachePolicy:kPFCachePolicyNetworkElseCache];
@@ -85,7 +94,6 @@ static NSArray *_enabledRecordTypes;
     [query findObjectsInBackgroundWithBlock:completion];
 }
 
-// TODO: fill this out?
 + (void)loadFromID:(NSString *)objectID completion:(void (^)(RecordType *type, NSError *error))completion {
     [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
         for (RecordType *recordType in types) {

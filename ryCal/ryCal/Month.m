@@ -121,9 +121,6 @@
 
 #pragma mark Data-fetching related methods
 
-// TODO: fix this primary record business to use the primary record type?
-// TODO: fix this to not return records that are of archived record types...
-// will need to also fix loadAllRecords probably
 - (Record *)getPrimaryRecordForDay:(NSInteger)day {
     NSDate *dateKey = [self getStartDateForDay:day];
     if (self.dailyRecordDictionary == nil ||
@@ -135,19 +132,17 @@
 }
 
 - (void)loadAllRecords:(void (^)(NSError *error))monthCompletion {
-    [Record loadAllRecordsForTimeRange:[self getStartDate] endDate:[self getEndDate] completion:^(NSArray *records, NSError *error) {
+    [Record loadAllEnabledRecordsForTimeRange:[self getStartDate] endDate:[self getEndDate] completion:^(NSArray *records, NSError *error) {
         if (error == nil) {
             NSLog(@"Loaded all records for month: %lu", (unsigned long)records.count);
             self.dailyRecordDictionary = [[NSMutableDictionary alloc] init];
             for (Record *record in records) {
-                // TODO: see if this should be changed
-                NSString *dateKey = record[kDateFieldKey];
+                NSDate *dateKey = record[kDateFieldKey];
                 if (self.dailyRecordDictionary[dateKey] == nil) {
                     self.dailyRecordDictionary[dateKey] = [[NSMutableArray alloc] init];
                 }
                 [self.dailyRecordDictionary[dateKey] addObject:record];
             }
-            // NSLog(@"RECORDS: %@", self.dailyRecordDictionary);
         } else {
             NSLog(@"Error loading records for month: %@", [self getTitleString]);
         }

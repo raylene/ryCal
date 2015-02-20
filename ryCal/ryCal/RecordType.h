@@ -28,6 +28,9 @@
 + (void)loadAllTypes:(void (^)(NSArray *types, NSError *error))completion;
 + (void)loadFromID:(NSString *)objectID completion:(void (^)(RecordType *type, NSError *error))completion;
 
++ (void)saveType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion;    
++ (void)deleteType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion;
+
 + (void)createTestRecordTypes;
 
 

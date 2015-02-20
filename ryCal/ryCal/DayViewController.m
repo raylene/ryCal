@@ -42,7 +42,7 @@
     
     [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
         self.recordTypes = types;
-        [Record loadAllRecordsForTimeRange:[self.dayData getStartDate] endDate:[self.dayData getEndDate] completion:^(NSArray *records, NSError *error) {
+        [Record loadAllEnabledRecordsForTimeRange:[self.dayData getStartDate] endDate:[self.dayData getEndDate] completion:^(NSArray *records, NSError *error) {
             for (Record *record in records) {
                 NSString *recordTypeID = record.typeID;
                 [self.recordDictionary setObject:record forKey:recordTypeID];

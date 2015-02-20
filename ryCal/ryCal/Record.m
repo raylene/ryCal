@@ -83,22 +83,37 @@
     [query findObjectsInBackgroundWithBlock:completion];
 }
 
-// Date comparison: https://www.parse.com/questions/cloud-code-querying-objects-by-creation-date
+// TODO: may not need this unless we support stats for both enabled/archived records
 + (void)loadAllRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion {
     NSLog(@"Loading all records for time range: %@, %@", startDate, endDate);
-    PFQuery *query = [self createBasicRecordQuery];
-    [query whereKey:kDateFieldKey greaterThanOrEqualTo:startDate];
-    [query whereKey:kDateFieldKey lessThan:endDate];
+    PFQuery *query = [self createTimeRangeRecordQuery:startDate endDate:endDate];
+    [query findObjectsInBackgroundWithBlock:completion];
+}
+
++ (void)loadAllEnabledRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion {
+    NSLog(@"Loading all ENABLED records for time range: %@, %@", startDate, endDate);
+    PFQuery *query = [self createTimeRangeRecordQuery:startDate endDate:endDate];
+    [query whereKey:kArchivedFieldKey notEqualTo:[NSNumber numberWithBool:YES]];
     [query includeKey:kTypeFieldKey];
     [query findObjectsInBackgroundWithBlock:completion];
 }
 
++ (PFQuery *)createTimeRangeRecordQuery:(NSDate *)startDate endDate:(NSDate *)endDate {
+    PFQuery *query = [self createBasicRecordQuery];
+    // Date comparison: https://www.parse.com/questions/cloud-code-querying-objects-by-creation-date
+    [query whereKey:kDateFieldKey greaterThanOrEqualTo:startDate];
+    [query whereKey:kDateFieldKey lessThan:endDate];
+    return query;
+}
+
+// Parse: base query used for fetching any records
 + (PFQuery *)createBasicRecordQuery {
     PFQuery *query = [PFQuery queryWithClassName:@"Record"];
     [query setCachePolicy:kPFCachePolicyNetworkElseCache];
     [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
     [query orderByAscending:@"date"];
     [query addDescendingOrder:@"updatedAt"];
+    [query includeKey:kTypeFieldKey];
     return query;
 }
 

@@ -105,12 +105,12 @@
 
 - (void)onSave {
     self.navigationItem.rightBarButtonItem.enabled = NO;
+
     self.recordType.name = [SharedConstants getSaveFormattedString:self.nameTextField.text];
     self.recordType.archived = (BOOL)self.enabledControl.selectedSegmentIndex;
     self.recordType.description = [SharedConstants getSaveFormattedString:self.descriptionTextView.text];
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    [self.recordType saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [RecordType saveType:self.recordType completion:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Successfully saved record type changes");
             [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
@@ -119,12 +119,13 @@
             NSLog(@"Error saving!");
         }
     }];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)onDelete:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
     // TODO: also delete all records with that type? Would need a confirmation before doing this...
-    [self.recordType deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [RecordType deleteType:self.recordType completion:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Successfully deleted record type");
             [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
