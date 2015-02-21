@@ -43,6 +43,11 @@
 
 #pragma mark CompressedDailyRecordCell that should be overridden
 
+- (BOOL)shouldShowDeleteConfirmation {
+    NSString *currentNote = self.recordData[kNoteFieldKey];
+    return currentNote.length;
+}
+
 - (void)setupTypeRelatedFields {
     self.recordTypeName.text = self.typeData[kNameFieldKey];
     self.recordColorImage.backgroundColor = [SharedConstants getColor:self.typeData[kColorFieldKey]];

@@ -54,13 +54,10 @@
 - (void)saveChanges:(BOOL)deleteRecord {
     NSLog(@"Saving record changes: %@", self.recordData);
     if (deleteRecord) {
-        // No need to delete if it's already nil
-        if (self.recordData != nil) {
-            [self deleteRecord];
-        }
+        [self deleteRecord];
     } else {
         NSString *newText = [self getNewRecordNoteText];
-        if (self.recordData) {
+        if (self.recordData && newText != nil) {
             self.recordData[kNoteFieldKey] = newText;
         } else {
             self.recordData = [Record createNewRecord:self.typeData withText:newText onDate:self.date];
@@ -77,6 +74,10 @@
 }
 
 - (void)deleteRecord {
+    // No need to delete if it's already nil
+    if (self.recordData == nil) {
+        return;
+    }
     [self.recordData deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Succeeded in deleting the record");
@@ -88,6 +89,24 @@
     }];
 }
 
+- (void)presentDeleteConfirmation:(void (^)(void))confirmationHandler {
+    UIAlertController* alert =
+    [UIAlertController alertControllerWithTitle:@"Confirm Delete"
+                                        message:@"You've saved a special note for this record. Are you sure you want to delete this?"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"Yes, Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        confirmationHandler();
+    }];
+    UIAlertAction* escapeAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:deleteAction];
+    [alert addAction:escapeAction];
+    
+    // NOTE: this seems like a huge hack. there must be a better way to present this
+    // from a view...
+    [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)sendDataChangedNotifications {
     // TODO: figure out if this is working properly...
     [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
@@ -96,6 +115,10 @@
 }
 
 #pragma mark Methods tied to visual elements that should be overriden
+
+- (BOOL)shouldShowDeleteConfirmation {
+    return self.recordNoteText.text.length;
+}
 
 - (void)setupTypeRelatedFields {
     self.recordTypeName.text = self.typeData[kNameFieldKey];
@@ -137,30 +160,13 @@
 - (IBAction)onTapGesture:(id)sender {
     // This is a binary toggle, so if the record already exists, consider this a delete
     BOOL deleteRecord = self.recordData != nil;
-    if (deleteRecord && self.recordNoteText.text.length) {
-        [self presentDeleteWarningAlert];
+    if (deleteRecord && [self shouldShowDeleteConfirmation]) {
+        [self presentDeleteConfirmation:^{
+            [self saveChanges:deleteRecord];
+        }];
     } else {
         [self saveChanges:deleteRecord];
     }
-}
-
-// Prevent people from deleting too quickly if there is a note
-- (void)presentDeleteWarningAlert {
-    UIAlertController* alert =
-        [UIAlertController alertControllerWithTitle:@"Confirm Delete"
-                                            message:@"You've saved a special note for this record. Are you sure you want to delete this?"
-                                     preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"Yes, Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self saveChanges:YES];
-    }];
-    UIAlertAction* escapeAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
-    [alert addAction:deleteAction];
-    [alert addAction:escapeAction];
-    
-    // NOTE: this seems like a huge hack. there must be a better way to present this
-    // from a view...
-    [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 @end
