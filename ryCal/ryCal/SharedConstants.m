@@ -64,6 +64,8 @@ NSString * const TEST_TYPE_CLIMBING = @"V6UNX3Rq3m";
 
 int const NUM_COLORS = 10;
 
+float const NAV_BAR_ICON_SIZE = 24.0;
+
 // TODO: convert to singleton? http://www.galloway.me.uk/tutorials/singleton-classes/
 + (NSArray *)getColorArray {
     return @[

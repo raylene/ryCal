@@ -96,16 +96,36 @@
     self.title = [self.monthData getTitleString];
     
     // If we're already looking at this month, don't let us go into the future
-    if (!self.monthData.isCurrentMonth) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@">>" style:UIBarButtonItemStylePlain target:self action:@selector(onGoForwardInTime)];
-    }
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<<" style:UIBarButtonItemStylePlain target:self action:@selector(onGoBackInTime)];
+//    if (!self.monthData.isCurrentMonth) {
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@">>" style:UIBarButtonItemStylePlain target:self action:@selector(onGoForwardInTime)];
+//    }
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<<" style:UIBarButtonItemStylePlain target:self action:@selector(onGoBackInTime)];
     
-    // Alternative menu options: Menu + Today
-    /*
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Today" style:UIBarButtonItemStylePlain target:self action:@selector(onGoToToday)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
-     */
+    UIImageView *menuImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu"]];
+    menuImageView.frame = CGRectMake(0, 0, NAV_BAR_ICON_SIZE, NAV_BAR_ICON_SIZE);
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleMenu)];
+    [menuImageView addGestureRecognizer:tgr];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:menuImageView];
+
+    UIImageView *pastImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftarrow"]];
+    pastImageView.frame = CGRectMake(0, 0, NAV_BAR_ICON_SIZE, NAV_BAR_ICON_SIZE);
+    UITapGestureRecognizer *pastTgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onGoBackInTime)];
+    [pastImageView addGestureRecognizer:pastTgr];
+    UIBarButtonItem *pastButton = [[UIBarButtonItem alloc] initWithCustomView:pastImageView];
+    
+    //self.navigationItem.leftBarButtonItem = menuButton;
+    //self.navigationItem.leftBarButtonItem = pastButton;
+    self.navigationItem.leftBarButtonItems = @[menuButton, pastButton];
+    
+    UIImageView *futureImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightarrow"]];
+    futureImageView.frame = CGRectMake(0, 0, NAV_BAR_ICON_SIZE, NAV_BAR_ICON_SIZE);
+    UITapGestureRecognizer *futureTgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onGoForwardInTime)];
+    [futureImageView addGestureRecognizer:futureTgr];
+    UIBarButtonItem *futureButton = [[UIBarButtonItem alloc] initWithCustomView:futureImageView];
+    
+    self.navigationItem.rightBarButtonItem = futureButton;
+    
+    //self.navigationItem.titleView =
 }
 
 #pragma mark Private helper methods
@@ -126,12 +146,12 @@
 }
 
 - (void)onGoForwardInTime {
-    if (self.monthData.isCurrentMonth) {
-        [self onGoToToday];
-    } else {
+//    if (self.monthData.isCurrentMonth) {
+//        [self onGoToToday];
+//    } else {
         HomeViewController *vc = [[HomeViewController alloc] initWithDate:[self.monthData getStartDateForNextMonth]];
         [self.navigationController pushViewController:vc animated:YES];
-    }
+//    }
 }
 
 // TODO: delete this if we don't decide to have a "today" button on home

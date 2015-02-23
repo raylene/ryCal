@@ -52,12 +52,20 @@
 
 - (void)setupNavigationBar {
     self.title = @"Record Types";
-    // TODO: possibly customize add button style?
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(onCreateNewType)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    
+    // TODO: share code with HomeViewController?
+    UIImageView *menuImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu"]];
+    menuImageView.frame = CGRectMake(0, 0, NAV_BAR_ICON_SIZE, NAV_BAR_ICON_SIZE);
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleMenu)];
+    [menuImageView addGestureRecognizer:tgr];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuImageView];
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(toggleMenu)];
-
+    UIImageView *newImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"plus"]];
+    newImageView.frame = CGRectMake(0, 0, NAV_BAR_ICON_SIZE, NAV_BAR_ICON_SIZE);
+    UITapGestureRecognizer *newTgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCreateNewType)];
+    [newImageView addGestureRecognizer:newTgr];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:newImageView];
+    
     // TODO: see if there is a better way to do this?
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"All Records" style:UIBarButtonItemStylePlain target:self action:nil];    
 }

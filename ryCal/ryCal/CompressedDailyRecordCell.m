@@ -62,7 +62,9 @@
         } else {
             self.recordData = [Record createNewRecord:self.typeData withText:newText onDate:self.date];
         }
-        [self.recordData saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        // TODO: push this into the Record.h class?
+        [self.recordData saveEventually:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"Successfully saved/updated record");
                 [self sendDataChangedNotifications];

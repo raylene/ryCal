@@ -60,6 +60,9 @@ extern NSString * const TEST_TYPE_CLIMBING;
 
 extern int const NUM_COLORS;
 
+extern float const NAV_BAR_ICON_SIZE;
+
+
 + (NSArray *)getColorArray;
 + (NSString *)getDefaultColorName;
 + (UIColor *)getPlaceholderRecordTypeColor;

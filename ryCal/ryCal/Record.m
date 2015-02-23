@@ -66,7 +66,7 @@
     }
     newRecord.userID = [[User currentUser] getUserID];
     newRecord.date = date;
-    [newRecord saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [newRecord saveEventually:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             // TODO: figure out why this isn't working?
             [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
@@ -109,7 +109,8 @@
 // Parse: base query used for fetching any records
 + (PFQuery *)createBasicRecordQuery {
     PFQuery *query = [PFQuery queryWithClassName:@"Record"];
-    [query setCachePolicy:kPFCachePolicyNetworkElseCache];
+    //[query setCachePolicy:kPFCachePolicyNetworkElseCache];
+    //[query setCachePolicy:kPFCachePolicyCacheElseNetwork];
     [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
     [query orderByAscending:@"date"];
     [query addDescendingOrder:@"updatedAt"];

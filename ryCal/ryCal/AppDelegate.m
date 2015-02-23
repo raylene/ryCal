@@ -37,7 +37,7 @@ static const NSString *kFacebookAppID = @"745968008790705";
     [RecordType registerSubclass];
 
     // https://www.parse.com/docs/ios_guide#objects-pinning/iOS
-    //[Parse enableLocalDatastore];
+    [Parse enableLocalDatastore];
 
     [Parse setApplicationId:(NSString *)kParseAppID clientKey:(NSString *)kParseClientKey];
     [PFFacebookUtils initializeFacebook];

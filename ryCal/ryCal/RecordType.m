@@ -43,7 +43,7 @@
     newRecordType.userID = [[User currentUser] getUserID];
     newRecordType.archived = archived;
     
-    [newRecordType saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [newRecordType saveEventually:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
@@ -53,7 +53,7 @@
 }
 
 + (void)saveType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion {
-    [type saveInBackgroundWithBlock:completion];
+    [type saveEventually:completion];
 }
 
 + (void)deleteType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion {
@@ -63,7 +63,7 @@
 // Parse: base query used for fetching any record types
 + (PFQuery *)createBasicRecordTypeQuery {
     PFQuery *query = [PFQuery queryWithClassName:@"RecordType"];
-    [query setCachePolicy:kPFCachePolicyNetworkElseCache];
+    //[query setCachePolicy:kPFCachePolicyNetworkElseCache];
     [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
     [query orderByAscending:@"archived"];
     [query addDescendingOrder:@"updatedAt"];

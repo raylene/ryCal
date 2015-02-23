@@ -75,7 +75,7 @@ static User *_currentUser;
 
             if (pfuser.isNew) {
                 NSLog(@"Created new user!");
-                [pfuser saveInBackground];
+                [pfuser saveEventually];
             }
             
             [User setCurrentUser:[[User alloc] initWithPFUser:pfuser]];
