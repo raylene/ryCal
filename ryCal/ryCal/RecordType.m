@@ -10,6 +10,7 @@
 #import <Parse/PFObject+Subclass.h>
 #import "User.h"
 #import "SharedConstants.h"
+#import "RecordQueryTracker.h"
 
 @implementation RecordType
 
@@ -42,7 +43,6 @@
     newRecordType.color = typeColor;
     newRecordType.userID = [[User currentUser] getUserID];
     newRecordType.archived = archived;
-    
     [newRecordType saveEventually:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
@@ -54,50 +54,61 @@
 
 + (void)saveType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion {
     [type saveEventually:^(BOOL succeeded, NSError *error) {
+        [self dirtyQueryCache];
         completion(succeeded, error);
     }];
 }
 
 + (void)deleteType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion {
     [type deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [self dirtyQueryCache];
         completion(succeeded, error);
     }];
 }
 
 // Parse: base query used for fetching any record types
-+ (PFQuery *)createBasicRecordTypeQuery {
++ (PFQuery *)createBasicRecordTypeQuery:(NSString *)queryKey {
     PFQuery *query = [PFQuery queryWithClassName:@"RecordType"];
-//    [query setCachePolicy:kPFCachePolicyCacheElseNetwork];
     [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
     [query orderByAscending:@"archived"];
     [query addDescendingOrder:@"updatedAt"];
+    
+    // Query is already cached, use local datastore
+    if ([[RecordQueryTracker sharedQueryTracker] hasQuery:queryKey]) {
+        [query fromLocalDatastore];
+    }
     return query;
 }
 
 + (void)loadEnabledTypes:(void (^)(NSArray *types, NSError *error))completion {
     NSLog(@"Loading only enabled record types for user: %@", [[User currentUser] getUserID]);
-    PFQuery *query = [self createBasicRecordTypeQuery];
+    PFQuery *query = [self createBasicRecordTypeQuery:kEnabledRecordTypeQueryKey];
     [query whereKey:kArchivedFieldKey notEqualTo:@YES];
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [self updateQueryTrackerAndDatastore:kEnabledRecordTypeQueryKey objects:objects];
         completion(objects, error);
     }];
 }
 
 + (void)loadAllTypes:(void (^)(NSArray *types, NSError *error))completion {
     NSLog(@"Loading all record types for user: %@", [[User currentUser] getUserID]);
-    PFQuery *query = [self createBasicRecordTypeQuery];
-    [query findObjectsInBackgroundWithBlock:completion];
-}
-
-+ (void)loadFromID:(NSString *)objectID completion:(void (^)(RecordType *type, NSError *error))completion {
-    [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
-        for (RecordType *recordType in types) {
-            if ([objectID isEqualToString:recordType.objectId]) {
-                completion(recordType, error);
-            }
-        }
+    PFQuery *query = [self createBasicRecordTypeQuery:kRecordTypeQueryKey];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [self updateQueryTrackerAndDatastore:kRecordTypeQueryKey objects:objects];
+        completion(objects, error);
     }];
 }
+
+//+ (void)loadFromID:(NSString *)objectID completion:(void (^)(RecordType *type, NSError *error))completion {
+//    [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
+//        for (RecordType *recordType in types) {
+//            if ([objectID isEqualToString:recordType.objectId]) {
+//                completion(recordType, error);
+//            }
+//        }
+//    }];
+//}
 
 + (void)createTestRecordTypes {
     [RecordType createRecordType:@"climbing" typeColor:RECORD_COLOR_BLUE completion:^(BOOL succeeded, NSError *error) {
@@ -115,6 +126,19 @@
             NSLog(@"Created new record type!");
         }
     }];
+}
+
+#pragma mark Query tracking helper methods
+
++ (void)dirtyQueryCache {
+    NSLog(@"dirty");
+    [[RecordQueryTracker sharedQueryTracker] removeQuery:kRecordTypeQueryKey];
+    [[RecordQueryTracker sharedQueryTracker] removeQuery:kEnabledRecordTypeQueryKey];
+}
+
+// TODO: share code with Record.m? move this into RecordQueryTracker?
++ (void)updateQueryTrackerAndDatastore:(NSString *)key objects:(NSArray *)objects{
+    [[RecordQueryTracker sharedQueryTracker] updateDatastore:key objects:objects];
 }
 
 @end

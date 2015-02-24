@@ -12,6 +12,7 @@
 #import <Parse/Parse.h>
 #import <Parse/PFObject+Subclass.h>
 #import "SharedConstants.h"
+#import "RecordQueryTracker.h"
 
 @implementation Record
 
@@ -68,6 +69,7 @@
     newRecord.date = date;
     [newRecord saveEventually:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
+            [self dirtyQueryCache];
             // TODO: figure out why this isn't working?
             [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
             // TODO: clean up duplicate Month + Day notifs being sent out
@@ -79,15 +81,16 @@
 
 + (void)deleteRecord:(Record *)record completion:(void (^)(BOOL succeeded, NSError *error)) completion {
     [record deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [self dirtyQueryCache];
         completion(succeeded, error);
     }];
 }
 
-+ (void)loadAllRecords:(void (^)(NSArray *records, NSError *error))completion {
-    NSLog(@"Loading all records");
-    PFQuery *query = [self createBasicRecordQuery];
-    [query findObjectsInBackgroundWithBlock:completion];
-}
+//+ (void)loadAllRecords:(void (^)(NSArray *records, NSError *error))completion {
+//    NSLog(@"Loading all records");
+//    PFQuery *query = [self createBasicRecordQuery];
+//    [query findObjectsInBackgroundWithBlock:completion];
+//}
 
 // TODO: may not need this unless we support stats for both enabled/archived records
 //+ (void)loadAllRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion {
@@ -99,13 +102,18 @@
 + (void)loadAllEnabledRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion {
     NSLog(@"Loading all ENABLED records for time range: %@, %@", startDate, endDate);
     PFQuery *query = [self createTimeRangeRecordQuery:startDate endDate:endDate];
-    [query whereKey:kArchivedFieldKey notEqualTo:[NSNumber numberWithBool:YES]];
+//    [query whereKey:kArchivedFieldKey notEqualTo:[NSNumber numberWithBool:YES]];
+    // TODO: FIX FIX - this needs to actually check that the type still exists / is enabled
     [query includeKey:kTypeFieldKey];
-    [query findObjectsInBackgroundWithBlock:completion];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [self updateQueryTrackerAndDatastore:kRecordQueryKey objects:objects];
+        completion(objects, error);
+    }];
 }
 
 + (PFQuery *)createTimeRangeRecordQuery:(NSDate *)startDate endDate:(NSDate *)endDate {
-    PFQuery *query = [self createBasicRecordQuery];
+    PFQuery *query = [self createBasicRecordQuery:kRecordQueryKey];
     // Date comparison: https://www.parse.com/questions/cloud-code-querying-objects-by-creation-date
     [query whereKey:kDateFieldKey greaterThanOrEqualTo:startDate];
     [query whereKey:kDateFieldKey lessThan:endDate];
@@ -113,13 +121,17 @@
 }
 
 // Parse: base query used for fetching any records
-+ (PFQuery *)createBasicRecordQuery {
++ (PFQuery *)createBasicRecordQuery:(NSString *)queryKey {
     PFQuery *query = [PFQuery queryWithClassName:@"Record"];
-//    [query setCachePolicy:kPFCachePolicyCacheElseNetwork];
     [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
     [query orderByAscending:@"date"];
     [query addDescendingOrder:@"updatedAt"];
     [query includeKey:kTypeFieldKey];
+    
+    // Query is already cached, use local datastore
+    if ([[RecordQueryTracker sharedQueryTracker] hasQuery:queryKey]) {
+        [query fromLocalDatastore];
+    }
     return query;
 }
 
@@ -136,6 +148,18 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd-MM-YYYY"];
     return [dateFormatter stringFromDate:self.date];
+}
+
+#pragma mark Query tracking helper methods
+
++ (void)dirtyQueryCache {
+    NSLog(@"dirty");
+    [[RecordQueryTracker sharedQueryTracker] removeQuery:kRecordQueryKey];
+}
+
+// TODO: share code with Record.m? move this into RecordQueryTracker?
++ (void)updateQueryTrackerAndDatastore:(NSString *)key objects:(NSArray *)objects {
+    [[RecordQueryTracker sharedQueryTracker] updateDatastore:key objects:objects];
 }
 
 @end
