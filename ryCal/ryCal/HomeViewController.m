@@ -113,9 +113,9 @@
     [pastImageView addGestureRecognizer:pastTgr];
     UIBarButtonItem *pastButton = [[UIBarButtonItem alloc] initWithCustomView:pastImageView];
     
-    //self.navigationItem.leftBarButtonItem = menuButton;
+    self.navigationItem.leftBarButtonItem = menuButton;
     //self.navigationItem.leftBarButtonItem = pastButton;
-    self.navigationItem.leftBarButtonItems = @[menuButton, pastButton];
+    //self.navigationItem.leftBarButtonItems = @[menuButton, pastButton];
     
     UIImageView *futureImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightarrow"]];
     futureImageView.frame = CGRectMake(0, 0, NAV_BAR_ICON_SIZE, NAV_BAR_ICON_SIZE);
@@ -123,7 +123,8 @@
     [futureImageView addGestureRecognizer:futureTgr];
     UIBarButtonItem *futureButton = [[UIBarButtonItem alloc] initWithCustomView:futureImageView];
     
-    self.navigationItem.rightBarButtonItem = futureButton;
+    //self.navigationItem.rightBarButtonItem = futureButton;
+    self.navigationItem.rightBarButtonItems = @[futureButton, pastButton];
     
     //self.navigationItem.titleView =
 }

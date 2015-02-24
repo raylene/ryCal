@@ -10,4 +10,16 @@
 
 @interface RecordQueryTracker : NSObject
 
+extern NSString * const kRecordTypeQueryKey;
+extern NSString * const kEnabledRecordTypeQueryKey;
+extern NSString * const kRecordQueryKey;
+
+@property (nonatomic, strong) NSMutableDictionary *queryNames;
+
++(id)sharedQueryTracker;
+
+- (BOOL)hasQuery:(NSString *)name;
+- (void)removeQuery:(NSString *)name;
+- (void)addQuery:(NSString *)name;
+
 @end

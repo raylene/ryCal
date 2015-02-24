@@ -10,4 +10,39 @@
 
 @implementation RecordQueryTracker
 
+NSString * const kRecordTypeQueryKey = @"record_types";
+NSString * const kEnabledRecordTypeQueryKey = @"enabled_record_types";
+NSString * const kRecordQueryKey = @"records";
+
+@synthesize queryNames;
+
++ (id)sharedQueryTracker {
+    static RecordQueryTracker *sharedQueryTracker = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedQueryTracker = [[self alloc] init];
+    });
+    return sharedQueryTracker;
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        queryNames = [[NSMutableDictionary alloc] init];
+    }
+    return self;
+}
+
+- (BOOL)hasQuery:(NSString *)name {
+    return (BOOL)[self.queryNames objectForKey:name];
+}
+
+- (void)removeQuery:(NSString *)name {
+    [self.queryNames removeObjectForKey:name];
+}
+
+- (void)addQuery:(NSString *)name {
+    self.queryNames[name] = [NSDate date];
+}
+
 @end
