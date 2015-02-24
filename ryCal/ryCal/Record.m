@@ -77,6 +77,12 @@
     }];
 }
 
++ (void)deleteRecord:(Record *)record completion:(void (^)(BOOL succeeded, NSError *error)) completion {
+    [record deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        completion(succeeded, error);
+    }];
+}
+
 + (void)loadAllRecords:(void (^)(NSArray *records, NSError *error))completion {
     NSLog(@"Loading all records");
     PFQuery *query = [self createBasicRecordQuery];
@@ -84,11 +90,11 @@
 }
 
 // TODO: may not need this unless we support stats for both enabled/archived records
-+ (void)loadAllRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion {
-    NSLog(@"Loading all records for time range: %@, %@", startDate, endDate);
-    PFQuery *query = [self createTimeRangeRecordQuery:startDate endDate:endDate];
-    [query findObjectsInBackgroundWithBlock:completion];
-}
+//+ (void)loadAllRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion {
+//    NSLog(@"Loading all records for time range: %@, %@", startDate, endDate);
+//    PFQuery *query = [self createTimeRangeRecordQuery:startDate endDate:endDate];
+//    [query findObjectsInBackgroundWithBlock:completion];
+//}
 
 + (void)loadAllEnabledRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion {
     NSLog(@"Loading all ENABLED records for time range: %@, %@", startDate, endDate);
@@ -109,8 +115,7 @@
 // Parse: base query used for fetching any records
 + (PFQuery *)createBasicRecordQuery {
     PFQuery *query = [PFQuery queryWithClassName:@"Record"];
-    //[query setCachePolicy:kPFCachePolicyNetworkElseCache];
-    //[query setCachePolicy:kPFCachePolicyCacheElseNetwork];
+//    [query setCachePolicy:kPFCachePolicyCacheElseNetwork];
     [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
     [query orderByAscending:@"date"];
     [query addDescendingOrder:@"updatedAt"];

@@ -80,9 +80,9 @@
     if (self.recordData == nil) {
         return;
     }
-    [self.recordData deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [Record deleteRecord:self.recordData completion:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            NSLog(@"Succeeded in deleting the record");
+            NSLog(@"Succeeded in deleting the record: %@", self.recordData);
             self.recordData = nil;
             [self sendDataChangedNotifications];
         } else {

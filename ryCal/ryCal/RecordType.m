@@ -53,39 +53,34 @@
 }
 
 + (void)saveType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion {
-    [type saveEventually:completion];
+    [type saveEventually:^(BOOL succeeded, NSError *error) {
+        completion(succeeded, error);
+    }];
 }
 
 + (void)deleteType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion {
-    [type deleteInBackgroundWithBlock:completion];
+    [type deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        completion(succeeded, error);
+    }];
 }
 
 // Parse: base query used for fetching any record types
 + (PFQuery *)createBasicRecordTypeQuery {
     PFQuery *query = [PFQuery queryWithClassName:@"RecordType"];
-    //[query setCachePolicy:kPFCachePolicyNetworkElseCache];
+//    [query setCachePolicy:kPFCachePolicyCacheElseNetwork];
     [query whereKey:kUserIDFieldKey equalTo:[[User currentUser] getUserID]];
     [query orderByAscending:@"archived"];
     [query addDescendingOrder:@"updatedAt"];
     return query;
 }
 
-// TODO: see if this singleton pattern is really the right thing to do...
-static NSArray *_enabledRecordTypes;
 + (void)loadEnabledTypes:(void (^)(NSArray *types, NSError *error))completion {
     NSLog(@"Loading only enabled record types for user: %@", [[User currentUser] getUserID]);
-    if (_enabledRecordTypes == nil) {
-        PFQuery *query = [self createBasicRecordTypeQuery];
-        [query whereKey:kArchivedFieldKey notEqualTo:@YES];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (error != nil) {
-                _enabledRecordTypes = objects;
-            }
-            completion(objects, error);
-        }];
-    } else {
-        completion(_enabledRecordTypes, nil);
-    }
+    PFQuery *query = [self createBasicRecordTypeQuery];
+    [query whereKey:kArchivedFieldKey notEqualTo:@YES];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        completion(objects, error);
+    }];
 }
 
 + (void)loadAllTypes:(void (^)(NSArray *types, NSError *error))completion {
