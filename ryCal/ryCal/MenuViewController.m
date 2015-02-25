@@ -16,8 +16,8 @@
 
 static int const kHomeItemIndex = 0;
 static int const kRecordTypesItemIndex = 1;
-static int const kLogoutItemIndex = 2;
-static int const kHelpItemIndex = 3;
+static int const kLogoutItemIndex = 3;
+static int const kHelpItemIndex = 2;
 
 @interface MenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -84,8 +84,8 @@ static int const kHelpItemIndex = 3;
     @[
       @{@"name" : @"Today", @"img":@"today"},
       @{@"name" : @"Activities", @"img": @"recordtypes"},
-      @{@"name" : @"Logout", @"img": @"logout"},
-      @{@"name" : @"Help", @"img": @"help"}
+      @{@"name" : @"Help", @"img": @"help"},
+      @{@"name" : @"Logout", @"img": @"logout"}
       ];
 }
 
