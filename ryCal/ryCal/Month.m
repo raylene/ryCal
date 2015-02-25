@@ -137,11 +137,16 @@
             NSLog(@"Loaded all records for month: %lu", (unsigned long)records.count);
             self.dailyRecordDictionary = [[NSMutableDictionary alloc] init];
             for (Record *record in records) {
-                NSDate *dateKey = record[kDateFieldKey];
-                if (self.dailyRecordDictionary[dateKey] == nil) {
-                    self.dailyRecordDictionary[dateKey] = [[NSMutableArray alloc] init];
+                if (!record.type || record.type.archived) {
+                    // DO NOTHING
+                    NSLog(@"loaded record with invalid type");
+                } else {
+                    NSDate *dateKey = record[kDateFieldKey];
+                    if (self.dailyRecordDictionary[dateKey] == nil) {
+                        self.dailyRecordDictionary[dateKey] = [[NSMutableArray alloc] init];
+                    }
+                    [self.dailyRecordDictionary[dateKey] addObject:record];
                 }
-                [self.dailyRecordDictionary[dateKey] addObject:record];
             }
         } else {
             NSLog(@"Error loading records for month: %@", [self getTitleString]);

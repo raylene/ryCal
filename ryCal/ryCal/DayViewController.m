@@ -40,6 +40,7 @@
 
     self.title = [self.dayData getTitleString];
     
+    // TODO: potentially share code with similar record fetching in Month.m
     [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
         self.recordTypes = types;
         [Record loadAllEnabledRecordsForTimeRange:[self.dayData getStartDate] endDate:[self.dayData getEndDate] completion:^(NSArray *records, NSError *error) {
