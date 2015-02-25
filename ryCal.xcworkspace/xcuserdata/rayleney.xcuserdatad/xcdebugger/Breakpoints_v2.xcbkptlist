@@ -467,8 +467,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "127"
             endingLineNumber = "127"
-            landmarkName = "+createBasicRecordQuery:"
-            landmarkType = "5">
+            landmarkName = "@implementation Record"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -717,7 +717,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
             endingLineNumber = "156"
-            landmarkName = "+dirtyQueryCache"
+            landmarkName = "-getDateStringKey"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

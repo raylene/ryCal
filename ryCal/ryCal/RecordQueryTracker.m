@@ -61,6 +61,4 @@ NSString * const kRecordQueryKey = @"records";
     }
 }
 
-
-
 @end

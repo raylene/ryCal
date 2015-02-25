@@ -105,7 +105,6 @@
 //    [query whereKey:kArchivedFieldKey notEqualTo:[NSNumber numberWithBool:YES]];
     // TODO: FIX FIX - this needs to actually check that the type still exists / is enabled
     [query includeKey:kTypeFieldKey];
-    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [self updateQueryTrackerAndDatastore:kRecordQueryKey objects:objects];
         completion(objects, error);
