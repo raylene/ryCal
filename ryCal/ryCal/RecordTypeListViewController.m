@@ -51,7 +51,7 @@
 }
 
 - (void)setupNavigationBar {
-    self.title = @"Record Types";
+    self.title = @"Activities";
     
     // TODO: share code with HomeViewController?
     UIImageView *menuImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu"]];

@@ -73,10 +73,11 @@
     [query orderByAscending:@"archived"];
     [query addDescendingOrder:@"updatedAt"];
     
-    // Query is already cached, use local datastore
-    if ([[RecordQueryTracker sharedQueryTracker] hasQuery:queryKey]) {
-        [query fromLocalDatastore];
-    }
+    // TODO: FIX THIS. removing for now as the logic is all borked :/
+    // if ([[RecordQueryTracker sharedQueryTracker] hasQuery:queryKey]) {
+    //   [query fromLocalDatastore];
+    // }
+
     return query;
 }
 
