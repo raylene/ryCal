@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -15,16 +15,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xs0-kQ-reR">
-                        <rect key="frame" x="48" y="27" width="41" height="20"/>
+                        <rect key="frame" x="70" y="27" width="41" height="20"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X6S-fD-iYA">
-                        <rect key="frame" x="23" y="32" width="10" height="10"/>
+                        <rect key="frame" x="23" y="21" width="32" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="10" id="hcx-0W-7Gz"/>
-                            <constraint firstAttribute="height" constant="10" id="xaf-Du-HPy"/>
+                            <constraint firstAttribute="width" constant="32" id="hcx-0W-7Gz"/>
+                            <constraint firstAttribute="height" constant="32" id="xaf-Du-HPy"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -47,7 +47,7 @@
                 <outlet property="itemImage" destination="X6S-fD-iYA" id="sBM-NW-wLe"/>
                 <outlet property="itemName" destination="Xs0-kQ-reR" id="vt8-DK-sOO"/>
             </connections>
-            <point key="canvasLocation" x="308" y="136.5"/>
+            <point key="canvasLocation" x="308" y="135.5"/>
         </tableViewCell>
     </objects>
 </document>

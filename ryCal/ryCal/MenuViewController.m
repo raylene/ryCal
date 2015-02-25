@@ -17,6 +17,7 @@
 static int const kHomeItemIndex = 0;
 static int const kRecordTypesItemIndex = 1;
 static int const kLogoutItemIndex = 2;
+static int const kHelpItemIndex = 3;
 
 @interface MenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -81,9 +82,10 @@ static int const kLogoutItemIndex = 2;
     // Init menu item option configurations
     self.menuItemConfig =
     @[
-      @{@"name" : @"Today", @"img":@"home"},
-      @{@"name" : @"Record Types", @"img": @"recordtypes"},
-      @{@"name" : @"Logout", @"img": @"logout"}
+      @{@"name" : @"Today", @"img":@"today"},
+      @{@"name" : @"Activities", @"img": @"recordtypes"},
+      @{@"name" : @"Logout", @"img": @"logout"},
+      @{@"name" : @"Help", @"img": @"help"}
       ];
 }
 
@@ -118,6 +120,8 @@ static int const kLogoutItemIndex = 2;
     if (indexPath.row == kHomeItemIndex) {
         vc = [[HomeViewController alloc] initWithDate:[NSDate date]];
     } else if (indexPath.row == kRecordTypesItemIndex) {
+        vc = [[RecordTypeListViewController alloc] init];
+    } else if (indexPath.row == kHelpItemIndex) {
         vc = [[RecordTypeListViewController alloc] init];
     } else if (indexPath.row == kLogoutItemIndex) {
         [User logout];
