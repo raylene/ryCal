@@ -21,7 +21,7 @@
 
 @property (nonatomic, strong) CompressedDailyRecordCell *prototypeCell;
 @property (nonatomic, strong) NSArray *recordTypes;
-@property (nonatomic, strong) NSMutableDictionary *recordDictionary;
+@property (nonatomic, strong) NSDictionary *recordDictionary;
 
 - (IBAction)addMoreInfo:(id)sender;
 
@@ -34,8 +34,9 @@
     self.view.backgroundColor = [SharedConstants getMonthBackgroundColor];
     [self setupTypeTable];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRecordData) name:MonthDataChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUsingNewDay:) name:SwitchDayNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRecordData) name:DayDataChangedNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRecordData) name:MonthDataChangedNotification object:nil];
 }
 
 - (id)initWithDate:(NSDate *)date {
@@ -74,14 +75,10 @@
 }
 
 - (void)loadRecordData {
-    self.recordDictionary = [[NSMutableDictionary alloc] init];
     [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
         self.recordTypes = types;
-        [Record loadAllEnabledRecordsForTimeRange:[self.dayData getStartDate] endDate:[self.dayData getEndDate] completion:^(NSArray *records, NSError *error) {
-            for (Record *record in records) {
-                NSString *recordTypeID = record[kTypeIDFieldKey];
-                [self.recordDictionary setObject:record forKey:recordTypeID];
-            }
+        [Record loadRecordDictionaryForTimeRange:[self.dayData getStartDate] endDate:[self.dayData getEndDate] cacheKey:[self.dayData getDayCacheKey] completion:^(NSDictionary *recordDict, NSError *error) {
+            self.recordDictionary = recordDict;
             [self.typeTableView reloadData];
         }];
     }];
@@ -115,6 +112,7 @@
     cell.date = [self.dayData getStartDate];
     cell.typeData = self.recordTypes[indexPath.row];
     cell.recordData = self.recordDictionary[cell.typeData.objectId];
+    cell.monthCacheKey = [self.dayData getMonthCacheKey];
     return cell;
 }
 

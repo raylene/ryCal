@@ -51,6 +51,11 @@
     [self setupRecordDataRelatedFields];
 }
 
+@synthesize monthCacheKey = _monthCacheKey;
+- (void)setMonthCacheKey:(NSString *)monthCacheKey {
+    _monthCacheKey = monthCacheKey;
+}
+
 - (void)saveChanges:(BOOL)deleteRecord {
     NSLog(@"Saving record changes: %@", self.recordData);
     if (deleteRecord) {
@@ -63,8 +68,7 @@
             self.recordData = [Record createNewRecord:self.typeData withText:newText onDate:self.date];
         }
         
-        // TODO: push this into the Record.h class?
-        [self.recordData saveEventually:^(BOOL succeeded, NSError *error) {
+        [Record saveRecord:self.recordData cacheKey:self.monthCacheKey completion:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"Successfully saved/updated record");
                 [self sendDataChangedNotifications];
@@ -80,8 +84,8 @@
     if (self.recordData == nil) {
         return;
     }
-    [Record deleteRecord:self.recordData completion:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
+    [Record deleteRecord:self.recordData cacheKey:self.monthCacheKey completion:^(BOOL succeeded, NSError *error) {
+        if (succeeded || !error) {
             NSLog(@"Succeeded in deleting the record: %@", self.recordData);
             self.recordData = nil;
             [self sendDataChangedNotifications];

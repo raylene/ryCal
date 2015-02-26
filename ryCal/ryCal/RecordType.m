@@ -81,16 +81,6 @@
         }
         completion(results, error);
     }];
-    /*
-    PFQuery *query = [self createBasicRecordTypeQuery:kEnabledRecordTypeQueryKey];
-    [query whereKey:kArchivedFieldKey notEqualTo:@YES];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            [[RecordQueryTracker sharedQueryTracker] updateDatastore:kEnabledRecordTypeQueryKey objects:objects];
-        }
-        completion(objects, error);
-    }];
-     */
 }
 
 + (void)loadAllTypes:(void (^)(NSArray *types, NSError *error))completion {

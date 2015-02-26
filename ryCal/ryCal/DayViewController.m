@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) EditableRecordTypeCell *prototypeCell;
 @property (nonatomic, strong) NSArray *recordTypes;
-@property (nonatomic, strong) NSMutableDictionary *recordDictionary;
+@property (nonatomic, strong) NSDictionary *recordDictionary;
 
 @property (weak, nonatomic) IBOutlet UITableView *typeTableView;
 
@@ -43,11 +43,8 @@
     // TODO: potentially share code with similar record fetching in Month.m
     [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
         self.recordTypes = types;
-        [Record loadAllEnabledRecordsForTimeRange:[self.dayData getStartDate] endDate:[self.dayData getEndDate] completion:^(NSArray *records, NSError *error) {
-            for (Record *record in records) {
-                NSString *recordTypeID = record.typeID;
-                [self.recordDictionary setObject:record forKey:recordTypeID];
-            }
+        [Record loadRecordDictionaryForTimeRange:[self.dayData getStartDate] endDate:[self.dayData getEndDate] cacheKey:[self.dayData getDayCacheKey] completion:^(NSDictionary *recordDict, NSError *error) {
+            self.recordDictionary = recordDict;
             [self.typeTableView reloadData];
         }];
     }];
@@ -90,6 +87,7 @@
     cell.typeData = self.recordTypes[indexPath.row];
     cell.date = [self.dayData getStartDate];
     cell.recordData = self.recordDictionary[cell.typeData.objectId];
+    cell.monthCacheKey = [self.dayData getMonthCacheKey];
     return cell;
 }
 

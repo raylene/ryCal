@@ -30,4 +30,7 @@
 
 - (Record *)getPrimaryRecord;
 
+- (NSString *)getDayCacheKey;
+- (NSString *)getMonthCacheKey;
+
 @end

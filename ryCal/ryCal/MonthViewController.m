@@ -59,7 +59,6 @@
     self.monthCollectionView.dataSource = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMonthData) name:MonthDataChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDayData) name:DayDataChangedNotification object:nil];
 }
 
 // TODO: see if Month should really be responsible for fetching all records
@@ -69,10 +68,6 @@
             [self.monthCollectionView reloadData];
         }
     }];
-}
-
-// TODO: fill this out -- no-op for now
-- (void)refreshDayData {
 }
 
 - (void)updateSelectedDay:(NSNotification *)notification {

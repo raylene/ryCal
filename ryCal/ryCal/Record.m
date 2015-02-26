@@ -46,77 +46,56 @@
     return newRecord;
 }
 
-+ (void)createRecord:(RecordType *)type withText:(NSString *)text completion:(void (^)(BOOL succeeded, NSError *error)) completion {
-    [self createRecord:type withText:text onDate:[NSDate date] completion:completion];
-}
-
-+ (void)createRecord:(RecordType *)type withText:(NSString *)text onDate:(NSDate *)date completion:(void (^)(BOOL succeeded, NSError *error)) completion {
-    NSLog(@"Creating record: %@, %@", text,
-        [NSDateFormatter localizedStringFromDate:date
-                                        dateStyle:NSDateFormatterShortStyle
-                                        timeStyle:NSDateFormatterFullStyle]);
-    [self saveRecord:type withText:text onDate:date completion:completion];
-}
-
-+ (void)saveRecord:(RecordType *)type withText:(NSString *)text onDate:(NSDate *)date completion:(void (^)(BOOL succeeded, NSError *error)) completion {
-    Record *newRecord = [Record object];
-    newRecord.type = type;
-    newRecord.typeID = type.objectId;
-    if (text != nil) {
-        newRecord.note = text;
-    }
-    newRecord.userID = [[User currentUser] getUserID];
-    newRecord.date = date;
-    [newRecord saveEventually:^(BOOL succeeded, NSError *error) {
++ (void)saveRecord:(Record *)record cacheKey:(NSString *)key completion:(void (^)(BOOL succeeded, NSError *error)) completion {
+    [record pinInBackgroundWithName:key block:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            [self dirtyQueryCache];
-            // TODO: figure out why this isn't working?
-            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
-            // TODO: clean up duplicate Month + Day notifs being sent out
-            [[NSNotificationCenter defaultCenter] postNotificationName:DayDataChangedNotification object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
+//            // TODO: clean up duplicate Month + Day notifs being sent out
+//            [[NSNotificationCenter defaultCenter] postNotificationName:DayDataChangedNotification object:nil];
+            [record saveInBackground];
         }
         completion(succeeded, error);
     }];
 }
 
-+ (void)deleteRecord:(Record *)record completion:(void (^)(BOOL succeeded, NSError *error)) completion {
-    [record deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        [self dirtyQueryCache];
++ (void)deleteRecord:(Record *)record cacheKey:(NSString *)key completion:(void (^)(BOOL succeeded, NSError *error)) completion {
+    [record unpinInBackgroundWithName:key block:^(BOOL succeeded, NSError *error) {
+        // TODO: see if the completion logic should be changed here
+        if (succeeded || !error) {
+            [record deleteEventually];
+        }
         completion(succeeded, error);
     }];
 }
 
-//+ (void)loadAllRecords:(void (^)(NSArray *records, NSError *error))completion {
-//    NSLog(@"Loading all records");
-//    PFQuery *query = [self createBasicRecordQuery];
-//    [query findObjectsInBackgroundWithBlock:completion];
-//}
-
-// TODO: may not need this unless we support stats for both enabled/archived records
-//+ (void)loadAllRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion {
-//    NSLog(@"Loading all records for time range: %@, %@", startDate, endDate);
-//    PFQuery *query = [self createTimeRangeRecordQuery:startDate endDate:endDate];
-//    [query findObjectsInBackgroundWithBlock:completion];
-//}
-
-+ (void)loadAllEnabledRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion {
+// TODO: This currently still loads all records vs. only enabled ones
++ (void)loadAllEnabledRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate cacheKey:(NSString *)key completion:(void (^)(NSArray *records, NSError *error))completion {
     NSLog(@"Loading all ENABLED records for time range: %@, %@", startDate, endDate);
-    PFQuery *query = [self createTimeRangeRecordQuery:startDate endDate:endDate];
-//    [query whereKey:kArchivedFieldKey notEqualTo:[NSNumber numberWithBool:YES]];
-    // TODO: FIX FIX - this needs to actually check that the type still exists / is enabled
-    [query includeKey:kTypeFieldKey];
+    PFQuery *query = [self createBasicRecordQuery:key];
+    // Date comparison: https://www.parse.com/questions/cloud-code-querying-objects-by-creation-date
+    [query whereKey:kDateFieldKey greaterThanOrEqualTo:startDate];
+    [query whereKey:kDateFieldKey lessThan:endDate];
+
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        [[RecordQueryTracker sharedQueryTracker] updateDatastore:kRecordQueryKey objects:objects];
+        if (!error) {
+            [[RecordQueryTracker sharedQueryTracker] updateDatastore:key objects:objects];
+        }
         completion(objects, error);
     }];
 }
 
-+ (PFQuery *)createTimeRangeRecordQuery:(NSDate *)startDate endDate:(NSDate *)endDate {
-    PFQuery *query = [self createBasicRecordQuery:kRecordQueryKey];
-    // Date comparison: https://www.parse.com/questions/cloud-code-querying-objects-by-creation-date
-    [query whereKey:kDateFieldKey greaterThanOrEqualTo:startDate];
-    [query whereKey:kDateFieldKey lessThan:endDate];
-    return query;
+// TODO: add pinnable key
++ (void)loadRecordDictionaryForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate cacheKey:(NSString *)key completion:(void (^)(NSDictionary *recordDict, NSError *error))completion {
+    [self loadAllEnabledRecordsForTimeRange:startDate endDate:endDate cacheKey:key completion:^(NSArray *records, NSError *error) {
+        NSMutableDictionary *recordDict = [[NSMutableDictionary alloc] init];
+        if (!error) {
+            for (Record *record in records) {
+                NSString *recordTypeID = record.typeID;
+                [recordDict setObject:record forKey:recordTypeID];
+            }
+        }
+        completion(recordDict, error);
+    }];
 }
 
 // Parse: base query used for fetching any records
@@ -126,14 +105,14 @@
     [query orderByAscending:@"date"];
     [query addDescendingOrder:@"updatedAt"];
     [query includeKey:kTypeFieldKey];
-   
-    // TODO: FIX THIS. removing for now as the logic is all borked :/
-    // if ([[RecordQueryTracker sharedQueryTracker] hasQuery:queryKey]) {
-    //   [query fromLocalDatastore];
-    // }
-
+    
+    if ([[RecordQueryTracker sharedQueryTracker] hasQuery:queryKey]) {
+        [query fromLocalDatastore];
+    }
     return query;
 }
+
+#pragma mark Helper getters
 
 - (UIColor *)getColor {
     if (self.type == nil) {
@@ -148,13 +127,6 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd-MM-YYYY"];
     return [dateFormatter stringFromDate:self.date];
-}
-
-#pragma mark Query tracking helper methods
-
-+ (void)dirtyQueryCache {
-    NSLog(@"dirty");
-    [[RecordQueryTracker sharedQueryTracker] removeQuery:kRecordQueryKey];
 }
 
 @end

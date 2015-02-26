@@ -18,6 +18,7 @@
 // TODO: change this to be an initWithRecordData?
 @property (nonatomic, strong) RecordType *typeData;
 @property (nonatomic, strong) Record *recordData;
+@property (nonatomic, strong) NSString *monthCacheKey;
 
 @property (nonatomic, strong) NSDate *date;
 

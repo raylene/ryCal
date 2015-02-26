@@ -9,6 +9,7 @@
 #import "Month.h"
 #import "SharedConstants.h"
 #import "Record.h"
+#import "RecordQueryTracker.h"
 
 @interface Month ()
 
@@ -132,7 +133,7 @@
 }
 
 - (void)loadAllRecords:(void (^)(NSError *error))monthCompletion {
-    [Record loadAllEnabledRecordsForTimeRange:[self getStartDate] endDate:[self getEndDate] completion:^(NSArray *records, NSError *error) {
+    [Record loadAllEnabledRecordsForTimeRange:[self getStartDate] endDate:[self getEndDate] cacheKey:[self getCacheKey] completion:^(NSArray *records, NSError *error) {
         if (error == nil) {
             NSLog(@"Loaded all records for month: %lu", (unsigned long)records.count);
             self.dailyRecordDictionary = [[NSMutableDictionary alloc] init];
@@ -153,6 +154,16 @@
         }
         monthCompletion(error);
     }];
+}
+
+#pragma mark Query tracking / caching helper
+
+- (NSString *)getCacheKey {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM_yyyy"];
+    NSString *dateStr = [dateFormatter stringFromDate:[self getStartDate]];
+    NSString *key = [NSString stringWithFormat:@"%@_%@", kRecordQueryKey, dateStr];
+    return key;
 }
 
 @end

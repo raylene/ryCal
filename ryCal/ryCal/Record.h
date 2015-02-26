@@ -25,10 +25,13 @@
 + (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text;
 + (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text onDate:(NSDate *)date;
 
-+ (void)deleteRecord:(Record *)record completion:(void (^)(BOOL succeeded, NSError *error)) completion;
++ (void)saveRecord:(Record *)record cacheKey:(NSString *)key completion:(void (^)(BOOL succeeded, NSError *error)) completion;
++ (void)deleteRecord:(Record *)record cacheKey:(NSString *)key completion:(void (^)(BOOL succeeded, NSError *error)) completion;
 
-//+ (void)loadAllRecords:(void (^)(NSArray *records, NSError *error))completion;
-+ (void)loadAllEnabledRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate completion:(void (^)(NSArray *records, NSError *error))completion;
++ (void)loadAllEnabledRecordsForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate cacheKey:(NSString *)key completion:(void (^)(NSArray *records, NSError *error))completion;
++ (void)loadRecordDictionaryForTimeRange:(NSDate *)startDate endDate:(NSDate *)endDate cacheKey:(NSString *)key completion:(void (^)(NSDictionary *recordDict, NSError *error))completion;
+
++ (void)forceReloadAllRecords:(void (^)(NSArray *records, NSError *error))completion;
 
 - (UIColor *)getColor;
 - (NSString *)getDateStringKey;

@@ -39,4 +39,6 @@
 - (void)loadAllRecords:(void (^)(NSError *error))monthCompletion;
 - (Record *)getPrimaryRecordForDay:(NSInteger)day;
 
+- (NSString *)getCacheKey;
+
 @end

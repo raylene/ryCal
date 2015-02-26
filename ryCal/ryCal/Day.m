@@ -9,6 +9,7 @@
 #import "Day.h"
 #import "Month.h"
 #import "Record.h"
+#import "RecordQueryTracker.h"
 
 @interface Day ()
 
@@ -89,6 +90,21 @@
 
 - (Record *)getPrimaryRecord {
     return [self.monthData getPrimaryRecordForDay:self.dayInt];
+}
+
+
+#pragma mark Query tracking / caching helper
+
+- (NSString *)getDayCacheKey {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM_yyyy_dd"];
+    NSString *dateStr = [dateFormatter stringFromDate:[self getStartDate]];
+    NSString *key = [NSString stringWithFormat:@"%@_%@", kRecordQueryKey, dateStr];
+    return key;
+}
+
+- (NSString *)getMonthCacheKey {
+    return [self.monthData getCacheKey];
 }
 
 @end
