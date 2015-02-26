@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *typeTableView;
 @property (nonatomic, strong) RecordTypeCell *prototypeCell;
 @property (nonatomic, strong) NSArray *recordTypes;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -27,6 +28,7 @@
     [super viewDidLoad];
     [self setupTypeTable];
     [self setupNavigationBar];
+    [self setupRefreshControl];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTypeData) name:RecordTypeDataChangedNotification object:nil];
     
@@ -70,6 +72,12 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"All Records" style:UIBarButtonItemStylePlain target:self action:nil];    
 }
 
+- (void)setupRefreshControl {
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.typeTableView insertSubview:self.refreshControl atIndex:0];
+}
+
 - (void)onCreateNewType {
     RecordTypeComposerViewController *vc = [[RecordTypeComposerViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
@@ -78,6 +86,19 @@
 - (void)toggleMenu {
     // TODO: see if it's weird to call this notif directly / import SlidingMenu
     [[NSNotificationCenter defaultCenter] postNotificationName:SlidingMenuToggleStateNotification object:nil];
+}
+
+-(void)pullToRefresh {
+    NSLog(@"Pulled!");
+    [RecordType forceReloadAllTypes:^(NSArray *types, NSError *error) {
+        if (!error) {
+            self.recordTypes = types;
+            [self.typeTableView reloadData];
+        } else {
+          // TODO: present "error fetching data" dialog?
+        }
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 #pragma mark - Custom setters
@@ -99,6 +120,7 @@
     RecordTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecordTypeCell" forIndexPath:indexPath];
     cell.viewController = self;
     cell.typeData = self.recordTypes[indexPath.row];
+//    NSLog(@"Displaying record type cell: %@, %@", cell.typeData.name, cell.typeData.color);
     return cell;
 }
 

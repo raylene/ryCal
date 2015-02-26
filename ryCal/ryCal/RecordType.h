@@ -30,8 +30,8 @@
 
 + (void)saveType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion;    
 + (void)deleteType:(RecordType *)type completion:(void (^)(BOOL succeeded, NSError *error)) completion;
++ (void)forceReloadAllTypes:(void (^)(NSArray *types, NSError *error))completion;
 
 + (void)createTestRecordTypes;
-
 
 @end

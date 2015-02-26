@@ -106,7 +106,7 @@
     // TODO: FIX FIX - this needs to actually check that the type still exists / is enabled
     [query includeKey:kTypeFieldKey];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        [self updateQueryTrackerAndDatastore:kRecordQueryKey objects:objects];
+        [[RecordQueryTracker sharedQueryTracker] updateDatastore:kRecordQueryKey objects:objects];
         completion(objects, error);
     }];
 }
@@ -155,11 +155,6 @@
 + (void)dirtyQueryCache {
     NSLog(@"dirty");
     [[RecordQueryTracker sharedQueryTracker] removeQuery:kRecordQueryKey];
-}
-
-// TODO: share code with Record.m? move this into RecordQueryTracker?
-+ (void)updateQueryTrackerAndDatastore:(NSString *)key objects:(NSArray *)objects {
-    [[RecordQueryTracker sharedQueryTracker] updateDatastore:key objects:objects];
 }
 
 @end

@@ -24,6 +24,8 @@ extern NSString * const SwitchDayNotification;
 
 // Notif params
 extern NSString * const kColorSelectedNotifParam;
+extern NSString * const kRecordTypeIDNotifParam;
+extern NSString * const kRecordTypeIDNotifParamPlaceholder;
 extern NSString * const kDayNotifParam;
 
 // Parse field keys
@@ -77,5 +79,8 @@ extern float const NAV_BAR_ICON_SIZE;
 
 + (NSInteger)getCurrentYear;
 + (NSString *)getSaveFormattedString:(NSString *)inputStr;
+
+// TODO: move this somewhere else? Kind of weird to have it in "SharedConstants"...
++ (void)presentDeleteConfirmation:(NSString *)msg confirmationHandler:(void (^)(void))confirmationHandler;
 
 @end

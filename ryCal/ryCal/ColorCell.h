@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) UIViewController *viewController;
 @property (nonatomic, strong) NSString *colorName;
+@property (nonatomic, strong) NSString *recordTypeID;
 
 - (void)setSelectedColor:(NSString *)selectedColor;
 

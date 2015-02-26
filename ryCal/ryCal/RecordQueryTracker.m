@@ -12,7 +12,7 @@
 @implementation RecordQueryTracker
 
 NSString * const kRecordTypeQueryKey = @"record_types";
-NSString * const kEnabledRecordTypeQueryKey = @"enabled_record_types";
+//NSString * const kEnabledRecordTypeQueryKey = @"enabled_record_types";
 NSString * const kRecordQueryKey = @"records";
 
 @synthesize queryNames;
@@ -47,10 +47,21 @@ NSString * const kRecordQueryKey = @"records";
 }
 
 - (void)updateDatastore:(NSString *)key objects:(NSArray *)objects {
+    NSLog(@"Updating LOCAL? query results for: %@ -- %@", key, objects);
+
     if (![self hasQuery:key]) {
+        NSLog(@"RecordQueryTracker MISSING KEY: %@", key);
         // Cache the new results.
-        [PFObject pinAllInBackground:objects withName:key];
-        [self addQuery:key];
+        [PFObject unpinAllObjectsInBackgroundWithName:key block:^(BOOL succeeded, NSError *error) {
+            NSLog(@"unpinAllObjects: %@, %d, %@", key, succeeded, error);
+            if (!error) {
+                [PFObject pinAllInBackground:objects withName:key block:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        [self addQuery:key];
+                    }
+                }];
+            };
+        }];
         //        [PFObject unpinAllObjectsInBackgroundWithName:key block:^(BOOL succeeded, NSError *error) {
         //            if (succeeded) {
         //                // Cache the new results.

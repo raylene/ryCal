@@ -11,7 +11,7 @@
 @interface RecordQueryTracker : NSObject
 
 extern NSString * const kRecordTypeQueryKey;
-extern NSString * const kEnabledRecordTypeQueryKey;
+//extern NSString * const kEnabledRecordTypeQueryKey;
 extern NSString * const kRecordQueryKey;
 
 @property (nonatomic, strong) NSMutableDictionary *queryNames;

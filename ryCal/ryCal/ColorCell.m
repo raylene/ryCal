@@ -45,7 +45,7 @@
 
 - (IBAction)onTapGesture:(id)sender {
     self.selectedStateView.hidden = !(self.selectedStateView.hidden);
-    [[NSNotificationCenter defaultCenter] postNotificationName:ColorSelectedNotification object:nil userInfo:@{kColorSelectedNotifParam: self.colorName}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ColorSelectedNotification object:nil userInfo:@{kColorSelectedNotifParam: self.colorName, kRecordTypeIDNotifParam: self.recordTypeID}];
 }
 
 @end

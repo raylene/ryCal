@@ -91,24 +91,6 @@
     }];
 }
 
-- (void)presentDeleteConfirmation:(void (^)(void))confirmationHandler {
-    UIAlertController* alert =
-    [UIAlertController alertControllerWithTitle:@"Confirm Delete"
-                                        message:@"You've saved a special note for this record. Are you sure you want to delete this?"
-                                 preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"Yes, Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        confirmationHandler();
-    }];
-    UIAlertAction* escapeAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
-    [alert addAction:deleteAction];
-    [alert addAction:escapeAction];
-    
-    // NOTE: this seems like a huge hack. there must be a better way to present this
-    // from a view...
-    [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
-}
-
 - (void)sendDataChangedNotifications {
     // TODO: figure out if this is working properly...
     [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
@@ -163,7 +145,8 @@
     // This is a binary toggle, so if the record already exists, consider this a delete
     BOOL deleteRecord = self.recordData != nil;
     if (deleteRecord && [self shouldShowDeleteConfirmation]) {
-        [self presentDeleteConfirmation:^{
+        NSString *msg = @"You've saved a special note for this record. Are you sure you want to delete this?";
+        [SharedConstants presentDeleteConfirmation:msg confirmationHandler:^{
             [self saveChanges:deleteRecord];
         }];
     } else {

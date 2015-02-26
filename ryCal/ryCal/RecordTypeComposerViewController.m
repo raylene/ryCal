@@ -93,7 +93,11 @@
 
 - (void)colorSwitched:(NSNotification *)notification {
     NSDictionary *dict = [notification userInfo];
-    self.recordType[kColorFieldKey] = dict[kColorSelectedNotifParam];
+    NSString *notifID = dict[kRecordTypeIDNotifParam];
+    if ((self.recordType.objectId && [self.recordType.objectId isEqualToString:notifID]) ||
+        (!self.recordType.objectId && [notifID isEqualToString:kRecordTypeIDNotifParamPlaceholder])) {
+        self.recordType[kColorFieldKey] = dict[kColorSelectedNotifParam];
+    }
 }
 
 #pragma mark Event handling helper methods
@@ -123,19 +127,21 @@
 }
 
 - (IBAction)onDelete:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    // TODO: also delete all records with that type? Would need a confirmation before doing this...
-    [RecordType deleteType:self.recordType completion:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Successfully deleted record type");
-            [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
-        } else {
-            NSLog(@"Error deleting record type");
-        }
+    NSString *msg = @"Deleting this activity will completely remove it from your calendar, and there is currently no way to recover it. Are you sure you want to delete this?";
+    [SharedConstants presentDeleteConfirmation:msg confirmationHandler:^{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        // TODO: also delete all records with that type? Would need a confirmation before doing this...
+        [RecordType deleteType:self.recordType completion:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"Successfully deleted record type");
+                [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
+            } else {
+                NSLog(@"Error deleting record type");
+            }
+        }];
     }];
 }
-
 
 #pragma mark UITextField event methods
 
@@ -164,6 +170,12 @@
     NSArray *colorArray = [SharedConstants getColorArray];
     [cell setViewController:self];
     [cell setColorName:colorArray[indexPath.row]];
+    if (self.recordType.objectId) {
+        [cell setRecordTypeID:self.recordType.objectId];
+    } else {
+        // No record yet -- set to placeholder
+        [cell setRecordTypeID:kRecordTypeIDNotifParamPlaceholder];
+    }
     [cell setSelectedColor:self.recordType[kColorFieldKey]];
     return cell;
 }

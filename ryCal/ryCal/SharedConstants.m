@@ -26,6 +26,8 @@ NSString * const ViewFullDayNotification = @"ViewFullDayNotification";
 NSString * const SwitchDayNotification = @"SwitchDayNotification";
 
 NSString * const kColorSelectedNotifParam = @"colorname";
+NSString * const kRecordTypeIDNotifParam = @"recordtypeid";
+NSString * const kRecordTypeIDNotifParamPlaceholder = @"recordtypeid_placeholder";
 NSString * const kDayNotifParam = @"day";
 
 NSString * const kNoteFieldKey = @"note";
@@ -172,6 +174,24 @@ float const NAV_BAR_ICON_SIZE = 24.0;
         return nil;
     }
     return result;
+}
+
++ (void)presentDeleteConfirmation:(NSString *)msg confirmationHandler:(void (^)(void))confirmationHandler {
+    UIAlertController* alert =
+    [UIAlertController alertControllerWithTitle:@"Confirm Delete"
+                                        message:msg
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"Yes, Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        confirmationHandler();
+    }];
+    UIAlertAction* escapeAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:deleteAction];
+    [alert addAction:escapeAction];
+    
+    // NOTE: this seems like a huge hack. there must be a better way to present this
+    // from a view...
+    [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 @end
