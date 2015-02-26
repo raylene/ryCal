@@ -39,6 +39,7 @@ NSString * const kRecordQueryKey = @"records";
 }
 
 - (void)removeQuery:(NSString *)name {
+    NSLog(@"RecordQueryTracker, removeQuery: %@", name);
     [self.queryNames removeObjectForKey:name];
 }
 
@@ -47,7 +48,7 @@ NSString * const kRecordQueryKey = @"records";
 }
 
 - (void)updateDatastore:(NSString *)key objects:(NSArray *)objects {
-    NSLog(@"Updating LOCAL? query results for: %@ -- %@", key, objects);
+//    NSLog(@"Updating LOCAL? query results for: %@ -- %@", key, objects);
 
     if (![self hasQuery:key]) {
         NSLog(@"RecordQueryTracker MISSING KEY: %@", key);
