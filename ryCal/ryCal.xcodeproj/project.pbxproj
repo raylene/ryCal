@@ -19,6 +19,8 @@
 		6F62F2D71A9565A30041D3B1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F62F2D61A9565A30041D3B1 /* libsqlite3.0.dylib */; };
 		6F62F2D91A9565C50041D3B1 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F62F2D81A9565C50041D3B1 /* libsqlite3.dylib */; };
 		6F62F2E21A9BFC4C0041D3B1 /* RecordQueryTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F62F2E11A9BFC4C0041D3B1 /* RecordQueryTracker.m */; };
+		6F62F2E61AA26DF70041D3B1 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F62F2E41AA26DF70041D3B1 /* HelpViewController.m */; };
+		6F62F2E71AA26DF70041D3B1 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F62F2E51AA26DF70041D3B1 /* HelpViewController.xib */; };
 		6F6B9A931A22BCDD005B7722 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B9A911A22BCDD005B7722 /* LoginViewController.m */; };
 		6F6B9A941A22BCDD005B7722 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B9A921A22BCDD005B7722 /* LoginViewController.xib */; };
 		6F6B9A9E1A22F585005B7722 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B9A9D1A22F585005B7722 /* User.m */; };
@@ -85,6 +87,9 @@
 		6F62F2D81A9565C50041D3B1 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		6F62F2E01A9BFC4C0041D3B1 /* RecordQueryTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordQueryTracker.h; sourceTree = "<group>"; };
 		6F62F2E11A9BFC4C0041D3B1 /* RecordQueryTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordQueryTracker.m; sourceTree = "<group>"; };
+		6F62F2E31AA26DF70041D3B1 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		6F62F2E41AA26DF70041D3B1 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		6F62F2E51AA26DF70041D3B1 /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		6F6B9A901A22BCDD005B7722 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6F6B9A911A22BCDD005B7722 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6F6B9A921A22BCDD005B7722 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -202,6 +207,9 @@
 				6F1650911A5396F1006336EF /* SlidingMenuMainViewController.h */,
 				6F1650921A5396F1006336EF /* SlidingMenuMainViewController.m */,
 				6F1650931A5396F1006336EF /* SlidingMenuMainViewController.xib */,
+				6F62F2E31AA26DF70041D3B1 /* HelpViewController.h */,
+				6F62F2E41AA26DF70041D3B1 /* HelpViewController.m */,
+				6F62F2E51AA26DF70041D3B1 /* HelpViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -428,6 +436,7 @@
 				6F6B9A941A22BCDD005B7722 /* LoginViewController.xib in Resources */,
 				6FBE74041A4950B00045810A /* EditableRecordTypeCell.xib in Resources */,
 				6F621D741A5F4D4A00F85A17 /* DummyCell.xib in Resources */,
+				6F62F2E71AA26DF70041D3B1 /* HelpViewController.xib in Resources */,
 				6F16509A1A53994A006336EF /* MenuViewController.xib in Resources */,
 				6F926BE51A22BA5F00473EA2 /* LaunchScreen.xib in Resources */,
 				6F16509F1A53A549006336EF /* MenuItemCell.xib in Resources */,
@@ -509,6 +518,7 @@
 				6FF278441A5D27B10063323F /* CompressedDailyRecordCell.m in Sources */,
 				6F62F2E21A9BFC4C0041D3B1 /* RecordQueryTracker.m in Sources */,
 				6FF334151A5BC56B00ADDBDB /* HomeViewController.m in Sources */,
+				6F62F2E61AA26DF70041D3B1 /* HelpViewController.m in Sources */,
 				6FE8A3471A5B75CD00754D34 /* EditDailyRecordViewController.m in Sources */,
 				6FBE74031A4950B00045810A /* EditableRecordTypeCell.m in Sources */,
 				6F926BDA1A22BA5F00473EA2 /* AppDelegate.m in Sources */,

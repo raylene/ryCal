@@ -35,16 +35,24 @@ NSString * const kRecordQueryKey = @"records";
 }
 
 - (BOOL)hasQuery:(NSString *)name {
-    return (BOOL)[self.queryNames objectForKey:name];
+    BOOL result = NO;
+    @synchronized(self.queryNames) {
+        result = (BOOL)[self.queryNames objectForKey:name];
+    }
+    return result;
 }
 
 - (void)removeQuery:(NSString *)name {
     NSLog(@"RecordQueryTracker, removeQuery: %@", name);
-    [self.queryNames removeObjectForKey:name];
+    @synchronized(self.queryNames) {
+        [self.queryNames removeObjectForKey:name];
+    }
 }
 
 - (void)addQuery:(NSString *)name {
-    self.queryNames[name] = [NSDate date];
+    @synchronized(self.queryNames) {
+        self.queryNames[name] = [NSDate date];
+    }
 }
 
 - (void)updateDatastore:(NSString *)key objects:(NSArray *)objects {
@@ -63,13 +71,21 @@ NSString * const kRecordQueryKey = @"records";
                 }];
             };
         }];
-        //        [PFObject unpinAllObjectsInBackgroundWithName:key block:^(BOOL succeeded, NSError *error) {
-        //            if (succeeded) {
-        //                // Cache the new results.
-        //                [PFObject pinAllInBackground:objects withName:key];
-        //                [[RecordQueryTracker sharedQueryTracker] addQuery:key];
-        //            }
-        //        }];
+    }
+}
+
+- (void)resetDatastore {
+    @synchronized(self.queryNames) {
+        for (NSString *key in self.queryNames) {
+            [PFObject unpinAllObjectsInBackgroundWithName:key];
+        }
+        [self.queryNames removeAllObjects];
+    }
+}
+
+- (BOOL)hasCachedData {
+    @synchronized(self.queryNames) {
+        return (BOOL)self.queryNames.count;
     }
 }
 

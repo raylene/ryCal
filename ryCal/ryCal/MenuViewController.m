@@ -13,6 +13,7 @@
 #import "RecordTypeListViewController.h"
 #import "UIImageView+AfNetworking.h"
 #import "SharedConstants.h"
+#import "HelpViewController.h"
 
 static int const kHomeItemIndex = 0;
 static int const kRecordTypesItemIndex = 1;
@@ -84,7 +85,7 @@ static int const kHelpItemIndex = 2;
     @[
       @{@"name" : @"Today", @"img":@"today"},
       @{@"name" : @"Activities", @"img": @"recordtypes"},
-      @{@"name" : @"Help", @"img": @"help"},
+      @{@"name" : @"Support", @"img": @"help"},
       @{@"name" : @"Logout", @"img": @"logout"}
       ];
 }
@@ -122,7 +123,7 @@ static int const kHelpItemIndex = 2;
     } else if (indexPath.row == kRecordTypesItemIndex) {
         vc = [[RecordTypeListViewController alloc] init];
     } else if (indexPath.row == kHelpItemIndex) {
-        vc = [[RecordTypeListViewController alloc] init];
+        vc = [[HelpViewController alloc] init];
     } else if (indexPath.row == kLogoutItemIndex) {
         [User logout];
     }

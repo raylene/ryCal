@@ -41,6 +41,9 @@ extern NSString * const kDescriptionFieldKey;
 
 // extern NSString * const NAV_BAR_COLOR;
 
+extern NSString * const ENABLED_BUTTON_COLOR;
+extern NSString * const DISABLED_BUTTON_COLOR;
+
 extern NSString * const RECORD_COLOR_EMPTY_ENTRY;
 extern NSString * const RECORD_COLOR_FEATURED_ENTRY;
 extern NSString * const RECORD_COLOR_LIGHT_BLUE;

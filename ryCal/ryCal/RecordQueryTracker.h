@@ -24,5 +24,7 @@ extern NSString * const kRecordQueryKey;
 
 // TODO: see if this should be in a better place..
 - (void)updateDatastore:(NSString *)key objects:(NSArray *)objects;
+- (void)resetDatastore;
+- (BOOL)hasCachedData;
 
 @end

@@ -40,6 +40,9 @@ NSString * const kColorFieldKey = @"color";
 NSString * const kNameFieldKey = @"name";
 NSString * const kDescriptionFieldKey = @"description";
 
+NSString * const ENABLED_BUTTON_COLOR = @"enabledbutton";
+NSString * const DISABLED_BUTTON_COLOR = @"disabledbutton";
+
 NSString * const NAV_BAR_COLOR = @"navbar";
 NSString * const MENU_BACKGROUND_COLOR = @"menubackground";
 NSString * const MENU_SELECTED_BACKGROUND_COLOR = @"menuselectedbackground";
@@ -119,7 +122,11 @@ float const NAV_BAR_ICON_SIZE = 24.0;
 // Hex colors from: http://www.w3schools.com/tags/ref_colorpicker.asp
 + (UIColor *)getColor:(NSString *)name {
     unsigned long int rgbValue = 0xBAE3FF;
-    if ([name isEqualToString:RECORD_COLOR_EMPTY_ENTRY]) {
+    if ([name isEqualToString:ENABLED_BUTTON_COLOR]) {
+        rgbValue = 0x82ABFF;
+    } else if ([name isEqualToString:DISABLED_BUTTON_COLOR]) {
+        rgbValue = 0x686868;
+    } else if ([name isEqualToString:RECORD_COLOR_EMPTY_ENTRY]) {
         rgbValue = 0xE8E8E8;
     } else if ([name isEqualToString:RECORD_COLOR_FEATURED_ENTRY]) {
         rgbValue = 0x474747;

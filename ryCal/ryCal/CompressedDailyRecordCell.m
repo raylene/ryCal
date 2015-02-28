@@ -21,6 +21,7 @@
 
 @end
 
+// THE CELL REVERTS STATE WHEN IT DISAPPEARS / REAPPEARS :(
 @implementation CompressedDailyRecordCell
 
 - (void)awakeFromNib {
@@ -38,6 +39,11 @@
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGesture:)];
     [self addGestureRecognizer:tgr];
 }
+
+//- (void)layoutSubviews {
+//    [super layoutSubviews];
+//    [self setupRecordDataRelatedFields];
+//}
 
 @synthesize typeData = _typeData;
 - (void)setTypeData:(RecordType *)typeData {

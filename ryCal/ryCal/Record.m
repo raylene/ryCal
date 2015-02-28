@@ -129,4 +129,8 @@
     return [dateFormatter stringFromDate:self.date];
 }
 
++ (void)forceReloadAllRecords:(void (^)(NSArray *records, NSError *error))completion {
+    
+}
+
 @end
