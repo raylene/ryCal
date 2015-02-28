@@ -35,8 +35,7 @@
     [self setupTypeTable];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUsingNewDay:) name:SwitchDayNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRecordData) name:DayDataChangedNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRecordData) name:MonthDataChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDayDataChanged) name:DayDataChangedNotification object:nil];
 }
 
 - (id)initWithDate:(NSDate *)date {
@@ -79,6 +78,7 @@
         self.recordTypes = types;
         [Record loadRecordDictionaryForTimeRange:[self.dayData getStartDate] endDate:[self.dayData getEndDate] cacheKey:[self.dayData getDayCacheKey] completion:^(NSDictionary *recordDict, NSError *error) {
             self.recordDictionary = recordDict;
+            
             [self.typeTableView reloadData];
         }];
     }];
@@ -88,6 +88,14 @@
     NSDictionary *dict = [notification userInfo];
     Day *data = dict[kDayNotifParam];
     [self setDayData:data];
+    [self loadRecordData];
+}
+
+- (void)updateDayDataChanged {
+    NSLog(@"updateDayDataChanged");
+//    self.recordDictionary = recordDict;
+//    [self.typeTableView reloadData];
+//    
     [self loadRecordData];
 }
 

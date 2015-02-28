@@ -113,10 +113,6 @@
     newRecordType.userID = [[User currentUser] getUserID];
     newRecordType.archived = archived;
     [newRecordType saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:RecordTypeDataChangedNotification object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
-        }
         completion(succeeded, error);
     }];
 }

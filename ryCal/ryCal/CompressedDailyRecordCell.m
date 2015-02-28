@@ -40,11 +40,6 @@
     [self addGestureRecognizer:tgr];
 }
 
-//- (void)layoutSubviews {
-//    [super layoutSubviews];
-//    [self setupRecordDataRelatedFields];
-//}
-
 @synthesize typeData = _typeData;
 - (void)setTypeData:(RecordType *)typeData {
     _typeData = typeData;
@@ -93,7 +88,7 @@
     [Record deleteRecord:self.recordData cacheKey:self.monthCacheKey completion:^(BOOL succeeded, NSError *error) {
         if (succeeded || !error) {
             NSLog(@"Succeeded in deleting the record: %@", self.recordData);
-            self.recordData = nil;
+            [self setRecordData:nil];
             [self sendDataChangedNotifications];
         } else {
             NSLog(@"Failed to delete");
@@ -130,18 +125,16 @@
         if (self.recordData[kNoteFieldKey]) {
             self.recordNoteText.text = self.recordData[kNoteFieldKey];
         }
-        self.outerContentView.backgroundColor = typeColor;
         self.innerContentView.backgroundColor = typeColor;
-
         [self.checkboxView addSubview:self.selectedCheckImageView];
     } else {
-        self.outerContentView.backgroundColor = typeColor;
         self.innerContentView.backgroundColor = [UIColor whiteColor];
-        
         [self.selectedCheckImageView removeFromSuperview];
+        
         self.checkboxView.layer.borderColor = [typeColor CGColor];
         self.checkboxView.layer.borderWidth = 1;
     }
+    self.outerContentView.backgroundColor = typeColor;
     self.recordNoteText.textColor = self.recordTypeName.textColor = textColor;
 }
 

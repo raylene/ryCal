@@ -49,9 +49,6 @@
 + (void)saveRecord:(Record *)record cacheKey:(NSString *)key completion:(void (^)(BOOL succeeded, NSError *error)) completion {
     [record pinInBackgroundWithName:key block:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
-//            // TODO: clean up duplicate Month + Day notifs being sent out
-//            [[NSNotificationCenter defaultCenter] postNotificationName:DayDataChangedNotification object:nil];
             [record saveInBackground];
         }
         completion(succeeded, error);
@@ -61,8 +58,8 @@
 + (void)deleteRecord:(Record *)record cacheKey:(NSString *)key completion:(void (^)(BOOL succeeded, NSError *error)) completion {
     [record unpinInBackgroundWithName:key block:^(BOOL succeeded, NSError *error) {
         // TODO: see if the completion logic should be changed here
-        if (succeeded || !error) {
-            [record deleteEventually];
+        if (succeeded) {
+            [record deleteInBackground];
         }
         completion(succeeded, error);
     }];
@@ -77,6 +74,7 @@
     [query whereKey:kDateFieldKey lessThan:endDate];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSLog(@"Loaded %ld ENABLED records for time range: %@, %@", objects.count, startDate, endDate);
         if (!error) {
             [[RecordQueryTracker sharedQueryTracker] updateDatastore:key objects:objects];
         }
