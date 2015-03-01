@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="clearCacheButton" destination="pTB-8D-DZj" id="3rL-cy-3CP"/>
                 <outlet property="clearCacheButtonBackground" destination="Fp8-ts-jkW" id="Cel-XQ-lde"/>
+                <outlet property="contactUsButtonBackground" destination="vkl-u3-wJq" id="OA9-Ll-dfA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,14 +17,14 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is something wrong with your data? Try restarting the app or clearing your cache." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1Y-lC-rRx">
-                    <rect key="frame" x="50" y="100" width="314" height="36"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are your activities not showing up or saving properly? Try restarting the app or clearing any currently cached data." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1Y-lC-rRx">
+                    <rect key="frame" x="50" y="100" width="314" height="47"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fp8-ts-jkW">
-                    <rect key="frame" x="50" y="166" width="314" height="50"/>
+                    <rect key="frame" x="50" y="177" width="314" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTB-8D-DZj">
                             <rect key="frame" x="83" y="9" width="149" height="33"/>
@@ -44,14 +45,51 @@
                         <constraint firstAttribute="height" constant="50" id="gRJ-gP-cRp"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vkl-u3-wJq">
+                    <rect key="frame" x="50" y="359" width="314" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wz-VU-dN5">
+                            <rect key="frame" x="113" y="9" width="89" height="33"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <state key="normal" title="Contact Us">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onEmailUsButton:" destination="-1" eventType="touchUpInside" id="QdV-Yy-LhW"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.50980392159999999" green="0.6705882353" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="1Wz-VU-dN5" secondAttribute="centerY" id="Bug-UP-fTL"/>
+                        <constraint firstAttribute="height" constant="50" id="QT2-1D-AAE"/>
+                        <constraint firstAttribute="centerX" secondItem="1Wz-VU-dN5" secondAttribute="centerX" id="VsY-8n-krF"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="eE6-vx-gil"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For other questions or comments, email us at recorditapp@gmail.com." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Dz-46-Gyr">
+                    <rect key="frame" x="50" y="287" width="314" height="32"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" none="YES" link="YES" staticText="YES"/>
+                    </accessibility>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Fp8-ts-jkW" secondAttribute="trailing" constant="50" id="2Ng-HS-Ki7"/>
                 <constraint firstItem="Fp8-ts-jkW" firstAttribute="top" secondItem="J1Y-lC-rRx" secondAttribute="bottom" constant="50" id="2jh-sH-nqz"/>
+                <constraint firstAttribute="trailing" secondItem="1Dz-46-Gyr" secondAttribute="trailing" constant="50" id="4jJ-xI-V38"/>
                 <constraint firstAttribute="centerY" secondItem="Fp8-ts-jkW" secondAttribute="centerY" constant="138" id="8Qa-hn-eyb"/>
                 <constraint firstItem="Fp8-ts-jkW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="93H-Jc-lbI"/>
+                <constraint firstItem="1Dz-46-Gyr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="AMc-bd-vZx"/>
+                <constraint firstAttribute="centerX" secondItem="vkl-u3-wJq" secondAttribute="centerX" id="ARd-dB-7WJ"/>
                 <constraint firstItem="Fp8-ts-jkW" firstAttribute="top" secondItem="J1Y-lC-rRx" secondAttribute="bottom" constant="40" id="Cj6-tY-c26"/>
+                <constraint firstItem="1Dz-46-Gyr" firstAttribute="top" secondItem="Fp8-ts-jkW" secondAttribute="bottom" constant="60" id="F00-oS-Xtk"/>
+                <constraint firstAttribute="trailing" secondItem="vkl-u3-wJq" secondAttribute="trailing" constant="50" id="Jve-ZR-fJw"/>
                 <constraint firstAttribute="centerX" secondItem="Fp8-ts-jkW" secondAttribute="centerX" id="Vqu-Pi-gIj"/>
                 <constraint firstAttribute="trailing" secondItem="J1Y-lC-rRx" secondAttribute="trailing" constant="50" id="XYT-jD-bfI"/>
                 <constraint firstAttribute="centerX" secondItem="J1Y-lC-rRx" secondAttribute="centerX" id="aZf-42-puk"/>
@@ -59,6 +97,8 @@
                 <constraint firstItem="J1Y-lC-rRx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="evM-Mv-tDg"/>
                 <constraint firstItem="J1Y-lC-rRx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="lFT-z1-vuY"/>
                 <constraint firstItem="Fp8-ts-jkW" firstAttribute="top" secondItem="J1Y-lC-rRx" secondAttribute="bottom" constant="30" id="mEU-nE-j32"/>
+                <constraint firstItem="vkl-u3-wJq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="vBu-zp-v1B"/>
+                <constraint firstItem="vkl-u3-wJq" firstAttribute="top" secondItem="1Dz-46-Gyr" secondAttribute="bottom" constant="40" id="zt3-Vg-UJp"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
             <variation key="default">

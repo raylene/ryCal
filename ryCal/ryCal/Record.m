@@ -74,7 +74,7 @@
     [query whereKey:kDateFieldKey lessThan:endDate];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        NSLog(@"Loaded %ld ENABLED records for time range: %@, %@", objects.count, startDate, endDate);
+        NSLog(@"Loaded %ld ENABLED records for time range: %@, %@", (unsigned long)objects.count, startDate, endDate);
         if (!error) {
             [[RecordQueryTracker sharedQueryTracker] updateDatastore:key objects:objects];
         }

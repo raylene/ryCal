@@ -97,7 +97,7 @@
 + (void)forceReloadAllTypes:(void (^)(NSArray *types, NSError *error))completion {
     NSLog(@"forceReloadAllTypes...");
     [self loadAllTypes:^(NSArray *types, NSError *error) {
-        NSLog(@"forceReloadAllTypes COMPLETION: %ld, %@", types.count, error);
+        NSLog(@"forceReloadAllTypes COMPLETION: %ld, %@", (unsigned long)types.count, error);
         if (!error) {
             [[RecordQueryTracker sharedQueryTracker] removeQuery:kRecordTypeQueryKey];
         }

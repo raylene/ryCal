@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -36,14 +36,17 @@
                             <constraint firstAttribute="centerY" secondItem="h9u-ME-B0g" secondAttribute="centerY" id="g1E-bi-maf"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record type name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-Un-lfY">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Record type name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-Un-lfY">
                         <rect key="frame" x="20" y="15" width="129" height="43"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="IdO-f7-CqV"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyk-6K-OxO">
-                        <rect key="frame" x="169" y="29" width="12" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Note note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyk-6K-OxO">
+                        <rect key="frame" x="159" y="29" width="111" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="WSc-n7-53c"/>
                         </constraints>
@@ -61,14 +64,16 @@
                     <constraint firstItem="td0-kX-TkF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="28K-4N-7oY"/>
                     <constraint firstAttribute="bottom" secondItem="7zP-Ne-qwG" secondAttribute="bottom" id="3xx-pE-cyg"/>
                     <constraint firstItem="td0-kX-TkF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="8X9-aX-EmE"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Yyk-6K-OxO" secondAttribute="trailing" constant="42" id="AJI-NA-8ze"/>
                     <constraint firstItem="Yyk-6K-OxO" firstAttribute="leading" secondItem="7zP-Ne-qwG" secondAttribute="trailing" id="BAv-AQ-duJ"/>
                     <constraint firstItem="7zP-Ne-qwG" firstAttribute="top" secondItem="Yra-Un-lfY" secondAttribute="bottom" id="CO3-z6-eSh"/>
                     <constraint firstItem="7zP-Ne-qwG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="DKK-PO-GEd"/>
                     <constraint firstItem="7zP-Ne-qwG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GhX-5a-MMP"/>
-                    <constraint firstItem="Yyk-6K-OxO" firstAttribute="leading" secondItem="Yra-Un-lfY" secondAttribute="trailing" constant="20" id="LYg-o1-XFJ"/>
+                    <constraint firstItem="Yyk-6K-OxO" firstAttribute="leading" secondItem="Yra-Un-lfY" secondAttribute="trailing" constant="10" id="LYg-o1-XFJ"/>
                     <constraint firstItem="Yra-Un-lfY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Oqg-Uh-FHU"/>
                     <constraint firstAttribute="bottom" secondItem="td0-kX-TkF" secondAttribute="bottom" constant="8" id="Y5B-1R-f0n"/>
                     <constraint firstItem="7zP-Ne-qwG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="dvB-Mf-SZY"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Yyk-6K-OxO" secondAttribute="trailing" constant="20" id="fqa-ng-go8"/>
                     <constraint firstAttribute="trailing" secondItem="td0-kX-TkF" secondAttribute="trailing" constant="8" id="gkx-3I-tim"/>
                     <constraint firstAttribute="bottomMargin" secondItem="7zP-Ne-qwG" secondAttribute="bottom" id="j0e-t0-CvB"/>
                     <constraint firstAttribute="bottom" secondItem="Yra-Un-lfY" secondAttribute="bottom" constant="15" id="npD-R9-QfD"/>
@@ -83,6 +88,7 @@
                         <exclude reference="CO3-z6-eSh"/>
                         <exclude reference="GhX-5a-MMP"/>
                         <exclude reference="BAv-AQ-duJ"/>
+                        <exclude reference="fqa-ng-go8"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
@@ -93,7 +99,7 @@
                 <outlet property="recordNoteText" destination="Yyk-6K-OxO" id="srP-XE-zza"/>
                 <outlet property="recordTypeName" destination="Yra-Un-lfY" id="has-ie-B4o"/>
             </connections>
-            <point key="canvasLocation" x="244" y="147"/>
+            <point key="canvasLocation" x="244" y="146"/>
         </tableViewCell>
     </objects>
 </document>

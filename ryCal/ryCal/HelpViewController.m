@@ -17,6 +17,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *clearCacheButton;
 @property (weak, nonatomic) IBOutlet UIView *clearCacheButtonBackground;
+@property (weak, nonatomic) IBOutlet UIView *contactUsButtonBackground;
+
+- (IBAction)onEmailUsButton:(id)sender;
 
 @end
 
@@ -27,6 +30,7 @@
     [self setupNavigationBar];
     
     [self setupCacheButton];
+    [self.contactUsButtonBackground setBackgroundColor:[SharedConstants getColor:ENABLED_BUTTON_COLOR]];
 }
 
 - (void)setupNavigationBar {
@@ -58,6 +62,12 @@
 - (IBAction)onClearCache:(id)sender {
     [[RecordQueryTracker sharedQueryTracker] resetDatastore];
     [self setupCacheButton];
+}
+
+- (IBAction)onEmailUsButton:(id)sender {
+    NSString *urlString = [@"mailto:recorditapp@gmail.com" stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    BOOL result = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    NSLog(@"opened email? %d", result);
 }
 
 @end

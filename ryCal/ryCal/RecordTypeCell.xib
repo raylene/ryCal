@@ -14,18 +14,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efZ-Nf-EmB">
-                        <rect key="frame" x="8" y="8" width="35" height="28"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="efZ-Nf-EmB">
+                        <rect key="frame" x="18" y="8" width="32" height="32"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="32" id="YaL-vs-Xue"/>
+                            <constraint firstAttribute="height" constant="32" id="pvN-db-wV3"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Record type..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b84-Pg-56c">
-                        <rect key="frame" x="59" y="11" width="109" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Record type..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b84-Pg-56c">
+                        <rect key="frame" x="60" y="14" width="176" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSF-B5-iVa">
-                        <rect key="frame" x="256" y="9" width="30" height="30"/>
+                        <rect key="frame" x="246" y="9" width="40" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="aYO-To-Awl"/>
+                        </constraints>
                         <state key="normal" title="Edit">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -36,11 +43,20 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="cSF-B5-iVa" secondAttribute="centerY" id="2qH-4k-QIP"/>
+                    <constraint firstItem="cSF-B5-iVa" firstAttribute="centerY" secondItem="b84-Pg-56c" secondAttribute="centerY" id="D7T-FE-Has"/>
+                    <constraint firstItem="cSF-B5-iVa" firstAttribute="leading" secondItem="b84-Pg-56c" secondAttribute="trailing" constant="10" id="ObF-YK-XYn"/>
+                    <constraint firstAttribute="centerY" secondItem="efZ-Nf-EmB" secondAttribute="centerY" id="QZQ-g7-2zW"/>
                     <constraint firstAttribute="trailingMargin" secondItem="cSF-B5-iVa" secondAttribute="trailing" constant="10" id="aKH-Is-Wu4"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="cSF-B5-iVa" secondAttribute="trailing" constant="10" id="ciR-He-nq7"/>
+                    <constraint firstItem="efZ-Nf-EmB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="hWU-H2-kuf"/>
+                    <constraint firstItem="b84-Pg-56c" firstAttribute="leading" secondItem="efZ-Nf-EmB" secondAttribute="trailing" constant="10" id="nVC-Rv-MBc"/>
+                    <constraint firstItem="cSF-B5-iVa" firstAttribute="centerY" secondItem="efZ-Nf-EmB" secondAttribute="centerY" id="qFe-au-kST"/>
                     <constraint firstItem="cSF-B5-iVa" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="30" id="y8J-36-Hot"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="2qH-4k-QIP"/>
+                        <exclude reference="aKH-Is-Wu4"/>
                         <exclude reference="y8J-36-Hot"/>
                     </mask>
                 </variation>
@@ -49,7 +65,7 @@
                 <outlet property="recordColorImage" destination="efZ-Nf-EmB" id="XwB-b7-XTM"/>
                 <outlet property="recordTypeName" destination="b84-Pg-56c" id="pte-Xg-CyM"/>
             </connections>
-            <point key="canvasLocation" x="-80" y="26.5"/>
+            <point key="canvasLocation" x="-80" y="25.5"/>
         </tableViewCell>
     </objects>
 </document>

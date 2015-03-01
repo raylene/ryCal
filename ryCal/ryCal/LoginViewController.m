@@ -27,7 +27,7 @@
 }
 
 - (void)setupNavigationBar {
-    self.title = @"(^_^)";
+    self.title = @"Record It";
 }
 
 - (IBAction)onLogin:(id)sender {
