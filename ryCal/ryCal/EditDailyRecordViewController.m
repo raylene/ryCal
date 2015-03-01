@@ -33,6 +33,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [SharedConstants getMonthBackgroundColor];
     [self setupTypeTable];
+    // TODO: read up on VC lifecycle more to get why this wasn't working before
+    [self setupDateHeader];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUsingNewDay:) name:SwitchDayNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDayDataChanged) name:DayDataChangedNotification object:nil];
@@ -92,10 +94,6 @@
 }
 
 - (void)updateDayDataChanged {
-    NSLog(@"updateDayDataChanged");
-//    self.recordDictionary = recordDict;
-//    [self.typeTableView reloadData];
-//    
     [self loadRecordData];
 }
 
