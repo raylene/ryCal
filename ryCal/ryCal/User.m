@@ -145,7 +145,11 @@ static User *_currentUser;
 }
 
 - (NSString *)getName {
-    return self.dictionary[@"name"];
+    NSString *name = [self.dictionary objectForKey:@"name"];
+    if (name && name.length) {
+        return name;
+    }
+    return self.pfUser.username;
 }
 
 - (PFUser *)getPFUser {
