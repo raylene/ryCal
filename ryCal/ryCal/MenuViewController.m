@@ -85,7 +85,7 @@ static int const kHelpItemIndex = 2;
     @[
       @{@"name" : @"Today", @"img":@"today"},
       @{@"name" : @"Activities", @"img": @"recordtypes"},
-      @{@"name" : @"Support", @"img": @"help"},
+      @{@"name" : @"Help", @"img": @"help"},
       @{@"name" : @"Logout", @"img": @"logout"}
       ];
 }
