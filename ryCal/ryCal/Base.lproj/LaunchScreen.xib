@@ -16,50 +16,40 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record It" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="br3-Dh-yzC">
-                    <rect key="frame" x="120" y="80" width="135" height="39"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mockcalendar" translatesAutoresizingMaskIntoConstraints="NO" id="J0w-x1-DPn">
-                    <rect key="frame" x="71" y="139" width="233" height="150"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="233" id="6oZ-x6-iAe"/>
-                        <constraint firstAttribute="height" constant="150" id="gax-6S-s6k"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track all of your goals, one day at a time" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="B8X-hA-KnO">
-                    <rect key="frame" x="40" y="309" width="295" height="43"/>
+                    <rect key="frame" x="60" y="203" width="255" height="43"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recordit" translatesAutoresizingMaskIntoConstraints="NO" id="J5g-40-uxA">
+                    <rect key="frame" x="88" y="80" width="200" height="63"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="63" id="f7C-zF-cBX"/>
+                        <constraint firstAttribute="width" constant="200" id="thy-8L-71E"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.51092991450000003" green="0.67026581299999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <color key="tintColor" red="0.51092991450000003" green="0.67026581299999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="B8X-hA-KnO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="0lc-8z-cfj"/>
-                <constraint firstItem="B8X-hA-KnO" firstAttribute="top" secondItem="br3-Dh-yzC" secondAttribute="bottom" constant="30" id="2cW-kg-hDK"/>
+                <constraint firstItem="B8X-hA-KnO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="60" id="0lc-8z-cfj"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="6D1-mS-7PN"/>
                 <constraint firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" constant="10" id="6jI-Uk-4DP"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="30" id="Kzo-t9-V3l"/>
-                <constraint firstItem="B8X-hA-KnO" firstAttribute="top" secondItem="J0w-x1-DPn" secondAttribute="bottom" constant="20" id="M7Y-n9-9gX"/>
+                <constraint firstAttribute="centerX" secondItem="J5g-40-uxA" secondAttribute="centerX" id="LY8-sC-0Mk"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstItem="br3-Dh-yzC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="80" id="NIG-cW-Lcu"/>
+                <constraint firstItem="J5g-40-uxA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="80" id="Mzx-VG-3mF"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="top" relation="greaterThanOrEqual" secondItem="B8X-hA-KnO" secondAttribute="bottom" constant="10" id="QSk-dF-EU6"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
                 <constraint firstAttribute="centerX" secondItem="B8X-hA-KnO" secondAttribute="centerX" id="blA-Zo-wtO"/>
-                <constraint firstAttribute="centerX" secondItem="J0w-x1-DPn" secondAttribute="centerX" id="cAJ-38-PjK"/>
-                <constraint firstAttribute="trailing" secondItem="B8X-hA-KnO" secondAttribute="trailing" constant="40" id="dWr-UR-1Tu"/>
-                <constraint firstAttribute="centerX" secondItem="br3-Dh-yzC" secondAttribute="centerX" id="duc-5a-Lgb"/>
-                <constraint firstItem="J0w-x1-DPn" firstAttribute="top" secondItem="br3-Dh-yzC" secondAttribute="bottom" constant="20" id="eLP-6X-4su"/>
+                <constraint firstAttribute="trailing" secondItem="B8X-hA-KnO" secondAttribute="trailing" constant="60" id="dWr-UR-1Tu"/>
+                <constraint firstItem="B8X-hA-KnO" firstAttribute="top" secondItem="J5g-40-uxA" secondAttribute="bottom" constant="60" id="gfu-Fj-Tjy"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="2cW-kg-hDK"/>
                     <exclude reference="MfP-vx-nX0"/>
                 </mask>
             </variation>
@@ -67,6 +57,6 @@
         </view>
     </objects>
     <resources>
-        <image name="mockcalendar" width="612" height="390"/>
+        <image name="recordit" width="870" height="254"/>
     </resources>
 </document>

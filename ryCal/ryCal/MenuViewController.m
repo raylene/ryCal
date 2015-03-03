@@ -60,7 +60,7 @@ static int const kHelpItemIndex = 2;
 
 - (void)displayUserInfo {
     User *user = [User currentUser];
-    self.nameLabel.text = [user getUsername];
+    self.nameLabel.text = [user getName];
     self.nameLabel.textColor = [SharedConstants getMenuTextColor];
     
     [self.profileImageView setImageWithURL:[NSURL URLWithString:[user getProfileImageURL]]];

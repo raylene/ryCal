@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zz8-ir-mjQ">
-                    <rect key="frame" x="50" y="300" width="275" height="60"/>
+                    <rect key="frame" x="50" y="507" width="275" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSd-ZJ-KPh">
                             <rect key="frame" x="55" y="14" width="165" height="33"/>
@@ -36,28 +36,68 @@
                         <constraint firstAttribute="height" constant="60" id="rHZ-gL-lDC"/>
                     </constraints>
                 </view>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O1i-1p-SKT">
-                    <rect key="frame" x="40" y="120" width="295" height="80"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W4d-hJ-YWz">
+                    <rect key="frame" x="40" y="100" width="295" height="180"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CzO-A9-Yeo">
+                            <rect key="frame" x="8" y="8" width="279" height="164"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We currently only support login via a valid Facebook account. We won't post anything on your behalf." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kxd-Ad-gWh">
+                                    <rect key="frame" x="20" y="46" width="239" height="72"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="Kxd-Ad-gWh" firstAttribute="leading" secondItem="CzO-A9-Yeo" secondAttribute="leading" constant="20" id="5Zi-Uy-9FJ"/>
+                                <constraint firstAttribute="trailing" secondItem="Kxd-Ad-gWh" secondAttribute="trailing" constant="20" id="qRI-4E-bXh"/>
+                                <constraint firstAttribute="centerY" secondItem="Kxd-Ad-gWh" secondAttribute="centerY" id="zwq-Nv-fr2"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="80" id="2jG-xC-NNI"/>
+                        <constraint firstAttribute="bottom" secondItem="CzO-A9-Yeo" secondAttribute="bottom" constant="8" id="1lD-Ek-mut"/>
+                        <constraint firstItem="CzO-A9-Yeo" firstAttribute="leading" secondItem="W4d-hJ-YWz" secondAttribute="leading" constant="8" id="36k-UI-7QH"/>
+                        <constraint firstAttribute="bottom" secondItem="CzO-A9-Yeo" secondAttribute="bottom" constant="-8" id="Cri-Ht-Hif"/>
+                        <constraint firstAttribute="trailing" secondItem="CzO-A9-Yeo" secondAttribute="trailing" constant="8" id="POU-BP-BCU"/>
+                        <constraint firstItem="CzO-A9-Yeo" firstAttribute="top" secondItem="W4d-hJ-YWz" secondAttribute="top" constant="8" id="Tw0-c3-9Mr"/>
+                        <constraint firstAttribute="height" constant="180" id="ckw-IC-JEL"/>
                     </constraints>
-                    <string key="text">We currently only support logging in with Facebook. We won't post anything on your behalf and will keep you signed in until you don't want to be anymore.</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Cri-Ht-Hif"/>
+                        </mask>
+                    </variation>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="O1i-1p-SKT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="120" id="3Ii-MO-OCr"/>
-                <constraint firstItem="O1i-1p-SKT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="AUP-mf-f6X"/>
+                <constraint firstAttribute="bottom" secondItem="W4d-hJ-YWz" secondAttribute="bottom" constant="100" id="7t9-oe-tYZ"/>
+                <constraint firstAttribute="trailing" secondItem="W4d-hJ-YWz" secondAttribute="trailing" constant="40" id="9Lg-Ld-iAB"/>
+                <constraint firstAttribute="bottom" secondItem="zz8-ir-mjQ" secondAttribute="bottom" constant="100" id="CH9-fx-uRu"/>
+                <constraint firstItem="W4d-hJ-YWz" firstAttribute="centerY" secondItem="zz8-ir-mjQ" secondAttribute="centerY" id="CVD-pE-0Ay"/>
+                <constraint firstItem="zz8-ir-mjQ" firstAttribute="top" secondItem="W4d-hJ-YWz" secondAttribute="bottom" constant="40" id="HAY-wP-wLv"/>
                 <constraint firstItem="zz8-ir-mjQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="MEx-5p-Iza"/>
-                <constraint firstAttribute="centerX" secondItem="O1i-1p-SKT" secondAttribute="centerX" id="Qkc-b5-qL7"/>
-                <constraint firstAttribute="trailing" secondItem="O1i-1p-SKT" secondAttribute="trailing" constant="40" id="UN0-6C-lmd"/>
+                <constraint firstItem="W4d-hJ-YWz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="QFh-t0-FQe"/>
                 <constraint firstAttribute="trailing" secondItem="zz8-ir-mjQ" secondAttribute="trailing" constant="50" id="Y0Y-h4-3qf"/>
-                <constraint firstItem="zz8-ir-mjQ" firstAttribute="top" secondItem="O1i-1p-SKT" secondAttribute="bottom" constant="100" id="f0j-KF-R2e"/>
+                <constraint firstItem="zz8-ir-mjQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="W4d-hJ-YWz" secondAttribute="bottom" constant="10" id="ZDC-Oa-jag"/>
+                <constraint firstItem="W4d-hJ-YWz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="hOD-Fx-XjB"/>
+                <constraint firstItem="W4d-hJ-YWz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="rDF-7Q-mCi"/>
+                <constraint firstItem="zz8-ir-mjQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="rNs-QR-BkF"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="7t9-oe-tYZ"/>
+                    <exclude reference="CVD-pE-0Ay"/>
+                    <exclude reference="QFh-t0-FQe"/>
+                    <exclude reference="HAY-wP-wLv"/>
+                    <exclude reference="rNs-QR-BkF"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>

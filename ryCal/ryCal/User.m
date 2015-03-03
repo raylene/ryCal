@@ -65,7 +65,7 @@ static User *_currentUser;
     // https://www.parse.com/tutorials/integrating-facebook-in-ios
 
     // Login PFUser using Facebook
-    NSArray *fbPermissions = nil; //@[@"user_about_me"];
+    NSArray *fbPermissions = nil;//@[@"user_about_me"];
     [PFFacebookUtils logInWithPermissions:fbPermissions block:^(PFUser *pfuser, NSError *error) {
         NSString *errorMessage = nil;
         if (error != nil) {
@@ -142,6 +142,10 @@ static User *_currentUser;
 
 - (NSString *)getUsername {
     return self.pfUser.username;
+}
+
+- (NSString *)getName {
+    return self.dictionary[@"name"];
 }
 
 - (PFUser *)getPFUser {

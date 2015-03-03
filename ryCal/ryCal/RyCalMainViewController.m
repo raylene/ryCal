@@ -32,6 +32,8 @@
     
     // TODO: look into this resizing hack
     hvc.view.frame = self.contentVC.view.frame;
+    self.menuVC.view.frame = self.contentVC.view.frame;
+    
     return self;
 }
 

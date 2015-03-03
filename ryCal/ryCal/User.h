@@ -22,6 +22,7 @@
 + (void)login;
 
 - (NSString *)getUsername;
+- (NSString *)getName;
 - (NSString *)getUserID;
 - (NSString *)getProfileImageURL;
 
