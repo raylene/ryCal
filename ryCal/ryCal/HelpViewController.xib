@@ -9,7 +9,6 @@
                 <outlet property="clearCacheButton" destination="pTB-8D-DZj" id="3rL-cy-3CP"/>
                 <outlet property="clearCacheButtonBackground" destination="Fp8-ts-jkW" id="Cel-XQ-lde"/>
                 <outlet property="contactUsButtonBackground" destination="vkl-u3-wJq" id="OA9-Ll-dfA"/>
-                <outlet property="helpScrollView" destination="OfH-iW-hwS" id="rqw-Fo-m0J"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,22 +24,15 @@
                         <constraint firstAttribute="width" constant="235" id="UqT-L5-YZS"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="howtolist" translatesAutoresizingMaskIntoConstraints="NO" id="SO4-NP-u1g">
-                    <rect key="frame" x="57" y="224" width="300" height="116"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="300" id="Mbt-lN-jLR"/>
-                        <constraint firstAttribute="height" constant="116" id="pDO-B7-djo"/>
-                    </constraints>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXY-Vc-bbO">
-                    <rect key="frame" x="20" y="350" width="374" height="1"/>
+                    <rect key="frame" x="20" y="318" width="374" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="D1H-be-1EB"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fp8-ts-jkW">
-                    <rect key="frame" x="50" y="584" width="314" height="40"/>
+                    <rect key="frame" x="50" y="582" width="314" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTB-8D-DZj">
                             <rect key="frame" x="109" y="4" width="97" height="33"/>
@@ -70,7 +62,7 @@
                     </variation>
                 </view>
                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For other questions or comments, email us at recorditapp@gmail.com." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Dz-46-Gyr">
-                    <rect key="frame" x="30" y="644" width="354" height="32"/>
+                    <rect key="frame" x="30" y="642" width="354" height="32"/>
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" none="YES" link="YES" staticText="YES"/>
                     </accessibility>
@@ -79,13 +71,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you having trouble saving or viewing your activities? Try clearing your cache." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1Y-lC-rRx">
-                    <rect key="frame" x="30" y="542" width="354" height="32"/>
+                    <rect key="frame" x="30" y="540" width="354" height="32"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vkl-u3-wJq">
-                    <rect key="frame" x="50" y="686" width="314" height="40"/>
+                    <rect key="frame" x="50" y="684" width="314" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wz-VU-dN5">
                             <rect key="frame" x="113" y="4" width="89" height="33"/>
@@ -99,6 +91,7 @@
                             </connections>
                         </button>
                     </subviews>
+                    <color key="backgroundColor" red="0.50980392159999999" green="0.6705882353" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="1Wz-VU-dN5" secondAttribute="centerY" id="Bug-UP-fTL"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="MMz-1o-art"/>
@@ -115,21 +108,42 @@
                         </mask>
                     </variation>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Record what you did each day with a quick tap" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SX2-Uh-YtF">
+                    <rect key="frame" x="4" y="264" width="406" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Easily track your progress each month" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSC-f0-vPn">
+                    <rect key="frame" x="4" y="288" width="406" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Create and customize activities you care about" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFh-45-5gH">
+                    <rect key="frame" x="4" y="240" width="406" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="CXY-Vc-bbO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="2nR-Vs-AmE"/>
                 <constraint firstAttribute="centerX" secondItem="Fp8-ts-jkW" secondAttribute="centerX" id="5Pd-J1-2nj"/>
-                <constraint firstAttribute="centerX" secondItem="SO4-NP-u1g" secondAttribute="centerX" id="6GO-iZ-uax"/>
+                <constraint firstItem="HSC-f0-vPn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="4" id="6Bk-hm-8og"/>
                 <constraint firstAttribute="trailing" secondItem="J1Y-lC-rRx" secondAttribute="trailing" constant="30" id="6HG-Mo-CJx"/>
                 <constraint firstItem="1Dz-46-Gyr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="6KY-SO-Phw"/>
-                <constraint firstItem="CXY-Vc-bbO" firstAttribute="top" secondItem="SO4-NP-u1g" secondAttribute="bottom" constant="10" id="8AL-yJ-JLS"/>
+                <constraint firstItem="DFh-45-5gH" firstAttribute="top" secondItem="f1g-bW-ESx" secondAttribute="bottom" constant="20" id="70H-I4-iEW"/>
                 <constraint firstItem="Fp8-ts-jkW" firstAttribute="top" secondItem="J1Y-lC-rRx" secondAttribute="bottom" constant="10" id="8W2-qH-ftd"/>
-                <constraint firstAttribute="bottom" secondItem="vkl-u3-wJq" secondAttribute="bottom" constant="10" id="IVv-h5-qt5"/>
+                <constraint firstItem="DFh-45-5gH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="4" id="COF-g5-pU8"/>
+                <constraint firstAttribute="bottom" secondItem="vkl-u3-wJq" secondAttribute="bottom" constant="12" id="IVv-h5-qt5"/>
+                <constraint firstAttribute="trailing" secondItem="DFh-45-5gH" secondAttribute="trailing" constant="4" id="LMv-1Q-bLc"/>
+                <constraint firstItem="CXY-Vc-bbO" firstAttribute="top" secondItem="HSC-f0-vPn" secondAttribute="bottom" constant="14" id="OF6-bB-n5O"/>
                 <constraint firstAttribute="centerX" secondItem="CXY-Vc-bbO" secondAttribute="centerX" id="PEI-ff-UxR"/>
                 <constraint firstAttribute="trailing" secondItem="CXY-Vc-bbO" secondAttribute="trailing" constant="20" id="Pxf-Cg-5AC"/>
-                <constraint firstItem="SO4-NP-u1g" firstAttribute="top" secondItem="f1g-bW-ESx" secondAttribute="bottom" constant="4" id="QOI-kA-9sm"/>
                 <constraint firstItem="Fp8-ts-jkW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="Qwd-Ba-hhX"/>
+                <constraint firstItem="SX2-Uh-YtF" firstAttribute="top" secondItem="DFh-45-5gH" secondAttribute="bottom" constant="8" id="ROZ-ah-E2Q"/>
                 <constraint firstAttribute="centerX" secondItem="J1Y-lC-rRx" secondAttribute="centerX" id="RPt-PB-dlU"/>
                 <constraint firstItem="J1Y-lC-rRx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="S0D-cY-J3R"/>
                 <constraint firstAttribute="centerX" secondItem="vkl-u3-wJq" secondAttribute="centerX" id="SZv-Ns-vge"/>
@@ -141,7 +155,11 @@
                 <constraint firstAttribute="centerX" secondItem="1Dz-46-Gyr" secondAttribute="centerX" id="amF-uY-sz3"/>
                 <constraint firstAttribute="trailing" secondItem="1Dz-46-Gyr" secondAttribute="trailing" constant="30" id="bqX-XK-UsU"/>
                 <constraint firstAttribute="centerX" secondItem="f1g-bW-ESx" secondAttribute="centerX" id="en3-SF-KE0"/>
+                <constraint firstItem="SX2-Uh-YtF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="4" id="kl6-GJ-eHw"/>
+                <constraint firstAttribute="trailing" secondItem="HSC-f0-vPn" secondAttribute="trailing" constant="4" id="n79-t9-uPG"/>
                 <constraint firstItem="J1Y-lC-rRx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CXY-Vc-bbO" secondAttribute="bottom" constant="5" id="oKt-IB-ZOI"/>
+                <constraint firstItem="HSC-f0-vPn" firstAttribute="top" secondItem="SX2-Uh-YtF" secondAttribute="bottom" constant="8" id="qCz-L7-fN6"/>
+                <constraint firstAttribute="trailing" secondItem="SX2-Uh-YtF" secondAttribute="trailing" constant="4" id="uYw-2B-R2Z"/>
                 <constraint firstItem="1Dz-46-Gyr" firstAttribute="top" secondItem="Fp8-ts-jkW" secondAttribute="bottom" constant="20" id="yBi-zf-K65"/>
                 <constraint firstAttribute="trailing" secondItem="vkl-u3-wJq" secondAttribute="trailing" constant="50" id="yY0-B3-lgn"/>
             </constraints>
@@ -151,11 +169,10 @@
                     <exclude reference="ShC-1z-Efi"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="71" y="207"/>
+            <point key="canvasLocation" x="-41" y="201"/>
         </view>
     </objects>
     <resources>
-        <image name="howtolist" width="800" height="310"/>
         <image name="mockcalendar" width="612" height="390"/>
     </resources>
 </document>

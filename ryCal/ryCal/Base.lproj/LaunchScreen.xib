@@ -16,17 +16,17 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track all of your goals, one day at a time" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="B8X-hA-KnO">
-                    <rect key="frame" x="60" y="203" width="255" height="43"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep track of your personal goals, one day at a time" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="B8X-hA-KnO">
+                    <rect key="frame" x="60" y="207" width="255" height="39"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recordit" translatesAutoresizingMaskIntoConstraints="NO" id="J5g-40-uxA">
-                    <rect key="frame" x="88" y="80" width="200" height="63"/>
+                    <rect key="frame" x="113" y="100" width="150" height="47"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="63" id="f7C-zF-cBX"/>
-                        <constraint firstAttribute="width" constant="200" id="thy-8L-71E"/>
+                        <constraint firstAttribute="height" constant="47" id="f7C-zF-cBX"/>
+                        <constraint firstAttribute="width" constant="150" id="thy-8L-71E"/>
                     </constraints>
                 </imageView>
             </subviews>
@@ -39,7 +39,7 @@
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="30" id="Kzo-t9-V3l"/>
                 <constraint firstAttribute="centerX" secondItem="J5g-40-uxA" secondAttribute="centerX" id="LY8-sC-0Mk"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstItem="J5g-40-uxA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="80" id="Mzx-VG-3mF"/>
+                <constraint firstItem="J5g-40-uxA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="100" id="Mzx-VG-3mF"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="top" relation="greaterThanOrEqual" secondItem="B8X-hA-KnO" secondAttribute="bottom" constant="10" id="QSk-dF-EU6"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
                 <constraint firstAttribute="centerX" secondItem="B8X-hA-KnO" secondAttribute="centerX" id="blA-Zo-wtO"/>
