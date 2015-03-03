@@ -11,7 +11,7 @@
 #import "ColorCell.h"
 #import "RecordType.h"
 
-@interface RecordTypeComposerViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface RecordTypeComposerViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) RecordType *recordType;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
@@ -25,6 +25,8 @@
 @end
 
 @implementation RecordTypeComposerViewController
+
+NSString * const kRecordDescriptionPlaceholder = @"What do you want to accomplish? (e.g. Go running twice a week)";
 
 - (id)init {
     self = [super init];
@@ -79,7 +81,23 @@
     [self.descriptionTextView.layer setCornerRadius:5.0];
     self.descriptionTextView.clipsToBounds = YES;
     
-    [self.descriptionTextView setText:self.recordType[kDescriptionFieldKey]];
+    self.descriptionTextView.delegate = self;
+    
+    if ([self.recordType[kDescriptionFieldKey] length]) {
+        [self.descriptionTextView setText:self.recordType[kDescriptionFieldKey]];
+        self.descriptionTextView.textColor = [UIColor blackColor];
+    } else {
+        [self.descriptionTextView setText:kRecordDescriptionPlaceholder];
+        self.descriptionTextView.textColor = [UIColor lightGrayColor];
+    }
+}
+
+// Helper to properly save the description instead of the placeholder
+- (NSString *)getDescriptionTextForSaving {
+    if (![self.descriptionTextView.text isEqualToString:kRecordDescriptionPlaceholder]) {
+        return [SharedConstants getSaveFormattedString:self.descriptionTextView.text];
+    }
+    return nil;
 }
 
 - (void)setupColorCollectionView {
@@ -112,7 +130,7 @@
 
     self.recordType.name = [SharedConstants getSaveFormattedString:self.nameTextField.text];
     self.recordType.archived = (BOOL)self.enabledControl.selectedSegmentIndex;
-    self.recordType.description = [SharedConstants getSaveFormattedString:self.descriptionTextView.text];
+    self.recordType.description = [self getDescriptionTextForSaving];
     
     [RecordType saveType:self.recordType completion:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -141,6 +159,24 @@
             }
         }];
     }];
+}
+
+#pragma mark UITextViewDelegate methods
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:kRecordDescriptionPlaceholder]) {
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor];
+    }
+    [textView becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = kRecordDescriptionPlaceholder;
+        textView.textColor = [UIColor lightGrayColor];
+    }
+    [textView resignFirstResponder];
 }
 
 #pragma mark UITextField event methods
