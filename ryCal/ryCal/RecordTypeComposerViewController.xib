@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecordTypeComposerViewController">
             <connections>
                 <outlet property="colorCollectionView" destination="RxC-fE-xrp" id="Qek-Oh-uib"/>
+                <outlet property="deleteButton" destination="yPK-wz-7Bh" id="Oz9-HB-AHF"/>
                 <outlet property="descriptionTextView" destination="eFP-3L-9j7" id="Bkb-eQ-T51"/>
                 <outlet property="enabledControl" destination="nsM-8y-hQ9" id="OX9-wk-zqT"/>
                 <outlet property="nameTextField" destination="Bdn-i2-23i" id="QWd-5p-wRs"/>

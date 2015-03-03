@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *colorCollectionView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *enabledControl;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 - (IBAction)onDelete:(id)sender;
 - (IBAction)nameTextEditingChanged:(id)sender;
@@ -65,8 +66,8 @@ NSString * const kRecordDescriptionPlaceholder = @"What do you want to accomplis
     [self.nameTextField setText:self.recordType[kNameFieldKey]];
     [self.enabledControl setSelectedSegmentIndex:(int)[self.recordType[kArchivedFieldKey] boolValue]];
     
-    // Disable saving if there's no type name
-    self.navigationItem.rightBarButtonItem.enabled = self.nameTextField.text.length;
+    // Disable saving/deleting if there's no type name
+    [self toggleEditingButtonStates];
 }
 
 - (void)setupNavigationBar {
@@ -179,11 +180,16 @@ NSString * const kRecordDescriptionPlaceholder = @"What do you want to accomplis
     [textView resignFirstResponder];
 }
 
-#pragma mark UITextField event methods
+#pragma mark UITextField event and related helper methods
 
+- (void)toggleEditingButtonStates {
+    // Disable saving/deleting if there's no type name
+    BOOL hasName = self.nameTextField.text.length;
+    self.navigationItem.rightBarButtonItem.enabled = hasName;
+    self.deleteButton.enabled = hasName;
+}
 - (IBAction)nameTextEditingChanged:(id)sender {
-    // Disable saving if there's no type name
-    self.navigationItem.rightBarButtonItem.enabled = self.nameTextField.text.length;
+    [self toggleEditingButtonStates];
 }
 
 #pragma mark UICollectionViewDataSource & UICollectionViewDataDelegate methods

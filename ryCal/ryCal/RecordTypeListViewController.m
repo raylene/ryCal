@@ -39,7 +39,7 @@
 
 - (void)refreshTypeData {
     [RecordType loadAllTypes:^(NSArray *types, NSError *error) {
-//        self.recordTypes = types;
+        self.recordTypes = types;
         [self setupNuxExperience];
         [self.typeTableView reloadData];
     }];
@@ -84,7 +84,7 @@
 - (void)setupRefreshControl {
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
-    [self.typeTableView insertSubview:self.refreshControl atIndex:0];
+//    [self.typeTableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)onCreateNewType {
