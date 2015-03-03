@@ -7,18 +7,31 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Raylene Yung. All rights reserved." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="10" y="429" width="460" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="10" y="620" width="355" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record It" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="br3-Dh-yzC">
-                    <rect key="frame" x="173" y="140" width="135" height="39"/>
+                    <rect key="frame" x="120" y="80" width="135" height="39"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mockcalendar" translatesAutoresizingMaskIntoConstraints="NO" id="J0w-x1-DPn">
+                    <rect key="frame" x="32" y="139" width="311" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="311" id="6oZ-x6-iAe"/>
+                        <constraint firstAttribute="height" constant="200" id="gax-6S-s6k"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track all of your goals, one day at a time" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="B8X-hA-KnO">
+                    <rect key="frame" x="40" y="359" width="295" height="43"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -26,22 +39,34 @@
             <color key="backgroundColor" red="0.51092991450000003" green="0.67026581299999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <color key="tintColor" red="0.51092991450000003" green="0.67026581299999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="B8X-hA-KnO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="0lc-8z-cfj"/>
+                <constraint firstItem="B8X-hA-KnO" firstAttribute="top" secondItem="br3-Dh-yzC" secondAttribute="bottom" constant="30" id="2cW-kg-hDK"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="6D1-mS-7PN"/>
                 <constraint firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" constant="10" id="6jI-Uk-4DP"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="30" id="Kzo-t9-V3l"/>
+                <constraint firstItem="B8X-hA-KnO" firstAttribute="top" secondItem="J0w-x1-DPn" secondAttribute="bottom" constant="20" id="M7Y-n9-9gX"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstItem="br3-Dh-yzC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="140" id="NIG-cW-Lcu"/>
+                <constraint firstItem="br3-Dh-yzC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="80" id="NIG-cW-Lcu"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" relation="greaterThanOrEqual" secondItem="B8X-hA-KnO" secondAttribute="bottom" constant="10" id="QSk-dF-EU6"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
+                <constraint firstAttribute="centerX" secondItem="B8X-hA-KnO" secondAttribute="centerX" id="blA-Zo-wtO"/>
+                <constraint firstAttribute="centerX" secondItem="J0w-x1-DPn" secondAttribute="centerX" id="cAJ-38-PjK"/>
+                <constraint firstAttribute="trailing" secondItem="B8X-hA-KnO" secondAttribute="trailing" constant="40" id="dWr-UR-1Tu"/>
                 <constraint firstAttribute="centerX" secondItem="br3-Dh-yzC" secondAttribute="centerX" id="duc-5a-Lgb"/>
+                <constraint firstItem="J0w-x1-DPn" firstAttribute="top" secondItem="br3-Dh-yzC" secondAttribute="bottom" constant="20" id="eLP-6X-4su"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="2cW-kg-hDK"/>
                     <exclude reference="MfP-vx-nX0"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="548" y="455"/>
+            <point key="canvasLocation" x="547.5" y="454.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="mockcalendar" width="612" height="390"/>
+    </resources>
 </document>

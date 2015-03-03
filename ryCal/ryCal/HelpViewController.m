@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *clearCacheButton;
 @property (weak, nonatomic) IBOutlet UIView *clearCacheButtonBackground;
 @property (weak, nonatomic) IBOutlet UIView *contactUsButtonBackground;
+@property (weak, nonatomic) IBOutlet UIScrollView *helpScrollView;
 
 - (IBAction)onEmailUsButton:(id)sender;
 
@@ -29,6 +30,7 @@
     [super viewDidLoad];
     [self setupNavigationBar];
     
+    self.helpScrollView.contentSize = CGSizeMake(300, 1000);
     [self setupCacheButton];
     [self.contactUsButtonBackground setBackgroundColor:[SharedConstants getColor:ENABLED_BUTTON_COLOR]];
 }
@@ -65,7 +67,7 @@
 }
 
 - (IBAction)onEmailUsButton:(id)sender {
-    NSString *urlString = [@"mailto:recorditapp@gmail.com" stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    NSString *urlString = [@"mailto:recorditapp@gmail.com?subject=Help Me!" stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     BOOL result = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
     NSLog(@"opened email? %d", result);
 }
