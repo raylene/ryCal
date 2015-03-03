@@ -6,7 +6,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditDailyRecordViewController">
             <connections>
+                <outlet property="addNotesButton" destination="vi4-J3-Nt1" id="VwL-b2-gyr"/>
                 <outlet property="dateHeaderLabel" destination="Sos-yx-7M1" id="br5-hx-lct"/>
+                <outlet property="howToView" destination="k6a-7Y-wWY" id="8m8-V8-9wd"/>
                 <outlet property="typeTableView" destination="nt3-TR-D9x" id="RUR-Dw-87Z"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,6 +24,30 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6a-7Y-wWY">
+                    <rect key="frame" x="20" y="47" width="560" height="514"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nux" translatesAutoresizingMaskIntoConstraints="NO" id="a2l-4T-hPW">
+                            <rect key="frame" x="130" y="182" width="300" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="150" id="Yd3-RN-cMq"/>
+                                <constraint firstAttribute="width" constant="300" id="zzj-4y-WQo"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="a2l-4T-hPW" secondAttribute="centerX" id="K1Z-ct-ox9"/>
+                        <constraint firstItem="a2l-4T-hPW" firstAttribute="top" secondItem="k6a-7Y-wWY" secondAttribute="top" constant="20" id="Vuh-Ca-ZrB"/>
+                        <constraint firstAttribute="centerX" secondItem="a2l-4T-hPW" secondAttribute="centerX" id="beS-wf-zfZ"/>
+                        <constraint firstAttribute="centerY" secondItem="a2l-4T-hPW" secondAttribute="centerY" id="x4l-hA-Etj"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Vuh-Ca-ZrB"/>
+                        </mask>
+                    </variation>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vi4-J3-Nt1">
                     <rect key="frame" x="265" y="561" width="70" height="29"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
@@ -42,11 +68,15 @@
                 </tableView>
             </subviews>
             <constraints>
+                <constraint firstItem="vi4-J3-Nt1" firstAttribute="top" secondItem="k6a-7Y-wWY" secondAttribute="bottom" id="0Gh-bf-OjL"/>
+                <constraint firstItem="k6a-7Y-wWY" firstAttribute="top" secondItem="Sos-yx-7M1" secondAttribute="bottom" constant="20" id="2t6-dt-1Tk"/>
                 <constraint firstItem="vi4-J3-Nt1" firstAttribute="top" secondItem="nt3-TR-D9x" secondAttribute="bottom" constant="10" id="7vf-Rk-hb0"/>
                 <constraint firstAttribute="centerX" secondItem="vi4-J3-Nt1" secondAttribute="centerX" id="8wv-la-Bjv"/>
+                <constraint firstAttribute="trailing" secondItem="k6a-7Y-wWY" secondAttribute="trailing" constant="20" id="Bcp-L6-3OP"/>
                 <constraint firstItem="nt3-TR-D9x" firstAttribute="top" secondItem="Sos-yx-7M1" secondAttribute="bottom" constant="10" id="Bmv-k9-bLr"/>
                 <constraint firstAttribute="centerX" secondItem="Sos-yx-7M1" secondAttribute="centerX" id="Hza-vg-wuB"/>
                 <constraint firstItem="Sos-yx-7M1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="U9B-fU-4Bd"/>
+                <constraint firstItem="k6a-7Y-wWY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="p9e-aP-kV0"/>
                 <constraint firstAttribute="bottom" secondItem="vi4-J3-Nt1" secondAttribute="bottom" constant="10" id="uyG-Uf-x1b"/>
                 <constraint firstItem="nt3-TR-D9x" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="v0w-0Z-3Fz"/>
                 <constraint firstAttribute="trailing" secondItem="nt3-TR-D9x" secondAttribute="trailing" id="ziB-fJ-dCm"/>
@@ -54,4 +84,7 @@
             <point key="canvasLocation" x="-5" y="16"/>
         </view>
     </objects>
+    <resources>
+        <image name="nux" width="800" height="400"/>
+    </resources>
 </document>

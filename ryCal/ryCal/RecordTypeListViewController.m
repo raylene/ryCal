@@ -16,6 +16,7 @@
 @interface RecordTypeListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *typeTableView;
+@property (weak, nonatomic) IBOutlet UIView *nuxView;
 @property (nonatomic, strong) RecordTypeCell *prototypeCell;
 @property (nonatomic, strong) NSArray *recordTypes;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -28,6 +29,7 @@
     [super viewDidLoad];
     [self setupTypeTable];
     [self setupNavigationBar];
+    [self setupNuxExperience];
     [self setupRefreshControl];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTypeData) name:RecordTypeDataChangedNotification object:nil];
@@ -37,7 +39,8 @@
 
 - (void)refreshTypeData {
     [RecordType loadAllTypes:^(NSArray *types, NSError *error) {
-        self.recordTypes = types;
+//        self.recordTypes = types;
+        [self setupNuxExperience];
         [self.typeTableView reloadData];
     }];
 }
@@ -50,6 +53,12 @@
     self.typeTableView.dataSource = self;
     self.typeTableView.rowHeight = UITableViewAutomaticDimension;
     self.typeTableView.tableFooterView = [[UIView alloc] init];
+}
+
+- (void)setupNuxExperience {
+    BOOL hasRecordTypes = self.recordTypes && self.recordTypes.count;
+    self.nuxView.hidden = hasRecordTypes;
+    self.typeTableView.hidden = !hasRecordTypes;
 }
 
 - (void)setupNavigationBar {

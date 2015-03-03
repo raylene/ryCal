@@ -43,26 +43,26 @@
                         <constraint firstAttribute="height" constant="1" id="D1H-be-1EB"/>
 =======
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="howtolist" translatesAutoresizingMaskIntoConstraints="NO" id="SO4-NP-u1g">
-                    <rect key="frame" x="57" y="224" width="300" height="90"/>
+                    <rect key="frame" x="57" y="224" width="300" height="116"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="Mbt-lN-jLR"/>
-                        <constraint firstAttribute="height" constant="90" id="pDO-B7-djo"/>
+                        <constraint firstAttribute="height" constant="116" id="pDO-B7-djo"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXY-Vc-bbO">
-                    <rect key="frame" x="20" y="324" width="374" height="1"/>
+                    <rect key="frame" x="20" y="350" width="374" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="D1H-be-1EB"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fp8-ts-jkW">
-                    <rect key="frame" x="50" y="412" width="314" height="40"/>
+                    <rect key="frame" x="50" y="584" width="314" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTB-8D-DZj">
-                            <rect key="frame" x="83" y="4" width="149" height="33"/>
+                            <rect key="frame" x="109" y="4" width="97" height="33"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <state key="normal" title="Clear Cached Data">
+                            <state key="normal" title="Clear Cache">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -87,6 +87,7 @@
                         </mask>
                     </variation>
                 </view>
+<<<<<<< HEAD
 <<<<<<< HEAD
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OfH-iW-hwS">
                     <rect key="frame" x="10" y="292" width="394" height="434"/>
@@ -167,6 +168,10 @@
 =======
                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For other questions or comments, email us at recorditapp@gmail.com." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Dz-46-Gyr">
                     <rect key="frame" x="30" y="482" width="354" height="32"/>
+=======
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For other questions or comments, email us at recorditapp@gmail.com." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Dz-46-Gyr">
+                    <rect key="frame" x="30" y="644" width="354" height="32"/>
+>>>>>>> 270b1e8... Basic NUX for home screen and activity editing
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" none="YES" link="YES" staticText="YES"/>
                     </accessibility>
@@ -174,14 +179,14 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you having trouble saving or viewing your activities? Try restarting the app or clearing any currently cached data." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1Y-lC-rRx">
-                    <rect key="frame" x="30" y="355" width="354" height="47"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you having trouble saving or viewing your activities? Try clearing your cache." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1Y-lC-rRx">
+                    <rect key="frame" x="30" y="542" width="354" height="32"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vkl-u3-wJq">
-                    <rect key="frame" x="50" y="524" width="314" height="40"/>
+                    <rect key="frame" x="50" y="686" width="314" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wz-VU-dN5">
                             <rect key="frame" x="113" y="4" width="89" height="33"/>
@@ -263,6 +268,7 @@
                 <constraint firstItem="1Dz-46-Gyr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="6KY-SO-Phw"/>
                 <constraint firstItem="CXY-Vc-bbO" firstAttribute="top" secondItem="SO4-NP-u1g" secondAttribute="bottom" constant="10" id="8AL-yJ-JLS"/>
                 <constraint firstItem="Fp8-ts-jkW" firstAttribute="top" secondItem="J1Y-lC-rRx" secondAttribute="bottom" constant="10" id="8W2-qH-ftd"/>
+                <constraint firstAttribute="bottom" secondItem="vkl-u3-wJq" secondAttribute="bottom" constant="10" id="IVv-h5-qt5"/>
                 <constraint firstAttribute="centerX" secondItem="CXY-Vc-bbO" secondAttribute="centerX" id="PEI-ff-UxR"/>
                 <constraint firstAttribute="trailing" secondItem="CXY-Vc-bbO" secondAttribute="trailing" constant="20" id="Pxf-Cg-5AC"/>
                 <constraint firstItem="SO4-NP-u1g" firstAttribute="top" secondItem="f1g-bW-ESx" secondAttribute="bottom" constant="4" id="QOI-kA-9sm"/>
@@ -278,19 +284,29 @@
                 <constraint firstAttribute="centerX" secondItem="1Dz-46-Gyr" secondAttribute="centerX" id="amF-uY-sz3"/>
                 <constraint firstAttribute="trailing" secondItem="1Dz-46-Gyr" secondAttribute="trailing" constant="30" id="bqX-XK-UsU"/>
                 <constraint firstAttribute="centerX" secondItem="f1g-bW-ESx" secondAttribute="centerX" id="en3-SF-KE0"/>
-                <constraint firstItem="1Dz-46-Gyr" firstAttribute="top" secondItem="Fp8-ts-jkW" secondAttribute="bottom" constant="30" id="yBi-zf-K65"/>
+                <constraint firstItem="J1Y-lC-rRx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CXY-Vc-bbO" secondAttribute="bottom" constant="5" id="oKt-IB-ZOI"/>
+                <constraint firstItem="1Dz-46-Gyr" firstAttribute="top" secondItem="Fp8-ts-jkW" secondAttribute="bottom" constant="20" id="yBi-zf-K65"/>
                 <constraint firstAttribute="trailing" secondItem="vkl-u3-wJq" secondAttribute="trailing" constant="50" id="yY0-B3-lgn"/>
 >>>>>>> 92127bb... Help & Launch screen design tweaks
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="ShC-1z-Efi"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="71" y="207"/>
         </view>
     </objects>
     <resources>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         <image name="howtolist" width="800" height="240"/>
 >>>>>>> 92127bb... Help & Launch screen design tweaks
+=======
+        <image name="howtolist" width="800" height="310"/>
+>>>>>>> 270b1e8... Basic NUX for home screen and activity editing
         <image name="mockcalendar" width="612" height="390"/>
     </resources>
 </document>

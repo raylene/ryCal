@@ -18,6 +18,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *typeTableView;
 @property (weak, nonatomic) IBOutlet UILabel *dateHeaderLabel;
+@property (weak, nonatomic) IBOutlet UIView *howToView;
+@property (weak, nonatomic) IBOutlet UIButton *addNotesButton;
 
 @property (nonatomic, strong) CompressedDailyRecordCell *prototypeCell;
 @property (nonatomic, strong) NSArray *recordTypes;
@@ -35,6 +37,7 @@
     [self setupTypeTable];
     // TODO: read up on VC lifecycle more to get why this wasn't working before
     [self setupDateHeader];
+    [self setupNuxExperience];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUsingNewDay:) name:SwitchDayNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDayDataChanged) name:DayDataChangedNotification object:nil];
@@ -65,6 +68,13 @@
     self.dateHeaderLabel.text = header;
 }
 
+- (void)setupNuxExperience {
+    BOOL hasRecordTypes = self.recordTypes && self.recordTypes.count;
+    self.howToView.hidden = hasRecordTypes;
+    self.typeTableView.hidden = !hasRecordTypes;
+    self.addNotesButton.hidden = !hasRecordTypes;
+}
+
 - (void)setupTypeTable {
     self.typeTableView.delegate = self;
     self.typeTableView.dataSource = self;
@@ -78,6 +88,7 @@
 - (void)loadRecordData {
     [RecordType loadEnabledTypes:^(NSArray *types, NSError *error) {
         self.recordTypes = types;
+        [self setupNuxExperience];
         [Record loadRecordDictionaryForTimeRange:[self.dayData getStartDate] endDate:[self.dayData getEndDate] cacheKey:[self.dayData getDayCacheKey] completion:^(NSDictionary *recordDict, NSError *error) {
             self.recordDictionary = recordDict;
             
