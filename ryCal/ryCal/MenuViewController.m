@@ -39,6 +39,8 @@ static int const kHelpItemIndex = 2;
     self.view.backgroundColor = [SharedConstants getMenuBackgroundColor];
     [self setupMenuTable];
     [self displayUserInfo];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUserInfo) name:UserDidLoginNotification object:nil];
 }
 
 #pragma mark - Custom setters

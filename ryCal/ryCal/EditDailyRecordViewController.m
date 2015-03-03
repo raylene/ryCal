@@ -37,7 +37,11 @@
     [self setupTypeTable];
     // TODO: read up on VC lifecycle more to get why this wasn't working before
     [self setupDateHeader];
-    [self setupNuxExperience];
+
+    // Start by blanking everything out
+    self.howToView.hidden = YES;
+    self.typeTableView.hidden = YES;
+    self.addNotesButton.hidden = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUsingNewDay:) name:SwitchDayNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDayDataChanged) name:DayDataChangedNotification object:nil];

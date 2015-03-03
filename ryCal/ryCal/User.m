@@ -36,7 +36,6 @@ static User *_currentUser;
 
 + (void)setCurrentUser:(User *)currentUser {
     _currentUser = currentUser;
-    
     if (_currentUser != nil) {
         NSData *data = nil;
         if (currentUser.dictionary != nil) {
@@ -117,6 +116,7 @@ static User *_currentUser;
             User *user = [User currentUser];
             [user setDictionary:userData];
             [User setCurrentUser:user];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLoginNotification object:nil];
         }
     }];
 }
