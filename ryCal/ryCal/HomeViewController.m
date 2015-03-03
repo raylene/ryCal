@@ -56,10 +56,12 @@
 - (void)layoutFunTimes {
     CGFloat fullHeight = CGRectGetHeight(self.view.bounds);
     CGFloat fullWidth = CGRectGetWidth(self.view.bounds);
-
+    CGFloat navHeight = (20 + self.navigationController.navigationBar.frame.size.height);
     // Month calendar sizing...
+    // TODO: this seems like a hack :(
+    [self.monthVC setMonthFrameWidth:(fullWidth - 20.0)];
     CGRect calendarFrame = [self createNewFrameBasedOnView:self.monthVC.view];
-    calendarFrame.origin.y = (20 + self.navigationController.navigationBar.frame.size.height);
+    calendarFrame.origin.y = navHeight;
     CGFloat calendarHeight = [self.monthVC getEstimatedHeight];
     calendarFrame.size = CGSizeMake(fullWidth, calendarHeight);
 
@@ -72,6 +74,10 @@
                                  fullWidth,
                                  fullHeight - dayY);
     self.dayEditVC.view.frame = dayFrame;
+    
+    NSLog(@"....LAYOUT SIZES: (totalW) %f, (totalH) %f, (monthW) %f, (monthH) %f, (dayW) %f, (dayH) %f", fullWidth, fullHeight, calendarFrame.size.width, calendarFrame.size.height, dayFrame.size.width, dayFrame.size.height);
+    NSLog(@"....LAYOUT CHECKS - width: (totalW) %f = (monthW) %f = (dayW) %f", fullWidth, calendarFrame.size.width, dayFrame.size.width);
+    NSLog(@"....LAYOUT CHECKS - height: (totalH) %f = (navH + monthH + dayH) %f", fullHeight, navHeight + calendarFrame.size.height + dayFrame.size.height);
 }
 
 - (void)setup {
@@ -95,12 +101,6 @@
 - (void)setupNavigationBar {
     self.title = [self.monthData getTitleString];
     
-    // If we're already looking at this month, don't let us go into the future
-//    if (!self.monthData.isCurrentMonth) {
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@">>" style:UIBarButtonItemStylePlain target:self action:@selector(onGoForwardInTime)];
-//    }
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<<" style:UIBarButtonItemStylePlain target:self action:@selector(onGoBackInTime)];
-    
     UIImageView *menuImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu"]];
     menuImageView.frame = CGRectMake(0, 0, NAV_BAR_ICON_SIZE, NAV_BAR_ICON_SIZE);
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleMenu)];
@@ -114,19 +114,14 @@
     UIBarButtonItem *pastButton = [[UIBarButtonItem alloc] initWithCustomView:pastImageView];
     
     self.navigationItem.leftBarButtonItem = menuButton;
-    //self.navigationItem.leftBarButtonItem = pastButton;
-    //self.navigationItem.leftBarButtonItems = @[menuButton, pastButton];
-    
+
     UIImageView *futureImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightarrow"]];
     futureImageView.frame = CGRectMake(0, 0, NAV_BAR_ICON_SIZE, NAV_BAR_ICON_SIZE);
     UITapGestureRecognizer *futureTgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onGoForwardInTime)];
     [futureImageView addGestureRecognizer:futureTgr];
     UIBarButtonItem *futureButton = [[UIBarButtonItem alloc] initWithCustomView:futureImageView];
-    
-    //self.navigationItem.rightBarButtonItem = futureButton;
+
     self.navigationItem.rightBarButtonItems = @[futureButton, pastButton];
-    
-    //self.navigationItem.titleView =
 }
 
 #pragma mark Private helper methods
@@ -135,7 +130,6 @@
     return CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
 }
 
-// TODO: Delete if we get rid of a menu button on this screen
 - (void)toggleMenu {
     // TODO: see if it's weird to import SlidingMenu in order to trigger this
     [[NSNotificationCenter defaultCenter] postNotificationName:SlidingMenuToggleStateNotification object:nil];
@@ -147,19 +141,8 @@
 }
 
 - (void)onGoForwardInTime {
-//    if (self.monthData.isCurrentMonth) {
-//        [self onGoToToday];
-//    } else {
-        HomeViewController *vc = [[HomeViewController alloc] initWithDate:[self.monthData getStartDateForNextMonth]];
-        [self.navigationController pushViewController:vc animated:YES];
-//    }
-}
-
-// TODO: delete this if we don't decide to have a "today" button on home
-- (void)onGoToToday {
-    HomeViewController *vc = [[HomeViewController alloc] initWithDate:[NSDate date]];
-    BOOL animated = !self.monthData.isCurrentMonth;
-    [self.navigationController pushViewController:vc animated:animated];
+    HomeViewController *vc = [[HomeViewController alloc] initWithDate:[self.monthData getStartDateForNextMonth]];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)presentDayView:(NSNotification *)notification {

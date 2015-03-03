@@ -59,6 +59,8 @@
     self.monthCollectionView.dataSource = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMonthData) name:MonthDataChangedNotification object:nil];
+    
+    self.monthFrameWidth = self.monthCollectionView.frame.size.width;
 }
 
 // TODO: see if Month should really be responsible for fetching all records
@@ -77,12 +79,25 @@
     [self.monthCollectionView reloadData];
 }
 
+- (CGFloat)getFrameWidth {
+    return self.monthFrameWidth;
+}
+
 - (CGFloat)getCellWidth {
-    return self.monthCollectionView.frame.size.width/8;
+    return [self getFrameWidth]/8.0;
+}
+
+- (CGFloat)getCellSpacing {
+    return floor(([self getCellWidth] / 6.0));
 }
 
 - (CGFloat)getEstimatedHeight {
-    return ([self getCellWidth] * (1 + ceil([self getNumCells] / 7)));
+    CGFloat cellWidth = [self getCellWidth];
+    return cellWidth + ([self getNumRows] - 1) * (cellWidth + [self getCellSpacing]);
+}
+
+- (NSInteger)getNumRows {
+    return ceil((float)[self getNumCells] / 7.0);
 }
 
 - (NSInteger)getNumCells {
@@ -96,13 +111,17 @@
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return (self.monthCollectionView.frame.size.width - 7.0 * [self getCellWidth]) / 6.0;
+    return [self getCellSpacing];
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return [self getCellSpacing];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat width = [self getCellWidth];
     if (indexPath.row < 7) {
-        return CGSizeMake(width, width/4);
+        return CGSizeMake(width, width/4.0);
     }
     return CGSizeMake(width, width);
 }

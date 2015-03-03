@@ -12,6 +12,8 @@
 
 @interface MonthViewController : UIViewController
 
+@property (nonatomic, assign) CGFloat monthFrameWidth;
+
 - (id)initWithDate:(NSDate *)date;
 
 - (CGFloat)getCellWidth;
