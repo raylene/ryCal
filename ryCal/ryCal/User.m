@@ -161,7 +161,11 @@ static User *_currentUser;
 }
 
 - (NSString *)getProfileImageURL {
-    return self.pfUser[@"profileImageUrl"];
+    NSString *fbID = self.dictionary[@"id"];
+    if (fbID) {
+        return [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", self.dictionary[@"id"]];
+    }
+    return nil;
 }
 
 @end

@@ -29,6 +29,7 @@ static int const kHelpItemIndex = 2;
 @property (nonatomic, strong) NSArray *menuItemConfig;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 @property (nonatomic, strong) MenuItemCell *prototypeCell;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePlaceholderImageView;
 
 @end
 
@@ -65,10 +66,11 @@ static int const kHelpItemIndex = 2;
     self.nameLabel.text = [user getName];
     self.nameLabel.textColor = [SharedConstants getMenuTextColor];
     
-    [self.profileImageView setImageWithURL:[NSURL URLWithString:[user getProfileImageURL]]];
+    NSString *profileImageURL = [user getProfileImageURL];
+    [self.profileImageView setImageWithURL:[NSURL URLWithString:profileImageURL]];
     self.profileImageView.clipsToBounds = YES;
     [self.profileImageView.layer setBorderColor: [[UIColor whiteColor] CGColor]];
-    [self.profileImageView.layer setBorderWidth: 3];
+    [self.profileImageView.layer setBorderWidth: 2];
 }
 
 - (void)setupMenuTable {
