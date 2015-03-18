@@ -14,11 +14,18 @@
 #import "UIImageView+AfNetworking.h"
 #import "SharedConstants.h"
 #import "HelpViewController.h"
+// Facebook imports
+#import "FBDialogs.h"
+#import "FBWebDialogs.h"
+#import "FBLinkShareParams.h"
 
 static int const kHomeItemIndex = 0;
 static int const kRecordTypesItemIndex = 1;
-static int const kLogoutItemIndex = 3;
-static int const kHelpItemIndex = 2;
+static int const kInviteItemIndex = 2;
+static int const kHelpItemIndex = 3;
+static int const kLogoutItemIndex = 4;
+
+NSString * const kRecordItAppUrl = @"https://www.facebook.com/recorditapp/";
 
 @interface MenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -83,12 +90,13 @@ static int const kHelpItemIndex = 2;
     
     UINib *menuItemCellNib = [UINib nibWithNibName:@"MenuItemCell" bundle:nil];
     [self.menuTableView registerNib:menuItemCellNib forCellReuseIdentifier:@"MenuItemCell"];
-    
+
     // Init menu item option configurations
     self.menuItemConfig =
     @[
       @{@"name" : @"Today", @"img":@"today"},
       @{@"name" : @"Activities", @"img": @"recordtypes"},
+      @{@"name" : @"Invite Friends", @"img": @"invite"},
       @{@"name" : @"Help", @"img": @"help"},
       @{@"name" : @"Logout", @"img": @"logout"}
       ];
@@ -103,7 +111,7 @@ static int const kHelpItemIndex = 2;
 #pragma mark - UITableView methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+    return 50;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -128,6 +136,8 @@ static int const kHelpItemIndex = 2;
         vc = [[RecordTypeListViewController alloc] init];
     } else if (indexPath.row == kHelpItemIndex) {
         vc = [[HelpViewController alloc] init];
+    } else if (indexPath.row == kInviteItemIndex) {
+        [self presentFacebookShareDialog];
     } else if (indexPath.row == kLogoutItemIndex) {
         [User logout];
     }
@@ -135,6 +145,76 @@ static int const kHelpItemIndex = 2;
         return;
     }
     [self.mainVC displayContentVC:[[UINavigationController alloc] initWithRootViewController:vc]];
+}
+
+#pragma mark Facebook sharing integration helper methods
+
+// Taken from: https://developers.facebook.com/docs/ios/share
+- (NSDictionary*)fbParseURLParams:(NSString *)query {
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *pair in pairs) {
+        NSArray *kv = [pair componentsSeparatedByString:@"="];
+        NSString *val = [kv[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        params[kv[0]] = val;
+    }
+    return params;
+}
+
+- (void)presentFacebookShareDialog {
+    NSLog(@"presentFacebookShareDialog");
+    FBLinkShareParams *params = [[FBLinkShareParams alloc] init];
+    params.link = [NSURL URLWithString:kRecordItAppUrl];
+    
+    // If the Facebook app is installed and we can present the share dialog
+    if ([FBDialogs canPresentShareDialogWithParams:params]) {
+        [FBDialogs presentShareDialogWithLink:params.link
+                                      handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                          if (error) {
+                                              // See: https://developers.facebook.com/docs/ios/errors
+                                              NSLog(@"Error publishing story: %@", error.description);
+                                          } else {
+                                              // Success
+                                              NSLog(@"result %@", results);
+                                          }
+                                      }];
+    } else {
+        NSLog(@"Cannot present share dialog, using a feed dialog");
+
+        NSDictionary *params = @{
+                                @"name" : @"Record It",
+                                @"caption" : @"An easy-to-use wall calendar for your phone.",
+                                @"description" : @"Join me in tracking and remembering what you've done this month -- Try it and let's make progress together!",
+                                @"link" : kRecordItAppUrl,
+                                @"picture" : @""
+                                };
+        
+        [FBWebDialogs presentFeedDialogModallyWithSession:nil
+                                               parameters:params
+                                                  handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+                                                      if (error) {
+                                                          // An error occurred, we need to handle the error
+                                                          // See: https://developers.facebook.com/docs/ios/errors
+                                                          NSLog(@"Error publishing story: %@", error.description);
+                                                      } else {
+                                                          if (result == FBWebDialogResultDialogNotCompleted) {
+                                                              // User cancelled.
+                                                              NSLog(@"User cancelled.");
+                                                          } else {
+                                                              // Handle the publish feed callback
+                                                              NSDictionary *urlParams = [self fbParseURLParams:[resultURL query]];
+                                                              if (![urlParams valueForKey:@"post_id"]) {
+                                                                  // User cancelled.
+                                                                  NSLog(@"User cancelled.");
+                                                              } else {
+                                                                  // User clicked the Share button
+                                                                  NSString *result = [NSString stringWithFormat: @"Posted story, id: %@", [urlParams valueForKey:@"post_id"]];
+                                                                  NSLog(@"result %@", result);
+                                                              }
+                                                          }
+                                                      }
+                                                  }];
+    }
 }
 
 @end

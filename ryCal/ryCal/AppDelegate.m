@@ -71,8 +71,13 @@ static const NSString *kFacebookAppID = @"745968008790705";
     self.window.rootViewController = navigationController;
 }
 
+// https://developers.facebook.com/docs/ios/share
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:[PFFacebookUtils session]];
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:[PFFacebookUtils session] fallbackHandler:^(FBAppCall *call) {
+        NSLog(@"Unhandled deep link: %@", url);
+        // Here goes the code to handle the links
+        // Use the links to show a relevant view of your app to the user
+    }];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuViewController">
@@ -85,7 +85,7 @@
                     </variation>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="X4g-07-HfO">
-                    <rect key="frame" x="10" y="240" width="590" height="360"/>
+                    <rect key="frame" x="10" y="216" width="590" height="384"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
@@ -97,7 +97,7 @@
                 <constraint firstItem="9Rm-Jc-38P" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="36" id="KYr-4O-fXv"/>
                 <constraint firstItem="X4g-07-HfO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="SLQ-ws-JpE"/>
                 <constraint firstItem="9Rm-Jc-38P" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="WbF-qz-6kI"/>
-                <constraint firstItem="X4g-07-HfO" firstAttribute="top" secondItem="9Rm-Jc-38P" secondAttribute="bottom" constant="60" id="ZZr-Xy-Zpg"/>
+                <constraint firstItem="X4g-07-HfO" firstAttribute="top" secondItem="9Rm-Jc-38P" secondAttribute="bottom" constant="36" id="ZZr-Xy-Zpg"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
