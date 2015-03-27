@@ -25,19 +25,26 @@
 @implementation CompressedDailyRecordCell
 
 - (void)awakeFromNib {
-    // Initialization code
-    self.backgroundColor = [SharedConstants getMonthBackgroundColor];
-    self.outerContentView.backgroundColor = [SharedConstants getMonthBackgroundColor];
-    self.innerContentView.backgroundColor = [UIColor whiteColor];
-
     // Reusable checked image view
     self.selectedCheckImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"centercheck"]];
     CGRect frame = self.checkboxView.frame;
     frame.origin.x = frame.origin.y = 0;
     self.selectedCheckImageView.frame = frame;
     
+    [self resetVisualState];
+    
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapGesture:)];
     [self addGestureRecognizer:tgr];
+}
+
+// Default visual state for initialization / reuse
+- (void)resetVisualState {
+    self.recordNoteText.textColor = [UIColor darkGrayColor];
+    self.backgroundColor = [SharedConstants getMonthBackgroundColor];
+    self.outerContentView.backgroundColor = [SharedConstants getMonthBackgroundColor];
+    self.innerContentView.backgroundColor = [UIColor whiteColor];
+    
+    
 }
 
 @synthesize typeData = _typeData;
@@ -126,14 +133,17 @@
             self.recordNoteText.text = self.recordData[kNoteFieldKey];
         }
         self.innerContentView.backgroundColor = typeColor;
+
+        self.checkboxView.layer.borderColor = [[UIColor whiteColor] CGColor];
         [self.checkboxView addSubview:self.selectedCheckImageView];
     } else {
-        self.innerContentView.backgroundColor = [UIColor whiteColor];
-        [self.selectedCheckImageView removeFromSuperview];
-        
         self.checkboxView.layer.borderColor = [typeColor CGColor];
         self.checkboxView.layer.borderWidth = 1;
+
+        self.innerContentView.backgroundColor = [UIColor whiteColor];
+        [self.selectedCheckImageView removeFromSuperview];
     }
+    self.checkboxView.layer.borderWidth = 1;
     self.outerContentView.backgroundColor = typeColor;
     self.recordNoteText.textColor = self.recordTypeName.textColor = textColor;
 }

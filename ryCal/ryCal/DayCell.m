@@ -62,6 +62,13 @@
     return _data;
 }
 
+#pragma mark UITableViewCell methods
+
+- (void)prepareForReuse {
+    self.featured = NO;
+    self.contentView.backgroundColor = nil;
+}
+
 #pragma mark UIGestureRecognizers
 
 - (IBAction)onTapGesture:(id)sender {

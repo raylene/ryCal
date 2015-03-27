@@ -147,11 +147,6 @@ static NSString *daysOfWeek[] = { @"SU", @"M", @"TU", @"W", @"TH", @"F", @"SA" }
         [dayCell setData:[[Day alloc] initWithMonthAndDay:self.monthData dayIndex:dayIdx]];
         cell = dayCell;
     }
-    
-    // TODO: see if there is a better way to do this
-    // Clear any possible highlighting that may have happened previously
-    cell.contentView.backgroundColor = nil;
-    
     return cell;
 }
 
