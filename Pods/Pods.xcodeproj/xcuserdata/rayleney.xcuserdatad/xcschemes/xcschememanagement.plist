@@ -24,16 +24,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Parse.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ParseFacebookUtils.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-SVProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,47 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0326BCA2519116A881C1433A</key>
+		<key>2774040E4F2AFF8B970C7C0F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>48CB09632D11E69F967EB72D</key>
+		<key>3F125632FEB271E074F491E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6CCD65B23579DF8EFAFA47DA</key>
+		<key>43576C30CA218A715E062285</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7F31A5C8DA2F4AECF5AE22E0</key>
+		<key>500DB21E62A26F71CA7319C7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>85BDE33222AFD95535CC53BC</key>
+		<key>6B9E2D1C7686AAA0CAEBA9F2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>907B52F52529D2A0CFAA5D60</key>
+		<key>73214D2A8A88F0E87B005AD1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BF2741ADDE5B61EF16058A4D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C1D410FF5043FF8521343C79</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C70465224D8EE4C8C596562E</key>
+		<key>C2A07F5A8909A1154F2CD7F2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
