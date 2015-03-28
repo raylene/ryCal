@@ -157,6 +157,8 @@ NSString * const kRecordDescriptionPlaceholder = @"What do you want to accomplis
                 [[NSNotificationCenter defaultCenter] postNotificationName:MonthDataChangedNotification object:nil];
             } else {
                 NSLog(@"Error deleting record type");
+                NSString *msg = [NSString stringWithFormat:@"We encountered an error when trying to delete your activity. Please try again later. (Error code: %@)", error.localizedDescription];
+                [SharedConstants presentErrorDialog:msg];
             }
         }];
     }];

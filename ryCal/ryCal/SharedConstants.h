@@ -83,7 +83,8 @@ extern float const NAV_BAR_ICON_SIZE;
 + (NSInteger)getCurrentYear;
 + (NSString *)getSaveFormattedString:(NSString *)inputStr;
 
-// TODO: move this somewhere else? Kind of weird to have it in "SharedConstants"...
+// TODO: move these somewhere else? Kind of weird to have it in "SharedConstants"...
 + (void)presentDeleteConfirmation:(NSString *)msg confirmationHandler:(void (^)(void))confirmationHandler;
++ (void)presentErrorDialog:(NSString *)msg;
 
 @end

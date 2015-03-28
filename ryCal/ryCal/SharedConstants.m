@@ -201,4 +201,18 @@ float const NAV_BAR_ICON_SIZE = 24.0;
     [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
++ (void)presentErrorDialog:(NSString *)msg {
+    UIAlertController* alert =
+    [UIAlertController alertControllerWithTitle:@"Sorry!"
+                                        message:msg
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:okayAction];
+    
+    // NOTE: this seems like a huge hack. there must be a better way to present this
+    // from a view...
+    [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
+
 @end
