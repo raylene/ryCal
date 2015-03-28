@@ -141,7 +141,7 @@ float const NAV_BAR_ICON_SIZE = 24.0;
     } else if ([name isEqualToString:RECORD_COLOR_TEAL]) {
         rgbValue = 0x5FDFBF;
     } else if ([name isEqualToString:RECORD_COLOR_PURPLE]) {
-        rgbValue = 0xBF7EFF;
+        rgbValue = 0xD1A3FF;
     } else if ([name isEqualToString:RECORD_COLOR_PINK]) {
         rgbValue = 0xFFA3D1;
     } else if ([name isEqualToString:RECORD_COLOR_RED]) {
