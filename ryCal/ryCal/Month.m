@@ -132,6 +132,19 @@
     return records[0];
 }
 
+- (Record *)getSecondaryRecordForDay:(NSInteger)day {
+    NSDate *dateKey = [self getStartDateForDay:day];
+    if (self.dailyRecordDictionary == nil ||
+        self.dailyRecordDictionary[dateKey] == nil) {
+        return nil;
+    }
+    NSArray *records = self.dailyRecordDictionary[dateKey];
+    if (records.count <= 1) {
+        return nil;
+    }
+    return records[1];
+}
+
 - (void)loadAllRecords:(void (^)(NSError *error))monthCompletion {
     [Record loadAllEnabledRecordsForTimeRange:[self getStartDate] endDate:[self getEndDate] cacheKey:[self getCacheKey] completion:^(NSArray *records, NSError *error) {
         if (error == nil) {

@@ -29,6 +29,7 @@
 - (NSDate *)getEndDate;
 
 - (Record *)getPrimaryRecord;
+- (Record *)getSecondaryRecord;
 
 - (NSString *)getDayCacheKey;
 - (NSString *)getMonthCacheKey;

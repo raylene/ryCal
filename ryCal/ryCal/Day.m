@@ -92,6 +92,9 @@
     return [self.monthData getPrimaryRecordForDay:self.dayInt];
 }
 
+- (Record *)getSecondaryRecord {
+    return [self.monthData getSecondaryRecordForDay:self.dayInt];
+}
 
 #pragma mark Query tracking / caching helper
 

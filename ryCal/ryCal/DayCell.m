@@ -15,7 +15,9 @@
 @interface DayCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
-@property (weak, nonatomic) IBOutlet UIView *recordIndicatorView;
+@property (weak, nonatomic) IBOutlet UIView *recordIndicatorPrimaryView;
+@property (weak, nonatomic) IBOutlet UIView *recordIndicatorSecondaryView;
+@property (weak, nonatomic) IBOutlet UIView *recordIndicatorParentView;
 
 @end
 
@@ -29,9 +31,12 @@
 }
 
 - (void)resetColors {
+    self.contentView.backgroundColor = nil;
     [self setBackgroundColor:[SharedConstants getColor:RECORD_COLOR_EMPTY_ENTRY]];
     self.dayLabel.textColor = [UIColor darkGrayColor];
-    self.recordIndicatorView.alpha = 0;
+    self.recordIndicatorParentView.alpha = 0;
+    self.recordIndicatorPrimaryView.alpha = 0;
+    self.recordIndicatorSecondaryView.alpha = 0;
 }
 
 - (void)setFeatured:(BOOL)featured {
@@ -50,11 +55,18 @@
     _data = data;
 
     self.dayLabel.text = [self.data getDayString];
-    self.recordIndicatorView.alpha = 0;
     Record *record = [self.data getPrimaryRecord];
     if (record != nil) {
-        self.recordIndicatorView.backgroundColor = [record getColor];
-        self.recordIndicatorView.alpha = 1;
+        self.recordIndicatorParentView.alpha = 1;
+        self.recordIndicatorPrimaryView.alpha = 1;
+        self.recordIndicatorSecondaryView.alpha = 1;
+        self.recordIndicatorPrimaryView.backgroundColor = [record getColor];
+        Record *secondaryRecord = [self.data getSecondaryRecord];
+        if (secondaryRecord) {
+            self.recordIndicatorSecondaryView.backgroundColor = [secondaryRecord getColor];
+        } else {
+            self.recordIndicatorSecondaryView.backgroundColor = [record getColor];
+        }
     }
 }
 
@@ -66,7 +78,7 @@
 
 - (void)prepareForReuse {
     self.featured = NO;
-    self.contentView.backgroundColor = nil;
+    [self resetColors];
 }
 
 #pragma mark UIGestureRecognizers
