@@ -34,6 +34,8 @@ extern NSString * const kTypeFieldKey;
 extern NSString * const kTypeIDFieldKey;
 extern NSString * const kUserIDFieldKey;
 extern NSString * const kDateFieldKey;
+extern NSString * const kDateStringFieldKey;
+extern NSString * const kDateGMTFieldKey;
 extern NSString * const kArchivedFieldKey;
 extern NSString * const kColorFieldKey;
 extern NSString * const kNameFieldKey;
@@ -81,6 +83,11 @@ extern float const NAV_BAR_ICON_SIZE;
 + (UIColor *)getDayHighlightColor;
 
 + (NSInteger)getCurrentYear;
+
++ (NSString *)getDateStringFromDate:(NSDate *)inputDate;
++ (NSDate *)getSystemDateFromUserDate:(NSDate *)userDate;
++ (NSDate *)getDateGMTFromUserDate:(NSDate *)userDate;
+
 + (NSString *)getSaveFormattedString:(NSString *)inputStr;
 
 // TODO: move these somewhere else? Kind of weird to have it in "SharedConstants"...

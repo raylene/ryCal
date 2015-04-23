@@ -20,6 +20,8 @@
 @property (nonatomic, strong) RecordType *type;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) NSDate *dateGMT;
+@property (nonatomic, strong) NSString *dateString;
 
 // Creation methods
 + (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text;

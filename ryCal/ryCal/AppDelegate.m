@@ -17,6 +17,8 @@
 #import "Record.h"
 #import "RecordType.h"
 
+#define TEST_PUSH_NOTIFS 0
+
 static const NSString *kParseAppID = @"MXbaau75VqOWXVcGqw5WM3KOsY12MPkRlLj5J7th";
 static const NSString *kParseClientKey = @"2vJqfG8gMODsZWgSGosJSsabTmhVJmTNdLLNFZFr";
 static const NSString *kFacebookAppID = @"745968008790705";
@@ -30,6 +32,17 @@ static const NSString *kFacebookAppID = @"745968008790705";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Parse setup
+    
+#if TEST_PUSH_NOTIFS
+    // Push notifications: https://parse.com/tutorials/ios-push-notifications
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                    UIUserNotificationTypeBadge |
+                                                    UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                             categories:nil];
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
+#endif
     
     // PFObject subclasses
     // https://parse.com/docs/ios/api/Protocols/PFSubclassing.html#//api/name/registerSubclass
@@ -80,8 +93,29 @@ static const NSString *kFacebookAppID = @"745968008790705";
     }];
 }
 
+#if TEST_PUSH_NOTIFS
+// https://parse.com/tutorials/ios-push-notifications
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    currentInstallation.channels = @[ @"global" ];
+    [currentInstallation saveInBackground];
+}
+
+// https://parse.com/tutorials/ios-push-notifications
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+#endif
+
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+    
+#if TEST_PUSH_NOTIFS
+    // Clear app badge number
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+#endif
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

@@ -35,6 +35,8 @@ NSString * const kTypeFieldKey = @"type";
 NSString * const kTypeIDFieldKey = @"typeID";
 NSString * const kUserIDFieldKey = @"userID";
 NSString * const kDateFieldKey = @"date";
+NSString * const kDateStringFieldKey = @"dateString";
+NSString * const kDateGMTFieldKey = @"dateGMT";
 NSString * const kArchivedFieldKey = @"archived";
 NSString * const kColorFieldKey = @"color";
 NSString * const kNameFieldKey = @"name";
@@ -172,6 +174,29 @@ float const NAV_BAR_ICON_SIZE = 24.0;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy"];
     return [[formatter stringFromDate:[NSDate date]] integerValue];
+}
+
++ (NSString *)getDateStringFromDate:(NSDate *)inputDate {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    return [formatter stringFromDate:inputDate];
+}
+
++ (NSDate *)getSystemDateFromUserDate:(NSDate *)userDate {
+    return userDate;
+}
+
++ (NSDate *)getDateGMTFromUserDate:(NSDate *)userDate {
+    // Get date string using local timezone
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateStr = [dateFormatter stringFromDate:userDate];
+    
+    // Now switch to GMT time (midnight / start of day) for same date string
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    NSDate *date = [dateFormatter dateFromString:dateStr];
+    return date;
 }
 
 + (NSString *)getSaveFormattedString:(NSString *)inputStr {

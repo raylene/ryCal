@@ -46,11 +46,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/Month.m"
-            timestampString = "446622296.953282"
+            timestampString = "451433346.684883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "-getPrimaryRecordForDay:"
             landmarkType = "5">
          </BreakpointContent>
@@ -62,11 +62,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/Month.m"
-            timestampString = "446622296.953282"
+            timestampString = "451433346.684883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "-getPrimaryRecordForDay:"
             landmarkType = "5">
          </BreakpointContent>
@@ -96,11 +96,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/AppDelegate.m"
-            timestampString = "445938687.439146"
+            timestampString = "451507195.912362"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -126,6 +126,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[RecordTypeViewController refreshTypeData]"
                   moduleName = "ryCal"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rayleney/ryCal/ryCal/ryCal/RecordTypeViewController.m"
                   timestampString = "442135322.883974"
                   startingColumnNumber = "9223372036854775807"
@@ -140,6 +141,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__43-[RecordTypeViewController refreshTypeData]_block_invoke"
                   moduleName = "ryCal"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rayleney/ryCal/ryCal/ryCal/RecordTypeViewController.m"
                   timestampString = "442135322.884245"
                   startingColumnNumber = "9223372036854775807"
@@ -272,11 +274,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/RyCalMainViewController.m"
-            timestampString = "447064395.237398"
+            timestampString = "451433105.915845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "-init"
             landmarkType = "5">
          </BreakpointContent>
@@ -416,11 +418,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/CompressedDailyRecordCell.m"
-            timestampString = "449191982.876261"
+            timestampString = "451433105.915845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "-sendDataChangedNotifications"
             landmarkType = "5">
          </BreakpointContent>
@@ -490,11 +492,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/Record.m"
-            timestampString = "446858650.284486"
+            timestampString = "451507688.906745"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "-getDateStringKey"
             landmarkType = "5">
          </BreakpointContent>
@@ -682,11 +684,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/CompressedDailyRecordCell.m"
-            timestampString = "449191982.876261"
+            timestampString = "451433105.915845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "-deleteRecord"
             landmarkType = "5">
             <Locations>
@@ -696,6 +698,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[CompressedDailyRecordCell deleteRecord]"
                   moduleName = "ryCal"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rayleney/ryCal/ryCal/ryCal/CompressedDailyRecordCell.m"
                   timestampString = "446634450.372098"
                   startingColumnNumber = "9223372036854775807"
@@ -710,6 +713,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__41-[CompressedDailyRecordCell deleteRecord]_block_invoke"
                   moduleName = "ryCal"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rayleney/ryCal/ryCal/ryCal/CompressedDailyRecordCell.m"
                   timestampString = "446634450.372282"
                   startingColumnNumber = "9223372036854775807"
@@ -728,11 +732,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/CompressedDailyRecordCell.m"
-            timestampString = "449191982.876261"
+            timestampString = "451433105.915845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "-deleteRecord"
             landmarkType = "5">
          </BreakpointContent>
@@ -744,27 +748,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ryCal/ryCal/CompressedDailyRecordCell.m"
-            timestampString = "449191982.876261"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "-deleteRecord"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ryCal/ryCal/CompressedDailyRecordCell.m"
-            timestampString = "449191982.876261"
+            timestampString = "451433105.915845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
             endingLineNumber = "97"
+            landmarkName = "-deleteRecord"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ryCal/ryCal/CompressedDailyRecordCell.m"
+            timestampString = "451433105.915845"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "-deleteRecord"
             landmarkType = "5">
          </BreakpointContent>
@@ -1022,6 +1026,38 @@
             startingLineNumber = "44"
             endingLineNumber = "44"
             landmarkName = "+setCurrentUser:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ryCal/ryCal/SharedConstants.m"
+            timestampString = "451436019.020395"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "+getDateGMTFromUserDate:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ryCal/ryCal/AppDelegate.m"
+            timestampString = "451507270.461638"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

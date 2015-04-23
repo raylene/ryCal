@@ -114,6 +114,12 @@
     return [self.calendar dateFromComponents:components];
 }
 
+- (NSString *)getStartDateKeyForDay:(NSInteger)day {
+    NSDateComponents *components = [self.components copy];
+    [components setDay:day];
+    return [SharedConstants getDateStringFromDate:[self.calendar dateFromComponents:components]];
+}
+
 - (NSDate *)getEndDateForDay:(NSInteger)day {
     NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
     [offsetComponents setDay:1];
@@ -123,7 +129,8 @@
 #pragma mark Data-fetching related methods
 
 - (Record *)getPrimaryRecordForDay:(NSInteger)day {
-    NSDate *dateKey = [self getStartDateForDay:day];
+    NSString *dateKey = [self getStartDateKeyForDay:day];
+//    NSDate *dateKey = [self getStartDateForDay:day];
     if (self.dailyRecordDictionary == nil ||
         self.dailyRecordDictionary[dateKey] == nil) {
         return nil;
@@ -133,7 +140,8 @@
 }
 
 - (Record *)getSecondaryRecordForDay:(NSInteger)day {
-    NSDate *dateKey = [self getStartDateForDay:day];
+    NSString *dateKey = [self getStartDateKeyForDay:day];
+//    NSDate *dateKey = [self getStartDateForDay:day];
     if (self.dailyRecordDictionary == nil ||
         self.dailyRecordDictionary[dateKey] == nil) {
         return nil;
@@ -155,7 +163,10 @@
                     // DO NOTHING
                     NSLog(@"loaded record with invalid type");
                 } else {
-                    NSDate *dateKey = record[kDateFieldKey];
+                    NSString *dateKey = record[kDateStringFieldKey];
+                    if (!dateKey || !dateKey.length) {
+                        dateKey = [SharedConstants getDateStringFromDate:record[kDateFieldKey]];
+                    }
                     if (self.dailyRecordDictionary[dateKey] == nil) {
                         self.dailyRecordDictionary[dateKey] = [[NSMutableArray alloc] init];
                     }

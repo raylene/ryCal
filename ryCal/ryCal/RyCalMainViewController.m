@@ -10,13 +10,6 @@
 #import "MenuViewController.h"
 #import "SharedConstants.h"
 
-@interface RyCalMainViewController ()
-
-@property (nonatomic, strong) UIViewController *contentVC;
-@property (nonatomic, strong) UIViewController<SlidingMenuProtocol> *menuVC;
-
-@end
-
 @implementation RyCalMainViewController
 
 - (id)init {

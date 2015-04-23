@@ -21,6 +21,8 @@
 @dynamic type;
 @dynamic userID;
 @dynamic date;
+@dynamic dateGMT;
+@dynamic dateString;
 
 + (NSString *)parseClassName {
     return @"Record";
@@ -42,7 +44,17 @@
         newRecord.note = text;
     }
     newRecord.userID = [[User currentUser] getUserID];
-    newRecord.date = date;
+    newRecord.date = [SharedConstants getSystemDateFromUserDate:date];
+    
+    // Don't save any new date stuff yet to be safe...
+    NSString *dateString = [SharedConstants getDateStringFromDate:date];
+    //newRecord.dateString = dateString;
+    NSDate *dateGMT = [SharedConstants getDateGMTFromUserDate:date];
+    
+    NSLog(@"Date manipulation: (user)%@, (gmt)%@, (str)%@",
+          newRecord.date,
+          dateGMT,
+          dateString);
     return newRecord;
 }
 
@@ -122,9 +134,7 @@
 }
 
 - (NSString *)getDateStringKey {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-YYYY"];
-    return [dateFormatter stringFromDate:self.date];
+    return [SharedConstants getDateStringFromDate:self.date];
 }
 
 + (void)forceReloadAllRecords:(void (^)(NSArray *records, NSError *error))completion {

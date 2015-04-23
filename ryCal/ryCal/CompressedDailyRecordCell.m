@@ -43,8 +43,6 @@
     self.backgroundColor = [SharedConstants getMonthBackgroundColor];
     self.outerContentView.backgroundColor = [SharedConstants getMonthBackgroundColor];
     self.innerContentView.backgroundColor = [UIColor whiteColor];
-    
-    
 }
 
 @synthesize typeData = _typeData;
