@@ -7,6 +7,7 @@
 //
 
 #import "SharedConstants.h"
+#import "RecordDateHelper.h"
 
 @interface SharedConstants ()
 
@@ -170,37 +171,8 @@ float const NAV_BAR_ICON_SIZE = 24.0;
     return [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0];
 }
 
-+ (NSInteger)getCurrentYear {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy"];
-    return [[formatter stringFromDate:[NSDate date]] integerValue];
-}
-
-+ (NSString *)getDateStringFromDate:(NSDate *)inputDate {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    return [formatter stringFromDate:inputDate];
-}
-
-+ (NSDate *)getSystemDateFromUserDate:(NSDate *)userDate {
-    return userDate;
-}
-
-+ (NSDate *)getDateGMTFromUserDate:(NSDate *)userDate {
-    // Get date string using local timezone
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateStr = [dateFormatter stringFromDate:userDate];
-    
-    // Now switch to GMT time (midnight / start of day) for same date string
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-    NSDate *date = [dateFormatter dateFromString:dateStr];
-    return date;
-}
-
 + (NSString *)getSaveFormattedString:(NSString *)inputStr {
-    NSString *result = [inputStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *result = [inputStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (!result.length) {
         // Don't bother saving the empty string
         return nil;
@@ -238,6 +210,23 @@ float const NAV_BAR_ICON_SIZE = 24.0;
     // NOTE: this seems like a huge hack. there must be a better way to present this
     // from a view...
     [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
+}
+
+// TODO: delete this stuff
++ (NSInteger)getCurrentYear {
+    return [RecordDateHelper getCurrentYear];
+}
+
++ (NSString *)getDateStringFromDate:(NSDate *)inputDate {
+    return [RecordDateHelper getDateStringFromDate:inputDate];
+}
+
++ (NSDate *)getSystemDateFromUserDate:(NSDate *)userDate {
+    return [RecordDateHelper getSystemDateFromUserDate:userDate];
+}
+
++ (NSDate *)getDateGMTFromUserDate:(NSDate *)userDate {
+    return [RecordDateHelper getDateGMTFromUserDate:userDate];
 }
 
 @end

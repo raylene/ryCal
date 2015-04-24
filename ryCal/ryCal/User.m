@@ -78,7 +78,7 @@ static User *_currentUser;
             }
             
             [User setCurrentUser:[[User alloc] initWithPFUser:pfuser]];
-            [User loadFacebookDataForCurrentUser];
+            [User loadFacebookDataForCurrentUser:pfuser];
             [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLoginNotification object:nil];
         }
         if (!pfuser && !error) {
@@ -105,7 +105,7 @@ static User *_currentUser;
     [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
-+ (void)loadFacebookDataForCurrentUser {
++ (void)loadFacebookDataForCurrentUser:(PFUser *)pfuser {
     FBRequest *request = [FBRequest requestForMe];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (error) {
@@ -115,6 +115,21 @@ static User *_currentUser;
             NSDictionary *userData = (NSDictionary *)result;
             User *user = [User currentUser];
             [user setDictionary:userData];
+            
+            // Save/update info for the associated pfuser
+            if (userData && !(pfuser[@"fbFullName"] && pfuser[@"fbLink"])) {
+                NSString *name = userData[@"name"];
+                if (name && ![name isEqualToString:pfuser[@"fbFullName"]]) {
+                    [pfuser setObject:name forKey:@"fbFullName"];
+                }
+                NSString *link = userData[@"link"];
+                if (link && ![link isEqualToString:pfuser[@"fbLink"]]) {
+                    [pfuser setObject:link forKey:@"fbLink"];
+                }
+                if (name || link) {
+                    [pfuser saveEventually];
+                }
+            }
             [User setCurrentUser:user];
             [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLoginNotification object:nil];
         }

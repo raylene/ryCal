@@ -29,6 +29,7 @@
 		6F926BE21A22BA5F00473EA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F926BE11A22BA5F00473EA2 /* Images.xcassets */; };
 		6F926BE51A22BA5F00473EA2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F926BE31A22BA5F00473EA2 /* LaunchScreen.xib */; };
 		6F926BF11A22BA5F00473EA2 /* ryCalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F926BF01A22BA5F00473EA2 /* ryCalTests.m */; };
+		6FB36F1D1AEAE0A5007F8056 /* RecordDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB36F1C1AEAE0A5007F8056 /* RecordDateHelper.m */; };
 		6FBE73DF1A4508860045810A /* Month.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE73DE1A4508860045810A /* Month.m */; };
 		6FBE73E21A4512FF0045810A /* Day.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE73E11A4512FF0045810A /* Day.m */; };
 		6FBE73E61A45193E0045810A /* DayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE73E41A45193E0045810A /* DayCell.m */; };
@@ -105,6 +106,8 @@
 		6F926BEA1A22BA5F00473EA2 /* ryCalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ryCalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F926BEF1A22BA5F00473EA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F926BF01A22BA5F00473EA2 /* ryCalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ryCalTests.m; sourceTree = "<group>"; };
+		6FB36F1B1AEAE0A5007F8056 /* RecordDateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordDateHelper.h; sourceTree = "<group>"; };
+		6FB36F1C1AEAE0A5007F8056 /* RecordDateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordDateHelper.m; sourceTree = "<group>"; };
 		6FBE73DD1A4508860045810A /* Month.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Month.h; sourceTree = "<group>"; };
 		6FBE73DE1A4508860045810A /* Month.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Month.m; sourceTree = "<group>"; };
 		6FBE73E01A4512FF0045810A /* Day.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Day.h; sourceTree = "<group>"; };
@@ -328,6 +331,8 @@
 				6FBE740A1A4A5C570045810A /* SharedConstants.m */,
 				6F62F2E01A9BFC4C0041D3B1 /* RecordQueryTracker.h */,
 				6F62F2E11A9BFC4C0041D3B1 /* RecordQueryTracker.m */,
+				6FB36F1B1AEAE0A5007F8056 /* RecordDateHelper.h */,
+				6FB36F1C1AEAE0A5007F8056 /* RecordDateHelper.m */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -522,6 +527,7 @@
 				6FF334151A5BC56B00ADDBDB /* HomeViewController.m in Sources */,
 				6F62F2E61AA26DF70041D3B1 /* HelpViewController.m in Sources */,
 				6FE8A3471A5B75CD00754D34 /* EditDailyRecordViewController.m in Sources */,
+				6FB36F1D1AEAE0A5007F8056 /* RecordDateHelper.m in Sources */,
 				6FBE74031A4950B00045810A /* EditableRecordTypeCell.m in Sources */,
 				6F926BDA1A22BA5F00473EA2 /* AppDelegate.m in Sources */,
 				6F926BD71A22BA5F00473EA2 /* main.m in Sources */,
