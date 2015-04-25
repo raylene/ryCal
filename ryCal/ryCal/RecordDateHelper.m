@@ -77,10 +77,12 @@
     return [[formatter stringFromDate:[NSDate date]] integerValue];
 }
 
-+ (NSString *)getDateStringFromDate:(NSDate *)inputDate {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    return [formatter stringFromDate:inputDate];
++ (NSString *)getGMTStringFromDate:(NSDate *)inputDate {
+    return [[self sharedGMTDateFormatter] stringFromDate:inputDate];
+}
+
++ (NSString *)getLocalStringFromDate:(NSDate *)inputDate {
+    return [[self sharedLocalDateFormatter] stringFromDate:inputDate];
 }
 
 + (NSDate *)getSystemDateFromUserDate:(NSDate *)userDate {

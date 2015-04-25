@@ -212,21 +212,4 @@ float const NAV_BAR_ICON_SIZE = 24.0;
     [[UIApplication sharedApplication].delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
-// TODO: delete this stuff
-+ (NSInteger)getCurrentYear {
-    return [RecordDateHelper getCurrentYear];
-}
-
-+ (NSString *)getDateStringFromDate:(NSDate *)inputDate {
-    return [RecordDateHelper getDateStringFromDate:inputDate];
-}
-
-+ (NSDate *)getSystemDateFromUserDate:(NSDate *)userDate {
-    return [RecordDateHelper getSystemDateFromUserDate:userDate];
-}
-
-+ (NSDate *)getDateGMTFromUserDate:(NSDate *)userDate {
-    return [RecordDateHelper getDateGMTFromUserDate:userDate];
-}
-
 @end

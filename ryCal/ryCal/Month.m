@@ -10,6 +10,9 @@
 #import "SharedConstants.h"
 #import "Record.h"
 #import "RecordQueryTracker.h"
+#import "RecordDateHelper.h"
+
+#define USE_GMT 1
 
 @interface Month ()
 
@@ -33,7 +36,11 @@
 - (id)initWithNSDate:(NSDate *)date {
     self = [super init];
     if (self) {
-        self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+#if USE_GMT
+        self.calendar = [RecordDateHelper sharedGMTCalendar];
+#else
+        self.calendar = [RecordDateHelper sharedLocalCalendar];
+#endif
         [self parseDateComponents:date];
         self.referenceDate = date;
     }
@@ -52,8 +59,15 @@
 }
 
 - (BOOL)isCurrentMonth {
-    return ([self.getStartDate compare:[NSDate date]] != NSOrderedDescending) &&
-    ([self.getEndDate compare:[NSDate date]] == NSOrderedDescending);
+#if USE_GMT
+    // GMT
+    NSDate *today = [RecordDateHelper getGMTStartOfToday];
+#else
+    // LOCAL
+    NSDate *today = [RecordDateHelper getLocalStartOfToday];
+#endif
+    return ([self.getStartDate compare:today] != NSOrderedDescending) &&
+    ([self.getEndDate compare:today] == NSOrderedDescending);
 }
 
 // http://unicode.org/reports/tr35/tr35-6.html#Date_Format_Patterns
@@ -61,9 +75,14 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MMMM"];
     // Add the yyyy if it's not this year
-    if (self.components.year != [SharedConstants getCurrentYear]) {
+    if (self.components.year != [RecordDateHelper getCurrentYear]) {
         [dateFormatter setDateFormat:@"MMM yyyy"];
     }
+#if USE_GMT
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+#else
+    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+#endif
     return [dateFormatter stringFromDate:[self getStartDate]];
 }
 
@@ -80,8 +99,6 @@
     
     // Get all components for the first of the month
     self.components = [self.calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate: self.startDate];
-    
-    // NSLog(@"Month components: %@ -- %ld, %ld, %ld, %ld", self.getTitleString, self.components.year, self.components.month, self.components.day, self.components.weekday);
 }
 
 - (NSInteger)getReferenceDayIdx {
@@ -117,7 +134,12 @@
 - (NSString *)getStartDateKeyForDay:(NSInteger)day {
     NSDateComponents *components = [self.components copy];
     [components setDay:day];
-    return [SharedConstants getDateStringFromDate:[self.calendar dateFromComponents:components]];
+    NSDate *date = [self.calendar dateFromComponents:components];
+#if USE_GMT
+    return [RecordDateHelper getGMTStringFromDate:date];
+#else 
+    return [RecordDateHelper getLocalStringFromDate:date];
+#endif
 }
 
 - (NSDate *)getEndDateForDay:(NSInteger)day {
@@ -130,7 +152,6 @@
 
 - (Record *)getPrimaryRecordForDay:(NSInteger)day {
     NSString *dateKey = [self getStartDateKeyForDay:day];
-//    NSDate *dateKey = [self getStartDateForDay:day];
     if (self.dailyRecordDictionary == nil ||
         self.dailyRecordDictionary[dateKey] == nil) {
         return nil;
@@ -141,7 +162,6 @@
 
 - (Record *)getSecondaryRecordForDay:(NSInteger)day {
     NSString *dateKey = [self getStartDateKeyForDay:day];
-//    NSDate *dateKey = [self getStartDateForDay:day];
     if (self.dailyRecordDictionary == nil ||
         self.dailyRecordDictionary[dateKey] == nil) {
         return nil;
@@ -163,10 +183,12 @@
                     // DO NOTHING
                     NSLog(@"loaded record with invalid type");
                 } else {
-                    NSString *dateKey = record[kDateStringFieldKey];
-                    if (!dateKey || !dateKey.length) {
-                        dateKey = [SharedConstants getDateStringFromDate:record[kDateFieldKey]];
-                    }
+                    NSDate *recordDate = record[kDateFieldKey];
+#if USE_GMT
+                    NSString *dateKey = [RecordDateHelper getGMTStringFromDate:recordDate];
+#else
+                    NSString *dateKey = [RecordDateHelper getLocalStringFromDate:recordDate];
+#endif
                     if (self.dailyRecordDictionary[dateKey] == nil) {
                         self.dailyRecordDictionary[dateKey] = [[NSMutableArray alloc] init];
                     }
@@ -185,6 +207,12 @@
 - (NSString *)getCacheKey {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM_yyyy"];
+#if USE_GMT
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+#else
+    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+#endif
+
     NSString *dateStr = [dateFormatter stringFromDate:[self getStartDate]];
     NSString *key = [NSString stringWithFormat:@"%@_%@", kRecordQueryKey, dateStr];
     return key;

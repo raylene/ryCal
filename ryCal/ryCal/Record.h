@@ -24,7 +24,6 @@
 @property (nonatomic, strong) NSString *dateString;
 
 // Creation methods
-+ (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text;
 + (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text onDate:(NSDate *)date;
 
 + (void)saveRecord:(Record *)record cacheKey:(NSString *)key completion:(void (^)(BOOL succeeded, NSError *error)) completion;

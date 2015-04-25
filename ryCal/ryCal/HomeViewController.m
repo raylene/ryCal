@@ -12,6 +12,9 @@
 #import "SharedConstants.h"
 #import "DayViewController.h"
 #import "SlidingMenuMainViewController.h"
+#import "RecordDateHelper.h"
+
+#define USE_GMT 1
 
 @interface HomeViewController ()
 
@@ -36,7 +39,11 @@
         
         // HACK: reset reference date to today to properly feature it if it's the current month
         if (self.monthData.isCurrentMonth) {
-            self.referenceDate = [NSDate date];
+#if USE_GMT
+            self.referenceDate = [RecordDateHelper getGMTStartOfToday];
+#else
+            self.referenceDate = [RecordDateHelper getLocalStartOfToday];
+#endif
         }
     }
     return self;

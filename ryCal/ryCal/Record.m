@@ -13,6 +13,7 @@
 #import <Parse/PFObject+Subclass.h>
 #import "SharedConstants.h"
 #import "RecordQueryTracker.h"
+#import "RecordDateHelper.h"
 
 @implementation Record
 
@@ -28,10 +29,6 @@
     return @"Record";
 }
 
-+ (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text {
-    return [Record createNewRecord:type withText:text onDate:[NSDate date]];
-}
-
 + (Record *)createNewRecord:(RecordType *)type withText:(NSString *)text onDate:(NSDate *)date {
     NSLog(@"Creating record: %@, %@", text,
           [NSDateFormatter localizedStringFromDate:date
@@ -44,14 +41,14 @@
         newRecord.note = text;
     }
     newRecord.userID = [[User currentUser] getUserID];
-    newRecord.date = [SharedConstants getSystemDateFromUserDate:date];
-    
+    newRecord.date = date;
+
     // Don't save any new date stuff yet to be safe...
-    NSString *dateString = [SharedConstants getDateStringFromDate:date];
+    NSString *dateString = [RecordDateHelper getGMTStringFromDate:date];
     //newRecord.dateString = dateString;
-    NSDate *dateGMT = [SharedConstants getDateGMTFromUserDate:date];
+    NSDate *dateGMT = [RecordDateHelper getDateGMTFromUserDate:date];
     
-    NSLog(@"Date manipulation: (user)%@, (gmt)%@, (str)%@",
+    NSLog(@"Date manipulation: (record)%@, (gmt)%@, (str)%@",
           newRecord.date,
           dateGMT,
           dateString);
@@ -134,7 +131,11 @@
 }
 
 - (NSString *)getDateStringKey {
-    return [SharedConstants getDateStringFromDate:self.date];
+#if USE_GMT
+    return [RecordDateHelper getGMTStringFromDate:self.date];
+#else
+    return [RecordDateHelper getLocalStringFromDate:self.date];
+#endif
 }
 
 + (void)forceReloadAllRecords:(void (^)(NSArray *records, NSError *error))completion {
