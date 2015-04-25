@@ -21,12 +21,14 @@ extern NSString * const DayDataChangedNotification;
 extern NSString * const RecordTypeDataChangedNotification;
 extern NSString * const ViewFullDayNotification;
 extern NSString * const SwitchDayNotification;
+extern NSString * const ScrollToRecordNotification;
 
 // Notif params
 extern NSString * const kColorSelectedNotifParam;
 extern NSString * const kRecordTypeIDNotifParam;
 extern NSString * const kRecordTypeIDNotifParamPlaceholder;
 extern NSString * const kDayNotifParam;
+extern NSString * const kIndexPathNotifParam;
 
 // Parse field keys
 extern NSString * const kNoteFieldKey;
