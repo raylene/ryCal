@@ -72,17 +72,17 @@
 
 // http://unicode.org/reports/tr35/tr35-6.html#Date_Format_Patterns
 - (NSString *)getTitleString {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+#if USE_GMT
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedGMTDateFormatter];
+#else
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedLocalDateFormatter];
+#endif
+    
     [dateFormatter setDateFormat:@"MMMM"];
     // Add the yyyy if it's not this year
     if (self.components.year != [RecordDateHelper getCurrentYear]) {
         [dateFormatter setDateFormat:@"MMM yyyy"];
     }
-#if USE_GMT
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-#else
-    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
-#endif
     return [dateFormatter stringFromDate:[self getStartDate]];
 }
 
@@ -205,13 +205,12 @@
 #pragma mark Query tracking / caching helper
 
 - (NSString *)getCacheKey {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM_yyyy"];
 #if USE_GMT
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedGMTDateFormatter];
 #else
-    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedLocalDateFormatter];
 #endif
+    [dateFormatter setDateFormat:@"MM_yyyy"];
 
     NSString *dateStr = [dateFormatter stringFromDate:[self getStartDate]];
     NSString *key = [NSString stringWithFormat:@"%@_%@", kRecordQueryKey, dateStr];

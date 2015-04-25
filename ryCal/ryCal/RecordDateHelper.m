@@ -78,11 +78,15 @@
 }
 
 + (NSString *)getGMTStringFromDate:(NSDate *)inputDate {
-    return [[self sharedGMTDateFormatter] stringFromDate:inputDate];
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedGMTDateFormatter];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    return [dateFormatter stringFromDate:inputDate];
 }
 
 + (NSString *)getLocalStringFromDate:(NSDate *)inputDate {
-    return [[self sharedLocalDateFormatter] stringFromDate:inputDate];
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedLocalDateFormatter];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    return [dateFormatter stringFromDate:inputDate];
 }
 
 + (NSDate *)getSystemDateFromUserDate:(NSDate *)userDate {

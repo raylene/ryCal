@@ -83,15 +83,13 @@
 }
 
 - (NSString *)getTitleString:(BOOL)allCaps {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"EEEE, MMM. d"];
-    
 #if USE_GMT
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedGMTDateFormatter];
 #else
-    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedLocalDateFormatter];
 #endif
 
+    [dateFormatter setDateFormat:@"EEEE, MMM. d"];
     NSString *result = [dateFormatter stringFromDate:[self getStartDate]];
     if (allCaps) {
         return [result uppercaseString];
@@ -120,14 +118,13 @@
 #pragma mark Query tracking / caching helper
 
 - (NSString *)getDayCacheKey {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM_yyyy_dd"];
 #if USE_GMT
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedGMTDateFormatter];
 #else
-    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedLocalDateFormatter];
 #endif
 
+    [dateFormatter setDateFormat:@"MM_yyyy_dd"];
     NSString *dateStr = [dateFormatter stringFromDate:[self getStartDate]];
     NSString *key = [NSString stringWithFormat:@"%@_%@", kRecordQueryKey, dateStr];
     return key;
