@@ -45,7 +45,8 @@
 
     // Don't save any new date stuff yet to be safe...
     NSString *dateString = [RecordDateHelper getGMTStringFromDate:date];
-    //newRecord.dateString = dateString;
+    newRecord.dateString = dateString;
+    
     NSDate *dateGMT = [RecordDateHelper getDateGMTFromUserDate:date];
     
     NSLog(@"Date manipulation: (record)%@, (gmt)%@, (str)%@",

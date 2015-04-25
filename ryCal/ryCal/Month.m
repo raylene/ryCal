@@ -184,11 +184,14 @@
                     NSLog(@"loaded record with invalid type");
                 } else {
                     NSDate *recordDate = record[kDateFieldKey];
+                    NSString *dateKey = record[kDateStringFieldKey];
+                    if (!dateKey || !dateKey.length) {
 #if USE_GMT
-                    NSString *dateKey = [RecordDateHelper getGMTStringFromDate:recordDate];
+                    dateKey = [RecordDateHelper getGMTStringFromDate:recordDate];
 #else
-                    NSString *dateKey = [RecordDateHelper getLocalStringFromDate:recordDate];
+                    dateKey = [RecordDateHelper getLocalStringFromDate:recordDate];
 #endif
+                    }
                     if (self.dailyRecordDictionary[dateKey] == nil) {
                         self.dailyRecordDictionary[dateKey] = [[NSMutableArray alloc] init];
                     }
