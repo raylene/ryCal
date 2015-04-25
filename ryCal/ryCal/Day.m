@@ -10,8 +10,11 @@
 #import "Month.h"
 #import "Record.h"
 #import "RecordQueryTracker.h"
+#import "RecordDateHelper.h"
 
 @interface Day ()
+
+#define USE_GMT 1
 
 @property (nonatomic, strong) Month *monthData;
 @property (nonatomic, assign) NSInteger dayInt;
@@ -35,9 +38,13 @@
     self = [super init];
     if (self) {
         // TODO: fix up the Month vs. Day init mess :/
-        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+#if USE_GMT
+        NSCalendar *calendar = [RecordDateHelper sharedGMTCalendar];
+#else
+        NSCalendar *calendar = [RecordDateHelper sharedLocalCalendar];
+#endif
+        
         NSDateComponents *components = [calendar components:(NSCalendarUnitDay) fromDate:date];
-
         self.monthData = month;
         self.dayInt = (int)components.day;
     }
@@ -51,8 +58,15 @@
 }
 
 - (BOOL)isToday {
-    return ([self.getStartDate compare:[NSDate date]] != NSOrderedDescending) &&
-    ([self.getEndDate compare:[NSDate date]] == NSOrderedDescending);
+#if USE_GMT
+    // GMT
+    NSDate *today = [RecordDateHelper getGMTStartOfToday];
+#else
+    // LOCAL
+    NSDate *today = [RecordDateHelper getLocalStartOfToday];
+#endif
+    return ([self.getStartDate compare:today] != NSOrderedDescending) &&
+    ([self.getEndDate compare:today] == NSOrderedDescending);
 }
 
 - (NSString *)getDayString {
@@ -69,7 +83,12 @@
 }
 
 - (NSString *)getTitleString:(BOOL)allCaps {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+#if USE_GMT
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedGMTDateFormatter];
+#else
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedLocalDateFormatter];
+#endif
+
     [dateFormatter setDateFormat:@"EEEE, MMM. d"];
     NSString *result = [dateFormatter stringFromDate:[self getStartDate]];
     if (allCaps) {
@@ -99,7 +118,12 @@
 #pragma mark Query tracking / caching helper
 
 - (NSString *)getDayCacheKey {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+#if USE_GMT
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedGMTDateFormatter];
+#else
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedLocalDateFormatter];
+#endif
+
     [dateFormatter setDateFormat:@"MM_yyyy_dd"];
     NSString *dateStr = [dateFormatter stringFromDate:[self getStartDate]];
     NSString *key = [NSString stringWithFormat:@"%@_%@", kRecordQueryKey, dateStr];

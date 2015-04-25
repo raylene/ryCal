@@ -8,6 +8,7 @@
 
 #import "RecordQueryTracker.h"
 #import <Parse/Parse.h>
+#import "RecordDateHelper.h"
 
 @implementation RecordQueryTracker
 
@@ -51,7 +52,7 @@ NSString * const kRecordQueryKey = @"records";
 
 - (void)addQuery:(NSString *)name {
     @synchronized(self.queryNames) {
-        self.queryNames[name] = [NSDate date];
+        self.queryNames[name] = [RecordDateHelper getGMTStartOfToday];
     }
 }
 

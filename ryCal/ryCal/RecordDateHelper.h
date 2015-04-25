@@ -20,10 +20,13 @@
 + (NSDate *)getLocalStartOfToday;
 + (NSDate *)getGMTStartOfToday;
 
+// Used in Month.m
++ (NSString *)getLocalStringFromDate:(NSDate *)inputDate;
++ (NSString *)getGMTStringFromDate:(NSDate *)inputDate;
+
 // Still needed?
 + (NSInteger)getCurrentYear;
 
-+ (NSString *)getDateStringFromDate:(NSDate *)inputDate;
 + (NSDate *)getSystemDateFromUserDate:(NSDate *)userDate;
 + (NSDate *)getDateGMTFromUserDate:(NSDate *)userDate;
 

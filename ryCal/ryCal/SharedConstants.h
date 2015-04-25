@@ -82,12 +82,6 @@ extern float const NAV_BAR_ICON_SIZE;
 + (UIColor *)getMonthBackgroundColor;
 + (UIColor *)getDayHighlightColor;
 
-// Moved to RecordDateHelper
-+ (NSInteger)getCurrentYear;
-+ (NSString *)getDateStringFromDate:(NSDate *)inputDate;
-+ (NSDate *)getSystemDateFromUserDate:(NSDate *)userDate;
-+ (NSDate *)getDateGMTFromUserDate:(NSDate *)userDate;
-
 + (NSString *)getSaveFormattedString:(NSString *)inputStr;
 
 // TODO: move these somewhere else? Kind of weird to have it in "SharedConstants"...

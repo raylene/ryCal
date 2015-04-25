@@ -16,7 +16,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedGMTDateFormatter = [[NSDateFormatter alloc] init];\
+        _sharedGMTDateFormatter = [[NSDateFormatter alloc] init];
         [_sharedGMTDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
         [_sharedGMTDateFormatter setDateFormat:@"yyyy-MM-dd"];
     });
@@ -72,15 +72,22 @@
 //////
 
 + (NSInteger)getCurrentYear {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy"];
-    return [[formatter stringFromDate:[NSDate date]] integerValue];
+    // Get components using local time
+    NSCalendar *cal = [RecordDateHelper sharedGMTCalendar];
+    NSDateComponents *components = [self parseComponents:[RecordDateHelper getGMTStartOfToday] calendar:cal];
+    return components.year;
 }
 
-+ (NSString *)getDateStringFromDate:(NSDate *)inputDate {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    return [formatter stringFromDate:inputDate];
++ (NSString *)getGMTStringFromDate:(NSDate *)inputDate {
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedGMTDateFormatter];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    return [dateFormatter stringFromDate:inputDate];
+}
+
++ (NSString *)getLocalStringFromDate:(NSDate *)inputDate {
+    NSDateFormatter *dateFormatter = [RecordDateHelper sharedLocalDateFormatter];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    return [dateFormatter stringFromDate:inputDate];
 }
 
 + (NSDate *)getSystemDateFromUserDate:(NSDate *)userDate {

@@ -8,21 +8,24 @@
 #import "RyCalMainViewController.h"
 #import "HomeViewController.h"
 #import "MenuViewController.h"
-#import "SharedConstants.h"
+#import "RecordDateHelper.h"
+
+#define USE_GMT 1
 
 @implementation RyCalMainViewController
 
 - (id)init {
-    HomeViewController *hvc = [[HomeViewController alloc] initWithDate:[NSDate date]];
+#if USE_GMT
+    NSDate *today = [RecordDateHelper getGMTStartOfToday];
+#else
+    NSDate *today = [RecordDateHelper getLocalStartOfToday];
+#endif
+    HomeViewController *hvc = [[HomeViewController alloc] initWithDate:today];
     self.contentVC = [[UINavigationController alloc] initWithRootViewController:hvc];
     
     self.menuVC = [[MenuViewController alloc] init];
     self = [super initWithViewControllers:self.menuVC contentVC:self.contentVC];
-//    
-//    [[UINavigationBar appearance] setBarTintColor:[SharedConstants getNavigationBarColor]];
-//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-//    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
-    
+
     // TODO: look into this resizing hack
     hvc.view.frame = self.contentVC.view.frame;
     self.menuVC.view.frame = self.contentVC.view.frame;
