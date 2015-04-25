@@ -11,6 +11,7 @@
 #import "EditableRecordTypeCell.h"
 #import "RecordType.h"
 #import "Record.h"
+#import "SharedConstants.h"
 
 @interface DayViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -20,9 +21,13 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *typeTableView;
 
+@property (nonatomic, assign) CGPoint initialTableOffset;
+
 @end
 
 @implementation DayViewController
+
+float const RECORD_CELL_HEIGHT = 70.0;
 
 - (id)initWithDay:(Day *)dayData {
     self = [super init];
@@ -48,6 +53,16 @@
             [self.typeTableView reloadData];
         }];
     }];
+    
+    [self subscribeToNotifications];
+}
+
+- (void)subscribeToNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToRecord:) name:ScrollToRecordNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)setupNavigationBar {
@@ -63,8 +78,28 @@
     self.typeTableView.dataSource = self;
     self.typeTableView.rowHeight = UITableViewAutomaticDimension;
 
+    self.initialTableOffset = CGPointMake(0.0, 0.0 - self.typeTableView.frame.origin.y);
+    
     UINib *cellNib = [UINib nibWithNibName:@"EditableRecordTypeCell" bundle:nil];
     [self.typeTableView registerNib:cellNib forCellReuseIdentifier:@"EditableRecordTypeCell"];
+}
+
+#pragma Notification response methods
+
+- (void)keyboardWillBeHidden:(NSNotification *)aNotification {
+    [self.typeTableView
+     setContentOffset:self.initialTableOffset
+     animated:YES];
+}
+
+- (void)scrollToRecord:(NSNotification *)notification {
+    NSDictionary *dict = [notification userInfo];
+    NSIndexPath *indexPath = dict[kIndexPathNotifParam];
+    NSLog(@"scrollToRecord: %@", indexPath);
+    
+    [self.typeTableView
+     setContentOffset:CGPointMake(0, (indexPath.row * RECORD_CELL_HEIGHT))
+     animated:YES];
 }
 
 #pragma mark - Custom setters
@@ -78,12 +113,13 @@
 
 #pragma mark - UITableView methods
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return RECORD_CELL_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EditableRecordTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EditableRecordTypeCell" forIndexPath:indexPath];
+    cell.indexPath = indexPath;
     cell.typeData = self.recordTypes[indexPath.row];
     cell.date = [self.dayData getStartDate];
     cell.recordData = self.recordDictionary[cell.typeData.objectId];

@@ -13,4 +13,7 @@
 
 @interface EditableRecordTypeCell : CompressedDailyRecordCell
 
+// TODO: see if better way to get indexPath from UITableViewCell
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
 @end

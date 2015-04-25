@@ -18,6 +18,7 @@
 
 - (IBAction)switchValueChanged:(id)sender;
 - (IBAction)noteDidEndOnExit:(id)sender;
+- (IBAction)noteEditingDidBegin:(id)sender;
 
 @end
 
@@ -39,6 +40,13 @@
 - (IBAction)noteDidEndOnExit:(id)sender {
     [self resignFirstResponder];
     [self saveChanges:[self shouldDeleteRecord]];
+}
+
+- (IBAction)noteEditingDidBegin:(id)sender {
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:ScrollToRecordNotification
+        object:nil
+        userInfo:@{kIndexPathNotifParam: self.indexPath}];
 }
 
 #pragma mark CompressedDailyRecordCell that should be overridden

@@ -25,11 +25,13 @@ NSString * const DayDataChangedNotification = @"DayDataChangedNotification";
 NSString * const RecordTypeDataChangedNotification = @"RecordTypeDataChangedNotification";
 NSString * const ViewFullDayNotification = @"ViewFullDayNotification";
 NSString * const SwitchDayNotification = @"SwitchDayNotification";
+NSString * const ScrollToRecordNotification = @"ScrollToRecordNotification";
 
 NSString * const kColorSelectedNotifParam = @"colorname";
 NSString * const kRecordTypeIDNotifParam = @"recordtypeid";
 NSString * const kRecordTypeIDNotifParamPlaceholder = @"recordtypeid_placeholder";
 NSString * const kDayNotifParam = @"day";
+NSString * const kIndexPathNotifParam = @"indexpath";
 
 NSString * const kNoteFieldKey = @"note";
 NSString * const kTypeFieldKey = @"type";

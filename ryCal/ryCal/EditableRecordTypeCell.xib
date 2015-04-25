@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="101" id="KGk-i7-Jjw" customClass="EditableRecordTypeCell">
-            <rect key="frame" x="0.0" y="0.0" width="314" height="101"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="86" id="KGk-i7-Jjw" customClass="EditableRecordTypeCell">
+            <rect key="frame" x="0.0" y="0.0" width="314" height="86"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ivy-xy-jSi">
-                        <rect key="frame" x="28" y="18" width="30" height="30"/>
+                        <rect key="frame" x="14" y="8" width="30" height="30"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="1ri-jT-z6P"/>
@@ -23,15 +23,16 @@
                         </constraints>
                     </imageView>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a note..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c64-XP-Iuc">
-                        <rect key="frame" x="28" y="56" width="258" height="30"/>
+                        <rect key="frame" x="14" y="46" width="286" height="31"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                         <connections>
                             <action selector="noteDidEndOnExit:" destination="KGk-i7-Jjw" eventType="editingDidEndOnExit" id="lbo-Tc-6Lc"/>
+                            <action selector="noteEditingDidBegin:" destination="KGk-i7-Jjw" eventType="editingDidBegin" id="Koj-Wu-ojG"/>
                         </connections>
                     </textField>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="749" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8MS-RS-HlH">
-                        <rect key="frame" x="237" y="18" width="51" height="31"/>
+                        <rect key="frame" x="251" y="8" width="51" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="UCw-lH-khZ"/>
                             <constraint firstAttribute="width" constant="40" id="nNn-wI-Nft"/>
@@ -48,7 +49,7 @@
                         </connections>
                     </switch>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Potentially long name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCp-g4-xKa">
-                        <rect key="frame" x="74" y="24" width="155" height="18"/>
+                        <rect key="frame" x="58" y="14" width="185" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -57,16 +58,17 @@
                 <constraints>
                     <constraint firstItem="8MS-RS-HlH" firstAttribute="centerY" secondItem="CCp-g4-xKa" secondAttribute="centerY" id="84L-RT-Z1P"/>
                     <constraint firstItem="8MS-RS-HlH" firstAttribute="centerY" secondItem="Ivy-xy-jSi" secondAttribute="centerY" id="FaI-gI-0jn"/>
-                    <constraint firstItem="Ivy-xy-jSi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="HD3-XS-wrR"/>
+                    <constraint firstItem="Ivy-xy-jSi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="HD3-XS-wrR"/>
                     <constraint firstItem="Ivy-xy-jSi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="M1T-pj-wds"/>
                     <constraint firstItem="Ivy-xy-jSi" firstAttribute="leading" secondItem="c64-XP-Iuc" secondAttribute="leading" id="NIb-Jz-mdU"/>
                     <constraint firstAttribute="trailingMargin" secondItem="c64-XP-Iuc" secondAttribute="trailing" constant="20" id="Th1-wo-Cnx"/>
                     <constraint firstItem="8MS-RS-HlH" firstAttribute="leading" secondItem="CCp-g4-xKa" secondAttribute="trailing" constant="8" id="WVq-nD-ebk"/>
-                    <constraint firstItem="Ivy-xy-jSi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="d8V-QB-G5d"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="8MS-RS-HlH" secondAttribute="trailing" constant="20" id="dgv-6N-dWU"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="c64-XP-Iuc" secondAttribute="bottom" id="apa-Mv-QDU"/>
+                    <constraint firstItem="Ivy-xy-jSi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="d8V-QB-G5d"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="8MS-RS-HlH" secondAttribute="trailing" constant="6" id="dgv-6N-dWU"/>
                     <constraint firstItem="c64-XP-Iuc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="e8N-IQ-h0o"/>
                     <constraint firstAttribute="centerX" secondItem="c64-XP-Iuc" secondAttribute="centerX" id="uE9-Ft-6Ca"/>
-                    <constraint firstItem="CCp-g4-xKa" firstAttribute="leading" secondItem="Ivy-xy-jSi" secondAttribute="trailing" constant="16" id="vTe-NI-2qf"/>
+                    <constraint firstItem="CCp-g4-xKa" firstAttribute="leading" secondItem="Ivy-xy-jSi" secondAttribute="trailing" constant="14" id="vTe-NI-2qf"/>
                     <constraint firstItem="c64-XP-Iuc" firstAttribute="top" secondItem="CCp-g4-xKa" secondAttribute="bottom" constant="14" id="wqE-PK-qWW"/>
                 </constraints>
                 <variation key="default">
@@ -83,7 +85,7 @@
                 <outlet property="recordTypeName" destination="CCp-g4-xKa" id="mUX-ZJ-SLy"/>
                 <outlet property="toggleSwitch" destination="8MS-RS-HlH" id="K2U-xo-x3R"/>
             </connections>
-            <point key="canvasLocation" x="83" y="16.5"/>
+            <point key="canvasLocation" x="60" y="9"/>
         </tableViewCell>
     </objects>
 </document>
