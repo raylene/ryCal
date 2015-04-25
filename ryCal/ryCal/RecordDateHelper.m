@@ -16,7 +16,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedGMTDateFormatter = [[NSDateFormatter alloc] init];\
+        _sharedGMTDateFormatter = [[NSDateFormatter alloc] init];
         [_sharedGMTDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
         [_sharedGMTDateFormatter setDateFormat:@"yyyy-MM-dd"];
     });
@@ -72,9 +72,10 @@
 //////
 
 + (NSInteger)getCurrentYear {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy"];
-    return [[formatter stringFromDate:[NSDate date]] integerValue];
+    // Get components using local time
+    NSCalendar *cal = [RecordDateHelper sharedGMTCalendar];
+    NSDateComponents *components = [self parseComponents:[RecordDateHelper getGMTStartOfToday] calendar:cal];
+    return components.year;
 }
 
 + (NSString *)getGMTStringFromDate:(NSDate *)inputDate {
