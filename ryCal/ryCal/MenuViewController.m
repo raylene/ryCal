@@ -18,6 +18,9 @@
 #import "FBDialogs.h"
 #import "FBWebDialogs.h"
 #import "FBLinkShareParams.h"
+#import "RecordDateHelper.h"
+
+#define USE_GMT 1
 
 static int const kHomeItemIndex = 0;
 static int const kRecordTypesItemIndex = 1;
@@ -131,7 +134,12 @@ NSString * const kRecordItAppUrl = @"https://www.facebook.com/recorditapp/";
     
     UIViewController *vc;
     if (indexPath.row == kHomeItemIndex) {
-        vc = [[HomeViewController alloc] initWithDate:[NSDate date]];
+#if USE_GMT
+        NSDate *today = [RecordDateHelper getGMTStartOfToday];
+#else
+        NSDate *today = [RecordDateHelper getLocalStartOfToday];
+#endif
+        vc = [[HomeViewController alloc] initWithDate:today];
     } else if (indexPath.row == kRecordTypesItemIndex) {
         vc = [[RecordTypeListViewController alloc] init];
     } else if (indexPath.row == kHelpItemIndex) {
