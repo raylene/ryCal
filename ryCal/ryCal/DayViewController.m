@@ -65,11 +65,18 @@ float const RECORD_CELL_HEIGHT = 70.0;
                                                  name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)unsubscribeToNotifications {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ScrollToRecordNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
 - (void)setupNavigationBar {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(onDismiss)];
 }
 
 - (void)onDismiss {
+    [self unsubscribeToNotifications];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
